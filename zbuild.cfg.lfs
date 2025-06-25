@@ -1,0 +1,4 @@
+zbuild_source="/mnt/lfs/sources"
+zbuild_root="/mnt/lfs/zbuild"
+zbuild_tmp="/mnt/lfs/zbuild/tmp"
+zbuild_log="/mnt/lfs/zbuild/log"
