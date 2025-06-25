@@ -3,7 +3,7 @@
 ZirconiumOS is part of the new zbuild c++ system builder<br>
 
 >Scripts to Fully Automate and Build Linux From Scratch<br>
->`git clone ... zbuild`
+>`git clone https://github.com/zedmatrix/ZirconiumOS.git zbuild`
 >
 
 # Zbuilder Program
