@@ -1,0 +1,4 @@
+zbuild_source="/sources"
+zbuild_root="/zbuild"
+zbuild_tmp="/zbuild/tmp"
+zbuild_log="/zbuild/log"
