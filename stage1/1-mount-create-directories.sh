@@ -20,6 +20,7 @@ fi
 
 # Setup zbuild paths
 mkdir -pv $LFS/zbuild/{tmp,log}
+ln -sv zbuild.cfg.lfs $LFS/zbuild/zbuild.cfg
 
 # Setup LFS Limited directories
 mkdir -pv $LFS/{etc,var,tools,sources} $LFS/usr/{bin,lib,sbin}
