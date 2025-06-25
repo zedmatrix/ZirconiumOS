@@ -1,0 +1,14 @@
+pkgdir=[linux-6.6.94]
+pkgname=[linux]
+pkgver=[6.6.94]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.94.tar.xz]
+md5sum=[50996413e03fa86b18024b2188c2f7b5]
+
+prepare=[make mrproper]
+
+build=[make headers && find usr/include -type f ! -name '*.h' -delete]
+
+install=[cp -rv usr/include $LFS/usr]

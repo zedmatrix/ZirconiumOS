@@ -1,0 +1,14 @@
+pkgdir=[patch-2.8]
+pkgname=[patch]
+pkgver=[2.8]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/patch/patch-2.8.tar.xz]
+md5sum=[149327a021d41c8f88d034eab41c039f]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT --build=$(build-aux/config.guess)]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]

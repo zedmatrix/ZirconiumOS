@@ -1,0 +1,22 @@
+pkgdir=[file-5.46]
+pkgname=[file]
+pkgver=[5.46]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://astron.com/pub/file/file-5.46.tar.gz]
+md5sum=[459da2d4b534801e2e2861611d823864]
+
+preconfig=[mkdir -v build && pushd build &&
+  ../configure --disable-bzlib --disable-libseccomp --disable-xzlib --disable-zlib &&
+  make &&
+  popd
+]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT --build=$(./config.guess)]
+
+build=[make FILE_COMPILE=$(pwd)/build/src/file]
+
+install=[make DESTDIR=$LFS install]
+
+post=[rm -v $LFS/usr/lib/libmagic.la]

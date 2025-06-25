@@ -1,0 +1,16 @@
+pkgdir=[diffutils-3.12]
+pkgname=[diffutils]
+pkgver=[3.12]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/diffutils/diffutils-3.12.tar.xz]
+md5sum=[d1b18b20868fb561f77861cd90b05de4]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT \
+ --build=$(./build-aux/config.guess) gl_cv_func_strcasecmp_works=y
+]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]

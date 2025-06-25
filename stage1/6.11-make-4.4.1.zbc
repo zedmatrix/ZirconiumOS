@@ -1,0 +1,14 @@
+pkgdir=[make-4.4.1]
+pkgname=[make]
+pkgver=[4.4.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz]
+md5sum=[c8469a3713cbbe04d955d4ae4be23eeb]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT --build=$(build-aux/config.guess)]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]

@@ -1,0 +1,21 @@
+pkgdir=[binutils-2.44-pass2]
+pkgname=[binutils]
+pkgver=[2.44]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://sourceware.org/pub/binutils/releases/binutils-2.44.tar.xz]
+md5sum=[49912ce774666a30806141f106124294]
+
+preconfig=[sed '6031s/$add_dir//' -i ltmain.sh]
+
+prepare=[mkdir -v build && cd build && ../configure --prefix=/usr --build=$(../config.guess) \
+ --host=$LFS_TGT --disable-nls --enable-shared --enable-gprofng=no --disable-werror \
+ --enable-64-bit-bfd --enable-new-dtags --enable-default-hash-style=gnu
+]
+
+build=[cd build && make]
+
+install=[cd build && make DESTDIR=$LFS install]
+
+post=[rm -v $LFS/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes,sframe}.{a,la}]

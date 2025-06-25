@@ -1,0 +1,18 @@
+pkgdir=[perl-5.40.2]
+pkgname=[perl]
+pkgver=[5.40.2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.cpan.org/src/5.0/perl-5.40.2.tar.xz]
+md5sum=[9ad7a269dc4053cdbeecd4fde444291b]
+
+prepare=[sh Configure -des -D prefix=/usr -D vendorprefix=/usr -D useshrplib \
+   -D privlib=/usr/lib/perl5/5.40/core_perl -D archlib=/usr/lib/perl5/5.40/core_perl \
+   -D sitelib=/usr/lib/perl5/5.40/site_perl -D sitearch=/usr/lib/perl5/5.40/site_perl \
+   -D vendorlib=/usr/lib/perl5/5.40/vendor_perl -D vendorarch=/usr/lib/perl5/5.40/vendor_perl
+]
+
+build=[make]
+
+install=[make install]

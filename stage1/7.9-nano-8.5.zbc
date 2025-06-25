@@ -1,0 +1,36 @@
+pkgdir=[nano-8.5]
+pkgname=[nano]
+pkgver=[8.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.nano-editor.org/dist/v8/nano-8.5.tar.xz]
+md5sum=[163a06d1320b66c928361320facb47cf]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --enable-utf8 \
+ --docdir=/usr/share/doc/nano-8.5
+]
+
+build=[make]
+
+install=[make install]
+
+post=[install -v -m644 doc/{nano.html,sample.nanorc} /usr/share/doc/nano-8.5]
+
+postconfig=[cat > /etc/nanorc << "EOF"
+set autoindent
+# set boldtext
+set constantshow
+set fill 72
+set historylog
+set indicator
+set multibuffer
+set positionlog
+set quickblank
+set regexp
+# set softwrap
+set tabsize 4
+
+include /usr/share/nano/sh.nanorc
+EOF
+]

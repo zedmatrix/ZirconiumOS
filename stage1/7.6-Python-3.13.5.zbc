@@ -1,0 +1,16 @@
+pkgdir=[Python-3.13.5]
+pkgname=[Python]
+pkgver=[3.13.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz]
+md5sum=[dbaa8833aa736eddbb18a6a6ae0c10fa]
+
+prepare=[./configure --prefix=/usr --enable-shared --without-ensurepip \
+ --without-static-libpython --disable-test-modules
+]
+
+build=[make]
+
+install=[make install]

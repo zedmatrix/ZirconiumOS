@@ -1,0 +1,16 @@
+pkgdir=[bash-5.3-rc2]
+pkgname=[bash]
+pkgver=[5.3-rc2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/bash/bash-5.3-rc2.tar.gz]
+md5sum=[9c440d7c5ca37433e496c5e22f8918c6]
+
+prepare=[./configure --prefix=/usr --build=$(sh support/config.guess) --host=$LFS_TGT --without-bash-malloc]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]
+
+post=[ln -sv bash $LFS/bin/sh]

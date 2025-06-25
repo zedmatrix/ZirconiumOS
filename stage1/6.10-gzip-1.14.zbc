@@ -1,0 +1,14 @@
+pkgdir=[gzip-1.14]
+pkgname=[gzip]
+pkgver=[1.14]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz]
+md5sum=[4bf5a10f287501ee8e8ebe00ef62b2c2]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]

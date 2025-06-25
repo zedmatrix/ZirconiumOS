@@ -1,0 +1,12 @@
+pkgdir=[gettext-0.25]
+pkgname=[gettext]
+pkgver=[0.25]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/gettext/gettext-0.25.tar.xz]
+md5sum=[355a09fa53ae2e87dd493e040d437874]
+
+build=[./configure --disable-shared && make]
+
+install=[cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /usr/bin]

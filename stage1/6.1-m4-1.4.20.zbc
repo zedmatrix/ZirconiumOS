@@ -1,0 +1,12 @@
+pkgdir=[m4-1.4.20]
+pkgname=[m4]
+pkgver=[1.4.20]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/m4/m4-1.4.20.tar.xz]
+md5sum=[6eb2ebed5b24e74b6e890919331d2132]
+
+build=[./configure --prefix=/usr --host=$LFS_TGT --build=$(build-aux/config.guess) && make]
+
+install=[make DESTDIR=$LFS install]

@@ -1,0 +1,16 @@
+pkgdir=[findutils-4.10.0]
+pkgname=[findutils]
+pkgver=[4.10.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/findutils/findutils-4.10.0.tar.xz]
+md5sum=[870cfd71c07d37ebe56f9f4aaf4ad872]
+
+prepare=[./configure --prefix=/usr --localstatedir=/var/lib/locate \
+ --host=$LFS_TGT --build=$(build-aux/config.guess)
+]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]

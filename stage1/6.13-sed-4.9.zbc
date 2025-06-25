@@ -1,0 +1,14 @@
+pkgdir=[sed-4.9]
+pkgname=[sed]
+pkgver=[4.9]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz]
+md5sum=[6aac9b2dbafcd5b7a67a8a9bcb8036c3]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT --build=$(./build-aux/config.guess)]
+
+build=[make]
+
+install=[make DESTDIR=$LFS install]
