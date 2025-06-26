@@ -1,0 +1,13 @@
+# REQUIRED
+pkgdir=[iana-etc-20250519]
+pkgname=[iana-etc]
+pkgver=[20250519]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/Mic92/iana-etc/releases/download/20250519/iana-etc-20250519.tar.gz]
+md5sum=[45778351c7eda633946a777cd8e24eb8]
+
+build=[echo "Installing 2 files"]
+
+install=[cp -v services protocols /etc]

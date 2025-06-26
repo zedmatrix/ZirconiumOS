@@ -1,0 +1,13 @@
+pkgdir=[lz4-1.10.0]
+pkgname=[lz4]
+pkgver=[1.10.0]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz]
+md5sum=[dead9f5f1966d9ae56e1e32761e4e675]
+
+build=[make BUILD_STATIC=no PREFIX=/usr]
+
+check=[make -j1 check]
+
+install=[make BUILD_STATIC=no PREFIX=/usr install]

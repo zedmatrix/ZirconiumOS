@@ -1,0 +1,24 @@
+pkgdir=[expect-5.45.4]
+pkgname=[expect]
+pkgver=[5.45.4]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz]
+md5sum=[00fce8de158422f5ccd2666512329bd2]
+
+patchurl=[https://www.linuxfromscratch.org/patches/downloads/expect/expect-5.45.4-gcc15-1.patch]
+patchmd5=[0ca4d6bb8d572fbcdb13cb36cd34833e]
+
+preconfig=[python3 -c 'from pty import spawn; spawn(["echo", "ok"])']
+
+prepare=[./configure --prefix=/usr --with-tcl=/usr/lib --enable-shared \
+ --disable-rpath --mandir=/usr/share/man --with-tclinclude=/usr/include
+]
+
+build=[make]
+
+check=[make test ]
+
+install=[make install ]
+
+post=[ln -svf expect5.45.4/libexpect5.45.4.so /usr/lib ]

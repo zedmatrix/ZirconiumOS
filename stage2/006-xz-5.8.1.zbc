@@ -1,0 +1,13 @@
+pkgdir=[xz-5.8.1]
+pkgname=[xz]
+pkgver=[5.8.1]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com//tukaani-project/xz/releases/download/v5.8.1/xz-5.8.1.tar.xz]
+md5sum=[cf5e1feb023d22c6bdaa30e84ef3abe3]
+
+build=[./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/xz-5.8.1 && make]
+
+check=[make check]
+
+install=[make install]

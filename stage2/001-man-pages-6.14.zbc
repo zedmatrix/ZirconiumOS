@@ -1,0 +1,12 @@
+# REQUIRED
+pkgdir=[man-pages-6.14]
+pkgname=[man-pages]
+pkgver=[6.14]
+pkgrel=[1]
+zarchive=[false]
+pkgurl=[https://www.kernel.org/pub/linux/docs/man-pages/man-pages-6.14.tar.xz]
+md5sum=[d0c9b48d6c4b4c26ec580970c461ebfa]
+
+build=[rm -v man3/crypt*]
+
+install=[make -R GIT=false prefix=/usr install]

@@ -22,7 +22,11 @@ done
 
 rm -rf /usr/share/{info,man,doc}/*
 find /usr/{lib,libexec} -name \*.la -delete
+
+## Clean Up Harmful tmp and log directories
 rm -rf /tools
+rm -rf /zbuild/log/*
+rm -rf /zbuild/tmp/*
 
 echo "At This Point you can Exit and Save the Stage 1 LFS Temporary Tools"
 

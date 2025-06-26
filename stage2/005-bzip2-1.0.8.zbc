@@ -1,0 +1,31 @@
+# REQUIRED
+pkgdir=[bzip2-1.0.8]
+pkgname=[bzip2]
+pkgver=[1.0.8]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz]
+md5sum=[67e051268d0c475ea773822f7500d0e5]
+
+patchurl=[https://www.linuxfromscratch.org/patches/lfs/development/bzip2-1.0.8-install_docs-1.patch]
+patchmd5=[6a5ac7e89b791aae556de0f745916f7f]
+
+preconfig=[sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile &&
+ sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile]
+
+prepare=[make -f Makefile-libbz2_so && make clean]
+
+build=[make]
+
+install=[make PREFIX=/usr install]
+
+post=[cp -av libbz2.so.* /usr/lib &&
+ ln -sv libbz2.so.1.0.8 /usr/lib/libbz2.so &&
+ rm -fv /usr/lib/libbz2.a
+]
+
+postconfig=[cp -v bzip2-shared /usr/bin/bzip2 &&
+ for i in /usr/bin/{bzcat,bunzip2}; do
+  ln -sfv bzip2 $i
+ done
+]

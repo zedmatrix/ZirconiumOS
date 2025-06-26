@@ -1,0 +1,67 @@
+pkgdir=[glibc-2.41]
+pkgname=[glibc]
+pkgver=[2.41]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/glibc/glibc-2.41.tar.xz]
+md5sum=[19862601af60f73ac69e067d3e9267d4]
+
+patchurl=[https://www.linuxfromscratch.org/patches/lfs/development/glibc-2.41-fhs-1.patch]
+patchmd5=[9a5997c3452909b1769918c759eff8a2]
+
+
+preconfig=[mkdir -v build && cd build && echo "rootsbindir=/usr/sbin" > configparms]
+
+prepare=[cd build && ../configure --prefix=/usr --disable-werror \
+  --disable-nscd libc_cv_slibdir=/usr/lib --enable-stack-protector=strong \
+  --enable-kernel=5.4
+]
+
+build=[cd build && make]
+
+check=[cd build && make check && grep "Timed out" $(find -name \*.out) || true]
+
+install=[touch /etc/ld.so.conf && cd build &&
+  sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile &&
+  make install &&
+  sed '/RTLDLIST=/s@/usr@@g' -i /usr/bin/ldd &&
+  make localedata/install-locales
+]
+
+post=[cat > /etc/nsswitch.conf << "EOF"
+# Begin /etc/nsswitch.conf
+passwd: files systemd
+group: files systemd
+shadow: files systemd
+hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
+networks: files
+protocols: files
+services: files
+ethers: files
+rpc: files
+# End /etc/nsswitch.conf
+EOF
+cat > /etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+/usr/local/lib
+/opt/lib
+
+# Add an include directory
+include /etc/ld.so.conf.d/*.conf
+EOF
+mkdir -pv /etc/ld.so.conf.d
+]
+
+postconfig=[tar -xf $SOURCES/tzdata2025b.tar.gz
+ZONEINFO=/usr/share/zoneinfo
+mkdir -pv $ZONEINFO/{posix,right}
+for tz in etcetera southamerica northamerica europe africa antarctica asia australasia backward; do
+    zic -L /dev/null -d $ZONEINFO ${tz}
+    zic -L /dev/null -d $ZONEINFO/posix ${tz}
+    zic -L leapseconds -d $ZONEINFO/right ${tz}
+done
+cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+zic -d $ZONEINFO -p America/Vancouver
+ln -sfv /usr/share/zoneinfo/America/Vancouver /etc/localtime
+]

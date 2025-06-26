@@ -1,0 +1,73 @@
+## Syntax highlighting for Zbuild shell scripts.
+
+syntax zbc "\.(zbuild|zb[2-4c]?)$"
+header "^#!.*/(((env|busybox)[[:blank:]]+)?(a|ba|c|da|k|mk|pdk|tc|z)?sh|openrc-run|runscript)\>"
+header "-\*-.*shell-script.*-\*-"
+magic "(POSIX|Bourne-Again) shell script.*text"
+comment "#"
+
+linter dash -n
+
+#######################################
+# KEY=VALUE field highlights
+#######################################
+
+# Specific: match bracketed URLs (must come first)
+# color cyan "[[:alpha:]_-]+\s*=\s*\[\(http\|https\|ftp\)://[^]]\+\]"
+color cyan "[[:alpha:]_-]+[[:space:]]*=[[:space:]]*\[(https?|ftp)://[^]]+]"
+
+# Version numbers inside brackets (e.g., [1.17])
+color red "\[[0-9]+(\.[0-9]+){0,2}\]"
+
+# Booleans and constants
+color magenta "\<(true|false|yes|no)\>"
+
+# Key names
+color brightgreen "^\s*(pkg(dir|name|ver|rel|url)|prepare|post|(pre|post)config|build|check|install)="
+color brightred "^\s*(patch(url|md5)|doc(url|md5))="
+
+#######################################
+# Hashes
+#######################################
+
+# Tool names
+color brightblue "\<(md5sum|sha(1|256|512)sum)\>"
+
+# Hash values (in brackets) MD5, SHA1, SHA256, SHA512
+color magenta       "\[[[:xdigit:]]{32}\]"
+color brightcyan    "\[[[:xdigit:]]{40}\]"
+color brightgreen   "\[[[:xdigit:]]{64}\]"
+color brightmagenta "\[[[:xdigit:]]{128}\]"
+
+#######################################
+# Strings and Paths
+#######################################
+
+# Quoted strings
+color brightred ""([^"\]|\\.)*"|'([^'\]|\\.)*'"
+
+# Bracketed strings (fallback — after specific matches)
+color brightyellow "\[[^]]*\]"
+
+# File paths and configure options
+color red   "--[a-zA-Z0-9_-]+"
+color brightblue  "/[a-zA-Z0-9._~+-/=%]+"
+
+# Standalone brackets (comes after bracketed strings to override)
+color brightyellow "\[|\]"
+
+#######################################
+# Functions, Variables, Shell Code
+#######################################
+
+# Function declarations
+color brightgreen "^[A-Za-z0-9_-]+\(\)"
+
+# Variable references (e.g., $VAR, $1, $@)
+color brightred "\$([-@*#?$!0-9]|[[:alpha:]_][[:alnum:]_]*)"
+
+# Comments
+color cyan "(^|[[:blank:]])#.*"
+
+# Trailing whitespace
+color ,green "[[:space:]]+$"
