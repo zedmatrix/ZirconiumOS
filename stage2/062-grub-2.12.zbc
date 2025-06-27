@@ -1,0 +1,20 @@
+pkgdir=[grub-2.12]
+pkgname=[grub]
+pkgver=[2.12]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz]
+md5sum=[60c564b1bdc39d8e43b3aab4bc0fb140]
+
+preconfig=[echo depends bli part_gpt > grub-core/extra_deps.lst ]
+
+prepare=[unset {C,CPP,CXX,LD}FLAGS && ./configure --prefix=/usr \
+  --sysconfdir=/etc --disable-efiemu --disable-werror
+]
+
+build=[unset {C,CPP,CXX,LD}FLAGS && make ]
+
+install=[make install ]
+
+post=[mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions ]

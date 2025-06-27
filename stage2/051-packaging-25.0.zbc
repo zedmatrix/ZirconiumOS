@@ -1,0 +1,11 @@
+pkgdir=[packaging-25.0]
+pkgname=[packaging]
+pkgver=[25.0]
+pkgrel=[1]
+zarchive=[false]
+pkgurl=[https://files.pythonhosted.org/packages/source/p/packaging/packaging-25.0.tar.gz]
+md5sum=[ab0ef21ddebe09d1803575120d3f99f8]
+
+build=[pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD]
+
+install=[pip3 install --no-index --find-links dist packaging]

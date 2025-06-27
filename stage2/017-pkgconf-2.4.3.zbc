@@ -1,0 +1,13 @@
+pkgdir=[pkgconf-2.4.3]
+pkgname=[pkgconf]
+pkgver=[2.4.3]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://distfiles.ariadne.space/pkgconf/pkgconf-2.4.3.tar.xz]
+md5sum=[781a513f4ca3d068155482a37986d594]
+
+build=[./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/pkgconf-2.4.3 && make]
+
+install=[make install]
+
+post=[ln -sv pkgconf /usr/bin/pkg-config && ln -sv pkgconf.1 /usr/share/man/man1/pkg-config.1 ]

@@ -1,0 +1,15 @@
+pkgdir=[libcap-2.76]
+pkgname=[libcap]
+pkgver=[2.76]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.76.tar.xz]
+md5sum=[449ade7d620b5c4eeb15a632fbaa4f74]
+
+prepare=[sed -i '/install -m.*STA/d' libcap/Makefile ]
+
+build=[make prefix=/usr lib=lib ]
+
+check=[make test ]
+
+install=[make prefix=/usr lib=lib install ]

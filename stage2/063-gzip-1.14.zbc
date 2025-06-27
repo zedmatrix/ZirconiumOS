@@ -1,0 +1,14 @@
+pkgdir=[gzip-1.14]
+pkgname=[gzip]
+pkgver=[1.14]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/gzip/gzip-1.14.tar.xz]
+md5sum=[4bf5a10f287501ee8e8ebe00ef62b2c2]
+
+build=[./configure --prefix=/usr && make ]
+
+check=[make check ]
+
+install=[make install ]

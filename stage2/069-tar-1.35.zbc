@@ -1,0 +1,16 @@
+pkgdir=[tar-1.35]
+pkgname=[tar]
+pkgver=[1.35]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz]
+md5sum=[a2d8042658cfd8ea939e6d911eaf4152]
+
+build=[FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr && make ]
+
+check=[make check ]
+
+install=[make install ]
+
+post=[make -C doc install-html docdir=/usr/share/doc/tar-1.35 ]

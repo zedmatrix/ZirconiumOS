@@ -1,0 +1,18 @@
+pkgdir=[dbus-1.16.2]
+pkgname=[dbus]
+pkgver=[1.16.2]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz]
+md5sum=[97832e6f0a260936d28536e5349c22e5]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release --wrap-mode=nofallback ]
+
+build=[meson compile -C build ]
+
+check=[meson test -C build ]
+
+install=[meson install -C build ]
+
+post=[ln -sfv /etc/machine-id /var/lib/dbus]

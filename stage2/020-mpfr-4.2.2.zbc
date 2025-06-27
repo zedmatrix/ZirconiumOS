@@ -1,0 +1,19 @@
+pkgdir=[mpfr-4.2.2]
+pkgname=[mpfr]
+pkgver=[4.2.2]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz]
+md5sum=[7c32c39b8b6e3ae85f25156228156061]
+
+prepare=[./configure --prefix=/usr --disable-static --enable-thread-safe \
+ --docdir=/usr/share/doc/mpfr-4.2.2
+]
+
+build=[make && make html ]
+
+check=[make check 2>&1 | tee mpfr-check-log]
+
+install=[make install && make install-html]
+
+post=[awk '/# PASS:/{total+=$3} ; END{print total}' mpfr-check-log]

@@ -1,0 +1,13 @@
+pkgdir=[gperf-3.3]
+pkgname=[gperf]
+pkgver=[3.3]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz]
+md5sum=[31753b021ea78a21f154bf9eecb8b079]
+
+build=[./configure --prefix=/usr --docdir=/usr/share/doc/gperf-3.3 && make ]
+
+check=[make check ]
+
+install=[make install ]

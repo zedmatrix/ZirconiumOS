@@ -1,0 +1,14 @@
+pkgdir=[findutils-4.10.0]
+pkgname=[findutils]
+pkgver=[4.10.0]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/findutils/findutils-4.10.0.tar.xz]
+md5sum=[870cfd71c07d37ebe56f9f4aaf4ad872]
+
+build=[./configure --prefix=/usr --localstatedir=/var/lib/locate && make ]
+
+check=[chown -R tester . && su tester -c "PATH=$PATH make check"]
+
+install=[make install ]

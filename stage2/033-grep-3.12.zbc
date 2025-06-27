@@ -1,0 +1,15 @@
+pkgdir=[grep-3.12]
+pkgname=[grep]
+pkgver=[3.12]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/grep/grep-3.12.tar.xz]
+md5sum=[5d9301ed9d209c4a88c8d3a6fd08b9ac]
+
+prepare=[sed -i "s/echo/#echo/" src/egrep.sh ]
+
+build=[./configure --prefix=/usr && make ]
+
+check=[make check ]
+
+install=[make install ]

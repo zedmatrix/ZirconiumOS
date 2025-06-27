@@ -1,0 +1,19 @@
+pkgdir=[openssl-3.5.0]
+pkgname=[openssl]
+pkgver=[3.5.0]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com/openssl/openssl/releases/download/openssl-3.5.0/openssl-3.5.0.tar.gz]
+md5sum=[51da7d2bdf7f4f508cb024f562eb9b03]
+
+prepare=[./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib shared zlib-dynamic ]
+
+build=[make]
+
+check=[HARNESS_JOBS=$(nproc) make test ]
+
+install=[make MANSUFFIX=ssl install ]
+
+post=[mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.5.0 ]
+
+postconfig=[cp -vfr doc/* /usr/share/doc/openssl-3.5.0 ]

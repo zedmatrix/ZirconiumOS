@@ -1,0 +1,17 @@
+pkgdir=[attr-2.5.2]
+pkgname=[attr]
+pkgver=[2.5.2]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://download.savannah.gnu.org/releases/attr/attr-2.5.2.tar.gz]
+md5sum=[227043ec2f6ca03c0948df5517f9c927]
+
+prepare=[./configure --prefix=/usr --disable-static \
+ --sysconfdir=/etc --docdir=/usr/share/doc/attr-2.5.2
+]
+
+build=[make]
+
+check=[make check ]
+
+install=[make install ]

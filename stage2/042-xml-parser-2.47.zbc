@@ -1,0 +1,16 @@
+# REQUIRED
+pkgdir=[XML-Parser-2.47]
+pkgname=[XML-Parser]
+pkgver=[2.47]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz]
+md5sum=[89a8e82cfd2ad948b349c0a69c494463]
+
+prepare=[perl Makefile.PL ]
+
+build=[make]
+
+check=[make check ]
+
+install=[make install ]

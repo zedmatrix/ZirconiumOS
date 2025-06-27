@@ -1,0 +1,14 @@
+pkgdir=[make-4.4.1]
+pkgname=[make]
+pkgver=[4.4.1]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz]
+md5sum=[c8469a3713cbbe04d955d4ae4be23eeb]
+
+build=[./configure --prefix=/usr && make ]
+
+check=[chown -R tester . && su tester -c "PATH=$PATH make check"]
+
+install=[make install ]

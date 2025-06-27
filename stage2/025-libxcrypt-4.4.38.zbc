@@ -1,0 +1,17 @@
+pkgdir=[libxcrypt-4.4.38]
+pkgname=[libxcrypt]
+pkgver=[4.4.38]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com/besser82/libxcrypt/releases/download/v4.4.38/libxcrypt-4.4.38.tar.xz]
+md5sum=[1796a5d20098e9dd9e3f576803c83000]
+
+prepare=[./configure --prefix=/usr --enable-hashes=strong,glibc --enable-obsolete-api=no \
+ --disable-static --disable-failure-tokens
+]
+
+build=[make]
+
+check=[make check ]
+
+install=[make install ]

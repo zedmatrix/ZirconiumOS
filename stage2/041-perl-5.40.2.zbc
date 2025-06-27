@@ -1,0 +1,24 @@
+pkgdir=[perl-5.40.2]
+pkgname=[perl]
+pkgver=[5.40.2]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://www.cpan.org/src/5.0/perl-5.40.2.tar.xz]
+md5sum=[9ad7a269dc4053cdbeecd4fde444291b]
+
+patchurl=[https://www.linuxfromscratch.org/patches/lfs/development/perl-5.40.2-upstream_fix-1.patch]
+patchmd5=[1983b48fee837a98db47fb5dba934744]
+
+prepare=[export BUILD_ZLIB=False && export BUILD_BZIP2=0 && sh Configure -des \
+  -D prefix=/usr -D vendorprefix=/usr -D useshrplib -D usethreads \
+  -D privlib=/usr/lib/perl5/5.40/core_perl -D archlib=/usr/lib/perl5/5.40/core_perl \
+  -D sitelib=/usr/lib/perl5/5.40/site_perl -D sitearch=/usr/lib/perl5/5.40/site_perl \
+  -D vendorlib=/usr/lib/perl5/5.40/vendor_perl -D vendorarch=/usr/lib/perl5/5.40/vendor_perl \
+  -D man1dir=/usr/share/man/man1 -D man3dir=/usr/share/man/man3 -D pager="/usr/bin/less -isR"
+]
+
+build=[make]
+
+check=[TEST_JOBS=$(nproc) make test_harness]
+
+install=[make install ]

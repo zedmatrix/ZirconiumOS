@@ -1,0 +1,15 @@
+pkgdir=[automake-1.18]
+pkgname=[automake]
+pkgver=[1.18]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/automake/automake-1.18.tar.xz]
+md5sum=[1320dd6a6aae0d97668daa089086c083]
+
+prepare=[./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.18]
+
+build=[make]
+
+check=[make -j$(nproc) check ]
+
+install=[make install ]

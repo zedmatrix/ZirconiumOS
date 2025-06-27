@@ -1,0 +1,29 @@
+pkgdir=[Python-3.13.5]
+pkgname=[python]
+pkgver=[3.13.5]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz]
+md5sum=[dbaa8833aa736eddbb18a6a6ae0c10fa]
+
+docurl=[https://www.python.org/ftp/python/doc/3.13.5/python-3.13.5-docs-html.tar.bz2]
+docmd5=[8f34b29779cc1d5d1e8c0a913c307129]
+
+preconfig=[printf '[global]\nroot-user-action = ignore\ndisable-pip-version-check = true\n' > /etc/pip.conf]
+
+prepare=[./configure --prefix=/usr --enable-shared --with-system-expat \
+  --enable-optimizations --without-static-libpython
+]
+
+build=[make]
+
+check=[make test TESTOPTS="--timeout 120" ]
+
+install=[make install ]
+
+post=[install -v -dm755 /usr/share/doc/python-3.13.5/html]
+
+postconfig=[tar --strip-components=1 --no-same-owner --no-same-permissions \
+ -C /usr/share/doc/python-3.13.5/html \
+ -xvf $SOURCES/python-3.13.5-docs-html.tar.bz2
+]

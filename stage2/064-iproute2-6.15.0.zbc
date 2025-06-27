@@ -1,0 +1,16 @@
+pkgdir=[iproute2-6.15.0]
+pkgname=[iproute2]
+pkgver=[6.15.0]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.15.0.tar.xz]
+md5sum=[d85d77deed57e055cb2d1409595a6348]
+
+prepare=[sed -i /ARPD/d Makefile && rm -fv man/man8/arpd.8]
+
+build=[make NETNS_RUN_DIR=/run/netns ]
+
+install=[make SBINDIR=/usr/sbin install ]
+
+post=[install -vDm644 COPYING README* -t /usr/share/doc/iproute2-6.15.0 ]

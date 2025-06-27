@@ -1,0 +1,28 @@
+pkgdir=[coreutils-9.7]
+pkgname=[coreutils]
+pkgver=[9.7]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz]
+md5sum=[6b7285faf7d5eb91592bdd689270d3f1]
+
+patchurl=[https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.7-upstream_fix-1.patch]
+patchmd5=[96382a5aa85d6651a74f94ffb61785d9]
+
+docurl=[https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.7-i18n-1.patch]
+docmd5=[33ebfad32b2dfb8417c3335c08671206]
+
+preconfig=[patch -Np1 -i $SOURCES/coreutils-9.7-i18n-1.patch && autoreconf -fv && automake -af ]
+
+prepare=[FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr --enable-no-install-program=kill,uptime]
+
+build=[make]
+
+check=[make NON_ROOT_USERNAME=tester check-root ]
+
+install=[make install ]
+
+post=[mv -v /usr/bin/chroot /usr/sbin &&
+  mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8 &&
+  sed -i 's/"1"/"8"/' /usr/share/man/man8/chroot.8
+]

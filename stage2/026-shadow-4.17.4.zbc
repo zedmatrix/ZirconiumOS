@@ -1,0 +1,25 @@
+pkgdir=[shadow-4.17.4]
+pkgname=[shadow]
+pkgver=[4.17.4]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com/shadow-maint/shadow/releases/download/4.17.4/shadow-4.17.4.tar.xz]
+md5sum=[469666ea82c203ce5b0116d26b3793a9]
+
+preconfig=[sed -i 's/groups$(EXEEXT) //' src/Makefile.in &&
+ find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \; &&
+ find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \; &&
+ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \; &&
+ sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD YESCRYPT:' -e 's:/var/spool/mail:/var/mail:' \
+     -e '/PATH=/{s@/sbin:@@;s@/bin:@@}' -i etc/login.defs && touch /usr/bin/passwd
+]
+
+prepare=[./configure --sysconfdir=/etc --disable-static --with-{b,yes}crypt \
+ --without-libbsd --with-group-name-max-length=32
+]
+
+build=[make]
+
+install=[make exec_prefix=/usr install && make -C man install-man ]
+
+post=[pwconv && grpconv && mkdir -p /etc/default && useradd -D --gid 999]

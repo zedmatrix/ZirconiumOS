@@ -1,0 +1,19 @@
+pkgdir=[elfutils-0.193]
+pkgname=[libelf]
+pkgver=[0.193]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://sourceware.org/ftp/elfutils/0.193/elfutils-0.193.tar.bz2]
+md5sum=[ceefa052ded950a4c523688799193a44]
+
+prepare=[./configure --prefix=/usr --disable-debuginfod --enable-libdebuginfod=dummy ]
+
+build=[make]
+
+check=[make check ]
+
+install=[make -C libelf install &&
+  install -vm644 config/libelf.pc /usr/lib/pkgconfig
+]
+
+post=[rm -v /usr/lib/libelf.a ]

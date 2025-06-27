@@ -1,0 +1,18 @@
+pkgdir=[procps-ng-4.0.5]
+pkgname=[procps-ng]
+pkgver=[4.0.5]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-4.0.5.tar.xz]
+md5sum=[90803e64f51f192f3325d25c3335d057]
+
+prepare=[./configure --prefix=/usr --docdir=/usr/share/doc/procps-ng-4.0.5 --with-systemd \
+  --disable-static --disable-kill --enable-watch8bit
+]
+
+build=[make]
+
+check=[chown -R tester . && su tester -c "PATH=$PATH make check"]
+
+install=[make install ]

@@ -1,0 +1,19 @@
+pkgdir=[binutils-2.44]
+pkgname=[binutils]
+pkgver=[2.44]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://sourceware.org/pub/binutils/releases/binutils-2.44.tar.xz]
+md5sum=[49912ce774666a30806141f106124294]
+
+prepare=[ mkdir -v build && cd build && ../configure --prefix=/usr --sysconfdir=/etc \
+ --enable-ld=default --enable-plugins --enable-shared --disable-werror --enable-64-bit-bfd \
+ --enable-new-dtags --with-system-zlib --enable-default-hash-style=gnu]
+
+build=[cd build && make tooldir=/usr ]
+
+check=[cd build && make -k check && grep '^FAIL:' $(find -name '*.log') || true]
+
+install=[cd build && make tooldir=/usr install]
+
+post=[rm -rfv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a /usr/share/doc/gprofng/ ]

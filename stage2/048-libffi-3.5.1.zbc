@@ -1,0 +1,15 @@
+pkgdir=[libffi-3.5.1]
+pkgname=[libffi]
+pkgver=[3.5.1]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com/libffi/libffi/releases/download/v3.5.1/libffi-3.5.1.tar.gz]
+md5sum=[a67b82e7ec069f15cd81c23ced5049f4]
+
+prepare=[./configure --prefix=/usr --disable-static --with-gcc-arch=native ]
+
+build=[make]
+
+check=[make check ]
+
+install=[make install ]

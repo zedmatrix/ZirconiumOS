@@ -1,0 +1,17 @@
+pkgdir=[expat-2.7.1]
+pkgname=[expat]
+pkgver=[2.7.1]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://github.com/libexpat/libexpat/releases/download/R_2_7_1/expat-2.7.1.tar.xz]
+md5sum=[9f0c266ff4b9720beae0c6bd53ae4469]
+
+prepare=[./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/expat-2.7.1 ]
+
+build=[make]
+
+check=[make check ]
+
+install=[make install ]
+
+post=[install -v -m644 doc/*.{html,css} /usr/share/doc/expat-2.7.1 ]

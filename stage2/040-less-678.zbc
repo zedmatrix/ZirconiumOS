@@ -1,0 +1,13 @@
+pkgdir=[less-678]
+pkgname=[less]
+pkgver=[678]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://www.greenwoodsoftware.com/less/less-678.tar.gz]
+md5sum=[19b055a2ee7db1bf910380fd04c41ffc]
+
+build=[./configure --prefix=/usr --sysconfdir=/etc && make ]
+
+check=[make check ]
+
+install=[make install ]

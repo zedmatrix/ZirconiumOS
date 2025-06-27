@@ -1,0 +1,17 @@
+pkgdir=[bash-5.3-rc2]
+pkgname=[bash]
+pkgver=[5.3-rc2]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/bash/bash-5.3-rc2.tar.gz]
+md5sum=[9c440d7c5ca37433e496c5e22f8918c6]
+
+prepare=[./configure --prefix=/usr --without-bash-malloc \
+ --with-installed-readline --docdir=/usr/share/doc/bash-5.3-rc2
+]
+
+build=[make]
+
+check=[chown -R tester . && su tester -c "make tests"; echo "Exit Status: $?" ]
+
+install=[make install ]

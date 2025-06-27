@@ -1,0 +1,14 @@
+pkgdir=[diffutils-3.12]
+pkgname=[diffutils]
+pkgver=[3.12]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/diffutils/diffutils-3.12.tar.xz]
+md5sum=[d1b18b20868fb561f77861cd90b05de4]
+
+build=[./configure --prefix=/usr && make ]
+
+check=[make check ]
+
+install=[make install ]

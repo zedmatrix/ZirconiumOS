@@ -1,0 +1,22 @@
+pkgdir=[inetutils-2.6]
+pkgname=[inetutils]
+pkgver=[2.6]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://ftp.gnu.org/gnu/inetutils/inetutils-2.6.tar.xz]
+md5sum=[401d7d07682a193960bcdecafd03de94]
+
+preconfig=[sed -i 's/def HAVE_TERMCAP_TGETENT/ 1/' telnet/telnet.c ]
+
+prepare=[./configure --prefix=/usr --bindir=/usr/bin --localstatedir=/var \
+ --disable-logger --disable-whois --disable-rcp --disable-rexec \
+ --disable-rlogin --disable-rsh --disable-servers
+]
+
+build=[make]
+
+check=[make check ]
+
+install=[make install ]
+
+post=[mv -v /usr/{,s}bin/ifconfig ]

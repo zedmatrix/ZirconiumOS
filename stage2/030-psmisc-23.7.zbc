@@ -1,0 +1,13 @@
+pkgdir=[psmisc-23.7]
+pkgname=[psmisc]
+pkgver=[23.7]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz]
+md5sum=[53eae841735189a896d614cba440eb10]
+
+build=[./configure --prefix=/usr && make ]
+
+check=[make check ]
+
+install=[make install]
