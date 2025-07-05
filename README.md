@@ -10,4 +10,4 @@ Disc Image Used: [Linux From Scratch Multilib GCC-15.1.0 Kernel 6.14.4](https://
 # Zbuilder Program
 > Written in C++ with the ability to static link and download packages.<br>
 > Optional Package Archive<br>
-> TODO: extract other formats like .zip packages<br>
+> Package handles .zip files<br>
