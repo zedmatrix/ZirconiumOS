@@ -1,0 +1,16 @@
+pkgdir=[libXfont2-2.0.7]
+pkgname=[libXfont2]
+pkgver=[2.0.7]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXfont2-2.0.7.tar.xz]
+md5sum=[66e03e3405d923dfaf319d6f2b47e3da]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXfont2-2.0.7 --disable-devel-docs
+]
+
+build=[make]
+
+install=[make install]

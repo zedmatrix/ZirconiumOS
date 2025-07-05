@@ -1,0 +1,20 @@
+pkgdir=[sqlite-3.50.1]
+pkgname=[sqlite]
+pkgver=[3.50.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://sqlite.org/2025/sqlite-autoconf-3500100.tar.gz]
+md5sum=[45508b1aeb0a946574d3385249c5fb58]
+
+docurl=[https://sqlite.org/2025/sqlite-doc-3500100.zip]
+docmd5=[8a5e4aa7d2a0f71d221ec9f0080ca352]
+
+prepare=[./configure --prefix=/usr --disable-static --enable-fts{4,5} \
+    CPPFLAGS="-D SQLITE_ENABLE_COLUMN_METADATA=1 -D SQLITE_ENABLE_UNLOCK_NOTIFY=1 \
+    -D SQLITE_ENABLE_DBSTAT_VTAB=1 -D SQLITE_SECURE_DELETE=1"
+]
+
+build=[make]
+
+install=[make install]

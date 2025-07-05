@@ -1,0 +1,36 @@
+# REQUIRED
+pkgdir=[]
+pkgname=[]
+pkgver=[]
+pkgrel=[1] # 1 for strip, 0 for no strip
+zarchive=[false] # if not exist default to true
+
+# Only One - Needed
+pkgurl=[]
+md5sum=[]
+sha256sum=[]
+
+# One Only - Optional
+patchurl=[]
+patchmd5=[]
+
+# One Only - Optional
+docurl=[]
+docmd5=[]
+
+# Optional execution order
+preconfig=[]
+
+prepare=[]
+
+# REQUIRED
+build=[]
+
+check=[]
+
+# REQUIRED
+install=[]
+
+# Optional execution order
+post=[]
+postconfig=[]

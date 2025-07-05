@@ -1,0 +1,31 @@
+pkgdir=[dbus-1.16.2]
+pkgname=[dbus]
+pkgver=[1.16.2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz]
+md5sum=[97832e6f0a260936d28536e5349c22e5]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release --wrap-mode=nofallback]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]
+
+post=[rm -rf /usr/share/doc/dbus-1.16.2 &&
+  mv -v /usr/share/doc/dbus{,-1.16.2}
+]
+
+postconfig=[cat > /etc/dbus-1/session-local.conf << "EOF"
+<!DOCTYPE busconfig PUBLIC
+ "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+
+  <!-- Search for .service files in /usr/local -->
+  <servicedir>/usr/local/share/dbus-1/services</servicedir>
+
+</busconfig>
+EOF
+]

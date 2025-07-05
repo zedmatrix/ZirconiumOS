@@ -1,0 +1,16 @@
+pkgdir=[libXvMC-1.0.14]
+pkgname=[libXvMC]
+pkgver=[1.0.14]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXvMC-1.0.14.tar.xz]
+md5sum=[a90a5f01102dc445c7decbbd9ef77608]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXvMC-1.0.14
+]
+
+build=[make]
+
+install=[make install]

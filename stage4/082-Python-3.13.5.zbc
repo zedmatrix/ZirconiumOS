@@ -1,0 +1,17 @@
+pkgdir=[Python-3.13.5-pass2]
+pkgname=[python]
+pkgver=[3.13.5]
+pkgrel=[1]
+zarchive=[true]
+pkgurl=[https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tar.xz]
+md5sum=[dbaa8833aa736eddbb18a6a6ae0c10fa]
+
+prepare=[./configure --prefix=/usr --enable-shared --with-system-expat \
+  --enable-optimizations --without-static-libpython
+]
+
+build=[make]
+
+check=[make test TESTOPTS="--timeout 120" ]
+
+install=[make install ]

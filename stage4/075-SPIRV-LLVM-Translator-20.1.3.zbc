@@ -1,0 +1,16 @@
+pkgdir=[SPIRV-LLVM-Translator-20.1.3]
+pkgname=[SPIRV-LLVM-Translator]
+pkgver=[20.1.3]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v20.1.3/SPIRV-LLVM-Translator-20.1.3.tar.gz]
+md5sum=[ed3fcfcd95d7e207ef95ce1ffca2c124]
+
+prepare=[cmake -B build -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON \
+  -D CMAKE_SKIP_INSTALL_RPATH=ON -D LLVM_EXTERNAL_SPIRV_HEADERS_SOURCE_DIR=/usr -G Ninja -Wno-dev
+]
+
+build=[cd build && ninja]
+
+install=[cd build && ninja install]

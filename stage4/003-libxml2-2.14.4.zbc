@@ -1,0 +1,31 @@
+pkgdir=[libxml2-2.14.4]
+pkgname=[libxml2]
+pkgver=[2.14.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.4.tar.xz]
+md5sum=[b35aecdbed333b6dbedb6d96d05fabc3]
+
+docurl=[https://www.w3.org/XML/Test/xmlts20130923.tar.gz]
+docmd5=[ef8fbe0c92efd9a60d7f320e211d10b2]
+
+# Optional execution order
+preconfig=[tar xf $SOURCES/xmlts20130923.tar.gz]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --disable-static \
+  --with-history --with-icu PYTHON=/usr/bin/python3 --docdir=/usr/share/doc/libxml2-2.14.4
+]
+
+build=[make]
+
+check=[make check > libxml2-check.log]
+
+install=[make install]
+
+# Optional execution order
+post=[rm -vf /usr/lib/libxml2.la &&
+  sed '/libs=/s/xml2.*/xml2"/' -i /usr/bin/xml2-config
+]
+
+postconfig=[grep -E '^Total|expected|Ran' libxml2-check.log || true]

@@ -1,0 +1,16 @@
+pkgdir=[libvdpau-1.5]
+pkgname=[libvdpau]
+pkgver=[1.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2]
+md5sum=[148a192110e7a49d62c0bf9ef916c099]
+
+prepare=[meson setup build --prefix=/usr]
+
+build=[cd build && ninja]
+
+check=[cd build && ninja test]
+
+install=[cd build && ninja install]

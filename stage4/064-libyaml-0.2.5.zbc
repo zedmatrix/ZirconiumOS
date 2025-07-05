@@ -1,0 +1,14 @@
+pkgdir=[yaml-0.2.5]
+pkgname=[yaml]
+pkgver=[0.2.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz]
+md5sum=[bb15429d8fb787e7d3f1c83ae129a999]
+
+build=[./configure --prefix=/usr --disable-static && make]
+
+check=[make check]
+
+install=[make install]

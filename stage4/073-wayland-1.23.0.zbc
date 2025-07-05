@@ -1,0 +1,16 @@
+pkgdir=[wayland-1.23.0]
+pkgname=[wayland]
+pkgver=[1.23.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://gitlab.freedesktop.org/wayland/wayland/-/releases/1.23.0/downloads/wayland-1.23.0.tar.xz]
+md5sum=[23ad991e776ec8cf7e58b34cbd2efa75]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release -D documentation=false]
+
+build=[meson compile -C build]
+
+check=[env -u XDG_RUNTIME_DIR meson test -C build]
+
+install=[meson install -C build]

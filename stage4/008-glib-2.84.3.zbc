@@ -1,0 +1,33 @@
+pkgdir=[glib-2.84.3]
+pkgname=[glib]
+pkgver=[2.84.3]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://download.gnome.org/sources/glib/2.84/glib-2.84.3.tar.xz]
+md5sum=[8f61227d9a981f435841dca7666715fe]
+
+docurl=[https://download.gnome.org/sources/gobject-introspection/1.84/gobject-introspection-1.84.0.tar.xz]
+docmd5=[2a62fb1c584616a8ebcd9dd4d045f27e]
+
+patchurl=[https://www.linuxfromscratch.org/patches/blfs/svn/glib-skip_warnings-1.patch]
+patchmd5=[729287ad0c60b5b2d6ca9ec4a19d8cec]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release -D introspection=disabled \
+  -D glib_debug=disabled -D man-pages=enabled -D sysprof=disabled &&
+  meson compile -C build &&
+  meson install -C build
+]
+
+build=[cd build && tar xf $SOURCES/gobject-introspection-1.84.0.tar.xz &&
+  meson setup gobject-introspection-1.84.0 gi-build --prefix=/usr --buildtype=release &&
+  ninja -C gi-build
+]
+
+check=[cd build && ninja -C gi-build test &&
+  ninja -C gi-build install
+]
+
+install=[cd build && meson configure -D introspection=enabled && ninja &&
+  ninja install
+]

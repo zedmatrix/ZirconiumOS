@@ -1,0 +1,18 @@
+pkgdir=[desktop-file-utils-0.28]
+pkgname=[desktop-file-utils]
+pkgver=[0.28]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz]
+md5sum=[dec5d7265c802db1fde3980356931b7b]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release]
+
+build=[cd build && ninja]
+
+install=[cd build && ninja install]
+
+post=[install -vdm755 /usr/share/applications]
+
+postconfig=[update-desktop-database /usr/share/applications]

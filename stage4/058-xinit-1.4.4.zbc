@@ -1,0 +1,16 @@
+pkgdir=[xinit-1.4.4]
+pkgname=[xinit]
+pkgver=[1.4.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xinit-1.4.4.tar.xz]
+md5sum=[e7430a710261c9129b1280f26cb159a5]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --with-xinitdir=/etc/X11/app-defaults
+]
+
+build=[make]
+
+install=[make install]

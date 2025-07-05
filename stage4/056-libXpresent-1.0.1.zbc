@@ -1,0 +1,16 @@
+pkgdir=[libXpresent-1.0.1]
+pkgname=[libXpresent]
+pkgver=[1.0.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXpresent-1.0.1.tar.xz]
+md5sum=[bdd3ec17c6181fd7b26f6775886c730d]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXpresent-1.0.1
+]
+
+build=[make]
+
+install=[make install]

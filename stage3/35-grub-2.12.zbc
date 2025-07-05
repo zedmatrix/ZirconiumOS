@@ -1,0 +1,33 @@
+pkgdir=[grub-2.12-uefi]
+pkgname=[grub]
+pkgver=[2.12]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.gnu.org/gnu/grub/grub-2.12.tar.xz]
+md5sum=[60c564b1bdc39d8e43b3aab4bc0fb140]
+
+docurl=[https://unifoundry.com/pub/unifont/unifont-16.0.01/font-builds/unifont-16.0.01.pcf.gz]
+docmd5=[007ffa7aab47ed3f270caee84d12148b]
+
+# Optional execution order
+preconfig=[mkdir -pv /usr/share/fonts/unifont &&
+  gunzip -c $SOURCES/unifont-16.0.01.pcf.gz > /usr/share/fonts/unifont/unifont.pcf &&
+  echo depends bli part_gpt > grub-core/extra_deps.lst
+]
+
+prepare=[unset {C,CPP,CXX,LD}FLAGS && ./configure --prefix=/usr --sysconfdir=/etc \
+  --disable-efiemu --with-platform=efi --target=x86_64 --disable-werror
+]
+
+build=[unset {C,CPP,CXX,LD}FLAGS && make]
+
+install=[make -C grub-core install]
+
+# Optional execution order
+post=[install -vm755 grub-mkfont /usr/bin/ &&
+  install -vm644 ascii.h widthspec.h *.pf2 /usr/share/grub/ &&
+  install -vm755 grub-mount /usr/bin/
+]
+
+### If both Fuse-3.17.2 and LVM2-2.03.32 are installed

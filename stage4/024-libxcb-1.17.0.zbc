@@ -1,0 +1,18 @@
+pkgdir=[libxcb-1.17.0]
+pkgname=[libxcb]
+pkgver=[1.17.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.17.0.tar.xz]
+md5sum=[96565523e9f9b701fcb35d31f1d4086e]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --without-doxygen --docdir=/usr/share/doc/libxcb-1.17.0
+]
+
+build=[LC_ALL=en_US.UTF-8 make]
+
+check=[make check]
+
+install=[make install]

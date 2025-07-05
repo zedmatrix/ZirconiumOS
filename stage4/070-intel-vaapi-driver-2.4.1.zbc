@@ -1,0 +1,14 @@
+pkgdir=[intel-vaapi-driver-2.4.1]
+pkgname=[intel-vaapi-driver]
+pkgver=[2.4.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2]
+md5sum=[073fce0f409559109ad2dd0a6531055d]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static]
+
+build=[make]
+
+install=[make install]

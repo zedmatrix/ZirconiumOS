@@ -1,0 +1,22 @@
+pkgdir=[icu4c-77.1]
+pkgname=[icu4c-src]
+pkgver=[77.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/unicode-org/icu/releases/download/release-77-1/icu4c-77_1-src.tgz]
+md5sum=[bc0132b4c43db8455d2446c3bae58898]
+
+preconfig=[case $(uname -m) in
+  i?86) sed -e "s/U_PLATFORM_IS_LINUX_BASED/__X86_64__ \&\& &/" \
+            -i source/test/intltest/ustrtest.cpp ;;
+esac
+]
+
+prepare=[cd source && ./configure --prefix=/usr]
+
+build=[cd source && make]
+
+check=[cd source && make check]
+
+install=[cd source && make install]

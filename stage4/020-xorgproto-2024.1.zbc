@@ -1,0 +1,16 @@
+pkgdir=[xorgproto-2024.1]
+pkgname=[xorgproto]
+pkgver=[2024.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2024.1.tar.xz]
+md5sum=[12374d29fb5ae642cfa872035e401640]
+
+prepare=[meson setup build --prefix=/usr]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]
+
+post=[mv -v /usr/share/doc/xorgproto{,-2024.1}]

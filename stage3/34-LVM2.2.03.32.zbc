@@ -1,0 +1,22 @@
+pkgdir=[LVM2.2.03.32]
+pkgname=[LVM2]
+pkgver=[2.03.32]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://sourceware.org/ftp/lvm2/LVM2.2.03.32.tgz]
+md5sum=[9e77031e91fec1172a5568e1de8507e5]
+
+prepare=[PATH+=:/usr/sbin ./configure --prefix=/usr --enable-cmdlib --enable-pkgconfig --enable-udev_sync]
+
+build=[unset SOURCES make]
+
+check=[make -C tools install_tools_dynamic &&
+  make -C udev install &&
+  make -C libdm install &&
+  LC_ALL=en_US.UTF-8 make check_local
+]
+
+install=[make install && make install_systemd_units]
+
+post=[sed -e '/locking_dir =/{s/#//;s/var/run/}' -i /etc/lvm/lvm.conf]

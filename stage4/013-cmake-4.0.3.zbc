@@ -1,0 +1,20 @@
+pkgdir=[cmake-4.0.3]
+pkgname=[cmake]
+pkgver=[4.0.3]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://cmake.org/files/v4.0/cmake-4.0.3.tar.gz]
+md5sum=[9b50ed920dde06e64afabede4b215f43]
+
+preconfig=[sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake]
+
+prepare=[./bootstrap --prefix=/usr --system-libs --mandir=/share/man  \
+  --no-system-jsoncpp --no-system-cppdap --no-system-librhash --docdir=/share/doc/cmake-4.0.3
+]
+
+build=[make]
+
+check=[bin/ctest -j$(nproc)]
+
+install=[make install]

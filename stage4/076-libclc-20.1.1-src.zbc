@@ -1,0 +1,16 @@
+pkgdir=[libclc-20.1.1-src]
+pkgname=[libclc-src]
+pkgver=[20.1.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.1/libclc-20.1.1.src.tar.xz]
+md5sum=[5d8c539b4ac56c729cfefcd0241ea13a]
+
+prepare=[cmake -B build -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -G Ninja -Wno-dev]
+
+build=[cd build && ninja]
+
+check=[cd build && ninja test]
+
+install=[cd build && ninja install]

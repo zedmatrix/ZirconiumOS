@@ -1,0 +1,23 @@
+pkgdir=[libpng-1.6.49]
+pkgname=[libpng]
+pkgver=[1.6.49]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://downloads.sourceforge.net/libpng/libpng-1.6.49.tar.xz]
+md5sum=[66c58f211e8e9fc66e621965960df19c]
+
+preconfig=[autoreconf -fiv]
+
+prepare=[./configure --prefix=/usr --disable-static]
+
+build=[make]
+
+check=[make check]
+
+install=[make install]
+
+post=[cd contrib/pngminus &&
+  make PNGLIB_SHARED="-L/usr/lib -lpng" CFLAGS="$CFLAGS" png2pnm pnm2png &&
+  install -vm0755 png2pnm pnm2png "/usr/bin/"
+]

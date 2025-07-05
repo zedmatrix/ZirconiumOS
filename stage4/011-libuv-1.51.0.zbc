@@ -1,0 +1,16 @@
+pkgdir=[libuv-v1.51.0]
+pkgname=[libuv]
+pkgver=[1.51.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://dist.libuv.org/dist/v1.51.0/libuv-v1.51.0.tar.gz]
+md5sum=[5e0109e19c3fed3a8cbecb958de39afa]
+
+preconfig=[sh autogen.sh]
+
+prepare=[./configure --prefix=/usr --disable-static]
+
+build=[make]
+
+install=[make install]

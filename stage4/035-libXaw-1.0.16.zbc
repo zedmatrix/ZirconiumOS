@@ -1,0 +1,16 @@
+pkgdir=[libXaw-1.0.16]
+pkgname=[libXaw]
+pkgver=[1.0.16]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXaw-1.0.16.tar.xz]
+md5sum=[2a9793533224f92ddad256492265dd82]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXaw-1.0.16
+]
+
+build=[make]
+
+install=[make install]

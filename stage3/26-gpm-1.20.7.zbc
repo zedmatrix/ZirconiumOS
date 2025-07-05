@@ -1,0 +1,30 @@
+pkgdir=[gpm-1.20.7]
+pkgname=[gpm]
+pkgver=[1.20.7]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://anduin.linuxfromscratch.org/BLFS/gpm/gpm-1.20.7.tar.bz2]
+md5sum=[bf84143905a6a903dbd4d4b911a2a2b8]
+
+patchurl=[https://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.7-consolidated-1.patch]
+patchmd5=[7f7d72b794c44c60afc122aca70838e0]
+
+docurl=[https://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.7-gcc15_fixes-1.patch]
+docmd5=[d9978705320563da2a8353cfbe6825c3]
+
+preconfig=[patch -Np1 -i $SOURCES/gpm-1.20.7-gcc15_fixes-1.patch]
+
+prepare=[./autogen.sh && ./configure --prefix=/usr --sysconfdir=/etc ac_cv_path_emacs=no]
+
+build=[make]
+
+install=[make install && install-info --dir-file=/usr/share/info/dir /usr/share/info/gpm.info]
+
+post=[install -v -m644 conf/gpm-root.conf /etc &&
+  install -v -m755 -d /usr/share/doc/gpm-1.20.7/support &&
+  install -v -m644 doc/support/* /usr/share/doc/gpm-1.20.7/support &&
+  install -v -m644 doc/{FAQ,HACK_GPM,README*} /usr/share/doc/gpm-1.20.7
+]
+
+postconfig=[rm -fv /usr/lib/libgpm.a && ln -sfv libgpm.so.2.1.0 /usr/lib/libgpm.so]

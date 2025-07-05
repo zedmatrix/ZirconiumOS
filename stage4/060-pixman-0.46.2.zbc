@@ -1,0 +1,16 @@
+pkgdir=[pixman-0.46.2]
+pkgname=[pixman]
+pkgver=[0.46.2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.cairographics.org/releases/pixman-0.46.2.tar.gz]
+md5sum=[60ec2d0e718c31510f2000ada530e51b]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release]
+
+build=[meson compile -C build]
+
+check=[meson test -C build]
+
+install=[meson install -C build]

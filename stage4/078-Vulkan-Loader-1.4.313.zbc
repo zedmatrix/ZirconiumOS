@@ -1,0 +1,22 @@
+pkgdir=[Vulkan-Loader-1.4.313]
+pkgname=[Vulkan-Loader]
+pkgver=[1.4.313]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.4.313/Vulkan-Loader-1.4.313.tar.gz]
+md5sum=[78cfb37d352cf5595ef3fb434ece176c]
+
+prepare=[cmake -B build -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+ -D CMAKE_SKIP_INSTALL_RPATH=ON -G Ninja -Wno-dev
+]
+
+build=[cd build && ninja]
+
+check=[cd build && sed "s/'git', 'clone'/&, '--depth=1', '-b', self.commit/" -i ../scripts/update_deps.py &&
+  cmake -D BUILD_TESTS=ON -D UPDATE_DEPS=ON .. &&
+  ninja &&
+  ninja test
+]
+
+install=[cd build && ninja install]

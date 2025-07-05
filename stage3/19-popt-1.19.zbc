@@ -1,0 +1,14 @@
+pkgdir=[popt-1.19]
+pkgname=[popt]
+pkgver=[1.19]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://ftp.osuosl.org/pub/rpm/popt/releases/popt-1.x/popt-1.19.tar.gz]
+md5sum=[eaa2135fddb6eb03f2c87ee1823e5a78]
+
+build=[./configure --prefix=/usr --disable-static && make]
+
+check=[make check]
+
+install=[make install]

@@ -1,0 +1,20 @@
+pkgdir=[curl-8.14.1]
+pkgname=[curl]
+pkgver=[8.14.1]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://curl.se/download/curl-8.14.1.tar.xz]
+md5sum=[cba9ea54bccefed639a529b1b5b17405]
+
+prepare=[./configure --prefix=/usr --disable-static --with-openssl --with-ca-path=/etc/ssl/certs]
+
+build=[make]
+
+install=[make install]
+
+post=[rm -rf docs/examples/.deps &&
+  find docs \( -name Makefile\* -o -name \*.1 -o -name \*.3 -o -name CMakeLists.txt \) -delete
+]
+
+postconfig=[cp -v -R docs -T /usr/share/doc/curl-8.14.1]

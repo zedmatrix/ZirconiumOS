@@ -1,0 +1,16 @@
+pkgdir=[libXScrnSaver-1.2.4]
+pkgname=[libXScrnSaver]
+pkgver=[1.2.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXScrnSaver-1.2.4.tar.xz]
+md5sum=[e613751d38e13aa0d0fd8e0149cec057]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXScrnSaver-1.2.4
+]
+
+build=[make]
+
+install=[make install]

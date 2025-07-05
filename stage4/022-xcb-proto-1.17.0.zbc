@@ -1,0 +1,16 @@
+pkgdir=[xcb-proto-1.17.0]
+pkgname=[xcb-proto]
+pkgver=[1.17.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz]
+md5sum=[c415553d2ee1a8cea43c3234a079b53f]
+
+prepare=[PYTHON=python3 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static]
+
+build=[make]
+
+check=[make check]
+
+install=[make install]

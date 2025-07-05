@@ -1,0 +1,16 @@
+pkgdir=[libICE-1.1.2]
+pkgname=[libICE]
+pkgver=[1.1.2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libICE-1.1.2.tar.xz]
+md5sum=[d1ffde0a07709654b20bada3f9abdd16]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libICE-1.1.2
+]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,20 @@
+pkgdir=[rsync-3.4.1]
+pkgname=[rsync]
+pkgver=[3.4.1]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://www.samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz]
+md5sum=[04ce67866db04fd7a1cde0b78168406e]
+
+preconfig=[groupadd -g 48 rsyncd &&
+  useradd -c "rsyncd Daemon" -m -d /home/rsync -g rsyncd -s /bin/false -u 48 rsyncd
+]
+
+prepare=[./configure --prefix=/usr --disable-xxhash --without-included-zlib]
+
+build=[make]
+
+check=[sed -i '/typedef/d' wildtest.c && make check]
+
+install=[make install]

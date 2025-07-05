@@ -1,0 +1,28 @@
+pkgdir=[p11-kit-0.25.5]
+pkgname=[p11-kit]
+pkgver=[0.25.5]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://github.com/p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz]
+md5sum=[e9c5675508fcd8be54aa4c8cb8e794fc]
+
+preconfig=[sed '20,$ d' -i trust/trust-extract-compat &&
+  cat >> trust/trust-extract-compat << "EOF"
+# Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Update trust stores
+/usr/sbin/make-ca -r
+EOF
+]
+
+prepare=[meson setup p11-build --prefix=/usr --buildtype=release -D trust_paths=/etc/pki/anchors]
+
+build=[meson compile -C p11-build]
+
+check=[LC_ALL=C meson test -C p11-build]
+
+install=[meson install -C p11-build]
+
+post=[ln -sfv /usr/libexec/p11-kit/trust-extract-compat /usr/bin/update-ca-certificates]

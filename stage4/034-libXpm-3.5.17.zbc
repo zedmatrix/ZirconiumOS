@@ -1,0 +1,16 @@
+pkgdir=[libXpm-3.5.17]
+pkgname=[libXpm]
+pkgver=[3.5.17]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXpm-3.5.17.tar.xz]
+md5sum=[05b5667aadd476d77e9b5ba1a1de213e]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXpm-3.5.17 --disable-open-zfile
+]
+
+build=[make]
+
+install=[make install]

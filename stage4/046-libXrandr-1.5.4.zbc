@@ -1,0 +1,16 @@
+pkgdir=[libXrandr-1.5.4]
+pkgname=[libXrandr]
+pkgver=[1.5.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/lib/libXrandr-1.5.4.tar.xz]
+md5sum=[24e0b72abe16efce9bf10579beaffc27]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  --disable-static --docdir=/usr/share/doc/libXrandr-1.5.4
+]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,16 @@
+pkgdir=[pciutils-3.14.0]
+pkgname=[pciutils]
+pkgver=[3.14.0]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://mj.ucw.cz/download/linux/pci/pciutils-3.14.0.tar.gz]
+md5sum=[f70cf2da9377cb484802e291ea60115d]
+
+prepare=[sed -r '/INSTALL/{/PCI_IDS|update-pciids /d; s/update-pciids.8//}' -i Makefile]
+
+build=[make PREFIX=/usr SHAREDIR=/usr/share/hwdata SHARED=yes]
+
+install=[make PREFIX=/usr SHAREDIR=/usr/share/hwdata SHARED=yes install install-lib ]
+
+post=[chmod -v 755 /usr/lib/libpci.so]

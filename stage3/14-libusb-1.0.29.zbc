@@ -1,0 +1,12 @@
+pkgdir=[libusb-1.0.29]
+pkgname=[libusb]
+pkgver=[1.0.29]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2]
+md5sum=[12d4a782ce606a0582fb5038c16d0f75]
+
+build=[./configure --prefix=/usr --disable-static && make ]
+
+install=[make install ]
