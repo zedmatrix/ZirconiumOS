@@ -1,0 +1,11 @@
+pkgdir=[cbindgen-0.29.0]
+pkgname=[cbindgen]
+pkgver=[0.29.0]
+pkgrel=[1]
+zarchive=[false]
+pkgurl=[https://github.com/mozilla/cbindgen/archive/v0.29.0/cbindgen-0.29.0.tar.gz]
+md5sum=[6020b670f82890ef7205fd2c84395954]
+
+build=[cargo build --release]
+
+install=[install -Dm755 target/release/cbindgen /usr/bin/]

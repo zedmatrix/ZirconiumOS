@@ -1,0 +1,16 @@
+pkgdir=[libepoxy-1.5.10]
+pkgname=[libepoxy]
+pkgver=[1.5.10]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://download.gnome.org/sources/libepoxy/1.5/libepoxy-1.5.10.tar.xz]
+md5sum=[10c635557904aed5239a4885a7c4efb7]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release]
+
+build=[meson compile -C build]
+
+check=[meson test -C build]
+
+install=[meson install -C build]

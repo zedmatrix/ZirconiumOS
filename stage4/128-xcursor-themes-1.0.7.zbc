@@ -1,0 +1,12 @@
+pkgdir=[xcursor-themes-1.0.7]
+pkgname=[xcursor-themes]
+pkgver=[1.0.7]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/data/xcursor-themes-1.0.7.tar.xz]
+md5sum=[070993be1f010b09447ea24bab2c9846]
+
+build=[./configure --prefix=/usr && make]
+
+install=[make install]

@@ -1,0 +1,16 @@
+pkgdir=[xf86-input-libinput-1.5.0]
+pkgname=[xf86-input-libinput]
+pkgver=[1.5.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/driver/xf86-input-libinput-1.5.0.tar.xz]
+md5sum=[f8d0fb6987d843e688d597c2b66ec824]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static]
+
+build=[make]
+
+check=[make check]
+
+install=[make install]

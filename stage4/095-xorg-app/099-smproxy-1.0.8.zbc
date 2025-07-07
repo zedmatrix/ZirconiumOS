@@ -1,0 +1,14 @@
+pkgdir=[smproxy-1.0.8]
+pkgname=[smproxy]
+pkgver=[1.0.8]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/smproxy-1.0.8.tar.xz]
+md5sum=[6484cd8ee30354aaaf8f490988f5f6ef]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

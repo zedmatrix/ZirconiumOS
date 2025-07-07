@@ -1,0 +1,14 @@
+pkgdir=[xcb-util-cursor-0.1.5]
+pkgname=[xcb-util-cursor]
+pkgver=[0.1.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://xcb.freedesktop.org/dist/xcb-util-cursor-0.1.5.tar.xz]
+md5sum=[bc30cd267b11ac5803fe19929cabd230]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static]
+
+build=[make]
+
+install=[make install]

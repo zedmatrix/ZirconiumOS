@@ -1,0 +1,14 @@
+pkgdir=[duktape-2.7.0]
+pkgname=[duktape]
+pkgver=[2.7.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://duktape.org/duktape-2.7.0.tar.xz]
+md5sum=[b3200b02ab80125b694bae887d7c1ca6]
+
+prepare=[sed -i 's/-Os/-O2/' Makefile.sharedlibrary]
+
+build=[make -f Makefile.sharedlibrary INSTALL_PREFIX=/usr]
+
+install=[make -f Makefile.sharedlibrary INSTALL_PREFIX=/usr install]

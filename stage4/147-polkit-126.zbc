@@ -1,0 +1,20 @@
+pkgdir=[polkit-126]
+pkgname=[polkit]
+pkgver=[126]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/polkit-org/polkit/archive/126/polkit-126.tar.gz]
+md5sum=[db4ce0a42d5bf8002061f8e34ee9bdd0]
+
+preconfig=[groupadd -fg 27 polkitd &&
+  useradd -c "PolicyKit Daemon Owner" -d /etc/polkit-1 -u 27 -g polkitd -s /bin/false polkitd
+]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release -D man=true \
+ -D session_tracking=logind -D tests=true
+]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]

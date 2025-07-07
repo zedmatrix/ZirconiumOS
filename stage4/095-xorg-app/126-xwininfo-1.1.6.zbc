@@ -1,0 +1,14 @@
+pkgdir=[xwininfo-1.1.6]
+pkgname=[xwininfo]
+pkgver=[1.1.6]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xwininfo-1.1.6.tar.xz]
+md5sum=[c91201bc1eb5e7b38933be8d0f7f16a8]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,14 @@
+pkgdir=[xauth-1.1.4]
+pkgname=[xauth]
+pkgver=[1.1.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xauth-1.1.4.tar.xz]
+md5sum=[bf7b5a94561c7c98de447ea53afabfc4]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,14 @@
+pkgdir=[xcb-util-wm-0.4.2]
+pkgname=[xcb-util-wm]
+pkgver=[0.4.2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://xcb.freedesktop.org/dist/xcb-util-wm-0.4.2.tar.xz]
+md5sum=[581b3a092e3c0c1b4de6416d90b969c3]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,14 @@
+pkgdir=[vala-0.56.18]
+pkgname=[vala]
+pkgver=[0.56.18]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://download.gnome.org/sources/vala/0.56/vala-0.56.18.tar.xz]
+md5sum=[14238ac89810b932db9fd75999739494]
+
+build=[./configure --prefix=/usr && make]
+
+check=[make check]
+
+install=[make install]

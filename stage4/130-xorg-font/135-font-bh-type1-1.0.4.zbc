@@ -1,0 +1,14 @@
+pkgdir=[font-bh-type1-1.0.4]
+pkgname=[font-bh-type1]
+pkgver=[1.0.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-bh-type1-1.0.4.tar.xz]
+md5sum=[51a17c981275439b85e15430a3d711ee]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

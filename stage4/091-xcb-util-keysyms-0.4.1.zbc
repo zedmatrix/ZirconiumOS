@@ -1,0 +1,14 @@
+pkgdir=[xcb-util-keysyms-0.4.1]
+pkgname=[xcb-util-keysyms]
+pkgver=[0.4.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://xcb.freedesktop.org/dist/xcb-util-keysyms-0.4.1.tar.xz]
+md5sum=[fbdc05f86f72f287ed71b162f1a9725a]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static]
+
+build=[make]
+
+install=[make install]

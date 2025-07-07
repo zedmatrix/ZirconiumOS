@@ -1,0 +1,14 @@
+pkgdir=[font-bh-ttf-1.0.4]
+pkgname=[font-bh-ttf]
+pkgver=[1.0.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-bh-ttf-1.0.4.tar.xz]
+md5sum=[063bfa1456c8a68208bf96a33f472bb1]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

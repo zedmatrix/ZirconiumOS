@@ -1,0 +1,14 @@
+pkgdir=[xwud-1.0.7]
+pkgname=[xwud]
+pkgver=[1.0.7]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xwud-1.0.7.tar.xz]
+md5sum=[3e741db39b58be4fef705e251947993d]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

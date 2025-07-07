@@ -1,0 +1,35 @@
+pkgdir=[Linux-PAM-1.7.1]
+pkgname=[Linux-PAM]
+pkgver=[1.7.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://github.com/linux-pam/linux-pam/releases/download/v1.7.1/Linux-PAM-1.7.1.tar.xz]
+md5sum=[92812d7dd414d816fba8d649e84e68ca]
+
+docurl=[https://anduin.linuxfromscratch.org/BLFS/Linux-PAM/Linux-PAM-1.7.1-docs.tar.xz]
+docmd5=[f147017efb39a670bad3e8b614df50f0]
+
+preconfig=[sed -e "s/'elinks'/'lynx'/" \
+  -e "s/'-no-numbering', '-no-references'/ '-force-html', '-nonumbers', '-stdin'/" \
+  -i meson.build
+]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release -D docdir=/usr/share/doc/Linux-PAM-1.7.1]
+
+build=[meson compile -C build]
+
+check=[install -v -m755 -d /etc/pam.d &&
+  cat > /etc/pam.d/other << "EOF"
+auth     required       pam_deny.so
+account  required       pam_deny.so
+password required       pam_deny.so
+session  required       pam_deny.so
+EOF
+cd build && ninja test &&
+rm -fv /etc/pam.d/other
+]
+
+install=[meson install -C build && chmod -v 4755 /usr/sbin/unix_chkpwd]
+
+post=[. $SOURCES/zbuild-linux-pam-conf.sh]

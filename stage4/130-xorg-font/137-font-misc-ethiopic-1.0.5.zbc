@@ -1,0 +1,14 @@
+pkgdir=[font-misc-ethiopic-1.0.5]
+pkgname=[font-misc-ethiopic]
+pkgver=[1.0.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-misc-ethiopic-1.0.5.tar.xz]
+md5sum=[fe972eaf13176fa9aa7e74a12ecc801a]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

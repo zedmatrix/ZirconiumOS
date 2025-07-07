@@ -1,0 +1,14 @@
+pkgdir=[font-alias-1.0.5]
+pkgname=[font-alias]
+pkgver=[1.0.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-alias-1.0.5.tar.xz]
+md5sum=[79f4c023e27d1db1dfd90d041ce89835]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

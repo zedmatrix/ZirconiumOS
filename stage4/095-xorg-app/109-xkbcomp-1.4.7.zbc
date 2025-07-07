@@ -1,0 +1,14 @@
+pkgdir=[xkbcomp-1.4.7]
+pkgname=[xkbcomp]
+pkgver=[1.4.7]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xkbcomp-1.4.7.tar.xz]
+md5sum=[83d711948de9ccac550d2f4af50e94c3]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

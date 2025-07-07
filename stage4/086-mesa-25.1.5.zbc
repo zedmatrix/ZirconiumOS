@@ -1,0 +1,22 @@
+pkgdir=[mesa-25.1.5]
+pkgname=[mesa]
+pkgver=[25.1.5]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://mesa.freedesktop.org/archive/mesa-25.1.5.tar.xz]
+sha256sum=[3c4f6b10ff6ee950d0ec6ea733cc6e6d34c569454e3d39a9b276de9115a3b363]
+
+patchurl=[https://www.linuxfromscratch.org/patches/blfs/svn/mesa-add_xdemos-4.patch]
+patchmd5=[a7de1b961ed1ed7e8ce08dff80ab82fe]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release -D platforms=x11,wayland \
+  -D gallium-drivers=auto -D vulkan-drivers=auto -D valgrind=disabled \
+  -D video-codecs=all -D libunwind=disabled
+]
+
+build=[cd build && ninja]
+
+check=[cd build && meson configure -D build-tests=true && ninja test]
+
+install=[cd build && ninja install]

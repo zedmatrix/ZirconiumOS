@@ -1,0 +1,14 @@
+pkgdir=[font-ibm-type1-1.0.4]
+pkgname=[font-ibm-type1]
+pkgver=[1.0.4]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-ibm-type1-1.0.4.tar.xz]
+md5sum=[00f64a84b6c9886040241e081347a853]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

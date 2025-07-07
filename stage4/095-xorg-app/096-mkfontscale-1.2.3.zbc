@@ -1,0 +1,14 @@
+pkgdir=[mkfontscale-1.2.3]
+pkgname=[mkfontscale]
+pkgver=[1.2.3]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/mkfontscale-1.2.3.tar.xz]
+md5sum=[7dcf5f702781bdd4aaff02e963a56270]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,14 @@
+pkgdir=[xrdb-1.2.2]
+pkgname=[xrdb]
+pkgver=[1.2.2]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xrdb-1.2.2.tar.xz]
+md5sum=[c8629d5a0bc878d10ac49e1b290bf453]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

@@ -1,0 +1,14 @@
+pkgdir=[xdriinfo-1.0.7]
+pkgname=[xdriinfo]
+pkgver=[1.0.7]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xdriinfo-1.0.7.tar.xz]
+md5sum=[34aff1f93fa54d6a64cbe4fee079e077]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

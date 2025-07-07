@@ -1,0 +1,14 @@
+pkgdir=[xrandr-1.5.3]
+pkgname=[xrandr]
+pkgver=[1.5.3]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xrandr-1.5.3.tar.xz]
+md5sum=[dc7680201afe6de0966c76d304159bda]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

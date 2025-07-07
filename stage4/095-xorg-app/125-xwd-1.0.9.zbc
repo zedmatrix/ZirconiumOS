@@ -1,0 +1,14 @@
+pkgdir=[xwd-1.0.9]
+pkgname=[xwd]
+pkgver=[1.0.9]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xwd-1.0.9.tar.xz]
+md5sum=[b0081fb92ae56510958024242ed1bc23]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

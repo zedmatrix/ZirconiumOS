@@ -1,0 +1,14 @@
+pkgdir=[cairo-1.18.4]
+pkgname=[cairo]
+pkgver=[1.18.4]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://www.cairographics.org/releases/cairo-1.18.4.tar.xz]
+md5sum=[db575fb41bbda127e0147e401f36f8ac]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]

@@ -1,0 +1,20 @@
+pkgdir=[librsvg-2.60.0]
+pkgname=[librsvg]
+pkgver=[2.60.0]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://download.gnome.org/sources/librsvg/2.60/librsvg-2.60.0.tar.xz]
+md5sum=[ba3320798fec656c58c849df030dd7d3]
+
+preconfig=[sed -e "/OUTDIR/s|,| / 'librsvg-2.60.0', '--no-namespace-dir',|" \
+  -e '/output/s|Rsvg-2.0|librsvg-2.60.0|' -i doc/meson.build
+]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release]
+
+build=[meson compile -C build]
+
+check=[meson test -C build]
+
+install=[meson install -C build]

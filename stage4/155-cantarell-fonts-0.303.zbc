@@ -1,0 +1,16 @@
+pkgdir=[cantarell-fonts-0.303]
+pkgname=[cantarell-fonts]
+pkgver=[0.303]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://cantarell.gnome.org/releases/cantarell-fonts-0.303.tar.xz]
+md5sum=[e542f9cea636cf252956288f9c9f4f0c]
+
+prepare=[meson setup build -D fontsdir=/usr/share/fonts/cantarell \
+ -D useprebuilt=true -D buildappstream=true -D buildstatics=false -D buildvf=true
+]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]

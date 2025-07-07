@@ -1,0 +1,14 @@
+pkgdir=[font-xfree86-type1-1.0.5]
+pkgname=[font-xfree86-type1]
+pkgver=[1.0.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-xfree86-type1-1.0.5.tar.xz]
+md5sum=[3b47fed2c032af3a32aad9acc1d25150]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

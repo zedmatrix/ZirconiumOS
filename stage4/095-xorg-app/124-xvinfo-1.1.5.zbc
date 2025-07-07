@@ -1,0 +1,14 @@
+pkgdir=[xvinfo-1.1.5]
+pkgname=[xvinfo]
+pkgver=[1.1.5]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xvinfo-1.1.5.tar.xz]
+md5sum=[d698862e9cad153c5fefca6eee964685]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

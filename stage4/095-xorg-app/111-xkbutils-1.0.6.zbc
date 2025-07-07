@@ -1,0 +1,14 @@
+pkgdir=[xkbutils-1.0.6]
+pkgname=[xkbutils]
+pkgver=[1.0.6]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xkbutils-1.0.6.tar.xz]
+md5sum=[07483ddfe1d83c197df792650583ff20]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

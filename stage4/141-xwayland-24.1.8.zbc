@@ -1,0 +1,16 @@
+pkgdir=[xwayland-24.1.8]
+pkgname=[xwayland]
+pkgver=[24.1.8]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/xserver/xwayland-24.1.8.tar.xz]
+md5sum=[1644a66e2843a400885e90051094b582]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release -D xkb_output_dir=/var/lib/xkb]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]
+
+post=[install -vm755 build/hw/vfb/Xvfb /usr/bin]

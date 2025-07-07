@@ -1,0 +1,14 @@
+pkgdir=[xmodmap-1.0.11]
+pkgname=[xmodmap]
+pkgver=[1.0.11]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xmodmap-1.0.11.tar.xz]
+md5sum=[0d66e07595ea083871048c4b805d8b13]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

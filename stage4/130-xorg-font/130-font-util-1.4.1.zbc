@@ -1,0 +1,14 @@
+pkgdir=[font-util-1.4.1]
+pkgname=[font-util]
+pkgver=[1.4.1]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/font/font-util-1.4.1.tar.xz]
+md5sum=[a6541d12ceba004c0c1e3df900324642]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

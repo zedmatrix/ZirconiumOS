@@ -1,0 +1,14 @@
+pkgdir=[xgamma-1.0.7]
+pkgname=[xgamma]
+pkgver=[1.0.7]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/app/xgamma-1.0.7.tar.xz]
+md5sum=[41afaa5a68cdd0de7e7ece4805a37f11]
+
+prepare=[./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var]
+
+build=[make]
+
+install=[make install]

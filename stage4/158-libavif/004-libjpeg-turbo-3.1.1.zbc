@@ -1,0 +1,19 @@
+pkgdir=[libjpeg-turbo-3.1.1]
+pkgname=[libjpeg-turbo]
+pkgver=[3.1.1]
+pkgrel=[1]
+zarchive=[true]
+
+pkgurl=[https://github.com/libjpeg-turbo/libjpeg-turbo//releases/download/3.1.1/libjpeg-turbo-3.1.1.tar.gz]
+md5sum=[e71063e0b043e38207c8cefda6931cbd]
+
+prepare=[cmake -B build -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=RELEASE -D ENABLE_STATIC=FALSE \
+  -D CMAKE_INSTALL_DEFAULT_LIBDIR=lib -D CMAKE_POLICY_VERSION_MINIMUM=3.5 -D CMAKE_SKIP_INSTALL_RPATH=ON \
+  -D CMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-3.1.1
+]
+
+build=[cmake --build build]
+
+check=[cmake --test build]
+
+install=[cmake --install build]

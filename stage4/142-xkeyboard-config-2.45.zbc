@@ -1,0 +1,14 @@
+pkgdir=[xkeyboard-config-2.45]
+pkgname=[xkeyboard-config]
+pkgver=[2.45]
+pkgrel=[1]
+zarchive=[false]
+
+pkgurl=[https://www.x.org/pub/individual/data/xkeyboard-config/xkeyboard-config-2.45.tar.xz]
+md5sum=[cebc84ec99d3273e07aee8ecff3e3519]
+
+prepare=[meson setup build --prefix=/usr --buildtype=release]
+
+build=[meson compile -C build]
+
+install=[meson install -C build]
