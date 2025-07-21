@@ -1,0 +1,24 @@
+pkgdir=[ncurses-6.5]
+pkgname=[ncurses]
+pkgver=[6.5]
+pkgrel=[1]
+zarchive=[false]
+zdelete=[true]
+
+pkgurl=[https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20250503.tgz]
+md5sum=[d76fe944c5c24cdeabeb6fce0acbf94b]
+
+preconfig=[mkdir build && pushd build && ../configure AWK=gawk && make -C include && make -C progs tic && popd]
+
+prepare=[./configure --prefix=/usr --host=$LFS_TGT --build=$(./config.guess) --mandir=/usr/share/man \
+ --with-manpage-format=normal --with-shared --without-normal --with-cxx-shared --without-debug \
+ --without-ada --disable-stripping AWK=gawk]
+
+build=[make]
+
+install=[make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install &&
+ ln -sv libncursesw.so $LFS/usr/lib/libncurses.so &&
+ sed -e 's/^#if.*XOPEN.*$/#if 1/' -i $LFS/usr/include/curses.h]
+
+post=[]
+postconfig=[]
