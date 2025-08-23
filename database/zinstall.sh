@@ -16,6 +16,8 @@ zprint() { echo -e "${zzwhite} *** $* *** ${zzreset}"; }
 zzok() { echo -e "${zzgreen} *** $* *** ${zzreset}"; }
 zmsg() { echo -e "${zzred} *** $* *** ${zzreset}"; }
 zstars() { echo -e "${zzpurple} $(printf '%.0s*' {1..100}) ${zzreset}"; }
+
+# Verify if package was installed and is the same version
 zcheck_func() {
     local pkg="${1}"
     local pn=${pkg%-*}
@@ -27,7 +29,7 @@ zcheck_func() {
         local found_ver=$(echo "$found" | awk -F' - ' '{gsub(/^ +| +$/, "", $2); print $2}')
 
         if [[ ${found_ver} == ${pv} ]]; then
-            zprint "Package Version Found. Not Installing"
+            zprint "Package: ${pn} Version: ${found_ver} Found. Not Installing"
             return 1
         fi
     else
@@ -35,6 +37,7 @@ zcheck_func() {
     fi
     return 0
 }
+# Simple Wait Before Executing Function of 5 seconds or whatever is passed
 zbuild_wait() {
     local wait=${1:-5}
     zmsg "Waiting $wait seconds or Press [SPACE] to continue..."
@@ -49,8 +52,11 @@ zbuild_wait() {
 ZREPOSITORY=${ZREPOSITORY:-"/var/db/repos"}
 ZSRC=${ZSRC:-"/sources"}
 ZBUILD=${ZBUILD:-"/zbuild"}
+ZBUILD_CONFIG=${ZBUILD_CONFIG:-"/etc/zbuild.conf"}
 
 zstars
+# Test if the zbuild program is rebuilt and installed in PATH
+[ -x $(which zbuild) ] && echo "Installed" || { echo "zbuild Not Found in Path. Exiting."; exit 1; }
 
 zpkg=${1}
 # Find package directory
@@ -71,6 +77,7 @@ if [[ -n $zpkg_dir ]]; then
     zpkg_def=$(find ${zpkg_dir} -type f -name "${zpackage}.zbc")      # Passed to zbuild
     zprint "Package: ${zpkg_def}"
 
+    # Copy any sources from repos to working source tree only if non-existence
     if [[ -d "${zpkg_dir}/sources" ]]; then
         zprint "Found: ${zpkg_dir}/sources"
         cp -nv "${zpkg_dir}/sources/"* ${ZSRC} || { echo "Failed to Copy Sources. Exiting."; exit 1; }
@@ -79,6 +86,7 @@ if [[ -n $zpkg_dir ]]; then
         exit 1
     fi
 
+    # Verify that any depends are met from reading the simple zpackage.db
     if [[ -f "${zpkg_dir}/depends.sh" ]]; then
         zprint "Found: ${zpkg_dir}/depends.sh"
         source "${zpkg_dir}/depends.sh"
@@ -86,7 +94,7 @@ if [[ -n $zpkg_dir ]]; then
         if [[ ${zcheck} -eq 0 ]]; then
             zbuild_wait
             zzok "Executing: ${zpkg_def}"
-            ${ZBUILD}/zbuild ${zpkg_def} || { zmsg "Error Building: ${?} .Exiting."; exit 1; }
+            zbuild ${zpkg_def} || { zmsg "Error Building: ${?} .Exiting."; exit 1; }
             /sbin/ldconfig
         else
             zmsg "Missing Depends. Exiting."
