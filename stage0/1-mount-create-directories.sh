@@ -1,7 +1,7 @@
 #!/bin/bash
 LFS=${LFS:-/mnt/lfs}
 source 0-environment.sh
-source check_fs.sh || { echo "Failed to source check_fs"; exit 1; }
+source 0-check_fs.sh || { echo "Failed to source check_fs"; exit 1; }
 
 # Mount ROOT partition if not already mounted
 if ! mountpoint -q "$LFS"; then
