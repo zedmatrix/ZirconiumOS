@@ -10,7 +10,7 @@ LFS_TGT=$(uname -m)-lfs-linux-gnu
 ZSRC=${ZSRC:-$LFS/sources}
 ZBUILD=${ZBUILD:-$LFS/zbuild}
 
-PATH=/usr/bin
+PATH=/usr/bin:/usr/sbin
 if [ ! -L /bin ]; then PATH=/bin:/sbin:$PATH; fi
 PATH=$LFS/tools/bin:$PATH
 CONFIG_SITE=$LFS/usr/share/config.site

@@ -1,6 +1,6 @@
 #!/bin/bash
 LFS=${LFS:-/mnt/lfs}
-
+source 0-environment.sh
 source check_fs.sh || { echo "Failed to source check_fs"; exit 1; }
 
 # Mount ROOT partition if not already mounted
@@ -26,7 +26,7 @@ ln -sfv zbuild.cfg.lfs $LFS/zbuild/zbuild.cfg
 mkdir -pv $LFS/{etc,var,tools,sources} $LFS/usr/{bin,lib,sbin}
 
 for i in bin lib sbin; do
-  ln -sv usr/$i $LFS/$i
+  [ ! -e "$LFS/$i" ] && ln -sv usr/$i $LFS/$i
 done
 
 case $(uname -m) in

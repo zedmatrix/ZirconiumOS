@@ -29,7 +29,7 @@ e170147da25e1d5f72721ffc46fe4e06  https://github.com/rhboot/efibootmgr/archive/1
 55c21312d50b20190807bf053a08c558  https://github.com/libfuse/libfuse/releases/download/fuse-3.17.2/fuse-3.17.2.tar.gz
 9e77031e91fec1172a5568e1de8507e5  https://sourceware.org/ftp/lvm2/LVM2.2.03.32.tgz
 605237f35de238dfacc83bcae406d95d  https://pagure.io/libaio/archive/libaio-0.3.113/libaio-0.3.113.tar.gz
-6e43781d11b99031e18593f44d39313a  https://www.kernel.org/pub/software/scm/git/git-2.50.0.tar.xz
-6ddb044f9130afe5aa34c8d65574f27d  https://www.kernel.org/pub/software/scm/git/git-manpages-2.50.0.tar.xz
-6a3e236aeb1fbc96b1e1f8ad328032bf  https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.50.0.tar.xz
-ada10ff4a604cfab4cf610a3debbcb31  https://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20241211.tar.xz
+2cb96fae126d66f8ff23a68f8dd5d748  https://www.kernel.org/pub/software/scm/git/git-2.50.1.tar.xz
+f166cf38117bc82495fd547b739eddd9  https://www.kernel.org/pub/software/scm/git/git-manpages-2.50.1.tar.xz
+5ca9e1728e390299f9809dedf92b2e47  https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.50.1.tar.xz
+a4d37986a2f841a6a33dd9382dad7ddf  https://www.linuxfromscratch.org/blfs/downloads/systemd/blfs-systemd-units-20241211.tar.xz
