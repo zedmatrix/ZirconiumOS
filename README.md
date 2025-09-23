@@ -1,6 +1,12 @@
 ## Zirconium OS - systemd
 
+- `Chapter_02/1-install-filesystem.sh` 
+- `Chapter_02/2-install-directories.sh`
+> Should be run from a usb drive or from the host build tools.<br>
+> If Preparing a new use the live iso and copy this repo to a usb stick.
+
 ### Installing
+
 * Copy the `repos` into `/mnt/lfs/ybuild/repos`
 * Copy Files from Chapter_03: 
 * `ca-bundle.crt` - Certifications to allow the libcurl module to download inside chroot.
