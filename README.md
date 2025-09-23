@@ -3,7 +3,7 @@
 - `Chapter_02/1-install-filesystem.sh` 
 - `Chapter_02/2-install-directories.sh`
 > Should be run from a usb drive or from the host build tools.<br>
-> If Preparing a new use the live iso and copy this repo to a usb stick.
+> If Preparing NEW, Use the live iso and copy this repo to a usb stick.
 
 ### Installing
 
