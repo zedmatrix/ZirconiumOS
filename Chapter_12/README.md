@@ -9,17 +9,18 @@ c-ares nghttp2 libnl rpcbind rpcsvc-proto
 linux-pam shadow-pam systemd-pam libcap-pam
 ```
 
-> Test Linux-PAM Configuration
-  Finalize
-`if [ -f /etc/login.access ]; then mv -v /etc/login.access{,.NOUSE}; fi`
-`if [ -f /etc/limits ]; then mv -v /etc/limits{,.NOUSE}; fi`
+>
+* Test Linux-PAM Configuration
+* Finalize
+`if [ -f /etc/login.access ]; then mv -v /etc/login.access{,.NOUSE}; fi` <br>
+`if [ -f /etc/limits ]; then mv -v /etc/limits{,.NOUSE}; fi` <br>
 
 > Create User
-export username= 
-useradd -m -G audio,video,wheel ${username}
-passwd ${username}
+* `export username= `
+* `useradd -m -G audio,video,wheel ${username}`
+* `passwd ${username}`
 
-* Final Security and Crypto
+### Final Security and Crypto
 ```
 nspr nss libgpg-error libgcrypt libssh2 lmdb
 cyrus-sasl openldap sudo gnutls duktape
