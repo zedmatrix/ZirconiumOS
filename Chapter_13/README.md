@@ -20,8 +20,8 @@ xdg-utils xdg-user-dirs glu freeglut
 (xorg-legacy-font.sh)
 bdftopcf font-adobe-100dpi font-adobe-75dpi font-jis-misc font-daewoo-misc font-isas-misc font-misc-misc
 ```
-> Testing Xorg
-`echo 4 > /proc/sys/kernel/sysrq`
+> Testing Xorg <br>
+* `echo 4 > /proc/sys/kernel/sysrq`
 > Alt+SysRq+R to reset the keyboard mode.
-`startx`
-`less /var/log/Xorg.0.log`
+* Test Run: `startx`
+* Log File to Check: `less /var/log/Xorg.0.log`
