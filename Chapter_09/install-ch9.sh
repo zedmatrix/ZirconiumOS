@@ -6,7 +6,7 @@ ybuild_scripts=(ybuild-environment.sh ynetwork-files.sh yclock-locale.sh ysystem
 ybash-startup.sh yskel-files.sh)
 
 for script in ${ybuild_scripts[@]}; do
-    ${script} || { echo "Error in ${script}. Exiting."; break; }
+    ./${script} || { echo "Error in ${script}. Exiting."; break; }
 done
 
 

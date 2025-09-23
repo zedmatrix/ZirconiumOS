@@ -17,7 +17,7 @@ esac
 [ ! -z $DRIVE ] && echo "Drive: $DRIVE " || bad_drive
 
 pttype=$(lsblk -n -o PTTYPE $DRIVE | head -1)
-codename="Titanium"
+codename="zirconium"
 kernelversion="6.12.47"
 [[ $DRIVE =~ 'nvme' ]] && P=p || P=
 

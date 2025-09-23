@@ -30,7 +30,7 @@ install: |
     mkdir -p /etc/default &&
     useradd -D --gid 999 &&
     sed -i '/MAIL/s/yes/no/' /etc/default/useradd &&
-    echo "Neptune" | passwd --stdin root
+    echo "lfsroot" | passwd --stdin root
 
 required:
     - libxcrypt

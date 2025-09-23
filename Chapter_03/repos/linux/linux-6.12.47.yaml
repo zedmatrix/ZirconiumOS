@@ -20,6 +20,6 @@ build: |
     make modules_install
 
 install: |
-    cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.12.47-Titanium &&
+    cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.12.47-zirconium &&
     cp -iv System.map /boot/System.map-6.12.47 &&
     cp -iv .config /boot/config-6.12.47
