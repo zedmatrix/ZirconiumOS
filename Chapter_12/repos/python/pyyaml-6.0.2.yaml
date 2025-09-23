@@ -1,0 +1,23 @@
+package:
+    name: pyyaml
+    version: 6.0.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://files.pythonhosted.org/packages/source/P/PyYAML/pyyaml-6.0.2.tar.gz
+      md5: 9600ee49b2b4e1a0237cf4173b6dc594
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user PyYAML
+
+required:
+    - cython
+    - libyaml
+
+optional:
+    - pytest

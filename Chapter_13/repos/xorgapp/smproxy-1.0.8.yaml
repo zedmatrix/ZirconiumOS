@@ -1,0 +1,28 @@
+package:
+    name: smproxy
+    version: 1.0.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/smproxy-1.0.8.tar.xz
+      md5: 6484cd8ee30354aaaf8f490988f5f6ef
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 005

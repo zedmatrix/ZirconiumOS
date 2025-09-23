@@ -1,0 +1,20 @@
+package:
+    name: libtirpc
+    version: 1.3.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources: 
+    - url: https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.7.tar.bz2
+      md5: 74f97df306b8d6149d3d9898a1d44c6e
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --disable-static --disable-gssapi &&
+    make CC="gcc -std=gnu17"
+
+install: |
+    make install
+
+optional:
+    - mitkrb

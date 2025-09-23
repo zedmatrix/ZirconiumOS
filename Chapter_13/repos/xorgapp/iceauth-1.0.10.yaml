@@ -1,0 +1,28 @@
+package:
+    name: iceauth
+    version: 1.0.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/iceauth-1.0.10.tar.xz
+      md5: 30f898d71a7d8e817302970f1976198c
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 001

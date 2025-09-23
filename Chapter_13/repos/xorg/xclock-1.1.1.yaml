@@ -1,0 +1,26 @@
+package:
+    name: xclock
+    version: 1.1.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xclock-1.1.1.tar.xz
+      md5: 1273e3f4c85f1801be11a5247c382d07
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
+    make
+
+install: |
+    make install
+
+required:
+    - libX11
+    - libXaw
+    - libXft
+    - libxkbfile
+    - libXmu
+    - libXrender
+    - util-macros

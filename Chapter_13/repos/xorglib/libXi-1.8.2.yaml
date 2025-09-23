@@ -1,0 +1,31 @@
+package:
+    name: libXi
+    version: 1.8.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXi-1.8.2.tar.xz
+      md5: 95a960c1692a83cc551979f7ffe28cf4
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --docdir=/usr/share/doc/libXi-1.8.2
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - fontconfig
+    - libxcb
+    - dbus
+optional:
+    - asciidoc
+    - xmlto
+    - fop
+    - links
+    - lynx

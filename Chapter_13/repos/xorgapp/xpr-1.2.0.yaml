@@ -1,0 +1,28 @@
+package:
+    name: xpr
+    version: 1.2.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xpr-1.2.0.tar.xz
+      md5: ab6c9d17eb1940afcfb80a72319270ae
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 023

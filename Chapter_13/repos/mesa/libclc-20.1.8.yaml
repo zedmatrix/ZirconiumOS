@@ -1,0 +1,27 @@
+package:
+    name: libclc
+    version: 20.1.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/libclc-20.1.8.src.tar.xz
+      md5: b49b6b81298c9eb1609073b9164ff4cb
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+check: |
+    ninja -C Ybuild test
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - spirv-llvm-translator
+    - cmake
+    - ninja

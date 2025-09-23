@@ -1,0 +1,28 @@
+package:
+    name: xprop
+    version: 1.2.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xprop-1.2.8.tar.xz
+      md5: 5ef4784b406d11bed0fdf07cc6fba16c
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 024

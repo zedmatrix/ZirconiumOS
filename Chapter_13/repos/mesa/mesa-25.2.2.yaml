@@ -1,0 +1,46 @@
+package:
+    name: mesa
+    version: 25.2.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mesa.freedesktop.org/archive/mesa-25.2.2.tar.xz
+      md5: 0f5efeb82427fb841fc89df51b487ed5
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/mesa-add_xdemos-4.patch
+      md5: a7de1b961ed1ed7e8ce08dff80ab82fe
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D platforms=x11,wayland \
+        -D gallium-drivers=iris,i915,crocus -D vulkan-drivers=intel,intel_hasvk -D valgrind=disabled \
+        -D video-codecs=all -D libunwind=disabled
+
+build: |
+    ninja -C ybuild
+
+check: |
+    cd ybuild && meson configure -D build-tests=true && ninja test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libdrm
+    - mako
+    - pyyaml
+    - libX11
+    - libxcb
+    - libXext
+    - libxshmfence
+    - libXxf86vm
+
+recommended:
+    - glslang
+    - libva-pass1
+    - libvdpau
+    - llvm
+    - libclc
+

@@ -1,0 +1,27 @@
+package:
+    name:
+    version:
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url:
+      md5:
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+install: |
+    make install
+
+final: |
+
+required:
+
+recommended:
+
+optional:

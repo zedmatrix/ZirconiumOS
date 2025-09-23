@@ -1,0 +1,42 @@
+package:
+    name: cyrus-sasl
+    version: 2.1.28
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.28/cyrus-sasl-2.1.28.tar.gz
+      md5: 6f228a692516f5318a64505b46966cfa
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/cyrus-sasl-2.1.28-gcc15_fixes-1.patch
+      md5: 6f228a692516f5318a64505b46966cfa
+
+prepare: |
+    autoreconf -fiv &&
+    sed '/saslint/a #include <time.h>' -i lib/saslutil.c &&
+    sed '/plugin_common/a #include <time.h>' -i plugins/cram.c
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --enable-auth-sasldb --with-dblib=lmdb \
+    --with-dbpath=/var/lib/sasl/sasldb2 --with-sphinx-build=no --with-saslauthd=/var/run/saslauthd &&
+    make -j1
+
+install: |
+    make install &&
+    install -v -dm755 /usr/share/doc/cyrus-sasl-2.1.28/html &&
+    install -v -m644 saslauthd/LDAP_SASLAUTHD /usr/share/doc/cyrus-sasl-2.1.28 &&
+    install -v -m644 doc/legacy/*.html /usr/share/doc/cyrus-sasl-2.1.28/html &&
+    install -v -dm700 /var/lib/sasl
+
+recommended:
+    - lmdb
+
+optional:
+    - linux-pam
+    - mitkrb
+    - mariadb
+    - openldap
+    - postgresql
+    - sphinx

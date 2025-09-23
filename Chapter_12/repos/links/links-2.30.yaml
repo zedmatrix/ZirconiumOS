@@ -1,0 +1,33 @@
+package:
+    name: links
+    version: 2.30
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: http://links.twibright.com/download/links-2.30.tar.bz2
+      md5: dc56041551980c74dd354cd7c2882539
+
+build: |
+    ./configure --prefix=/usr --mandir=/usr/share/man &&
+    make
+
+install: |
+    make install
+
+final: |
+    install -v -d -m755 /usr/share/doc/links-2.30 &&
+    install -v -m644 doc/links_cal/* KEYS BRAILLE_HOWTO /usr/share/doc/links-2.30
+
+recommended:
+    - libevent
+
+optional:
+    - gpm
+    - libavif
+    - libpng
+    - libjpeg-turbo
+    - librsvg
+    - libtiff
+    - brotli

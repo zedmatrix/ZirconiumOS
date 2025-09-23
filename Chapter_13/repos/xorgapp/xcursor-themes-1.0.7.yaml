@@ -1,0 +1,26 @@
+package:
+    name: xcursor-themes
+    version: 1.0.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/data/xcursor-themes-1.0.7.tar.xz
+      md5: 070993be1f010b09447ea24bab2c9846
+
+prepare: |
+    ./configure --prefix=/usr
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - util-macros
+    - xcursorgen
+
+recommended:
+    - pkgconf

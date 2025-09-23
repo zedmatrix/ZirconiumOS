@@ -1,0 +1,21 @@
+package:
+    name: libseccomp
+    version: 2.6.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/seccomp/libseccomp/releases/download/v2.6.0/libseccomp-2.6.0.tar.gz
+      md5: 2d42bcde31fd6e994fcf251a1f71d487
+
+build: |
+    ./configure --prefix=/usr --disable-static && make
+
+install: |
+    make install
+
+optional:
+    - which
+    - valgrind
+    - cython

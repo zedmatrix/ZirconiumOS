@@ -1,0 +1,22 @@
+package:
+    name: xdg-user-dirs
+    version: 0.18
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://user-dirs.freedesktop.org/releases/xdg-user-dirs-0.18.tar.gz
+      md5: dc7decea7ffb58cd067eff1fe1798cae
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --disable-documentation &&
+    make
+
+install: |
+    make install
+
+optional:
+    - docbook-xml
+    - docbook-xsl-nons
+    - libxslt

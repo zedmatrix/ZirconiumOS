@@ -1,0 +1,26 @@
+package:
+    name: libevent
+    version: 2.1.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
+      md5: b5333f021f880fe76490d8a799cd79f4
+
+prepare: |
+    sed -i 's/python/&3/' event_rpcgen.py
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+check: |
+    make verify
+
+install: |
+    make install
+
+optional:
+    - doxygen

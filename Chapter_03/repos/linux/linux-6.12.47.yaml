@@ -1,0 +1,25 @@
+package:
+    name: linux
+    version: 6.12.47
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.47.tar.xz
+      md5: c3b62721a4ed32df1eaa0b624fa6ac9c
+
+prepare: |
+    make mrproper &&
+    zcat /proc/config.gz > .config || exit 1 &&
+    #cp -v ${YSRC}/zbase-config-6.6.94 .config || exit 1 &&
+    make olddefconfig
+
+build: |
+    make || exit 1 &&
+    make modules_install
+
+install: |
+    cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.12.47-Titanium &&
+    cp -iv System.map /boot/System.map-6.12.47 &&
+    cp -iv .config /boot/config-6.12.47

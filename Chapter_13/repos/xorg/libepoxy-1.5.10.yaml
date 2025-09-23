@@ -1,0 +1,27 @@
+package:
+    name: libepoxy
+    version: 1.5.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/libepoxy/1.5/libepoxy-1.5.10.tar.xz
+      md5: 10c635557904aed5239a4885a7c4efb7
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - mesa
+    - libX11
+
+optional:
+    - doxygen
+    - graphviz

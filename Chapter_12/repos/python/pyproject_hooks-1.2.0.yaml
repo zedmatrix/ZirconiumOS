@@ -1,0 +1,19 @@
+package:
+    name: pyproject_hooks
+    version: 1.2.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://files.pythonhosted.org/packages/source/p/pyproject-hooks/pyproject_hooks-1.2.0.tar.gz
+      md5: ed3dd1b984339e83e35f676d7169c192
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user pyproject_hooks
+
+optional:
+    - pytest

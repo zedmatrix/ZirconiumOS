@@ -1,0 +1,16 @@
+package:
+    name: docutils
+    version: 0.21.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://files.pythonhosted.org/packages/source/d/docutils/docutils-0.21.2.tar.gz
+      md5: c4064e1e0e3cd142951fd2b95b830874
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user docutils

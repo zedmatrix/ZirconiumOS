@@ -1,0 +1,35 @@
+package:
+    name: harfbuzz
+    version: 11.4.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/harfbuzz/harfbuzz/releases/download/11.4.5/harfbuzz-11.4.5.tar.xz
+      md5: 6d5b10af0b184036238bbe2dd4959d3c
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D graphite2=enabled
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - glib2
+    - graphite2-pass1
+
+recommended:
+    - icu
+    - freetype2-pass1
+
+optional:
+    - cairo-pass1
+    - git
+    - gtk-doc

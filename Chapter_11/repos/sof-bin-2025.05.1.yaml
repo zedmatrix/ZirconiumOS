@@ -1,0 +1,15 @@
+package:
+    name: sof-bin
+    version: 2025.05.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/thesofproject/sof-bin/releases/download/v2025.05.1/sof-bin-2025.05.1.tar.gz
+      md5:
+      sha256: 60d54eae32694332a2120b7c44e4af403a14fe1fdf4c58d72981102b191d259c
+
+install: |
+    install -vdm755 /usr/lib/firmware/intel
+    cp -rv sof* /usr/lib/firmware/intel/

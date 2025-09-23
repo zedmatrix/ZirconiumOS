@@ -1,0 +1,24 @@
+package:
+    name: libcap-pam
+    version: 2.76
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.76.tar.xz
+      md5: 449ade7d620b5c4eeb15a632fbaa4f74
+
+build: |
+    make -C pam_cap
+
+install: |
+    install -v -m755 pam_cap/pam_cap.so /usr/lib/security &&
+    install -v -m644 pam_cap/capability.conf /etc/security
+
+final: |
+    mv -v /etc/pam.d/system-auth{,.bak} &&
+    install -vm644 ${YSRC}/libcap-system-auth /etc/pam.d/system-auth
+
+required:
+    - linux-pam

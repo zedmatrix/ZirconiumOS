@@ -1,0 +1,28 @@
+package:
+    name: xcursorgen
+    version: 1.0.9
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xcursorgen-1.0.9.tar.xz
+      md5: f97e81b2c063f6ae9b18d4b4be7543f6
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 008

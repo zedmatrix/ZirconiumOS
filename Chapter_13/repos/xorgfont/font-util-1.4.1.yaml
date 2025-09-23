@@ -1,0 +1,26 @@
+package:
+    name: font-util
+    version: 1.4.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-util-1.4.1.tar.xz
+      md5: a6541d12ceba004c0c1e3df900324642
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - xcursor-themes
+    - mkfontscale
+    - util-macros
+
+optional:
+
+order: 130

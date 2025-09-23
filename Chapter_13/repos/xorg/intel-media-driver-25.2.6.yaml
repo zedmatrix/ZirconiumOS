@@ -1,0 +1,25 @@
+package:
+    name: intel-media-driver
+    version: 25.2.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/lfs-book/intel-media-driver/archive/v25.2.6/intel-media-driver-25.2.6.tar.gz
+      md5: 87fdb5bc73a6dc33cb6090dad5194f0c
+
+prepare: |
+    cmake -B ybuild -D CMAKE_INSTALL_PREFIX=/usr -D BUILD_TYPE=Release -G Ninja -W no-dev \
+      -D CMAKE_POLICY_VERSION_MINIMUM=3.5 -D INSTALL_DRIVER_SYSCONF=OFF -D MEDIA_BUILD_FATAL_WARNINGS=OFF
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - cmake
+    - gmmlib
+    - libva

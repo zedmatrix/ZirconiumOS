@@ -1,0 +1,31 @@
+package:
+    name: libXScrnSaver
+    version: 1.2.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXScrnSaver-1.2.4.tar.xz
+      md5: e613751d38e13aa0d0fd8e0149cec057
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --docdir=/usr/share/doc/libXScrnSaver-1.2.4
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - fontconfig
+    - libxcb
+    - dbus
+optional:
+    - asciidoc
+    - xmlto
+    - fop
+    - links
+    - lynx

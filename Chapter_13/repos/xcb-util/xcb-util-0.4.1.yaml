@@ -1,0 +1,25 @@
+package:
+    name: xcb-util
+    version: 0.4.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://xcb.freedesktop.org/dist/xcb-util-0.4.1.tar.xz
+      md5: 34d749eab0fd0ffd519ac64798d79847
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - libxcb
+
+optional:
+    - doxygen

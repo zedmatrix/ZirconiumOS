@@ -1,0 +1,27 @@
+package:
+    name: intel-vaapi-driver
+    version: 2.4.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/intel/intel-vaapi-driver/releases/download/2.4.1/intel-vaapi-driver-2.4.1.tar.bz2
+      md5: 073fce0f409559109ad2dd0a6531055d
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - libva-pass1
+    - libdrm
+
+optional:
+    - git
+    - meson

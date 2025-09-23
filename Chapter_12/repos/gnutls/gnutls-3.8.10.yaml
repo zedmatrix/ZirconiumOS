@@ -1,0 +1,40 @@
+package:
+    name: gnutls
+    version: 3.8.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.10.tar.xz
+      md5: 803c6f5c9cbe55c64fbb46690d329a77
+
+build: |
+    ./configure --prefix=/usr --docdir=/usr/share/doc/gnutls-3.8.10 \
+    --with-default-trust-store-pkcs11="pkcs11:" &&
+    make
+
+install: |
+    make install
+
+required:
+    - nettle
+
+recommended:
+    - make-ca
+    - libunistring
+    - libtasn1
+    - p11-kit
+
+optional:
+    - brotli
+    - doxygen
+    - gtk-doc
+    - libidn
+    - libidn2
+    - libseccomp
+    - net-tools
+    - texlive
+    - tl-installer
+    - unbound
+    - valgrind

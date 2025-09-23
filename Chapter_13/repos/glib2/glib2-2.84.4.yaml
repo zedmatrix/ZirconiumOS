@@ -1,0 +1,45 @@
+package:
+    name: glib2
+    version: 2.84.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/glib/2.84/glib-2.84.4.tar.xz
+      md5: 5655d0ff809b98dd77c02490609fadde
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/glib-skip_warnings-1.patch
+      md5: 729287ad0c60b5b2d6ca9ec4a19d8cec
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D introspection=enabled \
+        -D glib_debug=disabled -D man-pages=enabled -D sysprof=disabled
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+
+required:
+    - glib2-pass1
+    - gobject-introspection
+    - docutils
+    - libxslt
+    - pcre2
+
+optional:
+    - cairo
+    - dbus
+    - fuse
+    - gdb
+    - gjs
+    - gtk-doc
+    - docbook-xml
+    - docbook-xsl-nons
+    - gi-docgen
+    - glib-networking
+    - mako

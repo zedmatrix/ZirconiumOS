@@ -1,0 +1,40 @@
+package:
+    name: libdrm
+    version: 2.4.125
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://dri.freedesktop.org/libdrm/libdrm-2.4.125.tar.xz
+      md5: 3baec8e685510892b3355a7074baa874
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D udev=true -D valgrind=disabled
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libX11
+    - libpciaccess
+    - meson
+
+recommended:
+    - glibc
+
+optional:
+    - cairo
+    - cmake
+    - docbook-xml
+    - docbook-xsl-nons
+    - docutils
+    - libxslt
+    - libatomic_ops
+    - valgrind

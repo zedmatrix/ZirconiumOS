@@ -1,0 +1,28 @@
+package:
+    name: xwininfo
+    version: 1.1.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xwininfo-1.1.6.tar.xz
+      md5: c91201bc1eb5e7b38933be8d0f7f16a8
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 032

@@ -1,0 +1,37 @@
+package:
+    name: cmake
+    version: 4.1.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://cmake.org/files/v4.1/cmake-4.1.1.tar.gz
+      md5: ebda3e68dfc72f05ad3578838e3f9263
+
+prepare: |
+    sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+
+build: |
+    ./bootstrap --prefix=/usr --system-libs --mandir=/share/man \
+    --no-system-jsoncpp --no-system-cppdap --no-system-librhash \
+    --docdir=/share/doc/cmake-4.1.1 &&
+    make
+
+install: |
+    make install
+
+recommended:
+    - curl
+    - libarchive
+    - libuv
+
+optional:
+    - nghttp2
+    - gcc-fortran
+    - git
+    - mercurial
+    - openjdk
+    - qt6
+    - sphinx
+    - subversion

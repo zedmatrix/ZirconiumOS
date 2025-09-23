@@ -1,0 +1,28 @@
+package:
+    name: xlsatoms
+    version: 1.1.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xlsatoms-1.1.4.tar.xz
+      md5: da5b7a39702841281e1d86b7349a03ba
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 019

@@ -1,0 +1,26 @@
+package:
+    name: font-alias
+    version: 1.0.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-alias-1.0.5.tar.xz
+      md5: 79f4c023e27d1db1dfd90d041ce89835
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - xcursor-themes
+    - mkfontscale
+    - util-macros
+
+optional:
+
+order: 132

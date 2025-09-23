@@ -1,0 +1,28 @@
+package:
+    name: xrdb
+    version: 1.2.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xrdb-1.2.2.tar.xz
+      md5: c8629d5a0bc878d10ac49e1b290bf453
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 026

@@ -1,0 +1,28 @@
+package:
+    name: xvinfo
+    version: 1.1.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xvinfo-1.1.5.tar.xz
+      md5: d698862e9cad153c5fefca6eee964685
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 030

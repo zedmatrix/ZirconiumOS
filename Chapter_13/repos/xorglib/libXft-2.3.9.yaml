@@ -1,0 +1,31 @@
+package:
+    name: libXft
+    version: 2.3.9
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXft-2.3.9.tar.xz
+      md5: d378be0fcbd1f689f9a132e0d642bc4b
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --docdir=/usr/share/doc/libXft-2.3.9
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - fontconfig
+    - libxcb
+    - dbus
+optional:
+    - asciidoc
+    - xmlto
+    - fop
+    - links
+    - lynx

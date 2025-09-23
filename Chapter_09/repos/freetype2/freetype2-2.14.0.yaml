@@ -1,0 +1,32 @@
+package:
+    name: freetype2
+    version: 2.14.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/freetype/freetype-2.14.0.tar.xz
+      md5: 6fc21ca4dcabcb8a4d643877585b3028
+    - url: https://downloads.sourceforge.net/freetype/freetype-doc-2.14.0.tar.xz
+      md5: 809cb7b52b90f1611aa740375e4dbff9
+
+prepare: |
+    sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
+    sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" -i include/freetype/config/ftoption.h
+
+build: |
+    ./configure --prefix=/usr --enable-freetype-config --disable-static &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - which
+    - harfbuzz
+
+optional:
+    - brotli
+    - librsvg

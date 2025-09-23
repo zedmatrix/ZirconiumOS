@@ -1,0 +1,16 @@
+package:
+    name: lmdb
+    version: 0.9.33
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://git.openldap.org/openldap/openldap/-/archive/LMDB_0.9.33.tar.bz2
+      md5: 28d648201f967e20b454df23ab4bd5b4
+
+build: |
+    cd libraries/liblmdb && make && sed -i 's| liblmdb.a||' Makefile
+
+install: |
+    cd libraries/liblmdb && make prefix=/usr install

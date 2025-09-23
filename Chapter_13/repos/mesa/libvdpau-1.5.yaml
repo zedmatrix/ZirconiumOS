@@ -1,0 +1,34 @@
+package:
+    name: libvdpau
+    version: 1.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/vdpau/libvdpau/-/archive/1.5/libvdpau-1.5.tar.bz2
+      md5: 148a192110e7a49d62c0bf9ef916c099
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libXext
+    - xorgproto
+
+recommended:
+    - meson
+
+optional:
+    - git
+    - doxygen
+    - graphviz

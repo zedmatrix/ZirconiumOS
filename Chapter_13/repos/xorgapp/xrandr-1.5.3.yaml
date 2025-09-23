@@ -1,0 +1,28 @@
+package:
+    name: xrandr
+    version: 1.5.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xrandr-1.5.3.tar.xz
+      md5: dc7680201afe6de0966c76d304159bda
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 025

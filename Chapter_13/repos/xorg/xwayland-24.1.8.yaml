@@ -1,0 +1,36 @@
+package:
+    name: xwayland
+    version: 24.1.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/xserver/xwayland-24.1.8.tar.xz
+      md5: 1644a66e2843a400885e90051094b582
+
+prepare: |
+    sed -i '/install_man/,$d' meson.build &&
+    meson setup ybuild --prefix=/usr --buildtype=release -D xkb_output_dir=/var/lib/xkb
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install &&
+    install -vm755 ybuild/hw/vfb/Xvfb /usr/bin
+
+required:
+    - libxcvt
+    - pixman
+    - wayland-protocols
+    - libepoxy
+    - libtirpc
+    - mesa
+
+optional:
+    - git
+    - libei
+    - libgcrypt
+    - nettle
+    - xmlto)

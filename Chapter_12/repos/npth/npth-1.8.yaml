@@ -1,0 +1,16 @@
+package:
+    name: npth
+    version: 1.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.gnupg.org/ftp/gcrypt/npth/npth-1.8.tar.bz2
+      md5: cb4fc0402be5ba67544e499cb2c1a74d
+
+build: |
+    ./configure --prefix=/usr && make
+
+install: |
+    make install

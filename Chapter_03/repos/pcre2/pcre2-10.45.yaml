@@ -1,0 +1,27 @@
+package:
+    name: pcre2
+    version: 10.45
+    rel: 1
+    archive: false
+    delete: true
+
+sources: 
+   - url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.tar.bz2
+     md5: f71abbe1b5adf25cd9af5d26ef223b66
+
+prepare: |
+    ./configure --prefix=/usr --docdir=/usr/share/doc/pcre2-10.45 --enable-unicode --enable-jit \
+    --enable-pcre2-16 --enable-pcre2-32 --enable-pcre2grep-libz --enable-pcre2grep-libbz2 \
+    --enable-pcre2test-libreadline --disable-static
+
+build: |
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+required:
+    - readline

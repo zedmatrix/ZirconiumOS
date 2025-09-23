@@ -1,0 +1,29 @@
+package:
+    name: desktop-file-utils
+    version: 0.28
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz
+      md5: dec5d7265c802db1fde3980356931b7b
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    install -vdm755 /usr/share/applications &&
+    update-desktop-database /usr/share/applications
+
+required:
+    - glib2
+
+optional:
+    - emacs

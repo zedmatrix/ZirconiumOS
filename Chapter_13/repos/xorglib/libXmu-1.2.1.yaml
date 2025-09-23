@@ -1,0 +1,31 @@
+package:
+    name: libXmu
+    version: 1.2.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXmu-1.2.1.tar.xz
+      md5: 85edefb7deaad4590a03fccba517669f
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --docdir=/usr/share/doc/libXmu-1.2.1
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - fontconfig
+    - libxcb
+    - dbus
+optional:
+    - asciidoc
+    - xmlto
+    - fop
+    - links
+    - lynx

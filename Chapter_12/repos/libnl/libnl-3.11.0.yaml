@@ -1,0 +1,28 @@
+package:
+    name: libnl
+    version: 3.11.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/thom311/libnl/releases/download/libnl3_11_0/libnl-3.11.0.tar.gz
+      md5: 0a5eb82b494c411931a47638cb0dba51
+    - url: https://github.com/thom311/libnl/releases/download/libnl3_11_0/libnl-doc-3.11.0.tar.gz
+      md5: 5c74044c92f2eb08de69cce88714cd1b
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc \
+        --disable-static &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+final: |
+    mkdir -vp /usr/share/doc/libnl-3.11.0 &&
+    tar -xf ${YSRC}/libnl-doc-3.11.0.tar.gz --strip-components=1 --no-same-owner \
+        -C /usr/share/doc/libnl-3.11.0

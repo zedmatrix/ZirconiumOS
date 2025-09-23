@@ -1,0 +1,23 @@
+package:
+    name: luit
+    version: 20240910
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://invisible-mirror.net/archives/luit/luit-20240910.tgz
+      md5: c9db8c12a3ad697a075179f07b099eaf
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - libfontenc
+    - libX11

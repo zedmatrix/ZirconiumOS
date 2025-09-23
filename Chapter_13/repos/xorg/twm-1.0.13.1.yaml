@@ -1,0 +1,30 @@
+package:
+    name: twm
+    version: 1.0.13.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/twm-1.0.13.1.tar.xz
+      md5: 2a337b776c904eab5b874eddc0124d4f
+
+prepare: |
+    sed -i -e '/^rcdir =/s,^\(rcdir = \).*,\1/etc/X11/app-defaults,' src/Makefile.in
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static &&
+    make
+
+install: |
+    make install
+
+required:
+    - xorg-server
+    - libICE
+    - libSM
+    - libX11
+    - libXext
+    - libXmu
+    - libXt
+    - util-macros

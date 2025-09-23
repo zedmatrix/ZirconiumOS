@@ -1,0 +1,32 @@
+package:
+    name: freeglut
+    version: 3.6.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/freeglut/freeglut-3.6.0.tar.gz
+      md5: 1a1c4712b3100f49f5dea22a1ad57c34
+
+prepare: |
+    sed -e '/Context/s/()/(SFG_PlatformDisplay, SFG_WindowContextType)/' -i src/egl/fg_init_egl.h &&
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -W no-dev \
+      -D CMAKE_POLICY_VERSION_MINIMUM=3.5 -D FREEGLUT_BUILD_DEMOS=OFF -D FREEGLUT_BUILD_STATIC_LIBS=OFF
+
+build: |
+    cmake --build Ybuild
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake
+    - mesa
+    - glu
+
+recommended:
+    - libX11
+    - libXi
+    - libXrandr
+    - libXxf86vm

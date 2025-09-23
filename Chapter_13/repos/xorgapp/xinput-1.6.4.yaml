@@ -1,0 +1,28 @@
+package:
+    name: xinput
+    version: 1.6.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xinput-1.6.4.tar.xz
+      md5: 8e4d14823b7cbefe1581c398c6ab0035
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 014

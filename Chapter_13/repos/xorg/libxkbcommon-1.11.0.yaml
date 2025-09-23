@@ -1,0 +1,31 @@
+package:
+    name: libxkbcommon
+    version: 1.11.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/lfs-book/libxkbcommon/archive/v1.11.0/libxkbcommon-1.11.0.tar.gz
+      md5: 28be5e49d8aa19e20fd7acd4b24e19be
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D enable-docs=false
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libxcb
+    - wayland
+    - wayland-protocols
+
+optional:
+    - doxygen
+    - xkeyboard-config

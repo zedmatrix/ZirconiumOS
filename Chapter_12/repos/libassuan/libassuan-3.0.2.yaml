@@ -1,0 +1,32 @@
+package:
+    name: libassuan
+    version: 3.0.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-3.0.2.tar.bz2
+      md5: c6f1bf4bd2aaa79cd1635dcc070ba51a
+
+prepare: |
+    ./configure --prefix=/usr && make
+
+build: |
+    make -C doc html &&
+    makeinfo --html --no-split -o doc/assuan_nochunks.html doc/assuan.texi &&
+    makeinfo --plaintext -o doc/assuan.txt doc/assuan.texi
+
+install: |
+    make install &&
+    install -v -dm755 /usr/share/doc/libassuan-3.0.2/html &&
+    install -v -m644 doc/assuan.html/* /usr/share/doc/libassuan-3.0.2/html &&
+    install -v -m644 doc/assuan_nochunks.html /usr/share/doc/libassuan-3.0.2 &&
+    install -v -m644 doc/assuan.{txt,texi} /usr/share/doc/libassuan-3.0.2
+
+required:
+    - libgpg-error
+
+optional:
+    - texlive
+    - tl-installer

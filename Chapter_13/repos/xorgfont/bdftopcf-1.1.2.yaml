@@ -1,0 +1,21 @@
+package:
+    name: bdftopcf
+    version: 1.1.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/util/bdftopcf-1.1.2.tar.xz
+      md5: e09b61567ab4a4d534119bba24eddfb1
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - util-macros
+    - xorgproto

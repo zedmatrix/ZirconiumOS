@@ -1,0 +1,38 @@
+package:
+    name: libvpx
+    version: 1.15.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/webmproject/libvpx/archive/v1.15.2/libvpx-1.15.2.tar.gz
+      md5: 4c7a93808c12b359733430c8377b7fcf
+
+prepare: |
+    sed -i 's/cp -p/cp/' build/make/Makefile
+
+build: |
+    mkdir -pv YBUILD && cd YBUILD &&
+    ../configure --prefix=/usr --enable-shared --disable-static &&
+    make
+
+check: |
+    cd YBUILD &&
+    LD_LIBRARY_PATH=. make test
+
+install: |
+    cd YBUILD &&
+    make install
+
+required:
+    - nasm
+
+recommended:
+    - yasm
+    - which
+
+optional:
+    - curl
+    - doxygen
+    - git

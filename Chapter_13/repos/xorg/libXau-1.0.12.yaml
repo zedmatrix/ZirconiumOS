@@ -1,0 +1,25 @@
+package:
+    name: libXau
+    version: 1.0.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXau-1.0.12.tar.xz
+      md5: 4c9f81acf00b62e5de56a912691bd737
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+required:
+    - xorgproto

@@ -1,0 +1,36 @@
+package:
+    name: libxcb
+    version: 1.17.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://xorg.freedesktop.org/archive/individual/lib/libxcb-1.17.0.tar.xz
+      md5: 96565523e9f9b701fcb35d31f1d4086e
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+        --disable-static --without-doxygen --docdir='${datadir}'/doc/libxcb-1.17.0
+
+build: |
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+final: |
+
+required:
+    - libXau
+    - xcb-proto
+
+recommended:
+    - libXdmcp
+
+optional:
+    - doxygen
+    - libxslt

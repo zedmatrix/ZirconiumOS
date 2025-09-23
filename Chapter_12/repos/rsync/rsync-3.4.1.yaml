@@ -1,0 +1,30 @@
+package:
+    name: rsync
+    version: 3.4.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz
+      md5: 04ce67866db04fd7a1cde0b78168406e
+
+prepare: |
+    groupadd -g 48 rsyncd &&
+    useradd -c "rsyncd Daemon" -m -d /home/rsync -g rsyncd -s /bin/false -u 48 rsyncd
+
+build: |
+    ./configure --prefix=/usr --disable-xxhash --without-included-zlib &&
+    make
+
+check: |
+    sed -i '/typedef/d' wildtest.c && make check
+
+install: |
+    make install
+
+recommened:
+    - popt
+
+optional:
+    - doxygen

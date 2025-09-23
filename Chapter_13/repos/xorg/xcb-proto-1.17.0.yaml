@@ -1,0 +1,23 @@
+package:
+    name: xcb-proto
+    version: 1.17.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz
+      md5: c415553d2ee1a8cea43c3234a079b53f
+
+prepare: |
+    PYTHON=python3 ./configure --prefix=/usr --sysconfdir=/etc \
+      --localstatedir=/var --disable-static
+
+check: |
+    make check
+
+install: |
+    make install
+
+optional:
+    - libxml2

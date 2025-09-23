@@ -1,0 +1,26 @@
+package:
+    name: pixman
+    version: 0.46.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.cairographics.org/releases/pixman-0.46.4.tar.gz
+      md5: c08173c8e1d2cc79428d931c13ffda59
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+optional:
+    - libpng
+    - gtk3

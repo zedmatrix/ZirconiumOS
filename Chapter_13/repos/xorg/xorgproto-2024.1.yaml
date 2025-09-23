@@ -1,0 +1,31 @@
+package:
+    name: xorgproto
+    version: 2024.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2024.1.tar.xz
+      md5: 12374d29fb5ae642cfa872035e401640
+
+prepare: |
+    meson setup ybuild --prefix=/usr
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    mv -v /usr/share/doc/xorgproto{,-2024.1}
+
+required:
+    - util-macros
+
+optional:
+    - fop
+    - libxslt
+    - xmlto
+    - asciidoc

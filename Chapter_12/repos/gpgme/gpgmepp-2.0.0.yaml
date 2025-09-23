@@ -1,0 +1,23 @@
+package:
+    name: gpgmepp
+    version: 2.0.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.gnupg.org/ftp/gcrypt/gpgmepp/gpgmepp-2.0.0.tar.xz
+      md5: c27f2285fe9fac54b5d1ca22e00b4594
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr
+
+build: |
+    cmake --build Ybuild
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake
+    - gpgme

@@ -1,0 +1,28 @@
+package:
+    name: xauth
+    version: 1.1.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xauth-1.1.4.tar.xz
+      md5: bf7b5a94561c7c98de447ea53afabfc4
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 006

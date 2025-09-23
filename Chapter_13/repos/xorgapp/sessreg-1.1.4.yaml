@@ -1,0 +1,28 @@
+package:
+    name: sessreg
+    version: 1.1.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/sessreg-1.1.4.tar.xz
+      md5: b9efe1d21615c474b22439d41981beef
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 003

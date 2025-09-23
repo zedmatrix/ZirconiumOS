@@ -1,0 +1,17 @@
+package:
+    name: unix-tree
+    version: 2.2.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.2.1/unix-tree-2.2.1.tar.bz2
+      md5: ada08dc80717b09e2041ac9276d7b854
+
+
+build: |
+    make
+
+install: |
+    make PREFIX=/usr MANDIR=/usr/share/man install

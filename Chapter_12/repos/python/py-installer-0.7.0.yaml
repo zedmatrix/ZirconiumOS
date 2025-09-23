@@ -1,0 +1,20 @@
+package:
+    name: py-installer
+    version: 0.7.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/pypa/installer/archive/refs/tags/0.7.0.tar.gz
+      md5: fcfbaa5603d3e68adbaa8392963cd895
+
+build: |
+    python3 -m build -wn --skip-dependency-check
+
+install: |
+    pip3 install --no-index --find-links dist --no-user installer
+
+required:
+    - flit-core
+    - build

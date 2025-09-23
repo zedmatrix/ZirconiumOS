@@ -1,0 +1,23 @@
+package:
+    name: net-tools
+    version: 2.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/project/net-tools/net-tools-2.10.tar.xz
+      md5: 78aae762c95e2d731faf88d482e4cde5
+
+build: |
+    export BINDIR='/usr/bin' SBINDIR='/usr/bin' &&
+    yes "" | make -j1 &&
+    make DESTDIR=$PWD/install -j1 install
+
+install: |
+    rm install/usr/bin/{nis,yp}domainname &&
+    rm install/usr/bin/{hostname,dnsdomainname,domainname,ifconfig} &&
+    rm -r install/usr/share/man/man1 &&
+    rm install/usr/share/man/man8/ifconfig.8 &&
+    chown -R root:root install &&
+    cp -a install/* /

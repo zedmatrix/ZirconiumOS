@@ -1,0 +1,42 @@
+package:
+    name: docbook-xsl-nons
+    version: 1.79.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2
+      md5: 2666d1488d6ced1551d15f31d7ed8c38
+    - url: https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-doc-1.79.2.tar.bz2
+      md5: 62375ca864fc198cb2b17d98209d0b8c
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/docbook-xsl-nons-1.79.2-stack_fix-1.patch
+      md5: 8457bd6ee6b06fbc6dc540e1b096f766
+
+prepare: |
+    tar -xf ${YSRC}/docbook-xsl-doc-1.79.2.tar.bz2 --strip-components=1
+
+install: |
+    install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&
+    cp -v -R VERSION assembly common eclipse epub epub3 extensions fo \
+         highlighting html htmlhelp images javahelp lib manpages params \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5 \
+    /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&
+    ln -s VERSION /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/VERSION.xsl &&
+    install -v -m644 -D README /usr/share/doc/docbook-xsl-nons-1.79.2/README.txt &&
+    install -v -m644    RELEASE-NOTES* NEWS* /usr/share/doc/docbook-xsl-nons-1.79.2 &&
+    cp -v -R doc/* /usr/share/doc/docbook-xsl-nons-1.79.2
+
+final: |
+    ${YSRC}/docbook-xsl-nons-config.sh
+
+recommended:
+    - libxml2
+
+optional:
+    - apache-ant
+    - libxslt
+    - ruby

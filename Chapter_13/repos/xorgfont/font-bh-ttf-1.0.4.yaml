@@ -1,0 +1,26 @@
+package:
+    name: font-bh-ttf
+    version: 1.0.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-bh-ttf-1.0.4.tar.xz
+      md5: 063bfa1456c8a68208bf96a33f472bb1
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - xcursor-themes
+    - mkfontscale
+    - util-macros
+
+optional:
+
+order: 134

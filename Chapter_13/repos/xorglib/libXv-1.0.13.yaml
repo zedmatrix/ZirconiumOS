@@ -1,0 +1,31 @@
+package:
+    name: libXv
+    version: 1.0.13
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXv-1.0.13.tar.xz
+      md5: 8a26503185afcb1bbd2c65e43f775a67
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --docdir=/usr/share/doc/libXv-1.0.13
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - fontconfig
+    - libxcb
+    - dbus
+optional:
+    - asciidoc
+    - xmlto
+    - fop
+    - links
+    - lynx

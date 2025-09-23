@@ -1,0 +1,28 @@
+package:
+    name: xwud
+    version: 1.0.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xwud-1.0.7.tar.xz
+      md5: 3e741db39b58be4fef705e251947993d
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 033

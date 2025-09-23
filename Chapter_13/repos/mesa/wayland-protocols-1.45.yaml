@@ -1,0 +1,23 @@
+package:
+    name: wayland-protocols
+    version: 1.45
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/1.45/downloads/wayland-protocols-1.45.tar.xz
+      md5: a235baeab3f1c6d57ac4c7c00ecd7e48
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - wayland
+    - meson

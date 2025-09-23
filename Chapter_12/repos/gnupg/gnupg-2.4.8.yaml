@@ -1,0 +1,35 @@
+package:
+    name: gnupg
+    version: 2.4.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-2.4.8.tar.bz2
+      md5: a165b60aeaac0bb4d251117a45199c5f
+
+prepare: |
+    mkdir -v ybuild && cd ybuild &&
+    ../configure --prefix=/usr --localstatedir=/var --sysconfdir=/etc \
+        --docdir=/usr/share/doc/gnupg-2.4.8 &&
+    make
+
+build: |
+    cd ybuild &&
+    makeinfo --html --no-split -I doc -o doc/gnupg_nochunks.html ../doc/gnupg.texi &&
+    makeinfo --plaintext -I doc -o doc/gnupg.txt ../doc/gnupg.texi &&
+    make -C doc html
+
+install: |
+    cd ybuild && make install &&
+    install -v -m755 -d /usr/share/doc/gnupg-2.4.8/html &&
+    install -v -m644 doc/gnupg_nochunks.html /usr/share/doc/gnupg-2.4.8/html/gnupg.html &&
+    install -v -m644 ../doc/*.texi doc/gnupg.txt /usr/share/doc/gnupg-2.4.8 &&
+    install -v -m644 doc/gnupg.html/* /usr/share/doc/gnupg-2.4.8/html
+
+optional:
+    - openldap
+    - libusb-compat
+    - curl
+    - server-mail

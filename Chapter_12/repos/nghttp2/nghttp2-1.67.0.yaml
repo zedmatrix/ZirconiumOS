@@ -1,0 +1,29 @@
+package:
+    name: nghttp2
+    version: 1.67.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/nghttp2/nghttp2/releases/download/v1.67.0/nghttp2-1.67.0.tar.xz
+      md5: cf7e2f819c6f5e42b101b1cd3fd654c8
+
+build: |
+    ./configure --prefix=/usr --disable-static --enable-lib-only \
+        --docdir=/usr/share/doc/nghttp2-1.67.0 &&
+    make
+
+install: |
+    make install
+
+required:
+    - libxml2
+
+optional:
+    - boost
+    - c-ares
+    - cython
+    - jansson
+    - libevent
+    - sphinx

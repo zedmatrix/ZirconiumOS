@@ -1,0 +1,32 @@
+package:
+    name: shared-mime-info
+    version: 2.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/2.4/shared-mime-info-2.4.tar.gz
+      md5: aac56db912b7b12a04fb0018e28f2f36
+    - url: https://anduin.linuxfromscratch.org/BLFS/xdgmime/xdgmime.tar.xz
+      md5:
+
+prepare: |
+    tar -xf ${YSRC}/xdgmime.tar.xz && make -C xdgmime &&
+    meson setup ybuild --prefix=/usr --buildtype=release -D update-mimedb=true
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - glib2
+    - libxml2
+
+optional:
+    - xmlto

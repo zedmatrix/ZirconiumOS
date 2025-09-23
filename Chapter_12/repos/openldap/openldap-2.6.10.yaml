@@ -1,0 +1,34 @@
+package:
+    name: openldap
+    version: 2.6.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.6.10.tgz
+      md5: 6be5e6c43d599e7a422669c70229ca74
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/openldap-2.6.10-consolidated-1.patch
+      md5:
+
+prepare: |
+    autoconf
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-dynamic \
+    --disable-debug --disable-slapd &&
+    make depend && make
+
+install: |
+    make install
+
+recommended:
+    - cyrus-sasl
+
+optional:
+    - gnutls
+    - unixodbc
+    - mariadb
+    - postgresql

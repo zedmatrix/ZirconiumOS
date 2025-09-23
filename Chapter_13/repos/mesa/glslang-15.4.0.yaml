@@ -1,0 +1,34 @@
+package:
+    name: glslang
+    version: 15.4.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/KhronosGroup/glslang/archive/15.4.0/glslang-15.4.0.tar.gz
+      md5: a400ed377dc9de8b87a8179a90cef3b8
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -G Ninja \
+      -D ALLOW_EXTERNAL_SPIRV_TOOLS=ON -D BUILD_SHARED_LIBS=ON -D GLSLANG_TESTS=ON
+
+build: |
+    ninja -C Ybuild
+
+check: |
+    ninja -C Ybuild test
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - cmake
+    - spirv-tools
+
+recommended:
+    - ninja
+
+optional:
+    - git
+    - python

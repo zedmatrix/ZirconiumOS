@@ -1,0 +1,28 @@
+package:
+    name: xkbcomp
+    version: 1.4.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xkbcomp-1.4.7.tar.xz
+      md5: 83d711948de9ccac550d2f4af50e94c3
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 015

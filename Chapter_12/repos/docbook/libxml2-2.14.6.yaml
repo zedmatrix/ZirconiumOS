@@ -1,0 +1,38 @@
+package:
+    name: libxml2
+    version: 2.14.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.6.tar.xz
+      md5: a2bb2b6cb8fc7be1fafa14f500e4f7c5
+    - url: https://www.w3.org/XML/Test/xmlts20130923.tar.gz
+      md5: ef8fbe0c92efd9a60d7f320e211d10b2
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --disable-static  \
+        --with-history --with-icu PYTHON=/usr/bin/python3 \
+        --docdir=/usr/share/doc/libxml2-2.14.6
+
+build: |
+    make
+
+check: |
+    tar xf ${YSRC}/xmlts20130923.tar.gz &&
+    make check > check.log &&
+    grep -E '^Total|expected|Ran' check.log || true
+
+install: |
+    make install
+
+final: |
+    rm -vf /usr/lib/libxml2.la &&
+    sed '/libs=/s/xml2.*/xml2"/' -i /usr/bin/xml2-config
+
+recommended:
+    - icu
+
+optional:
+    - valgrind

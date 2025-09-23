@@ -1,0 +1,28 @@
+package:
+    name: libva-pass1
+    version: 2.22.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/intel/libva/archive/2.22.0/libva-2.22.0.tar.gz
+      md5: 8dba13313d724b5e930f06e65b7437e2
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libdrm
+
+recommended:
+    - libX11
+    - libXext
+    - libXfixes
+    - wayland

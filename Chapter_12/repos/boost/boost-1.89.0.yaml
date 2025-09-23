@@ -1,0 +1,26 @@
+package:
+    name: boost
+    version: 1.89.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/boostorg/boost/releases/download/boost-1.89.0/boost-1.89.0-b2-nodocs.tar.xz
+      md5: 023f1014b98d51676ddba21c2ee4878b
+
+prepare: |
+    ./bootstrap.sh --prefix=/usr --with-python=python3
+
+build: |
+    ./b2 stage -j$(nproc) threading=multi link=shared
+
+install: |
+    ./b2 install threading=multi link=shared
+
+recommended:
+    - which
+
+optional:
+    - icu
+    - numpy

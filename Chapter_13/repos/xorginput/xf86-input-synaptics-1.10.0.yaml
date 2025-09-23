@@ -1,0 +1,25 @@
+package:
+    name: xf86-input-synaptics
+    version: 1.10.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/driver/xf86-input-synaptics-1.10.0.tar.xz
+      md5: 017383c13a0d0f4cb320be477ab25513
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static && make
+
+install: |
+    make install
+
+required:
+    - libevdev
+    - libevdev
+    - libX11
+    - libXi
+    - libXtst
+recommended:
+    - xorg-server

@@ -1,0 +1,33 @@
+package:
+    name: libXt
+    version: 1.3.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXt-1.3.1.tar.xz
+      md5: 9acd189c68750b5028cf120e53c68009
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --with-appdefaultdir=/etc/X11/app-defaults \
+    --docdir=/usr/share/doc/libXt-1.3.1
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - fontconfig
+    - libxcb
+    - dbus
+optional:
+    - asciidoc
+    - xmlto
+    - fop
+    - links
+    - lynx
+

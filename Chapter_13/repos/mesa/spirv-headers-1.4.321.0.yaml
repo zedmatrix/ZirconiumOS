@@ -1,0 +1,24 @@
+package:
+    name: spirv-headers
+    version: 1.4.321.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/KhronosGroup/SPIRV-Headers/archive/vulkan-sdk-1.4.321.0/SPIRV-Headers-vulkan-sdk-1.4.321.0.tar.gz
+      md5: ef203788b47d207f7a71bdf4fa02d6f2
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -G Ninja \
+        -D CMAKE_INSTALL_SYSCONFDIR=/etc -D CMAKE_SKIP_INSTALL_RPATH=ON
+
+build: |
+    ninja -C Ybuild
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - cmake
+    - ninja

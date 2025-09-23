@@ -1,0 +1,26 @@
+package:
+    name: font-xfree86-type1
+    version: 1.0.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-xfree86-type1-1.0.5.tar.xz
+      md5: 3b47fed2c032af3a32aad9acc1d25150
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - xcursor-themes
+    - mkfontscale
+    - util-macros
+
+optional:
+
+order: 138

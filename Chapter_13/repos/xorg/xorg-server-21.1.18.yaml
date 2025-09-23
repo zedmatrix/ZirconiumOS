@@ -1,0 +1,43 @@
+package:
+    name: xorg-server
+    version: 21.1.18
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/xserver/xorg-server-21.1.18.tar.xz
+      md5: 43225ddc1fd8d7ae7671c25ab6d1f927
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/xorg-server-21.1.18-tearfree_backport-1.patch
+      md5: 6834d533bf96fb12f1a340ac55503d7b
+
+prepare: |
+    meson setup ybuild --prefix=/usr --localstatedir=/var -D glamor=true -D xkb_output_dir=/var/lib/xkb
+
+build: |
+    ninja -C ybuild
+
+check: |
+    /sbin/ldconfig && ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install &&
+    mkdir -pv /etc/X11/xorg.conf.d
+
+
+required:
+    - libxcvt
+    - pixman
+    - libepoxy
+    - libtirpc
+
+optional:
+    - acpid
+    - doxygen
+    - fop
+    - nettle
+    - libgcrypt
+    - xmlto
+    - xkeyboard-config

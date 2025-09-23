@@ -1,0 +1,32 @@
+package:
+    name: vulkan-loader
+    version: 1.4.321
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.4.321/Vulkan-Loader-1.4.321.tar.gz
+      md5: 880cb5b96b4f94282db03337dcb8743d
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - cmake
+    - vulkan-headers
+    - wayland
+
+recommended:
+    - libX11
+    - libXrandr
+
+optional:
+    - git

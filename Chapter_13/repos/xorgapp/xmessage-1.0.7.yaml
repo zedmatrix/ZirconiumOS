@@ -1,0 +1,28 @@
+package:
+    name: xmessage
+    version: 1.0.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xmessage-1.0.7.tar.xz
+      md5: ba2dd3db3361e374fefe2b1c797c46eb
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 021

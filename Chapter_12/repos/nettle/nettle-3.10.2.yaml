@@ -1,0 +1,28 @@
+package:
+    name: nettle
+    version: 3.10.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://ftp.gnu.org/gnu/nettle/nettle-3.10.2.tar.gz
+      md5: b28bcbf6f045ff007940a9401673600d
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+final: |
+    chmod   -v   755 /usr/lib/lib{hogweed,nettle}.so &&
+    install -v -m755 -d /usr/share/doc/nettle-3.10.2 &&
+    install -v -m644 nettle.{html,pdf} /usr/share/doc/nettle-3.10.2
+
+optional:
+    - valgrind

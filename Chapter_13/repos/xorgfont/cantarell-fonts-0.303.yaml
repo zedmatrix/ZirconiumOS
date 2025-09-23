@@ -1,0 +1,21 @@
+package:
+    name: cantarell-fonts
+    version: 0.303
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://cantarell.gnome.org/releases/cantarell-fonts-0.303.tar.xz
+      md5: e542f9cea636cf252956288f9c9f4f0c
+
+prepare: |
+    meson setup ybuild -D fontsdir=/usr/share/fonts/cantarell \
+        -D useprebuilt=true -D buildappstream=true -D buildstatics=false -D buildvf=true
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+

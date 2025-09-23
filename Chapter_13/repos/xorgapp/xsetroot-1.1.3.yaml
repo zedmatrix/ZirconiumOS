@@ -1,0 +1,28 @@
+package:
+    name: xsetroot
+    version: 1.1.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xsetroot-1.1.3.tar.xz
+      md5: fa9a24fe5b1725c52a4566a62dd0a50d
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 029

@@ -1,0 +1,23 @@
+package:
+    name: xcb-util-renderutil
+    version: 0.3.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://xcb.freedesktop.org/dist/xcb-util-renderutil-0.3.10.tar.xz
+      md5: 193b890e2a89a53c31e2ece3afcbd55f
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - libxcb
+    - xcb-util

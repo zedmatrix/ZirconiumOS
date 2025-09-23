@@ -1,0 +1,28 @@
+package:
+    name:
+    version:
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url:
+      md5:
+
+patches:
+    - url:
+      md5:
+
+build: |
+    python3 -m build --wheel --no-isolation --skip-dependency-check
+
+install: |
+    python3 -m installer --prefix=/usr dist/*.whl
+
+final: |
+
+required:
+
+recommended:
+
+optional:

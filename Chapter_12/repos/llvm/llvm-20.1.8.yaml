@@ -1,0 +1,72 @@
+package:
+    name: llvm
+    version: 20.1.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/llvm-20.1.8.src.tar.xz
+      md5: 78040509eb91309b4ec2edfe12cd20d8
+    - url: https://anduin.linuxfromscratch.org/BLFS/llvm/llvm-cmake-20.1.8.src.tar.xz
+      md5: 5bfb8f4b4a2b3ccffca0d2406e4cdcc6
+    - url: https://anduin.linuxfromscratch.org/BLFS/llvm/llvm-third-party-20.1.8.src.tar.xz
+      md5: 2ffd8624b3cbddf55a4e74a7d8ea89fa
+    - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/clang-20.1.8.src.tar.xz
+      md5: 62a0500bb932868061607cde0c01f584
+    - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/compiler-rt-20.1.8.src.tar.xz
+      md5: 3869861662d173ca8303b9f1524d1e91
+
+prepare: |
+    tar -xf ${YSRC}/llvm-cmake-20.1.8.src.tar.xz &&
+    tar -xf ${YSRC}/llvm-third-party-20.1.8.src.tar.xz &&
+    sed '/LLVM_COMMON_CMAKE_UTILS/s@../cmake@cmake-20.1.8.src@' -i CMakeLists.txt &&
+    sed '/LLVM_THIRD_PARTY_DIR/s@../third-party@third-party-20.1.8.src@' \
+        -i cmake/modules/HandleLLVMOptions.cmake &&
+    tar -xf ${YSRC}/clang-20.1.8.src.tar.xz -C tools &&
+    mv tools/clang-20.1.8.src tools/clang &&
+    tar -xf ${YSRC}/compiler-rt-20.1.8.src.tar.xz -C projects &&
+    mv projects/compiler-rt-20.1.8.src projects/compiler-rt &&
+    grep -rl '#!.*python' | xargs sed -i '1s/python$/python3/' &&
+    sed 's/utility/tool/' -i utils/FileCheck/CMakeLists.txt
+
+build: |
+    CC=gcc CXX=g++ cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON -D LLVM_ENABLE_FFI=ON -D LLVM_BUILD_LLVM_DYLIB=ON \
+      -D LLVM_LINK_LLVM_DYLIB=ON -D LLVM_ENABLE_RTTI=ON -D LLVM_TARGETS_TO_BUILD="host;AMDGPU" \
+      -D LLVM_BINUTILS_INCDIR=/usr/include -D LLVM_INCLUDE_BENCHMARKS=OFF -D CLANG_DEFAULT_PIE_ON_LINUX=ON \
+      -D CLANG_CONFIG_FILE_SYSTEM_DIR=/etc/clang -W no-dev -G Ninja &&
+    ninja -C Ybuild
+
+check: |
+    sed -e 's/config.has_no_default_config_flag/True/' -e 's/"-fuse-ld=gold"//' \
+        -i projects/compiler-rt/test/lit.common.cfg.py &&
+    systemctl --user start dbus &&
+    systemd-run --user --pty -d -G -p LimitCORE=0 ninja -C Ybuild check-all
+
+install: |
+    ninja -C Ybuild install
+
+final: |
+    mkdir -pv /etc/clang &&
+    for i in clang clang++; do
+        echo -fstack-protector-strong > /etc/clang/$i.cfg;
+    done
+
+required:
+    - cmake
+
+optional:
+    - doxygen
+    - git
+    - graphviz
+    - libunwind
+    - libxml2
+    - psutil
+    - pygments
+    - pyyaml
+    - rsync
+    - sphinx
+    - systemd-pam
+    - texlive
+    - valgrind

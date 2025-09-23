@@ -1,0 +1,48 @@
+package:
+    name: linux-pam
+    version: 1.7.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/linux-pam/linux-pam/releases/download/v1.7.1/Linux-PAM-1.7.1.tar.xz
+      md5: 92812d7dd414d816fba8d649e84e68ca
+    - url: https://anduin.linuxfromscratch.org/BLFS/Linux-PAM/Linux-PAM-1.7.1-docs.tar.xz
+      md5: f147017efb39a670bad3e8b614df50f0
+
+prepare: |
+    sed -e "s/'elinks'/'lynx'/" -e "s/'-no-numbering', '-no-references'/ \
+          '-force-html', '-nonumbers', '-stdin'/" -i meson.build &&
+    meson setup ybuild --prefix=/usr --buildtype=release -D docdir=/usr/share/doc/Linux-PAM-1.7.1
+
+build: |
+    ninja -C ybuild
+
+check: |
+    cp -v ${YSRC}/test-pam-other /etc/pam.d/other &&
+    ninja -C ybuild test &&
+    rm -fv /etc/pam.d/other
+
+install: |
+    ninja -C ybuild install &&
+    chmod -v 4755 /usr/sbin/unix_chkpwd
+
+final: |
+    tar -C / -xvf ${YSRC}/Linux-PAM-1.7.1-docs.tar.xz &&
+    install -vdm755 /etc/pam.d &&
+    install -vm644 ${YSRC}/system-account /etc/pam.d/system-account &&
+    install -vm644 ${YSRC}/system-auth /etc/pam.d/system-auth &&
+    install -vm644 ${YSRC}/system-session /etc/pam.d/system-session &&
+    install -vm644 ${YSRC}/system-password /etc/pam.d/system-password &&
+    install -vm644 ${YSRC}/other /etc/pam.d/other
+
+optional:
+    - libnsl
+    - libtirpc
+    - rpcsvc-proto
+    - docbook-xml
+    - docbook-xsl-ns
+    - fop
+    - libxslt
+    - lynx

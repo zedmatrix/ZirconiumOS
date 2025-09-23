@@ -1,0 +1,33 @@
+package:
+    name: xmlto
+    version: 0.0.29
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz
+      md5: 556f2642cdcd005749bd4c08bc621c37
+
+prepare: |
+    autoreconf -fiv
+
+build: |
+    LINKS="/usr/bin/links" ./configure --prefix=/usr &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+required:
+    - docbook-xml
+    - docbook-xsl-nons
+    - libxslt
+
+optional:
+    - fop
+    - links
+    - lynx

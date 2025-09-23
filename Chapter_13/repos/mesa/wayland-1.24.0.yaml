@@ -1,0 +1,34 @@
+package:
+    name: wayland
+    version: 1.24.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/wayland/wayland/-/releases/1.24.0/downloads/wayland-1.24.0.tar.xz
+      md5: fda0b2a73ea2716f61d75767e02008e1
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D documentation=false
+
+build: |
+    ninja -C ybuild
+
+check: |
+    env -u XDG_RUNTIME_DIR ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libxml2
+    - meson
+
+optional:
+    - doxygen
+    - graphviz
+    - xmlto
+    - docbook-xml
+    - docbook-xsl-nons
+    - libxslt

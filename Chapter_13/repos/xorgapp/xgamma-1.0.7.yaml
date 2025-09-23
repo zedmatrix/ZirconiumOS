@@ -1,0 +1,28 @@
+package:
+    name: xgamma
+    version: 1.0.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xgamma-1.0.7.tar.xz
+      md5: 41afaa5a68cdd0de7e7ece4805a37f11
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 012

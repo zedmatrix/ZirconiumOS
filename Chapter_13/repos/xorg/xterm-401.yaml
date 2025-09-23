@@ -1,0 +1,45 @@
+package:
+    name: xterm
+    version: 401
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://invisible-mirror.net/archives/xterm/xterm-401.tgz
+      md5: 8b0617af50f7b8530aff5c6c0a8d0c0b
+
+
+prepare: |
+    sed -i '/v0/{n;s/new:/new:kb=^?:/}' termcap &&
+    printf '\tkbs=\\177,\n' >> terminfo
+
+build: |
+    TERMINFO=/usr/share/terminfo ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+    --disable-static --with-app-defaults=/etc/X11/app-defaults &&
+    make
+
+install: |
+    make install
+
+final: |
+    mkdir -pv /usr/share/applications &&
+    cp -v *.desktop /usr/share/applications/ &&
+    cp -v ${YSRC}/xterm-defaults /etc/X11/app-defaults/XTerm
+
+required:
+    - luit
+    - libICE
+    - libX11
+    - libXaw
+    - libXext
+    - libXft
+    - libxkbfile
+    - libXmu
+    - libXpm
+    - libXt
+
+optional:
+    - emacs
+    - pcre2
+    - valgrind

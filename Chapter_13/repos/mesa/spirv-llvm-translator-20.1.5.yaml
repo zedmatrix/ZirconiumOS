@@ -1,0 +1,25 @@
+package:
+    name: spirv-llvm-translator
+    version: 20.1.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/v20.1.5/SPIRV-LLVM-Translator-20.1.5.tar.gz
+      md5: 510a7cceed8205e4c3877f23d9c0911a
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON -D LLVM_EXTERNAL_SPIRV_HEADERS_SOURCE_DIR=/usr -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - libxml2
+    - llvm
+    - spirv-tools

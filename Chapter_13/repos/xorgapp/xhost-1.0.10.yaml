@@ -1,0 +1,28 @@
+package:
+    name: xhost
+    version: 1.0.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xhost-1.0.10.tar.xz
+      md5: 45c7e956941194e5f06a9c7307f5f971
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 013

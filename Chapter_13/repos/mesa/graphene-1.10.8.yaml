@@ -1,0 +1,33 @@
+package:
+    name: graphene
+    version: 1.10.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
+      md5: 169e3c507b5a5c26e9af492412070b81
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - glib2
+    - meson
+    - gobject-introspection
+
+recommended:
+    - git
+
+optional:
+    - gtk-doc

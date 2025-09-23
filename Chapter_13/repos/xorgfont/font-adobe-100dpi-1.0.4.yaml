@@ -1,0 +1,23 @@
+package:
+    name: font-adobe-100dpi
+    version: 1.0.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-adobe-100dpi-1.0.4.tar.xz
+      md5: 20239f6f99ac586f10360b0759f73361
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - xcursor-themes
+    - bdftopcf
+    - util-macros
+    - mkfontscale

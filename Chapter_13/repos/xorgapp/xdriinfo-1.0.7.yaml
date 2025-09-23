@@ -1,0 +1,28 @@
+package:
+    name: xdriinfo
+    version: 1.0.7
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xdriinfo-1.0.7.tar.xz
+      md5: 34aff1f93fa54d6a64cbe4fee079e077
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 010

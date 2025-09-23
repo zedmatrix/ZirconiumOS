@@ -1,0 +1,29 @@
+package:
+    name: xf86-input-wacom
+    version: 1.2.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/linuxwacom/xf86-input-wacom/releases/download/xf86-input-wacom-1.2.3/xf86-input-wacom-1.2.3.tar.bz2
+      md5: ef8a6cc34623db6c3482508374863d51
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static && make
+
+install: |
+    make install
+
+required:
+    - libX11
+    - libXi
+    - libXinerama
+    - libXrandr
+
+recommanded:
+    - xorg-server
+
+optional:
+    - doxygen
+    - graphviz

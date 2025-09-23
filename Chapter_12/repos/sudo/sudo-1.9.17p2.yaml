@@ -1,0 +1,27 @@
+package:
+    name: sudo
+    version: 1.9.17p2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.sudo.ws/dist/sudo-1.9.17p2.tar.gz
+      md5: dcbf46f739ae06b076e1a11cbb271a10
+
+build: |
+    ./configure --prefix=/usr --libexecdir=/usr/lib --with-secure-path \
+    --with-env-editor --docdir=/usr/share/doc/sudo-1.9.17p2 \
+    --without-pam --with-passprompt="[sudo] password for %p: " &&
+    make
+
+install: |
+    make install
+
+final: |
+    install -vm600 ${YSRC}/00-sudo "/etc/sudoers.d/"
+
+optional:
+    - linux-pam
+    - mitkrb5
+    - openldap

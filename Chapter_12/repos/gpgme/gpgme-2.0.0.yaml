@@ -1,0 +1,29 @@
+package:
+    name: gpgme
+    version: 2.0.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.0.0.tar.bz2
+      md5: 60f6871b948060572c7d952e39b42bd8
+
+build: |
+    mkdir -v ybuild && cd ybuild
+    ../configure --prefix=/usr --disable-static && make
+
+check: |
+    cd ybuild && make -k check
+
+install: |
+    cd ybuild && make install
+
+required:
+    - libassuan
+
+recommended:
+    - gnupg
+
+optional:
+    - doxygen

@@ -1,0 +1,23 @@
+package:
+    name: font-daewoo-misc
+    version: 1.0.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-daewoo-misc-1.0.4.tar.xz
+      md5: 6300bc99a1e45fbbe6075b3de728c27f
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - bdftopcf
+    - util-macros
+    - mkfontscale
+    - font-util

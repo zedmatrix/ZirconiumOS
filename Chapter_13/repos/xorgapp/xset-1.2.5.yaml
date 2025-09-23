@@ -1,0 +1,28 @@
+package:
+    name: xset
+    version: 1.2.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xset-1.2.5.tar.xz
+      md5: 18ff5cdff59015722431d568a5c0bad2
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 028

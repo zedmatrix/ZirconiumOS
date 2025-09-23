@@ -1,0 +1,22 @@
+package:
+    name: build
+    version: 1.3.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://files.pythonhosted.org/packages/source/b/build/build-1.3.0.tar.gz
+      md5: 48f7fbc11051430eab3c1abe216bed7a
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user build
+
+required:
+    - pyproject_hooks
+
+optional:
+    - pytest

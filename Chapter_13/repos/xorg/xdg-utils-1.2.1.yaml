@@ -1,0 +1,32 @@
+package:
+    name: xdg-utils
+    version: 1.2.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v1.2.1/xdg-utils-v1.2.1.tar.gz
+      md5: 4c72585a98ba8f775cb9e72b066cc0df
+
+build: |
+    ./configure --prefix=/usr &&
+    make
+
+check: |
+    make -k test
+
+install: |
+    make install
+
+required:
+    - xmlto
+    - links
+
+recommended:
+    - xprop
+    - xset
+
+optional:
+    - git
+    - lynx

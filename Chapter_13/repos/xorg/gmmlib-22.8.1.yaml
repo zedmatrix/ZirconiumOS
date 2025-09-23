@@ -1,0 +1,22 @@
+package:
+    name: gmmlib
+    version: 22.8.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/lfs-book/gmmlib/archive/v22.8.1/gmmlib-22.8.1.tar.gz
+      md5: 23869643d5e37c73854bd76964a124d8
+
+prepare: |
+    cmake -B ybuild -D CMAKE_INSTALL_PREFIX=/usr -D BUILD_TYPE=Release -G Ninja -W no-dev
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - cmake

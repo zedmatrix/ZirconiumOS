@@ -1,0 +1,28 @@
+package:
+    name: xdpyinfo
+    version: 1.3.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xdpyinfo-1.3.4.tar.xz
+      md5: 933e6d65f96c890f8e96a9f21094f0de
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 009

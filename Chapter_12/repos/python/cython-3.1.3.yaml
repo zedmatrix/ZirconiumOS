@@ -1,0 +1,16 @@
+package:
+    name: cython
+    version: 3.1.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/cython/cython/releases/download/3.1.3/cython-3.1.3.tar.gz
+      md5: f508595cc0951a77b70c07100df1b4ff
+
+build: |
+    python3 -m build --wheel --no-isolation --skip-dependency-check
+
+install: |
+    python3 -m installer --prefix=/usr dist/*.whl

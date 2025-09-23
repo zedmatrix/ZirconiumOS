@@ -1,0 +1,28 @@
+package:
+    name: xmodmap
+    version: 1.0.11
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xmodmap-1.0.11.tar.xz
+      md5: 0d66e07595ea083871048c4b805d8b13
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 022

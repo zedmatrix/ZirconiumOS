@@ -1,0 +1,45 @@
+package:
+    name: nfs-utils
+    version: 2.8.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.kernel.org/pub/linux/utils/nfs-utils/2.8.3/nfs-utils-2.8.3.tar.xz
+      md5: 5a827a1254f878370135e3b3ae49be73
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --sbindir=/usr/sbin \
+        --disable-nfsv4 --disable-gss LIBS="-lsqlite3 -levent_core" &&
+    make
+
+install: |
+    make install &&
+    chmod u+w,go+r /usr/sbin/mount.nfs &&
+    chown nobody:nogroup /var/lib/nfs
+
+final: |
+    install -dm755 /etc/default/
+    install -m644 ${YSRC}/nfs-utils /etc/default/
+    install -m644 ${YSRC}/rpc-statd.service /usr/lib/systemd/system/
+    install -m644 ${YSRC}/rpc-statd-notify.service /usr/lib/systemd/system/
+    install -m644 ${YSRC}/nfs-client.service /usr/lib/systemd/system/
+    install -m644 ${YSRC}/nfs-client.target /usr/lib/systemd/system/
+    systemctl enable nfs-client.target
+
+required:
+    - libevent
+    - libnl
+    - libtirpc
+    - libxml2
+    - rpcsvc-proto
+    - rpcbind
+
+optional:
+    - cyrus-sasl
+    - libnsl
+    - lvm2
+    - openldap
+    - mitkrb
+    - libcap-pam

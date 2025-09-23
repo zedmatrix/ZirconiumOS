@@ -1,0 +1,33 @@
+package:
+    name: libXdmcp
+    version: 1.1.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/lib/libXdmcp-1.1.5.tar.xz
+      md5: ce0af51de211e4c99a111e64ae1df290
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+        --disable-static --docdir=/usr/share/doc/libXdmcp-1.1.5
+
+build: |
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+final: |
+
+required:
+    - xorgproto
+
+optional:
+    - xmlto
+    - fop
+    - libxslt

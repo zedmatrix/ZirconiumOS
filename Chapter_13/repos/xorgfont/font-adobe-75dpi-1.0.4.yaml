@@ -1,0 +1,23 @@
+package:
+    name: font-adobe-75dpi
+    version: 1.0.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/font/font-adobe-75dpi-1.0.4.tar.xz
+      md5: 2dc044f693ee8e0836f718c2699628b9
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - bdftopcf
+    - util-macros
+    - mkfontscale
+    - font-util

@@ -1,0 +1,28 @@
+package:
+    name: xkbutils
+    version: 1.0.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xkbutils-1.0.6.tar.xz
+      md5: 07483ddfe1d83c197df792650583ff20
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 017

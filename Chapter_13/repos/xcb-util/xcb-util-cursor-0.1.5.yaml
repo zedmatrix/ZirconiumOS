@@ -1,0 +1,23 @@
+package:
+    name: xcb-util-cursor
+    version: 0.1.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://xcb.freedesktop.org/dist/xcb-util-cursor-0.1.5.tar.xz
+      md5: bc30cd267b11ac5803fe19929cabd230
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - libxcb
+    - xcb-util

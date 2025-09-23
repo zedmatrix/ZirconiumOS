@@ -1,0 +1,27 @@
+package:
+    name: vulkan-headers
+    version: 1.4.321
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.4.321/Vulkan-Headers-1.4.321.tar.gz
+      md5: 0121ba99047bf40ab93737209c7a170a
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - cmake
+    - ninja
+
+recommended:
+    - python
+    - git

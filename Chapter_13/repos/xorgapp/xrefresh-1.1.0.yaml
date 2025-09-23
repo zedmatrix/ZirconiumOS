@@ -1,0 +1,28 @@
+package:
+    name: xrefresh
+    version: 1.1.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.x.org/pub/individual/app/xrefresh-1.1.0.tar.xz
+      md5: 55003733ef417db8fafce588ca74d584
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+    - mesa
+    - xbitmaps
+    - xcb-util
+
+optional:
+    - linux-pam
+
+order: 027

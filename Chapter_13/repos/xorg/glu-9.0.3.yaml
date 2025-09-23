@@ -1,0 +1,24 @@
+package:
+    name: glu
+    version: 9.0.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
+      md5: 06a4fff9179a98ea32ef41b6d83f6b19
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D gl_provider=gl
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install &&
+    rm -vf /usr/lib/libGLU.a
+
+required:
+    - mesa
+    - meson
