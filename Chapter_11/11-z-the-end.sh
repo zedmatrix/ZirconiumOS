@@ -1,7 +1,7 @@
 #!/bin/bash
 
 release="r12.4-16-systemd-wip"
-codename="Titanium"
+codename="zirconium"
 
 echo $release > /etc/lfs-release
 
