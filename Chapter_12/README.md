@@ -22,7 +22,7 @@ To rebuild **Ybuild** with full support, several libraries and tools must be ins
 - `libxml2`, `docbook-xml`, `docbook-xsl-nons`, `libxslt`, `xmlto`, `itstool` – XML/DocBook processing.  
 - `asciidoc` – Lightweight markup for docs.  
 - `links` – Text/graphical web browser.  
-- `build` – Build scripts and helpers.  
+- `build` – A simple, correct Python build frontend.  
 - `py-installer` – Freeze Python applications into executables.  
 - `rsync` – File synchronization utility.  
 
