@@ -7,12 +7,16 @@
 > `gettext-temp bison-temp perl-temp python-temp texinfo-temp util-linux-temp`<br>
 + `7-z-cleanup.sh` - Automated Cleanup
 
+---
+
 ### Saving the Temporary System
 
 1. `exit` from the chroot environment
 2. `cd $LFS`
 3. `tar -cJpf $HOME/lfs-temp-tools-r12.4-16-systemd-wip.tar.xz .`
 > You can change the $HOME to a USB or other location also saves the sources.
+
+---
 
 ### Restore the System from the Backup
 1. `export LFS=/mnt/lfs` - Make sure this is set
