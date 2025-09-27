@@ -13,6 +13,7 @@ This provides a minimal package manager and database to automate installations d
 > Includes all yaml and source files for complete Systemd or Sys-V
 
 **Prepare the Ybuilder**
+
 2. Copy Files into the `/mnt/lfs/ybuild` directory:
 
  - `ca-bundle.crt` - Certifications to allow the libcurl module to download inside chroot.
