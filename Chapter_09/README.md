@@ -19,11 +19,11 @@ These scripts finalize the base system by setting up environment paths, networki
 
 These utilities are required for networking, crypto, compression, and hardware support:  
 
-- `which` – Locate executables in PATH.  
-- `libarchive`, `libtasn1`, `p11-kit`, `make-ca` – Crypto and certificate handling.  
-- `openssh` – Secure remote access via SSH.  
-- `libunistring`, `libidn2`, `libpsl`, `wget`, `curl` – String handling and network downloads.  
-- `hwdata`, `pciutils`, `libusb`, `usbutils` – Hardware identification and USB/PnP utilities.  
+ 1. `which` – Locate executables in PATH.  
+ 2. `libarchive`, `libtasn1`, `p11-kit`, `make-ca` – Crypto and certificate handling.  
+ 3. `openssh` – Secure remote access via SSH.  
+ 4. `libunistring`, `libidn2`, `libpsl`, `wget`, `curl` – String handling and network downloads.  
+ 5. `hwdata`, `pciutils`, `libusb`, `usbutils` – Hardware identification and USB/PnP utilities.  
 
 ---
 
@@ -31,13 +31,13 @@ These utilities are required for networking, crypto, compression, and hardware s
 
 Required libraries and tools to support EFI booting:  
 
-- `popt`, `libpng`, `libaio` – Libraries needed by GRUB and related tools.  
-- `dosfstools` – FAT filesystem utilities (for EFI partitions).  
-- `lvm2` – Logical Volume Management support.  
-- `fuse` – Filesystem in Userspace support.  
-- `freetype2-pass1` – Font rendering library (needed for GRUB menus).  
-- `efivar`, `efibootmgr` – Manage EFI variables and boot entries.  
-- `grub-uefi` – The GRUB bootloader built for UEFI systems.  
+ 6. `popt`, `libpng`, `libaio` – Libraries needed by GRUB and related tools.  
+ 7. `dosfstools` – FAT filesystem utilities (for EFI partitions).  
+ 8. `lvm2` – Logical Volume Management support.  
+ 9. `fuse` – Filesystem in Userspace support.  
+ 10. `freetype2-pass1` – Font rendering library (needed for GRUB menus).  
+ 11. `efivar`, `efibootmgr` – Manage EFI variables and boot entries.  
+ 12. `grub-uefi` – The GRUB bootloader built for UEFI systems.  
 
 ---
 
