@@ -1,5 +1,5 @@
 package:
-    name: build
+    name: py-build
     version: 1.3.0
     rel: 1
     archive: false
