@@ -4,7 +4,14 @@
 + `7-5-creating-dirs.sh` - Creating Directories
 + `7-6-create-files_systemd.sh` - Creating Essential Files and Symlinks
 + `7-7-chapter-install.sh` - Installation of Tools<br>
-> `gettext-temp bison-temp perl-temp python-temp texinfo-temp util-linux-temp`<br>
+
+1. `gettext-temp` – Internationalization and localization utilities.
+2. `bison-temp` – Parser generator (yacc replacement).
+3. `perl-temp` – Practical Extraction and Reporting Language.
+4. `python-temp` – General-purpose interpreted programming language.
+5. `texinfo-temp` – Documentation system for GNU packages.
+6. `util-linux-temp` – Essential utilities for Linux system management. 
+
 + `7-z-cleanup.sh` - Automated Cleanup
 
 ---
