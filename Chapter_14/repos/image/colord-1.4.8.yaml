@@ -1,0 +1,45 @@
+package:
+    name: colord
+    version: 1.4.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.freedesktop.org/software/colord/releases/colord-1.4.8.tar.xz
+      md5: 4d17dea7fe5460c2ea16aee64dca2ecb
+
+prepare: |
+    groupadd -g 71 colord;
+    useradd -c "Color Daemon Owner" -d /var/lib/colord -u 71 -g colord -s /bin/false colord;
+    meson setup ybuild --prefix=/usr --buildtype=release -D daemon_user=colord -D vapi=true \
+      -D systemd=true -D libcolordcompat=true -D argyllcms_sensor=false -D bash_completion=false \
+      -D docs=false -D man=false
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gobject-introspection
+    - glib2
+    - dbus
+    - lcms2
+    - libgudev
+    - libgusb
+    - polkit
+
+recommended:
+    - systemd
+    - vala
+
+optional:
+    - gnome-desktop
+    - colord-gtk
+    - docbook-xml5
+    - docbook-xsl-ns
+    - libxslt
+    - gtk-doc
+    - sane

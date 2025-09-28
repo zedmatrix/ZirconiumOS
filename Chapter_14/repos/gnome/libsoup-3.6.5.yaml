@@ -1,0 +1,43 @@
+package:
+    name: libsoup
+    version: 3.6.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/libsoup/3.6/libsoup-3.6.5.tar.xz
+      md5: 181a474d783492e3f5f7cbfb047bcecd
+
+prepare: |
+    sed 's/apiversion/soup_version/' -i docs/reference/meson.build &&
+    meson setup ybuild --prefix=/usr --buildtype=release --wrap-mode=nofallback
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - glib-networking
+    - libpsl
+    - libxml2
+    - nghttp2
+
+recommended:
+    - gobject-introspection
+    - glib2
+    - vala
+
+optional:
+    - apache
+    - brotli
+    - curl
+    - gi-docgen
+    - mitkrb5
+    - php
+    - samba

@@ -1,0 +1,76 @@
+package:
+    name: ffmpeg
+    version: 7.1.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://ffmpeg.org/releases/ffmpeg-7.1.2.tar.xz
+      md5: 02fad5aa6db43488f748c397baccc326
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/ffmpeg-7.1.2-chromium_method-1.patch
+      md5: e1972cc809fe72a8b8a711c8896ffa41
+
+prepare: |
+    ./configure --prefix=/usr --enable-gpl --enable-version3 --enable-nonfree --disable-static \
+        --enable-shared --disable-debug --enable-libaom --enable-libass --enable-libfdk-aac \
+        --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
+        --enable-libx264 --enable-libx265 --enable-openssl --enable-libdav1d --enable-libsvtav1 \
+        --ignore-tests=enhanced-flv-av1,enhanced-flv-multitrack \
+        --docdir=/usr/share/doc/ffmpeg-7.1.2
+
+build: |
+    make &&
+    gcc tools/qt-faststart.c -o tools/qt-faststart
+
+install: |
+    make install &&
+    install -v -m755 tools/qt-faststart /usr/bin &&
+    install -v -m755 -d /usr/share/doc/ffmpeg-7.1.2 &&
+    install -v -m644 doc/*.txt /usr/share/doc/ffmpeg-7.1.2
+
+final: |
+    make fate-rsync SAMPLES=fate-suite/ &&
+    rsync -vrltLW  --delete --timeout=60 --contimeout=60 rsync://fate-suite.ffmpeg.org/fate-suite/ fate-suite/ &&
+    make fate THREADS=4 SAMPLES=fate-suite/ | tee ../fate.log &&
+    grep ^TEST ../fate.log | wc -l
+
+required:
+    - libaom
+    - libass
+    - fdk-aac
+    - freetype2
+    - lame
+    - libvorbis
+    - libvpx
+    - opus
+    - x264
+    - x265
+    - nasm
+
+recommended:
+    - dav1d
+    - svt-av1
+    - alsa-lib
+    - libva
+    - sdl2
+    - libvdpau
+    - libvdpau-va-gl
+
+optional:
+    - doxygen
+    - fontconfig
+    - fribidi
+    - frei0r
+    - libcdio
+    - libdrm
+    - libjxl
+    - libplacebo
+    - libwebp
+    - openjpeg
+    - gnutls
+    - pulseaudio
+    - samba
+    - speex

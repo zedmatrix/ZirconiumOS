@@ -1,0 +1,25 @@
+package:
+    name: cdparanoia
+    version: 10.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-10.2.src.tgz
+      md5: b304bbe8ab63373924a744eac9ebc652
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/cdparanoia-III-10.2-gcc_fixes-1.patch
+      md5: 4d6a164f760b59c2f0d82d0997dbdce1
+
+build: |
+    ./configure --prefix=/usr --mandir=/usr/share/man &&
+    make -j1
+
+install: |
+    make install
+
+final: |
+    chmod -v 755 /usr/lib/libcdda_*.so.0.10.2 &&
+    rm -fv /usr/lib/libcdda_*.a

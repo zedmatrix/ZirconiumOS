@@ -1,0 +1,19 @@
+package:
+    name: hicolor-icon-theme
+    version: 0.18
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.18.tar.xz
+      md5: ef14f3af03bcde9ed134aad626bdbaad
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install

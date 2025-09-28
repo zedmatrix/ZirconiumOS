@@ -1,0 +1,27 @@
+package:
+    name: bubblewrap
+    version: 0.11.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/containers/bubblewrap/releases/download/v0.11.0/bubblewrap-0.11.0.tar.xz
+      md5: 630eec714ea04729efd116ea85a715a3
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    sed 's@symlink usr/lib64@ro-bind-try /lib64@' -i ../tests/libtest.sh &&
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+optional:
+    - libxslt
+    - libseccomp

@@ -1,0 +1,23 @@
+package:
+    name: speex
+    version: 1.2.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.xiph.org/releases/speex/speex-1.2.1.tar.gz
+      md5: fe7bf610883ff202092b92c72fe0fe3e
+
+build: |
+    ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/speex-1.2.1 &&
+    make
+
+install: |
+    make install
+
+required:
+    - libogg
+
+optional:
+    - valgrind

@@ -1,0 +1,16 @@
+package:
+    name: fdk-aac
+    version: 2.0.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/opencore-amr/fdk-aac-2.0.3.tar.gz
+      md5: f43e593991caefdce509ad837d3301bd
+
+build: |
+    ./configure --prefix=/usr --disable-static && make
+
+install: |
+    make install

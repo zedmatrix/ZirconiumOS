@@ -1,0 +1,44 @@
+package:
+    name: gst-plugins-good
+    version: 1.26.5
+    rel: 1
+    archive: false
+    delete: false
+
+sources:
+    - url: https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.26.5.tar.xz
+      md5: 7323c4c55e82b498b16d62e23e022626
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gst-plugins-base
+
+recommended:
+    - cairo
+    - flac
+    - gdk-pixbuf
+    - lame
+    - libsoup
+    - libvpx
+    - mpg123
+    - nasm
+    - pulseaudio
+
+optional:
+    - aalib
+    - gtk3
+    - libdv
+    - qt6
+    - speex
+    - taglib
+    - valgrind
+    - v4l-utils
+    - wayland

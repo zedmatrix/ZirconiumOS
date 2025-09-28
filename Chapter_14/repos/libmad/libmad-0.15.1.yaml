@@ -1,0 +1,27 @@
+package:
+    name: libmad
+    version: 0.15.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/mad/libmad-0.15.1b.tar.gz
+      md5: 1be543bc30c56fb6bea1d7bf6a64e66c
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/libmad-0.15.1b-fixes-1.patch
+      md5: d66a99860fd79066515671a511bd8f4f
+
+prepare: |
+    sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
+    touch NEWS AUTHORS ChangeLog &&
+    autoreconf -fi
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+install: |
+    make install
+    install -vm644 ${YSRC}/mad.pc /usr/lib/pkgconfig/

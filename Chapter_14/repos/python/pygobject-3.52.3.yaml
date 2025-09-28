@@ -1,0 +1,32 @@
+package:
+    name: pygobject
+    version: 3.52.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/pygobject/3.52/pygobject-3.52.3.tar.gz
+      md5: 50e6b31b7059e31a03f5949dab393e60
+
+prepare: |
+    mv -v tests/test_gdbus.py{,.nouse} &&
+    mv -v tests/test_overrides_gtk.py{,.nouse} &&
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gobject-introspection
+    - glib2
+
+recommended:
+    - pycairo
+
+optional:
+    - gtk4
+    - pytest

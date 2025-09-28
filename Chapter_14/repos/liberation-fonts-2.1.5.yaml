@@ -1,0 +1,20 @@
+package:
+    name: liberation-fonts
+    version: 2.1.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/liberationfonts/liberation-fonts/archive/2.1.5/liberation-fonts-2.1.5.tar.gz
+      md5: 77f8b9c9cdeea1f8b2a7c2fb29c5bae7
+
+build: |
+    make build
+
+install: |
+    install -vDm644 -t "/usr/share/fonts/liberation" liberation-fonts-ttf-2.1.5/*.ttf
+
+required:
+    - fontforge
+    - fonttools

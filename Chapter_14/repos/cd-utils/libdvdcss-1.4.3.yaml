@@ -1,0 +1,19 @@
+package:
+    name: libdvdcss
+    version: 1.4.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://get.videolan.org/libdvdcss/1.4.3/libdvdcss-1.4.3.tar.bz2
+      md5: e98239a88af9b2204f9b9d987c2bc71a
+
+build: |
+    ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/libdvdcss-1.4.3 && make
+
+install: |
+    make install
+
+optional:
+    - doxygen

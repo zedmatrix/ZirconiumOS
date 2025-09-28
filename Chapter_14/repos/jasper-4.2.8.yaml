@@ -1,0 +1,35 @@
+package:
+    name: jasper
+    version: 4.2.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/jasper-software/jasper/archive/version-4.2.8/jasper-version-4.2.8.tar.gz
+      md5: 2277a24310224952f49149615fa853eb
+
+prepare: |
+    cmake -B YBUILD -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D JAS_ENABLE_DOC=NO \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON -D ALLOW_IN_SOURCE_BUILD=YES \
+      -D CMAKE_INSTALL_DOCDIR=/usr/share/doc/jasper-4.2.8
+
+build: |
+    cmake --build YBUILD
+
+check: |
+    cd YBUILD && make test
+
+install: |
+    cmake --install YBUILD
+
+required:
+    - cmake
+
+recommended:
+    - libjpeg-turbo
+
+optional:
+    - freeglut
+    - doxygen
+    - texlive

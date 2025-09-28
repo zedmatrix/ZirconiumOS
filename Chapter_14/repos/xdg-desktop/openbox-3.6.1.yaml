@@ -1,0 +1,45 @@
+package:
+    name: openbox
+    version: 3.6.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: http://openbox.org/dist/openbox/openbox-3.6.1.tar.gz
+      md5: b72794996c6a3ad94634727b95f9d204
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/openbox-3.6.1-py3-1.patch
+      md5: 6fe54d2523935bea4ed1209b4f9b7f18
+
+prepare: |
+    autoreconf -fi &&
+    ./configure --prefix=/usr --sysconfdir=/etc --disable-static \
+        --docdir=/usr/share/doc/openbox-3.6.1
+
+build: |
+    make
+
+install: |
+    make install
+
+final: |
+    rm -v /usr/share/xsessions/openbox-{gnome,kde}.desktop
+
+required:
+    - imlib2
+    - librsvg
+    - libSM
+    - libXcursor
+    - libXinerama
+    - libXrandr
+    - pango
+
+recommended:
+    - startup-notification
+    - libxml2
+
+optional:
+    - imagemagick
+    - pyxdg

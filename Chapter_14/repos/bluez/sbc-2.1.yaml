@@ -1,0 +1,19 @@
+package:
+    name: sbc
+    version: 2.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.kernel.org/pub/linux/bluetooth/sbc-2.1.tar.xz
+      md5: 46e29f9c2fbd07c417194e5da60b6d48
+
+build: |
+    ./configure --prefix=/usr --disable-static --disable-tester && make
+
+install: |
+    make install
+
+optional:
+    - libsndfile

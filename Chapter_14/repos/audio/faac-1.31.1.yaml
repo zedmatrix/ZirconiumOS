@@ -1,0 +1,28 @@
+package:
+    name: faac
+    version: 1.31.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/lfs-book/faac/archive/v1.31.1/faac-1.31.1.tar.gz
+      md5: f9eeff03ad4a27a4973fe728ab065924
+
+prepare: |
+    ./bootstrap
+
+build: |
+    ./configure --prefix=/usr --disable-static && make
+
+check: |
+    ./frontend/faac -o Front_Left.mp4 /usr/share/sounds/alsa/Front_Left.wav &&
+    faad Front_Left.mp4 &&
+    aplay Front_Left.wav
+
+install: |
+    make install
+
+recommended:
+    - faad2
+    - alsa-utils

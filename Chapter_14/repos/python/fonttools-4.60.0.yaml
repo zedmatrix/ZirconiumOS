@@ -1,0 +1,21 @@
+package:
+    name: fonttools
+    version: 4.60.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/fonttools/fonttools/archive/4.60.0/fonttools-4.60.0.tar.gz
+      md5: 0e0948f26d657c2d44557cbae0bcf4f9
+
+build: |
+    python3 -m build -wn
+
+install: |
+    python3 -m installer --prefix=/usr  dist/*.whl
+
+required:
+    - py-installer
+    - build
+    - cython

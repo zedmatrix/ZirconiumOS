@@ -1,0 +1,19 @@
+package:
+    name: fribidi
+    version: 1.0.16
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz
+      md5: 333ad150991097a627755b752b87f9ff
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install

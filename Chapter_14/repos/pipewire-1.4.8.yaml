@@ -1,0 +1,50 @@
+package:
+    name: pipewire
+    version: 1.4.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/1.4.8/pipewire-1.4.8.tar.bz2
+      md5: e12419f003316784ae3791578b610591
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D session-managers="[]"
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - bluez
+    - gstreamer
+    - gst-plugins-base
+    - pulseaudio
+    - sbc
+    - v4l-utils
+
+recommended:
+    - alsa-lib
+    - avahi
+    - fdk-aac
+    - ffmpeg
+    - libcanberra
+    - libdrm
+
+optional:
+    - libxcb
+    - libsndfile
+    - libusb
+    - opus
+    - sdl2
+    - valgrind
+    - vulkan-loader
+    - doxygen
+    - graphviz
+    - libX11

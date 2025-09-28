@@ -1,0 +1,27 @@
+package:
+    name: adwaita-icon-theme
+    version: 48.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/adwaita-icon-theme/48/adwaita-icon-theme-48.1.tar.xz
+      md5: a3923f90a1885cfc1d5b0626762ec0b7
+
+prepare: |
+    meson setup ybuild --prefix=/usr
+
+build: |
+    ninja -C ybuild
+
+install: |
+    rm -rf /usr/share/icons/Adwaita/;
+    ninja -C ybuild install
+
+required:
+    - gtk3
+    - librsvg
+
+optional:
+    - gtk4

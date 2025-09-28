@@ -1,0 +1,28 @@
+package:
+    name: lua
+    version: 5.4.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.lua.org/ftp/lua-5.4.8.tar.gz
+      md5: 81cf5265b8634967d8a7480d238168ce
+    - url: https://www.lua.org/tests/lua-5.4.8-tests.tar.gz
+      md5: eafc6cebee86ce2e931b2c2f335de18e
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/lua-5.4.8-shared_library-1.patch
+      md5: dd9bafa25310f188f711b2670275e0cc
+
+build: |
+    make linux
+
+install: |
+    make INSTALL_TOP=/usr INSTALL_DATA="cp -d" INSTALL_MAN=/usr/share/man/man1 \
+     TO_LIB="liblua.so liblua.so.5.4 liblua.so.5.4.8" install
+
+final: |
+    install -vdm755 /usr/share/doc/lua-5.4.8;
+    install -vm644 doc/*.{html,css,gif,png} /usr/share/doc/lua-5.4.8;
+    install -vDm644 ${YSRC}/lua.pc /usr/lib/pkgconfig/lua.pc

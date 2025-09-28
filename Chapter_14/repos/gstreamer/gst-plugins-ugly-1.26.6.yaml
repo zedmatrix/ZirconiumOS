@@ -1,0 +1,35 @@
+package:
+    name: gst-plugins-ugly
+    version: 1.26.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-1.26.6.tar.xz
+      md5: 802101a92ca38668ff1114f5cf3df2ca
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D gpl=enabled
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gst-plugins-base
+
+recommended:
+    - liba52
+    - libdvdread
+    - x264
+
+optional:
+    - libmpeg2
+    - libcdio
+    - valgrind

@@ -1,0 +1,36 @@
+package:
+    name: libgusb
+    version: 0.4.9
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/hughsie/libgusb/releases/download/0.4.9/libgusb-0.4.9.tar.xz
+      md5: 354a3227334991ea4e924843c144bd82
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D docs=false
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - json-glib
+    - libusb
+
+recommended:
+    - gobject-introspection
+    - glib2
+    - hwdata
+    - vala
+
+optional:
+    - gi-docgen
+    - umockdev

@@ -1,0 +1,25 @@
+package:
+    name: libexif
+    version: 0.6.25
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/libexif/libexif/releases/download/v0.6.25/libexif-0.6.25.tar.bz2
+      md5: eba77b69efac8fa8e8fc53f8c2cdad7c
+
+build: |
+    ./configure --prefix=/usr --disable-static \
+        --with-doc-dir=/usr/share/doc/libexif-0.6.25 &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+optional:
+    - doxygen
+    - graphviz

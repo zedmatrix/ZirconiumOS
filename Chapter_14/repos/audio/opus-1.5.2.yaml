@@ -1,0 +1,27 @@
+package:
+    name: opus
+    version: 1.5.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz
+      md5: c40b3a1fbdbb9a7aa178600b88200c76
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D docdir=/usr/share/doc/opus-1.5.2
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+optional:
+    - doxygen
+    - texlive
+    - tl-installer

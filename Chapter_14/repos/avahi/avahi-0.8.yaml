@@ -1,0 +1,48 @@
+package:
+    name: avahi
+    version: 0.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/lathiat/avahi/releases/download/v0.8/avahi-0.8.tar.gz
+      md5: 229c6aa30674fc43c202b22c5f8c2be7
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/avahi-0.8-ipv6_race_condition_fix-1.patch
+      md5: c82a8c2a19c5dd7373fb4644ef8e84b3
+    - url: sources/avahi-simple-protocol-fix.patch
+      md5: 3703aa406d6d9e5a2f485d738e86b465
+
+prepare: |
+    [ ! $(getent group avahi >/dev/null) ] || groupadd -fg 84 avahi;
+    [ ! $(id avahi >/dev/null 2>&1) ] || useradd -c "Avahi Daemon Owner" -d /run/avahi-daemon -u 84 -g avahi -s /bin/false avahi;
+    [ ! $(getent group netdev >/dev/null) ] || groupadd -fg 86 netdev
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static --disable-libevent \
+    --disable-mono --disable-monodoc --disable-python --disable-qt3 --disable-qt4 --disable-qt5        \
+    --enable-core-docs --with-distro=none --with-dbus-system-address='unix:path=/run/dbus/system_bus_socket' &&
+    make
+
+install: |
+    make install
+
+final: |
+    install -vm755 /etc/systemd/resolved.conf.d;
+    install -vm644 ${YSRC}/no-mdns.conf /etc/systemd/resolved.conf.d/;
+    systemctl enable avahi-daemon
+
+required:
+    - glib2
+    - gobject-introspection
+
+recommended:
+    - gtk3
+    - libdaemon
+
+optional:
+    - dbus-python
+    - libevent
+    - doxygen

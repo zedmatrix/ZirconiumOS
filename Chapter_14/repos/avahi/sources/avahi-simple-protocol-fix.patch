@@ -1,0 +1,13 @@
+--- a/avahi-daemon/simple-protocol.c    2025-09-26 20:18:05.406836239 -0700
++++ b/avahi-daemon/simple-protocol.c    2018-09-13 22:31:28.486023126 -0700
+@@ -424,10 +424,6 @@
+         }
+     }
+ 
++if (events & AVAHI_WATCH_HUP) { 
++client_free(c); 
++return; 
++}
+     c->server->poll_api->watch_update(
+         watch,
+         (c->outbuf_length > 0 ? AVAHI_WATCH_OUT : 0) |

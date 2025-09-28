@@ -1,0 +1,56 @@
+package:
+    name: gtk4
+    version: 4.20.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/gtk/4.20/gtk-4.20.1.tar.xz
+      md5: 865e4e4e592d2e166406508d0324a146
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D broadway-backend=true \
+        -D introspection=enabled -D vulkan=enabled
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    install -vdm755 /usr/share/gtk-4.0/
+    install -vm644 ${YSRC}/gtk4-settings.ini /usr/share/gtk-4.0/settings.ini
+
+required:
+    - gdk-pixbuf
+    - graphene
+    - iso-codes
+    - libepoxy
+    - libxkbcommon
+    - pango
+    - pygobject
+    - wayland-protocols
+
+recommended:
+    - gst-plugins-good
+    - gst-plugins-bad
+    - shaderc
+    - libvpx
+    - hicolor-icon-theme
+    - librsvg
+    - vulkan-loader
+    - glib2
+    - gobject-introspection
+
+optional:
+    - avahi
+    - colord
+    - cups
+    - docutils
+    - gi-docgen
+    - highlight
+    - libcloudproviders
+    - sassc
+    - tinysparql

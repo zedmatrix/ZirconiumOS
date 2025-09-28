@@ -1,0 +1,32 @@
+package:
+    name: libaom
+    version: 3.12.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://storage.googleapis.com/aom-releases/libaom-3.12.1.tar.gz
+      md5: 51e4e369c41f66d2f8f1ed83e2206908
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+        -D BUILD_SHARED_LIBS=1 -D ENABLE_DOCS=no -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+check: |
+    cd Ybuild &&
+    ninja testdata &&
+    ninja runtests
+
+install: |
+    ninja -C Ybuild install &&
+    rm -v /usr/lib/libaom.a
+
+recommended:
+    - yasm
+    - nasm
+optional:
+    - doxygen

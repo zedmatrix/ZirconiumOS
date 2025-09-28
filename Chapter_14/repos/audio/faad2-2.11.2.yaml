@@ -1,0 +1,30 @@
+package:
+    name: faad2
+    version: 2.11.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/knik0/faad2/archive/2.11.2/faad2-2.11.2.tar.gz
+      md5: 6a0ab532d81d9a528d08ab862bc4b637
+    - url: https://www.nch.com.au/acm/sample.aac
+      md5: 2eb6490964c5215be713c16a6d769801
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON
+
+build: |
+    cmake --build Ybuild
+
+check: |
+    cd Ybuild;
+    ./faad -o sample.wav ${YSRC}/sample.aac &&
+    aplay sample.wav
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake
+    - alsa-utils

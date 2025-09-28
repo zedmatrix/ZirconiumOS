@@ -1,0 +1,31 @@
+package:
+    name: libsndfile
+    version: 1.2.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz
+      md5: 04e2e6f726da7c5dc87f8cf72f250d04
+
+build: |
+    sed '/typedef enum/,/bool ;/d' -i src/ALAC/alac_{en,de}coder.c &&
+    ./configure --prefix=/usr --docdir=/usr/share/doc/libsndfile-1.2.2 &&
+    make
+
+check: |
+
+install: |
+    make install
+
+recommended:
+    - flac
+    - opus
+    - libvorbis
+
+optional:
+    - alsa-lib
+    - lame
+    - mpg123
+    - speex

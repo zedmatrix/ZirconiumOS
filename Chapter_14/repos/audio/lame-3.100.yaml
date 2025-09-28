@@ -1,0 +1,27 @@
+package:
+    name: lame
+    version: 3.100
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/lame/lame-3.100.tar.gz
+      md5: 83e260acbe4389b54fe08e0bdbf7cddb
+
+prepare: |
+
+build: |
+    sed -i -e 's/^\(\s*hardcode_libdir_flag_spec\s*=\).*/\1/' configure &&
+    ./configure --prefix=/usr --enable-mp3rtp --disable-static &&
+    make
+
+check: |
+    LD_LIBRARY_PATH=libmp3lame/.libs make test
+
+install: |
+    make pkghtmldir=/usr/share/doc/lame-3.100 install
+
+optional:
+    - libsndfile
+    - nasm

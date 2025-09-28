@@ -1,0 +1,25 @@
+package:
+    name: dav1d
+    version: 1.5.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://code.videolan.org/videolan/dav1d/-/archive/1.5.1/dav1d-1.5.1.tar.gz
+      md5: e919dd18e2d834abe007bdf7d973a2f0
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+recommended:
+    - nasm

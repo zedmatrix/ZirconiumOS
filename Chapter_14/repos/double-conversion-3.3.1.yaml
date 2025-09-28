@@ -1,0 +1,26 @@
+package:
+    name: double-conversion
+    version: 3.3.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/google/double-conversion/archive/v3.3.1/double-conversion-3.3.1.tar.gz
+      md5: 7bbcf4bd2e1a96ef9d2a6fa60e887276
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -D BUILD_SHARED_LIBS=ON -D BUILD_TESTING=ON
+
+build: |
+    cmake --build Ybuild
+
+check: |
+    cd Ybuild && make test
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake

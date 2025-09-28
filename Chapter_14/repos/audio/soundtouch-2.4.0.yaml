@@ -1,0 +1,20 @@
+package:
+    name: soundtouch
+    version: 2.4.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.surina.net/soundtouch/soundtouch-2.4.0.tar.gz
+      md5: eec20bde8f47f27f95b931ad041d5d79
+
+prepare: |
+    ./bootstrap
+
+build: |
+    ./configure --prefix=/usr --docdir=/usr/share/doc/soundtouch-2.4.0 &&
+    make
+
+install: |
+    make install

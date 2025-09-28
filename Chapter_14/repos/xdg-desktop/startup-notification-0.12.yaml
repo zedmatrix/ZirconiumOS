@@ -1,0 +1,22 @@
+package:
+    name: startup-notification
+    version: 0.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.freedesktop.org/software/startup-notification/releases/startup-notification-0.12.tar.gz
+      md5: 2cd77326d4dcaed9a5a23a1232fb38e9
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+install: |
+    make install &&
+    install -vDm644 doc/startup-notification.txt /usr/share/doc/startup-notification-0.12/startup-notification.txt
+
+required:
+    - libX11
+    - xcb-util

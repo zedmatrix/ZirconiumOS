@@ -1,0 +1,39 @@
+package:
+    name: librsvg
+    version: 2.61.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/librsvg/2.61/librsvg-2.61.0.tar.xz
+      md5: 7ed4ffdee87e0d7f356fedfea77744ca
+
+prepare: |
+    sed -e "/OUTDIR/s|,| / 'librsvg-2.61.0', '--no-namespace-dir',|" \
+    -e '/output/s|Rsvg-2.0|librsvg-2.61.0|' -i doc/meson.build &&
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - cairo
+    - cargo-c
+    - gdk-pixbuf
+    - pango
+
+recommended:
+    - gobject-introspection
+    - glib2
+    - vala
+
+optional:
+    - docutils
+    - gi-docgen

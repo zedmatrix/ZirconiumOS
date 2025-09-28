@@ -1,0 +1,33 @@
+package:
+    name: at-spi2-core
+    version: 2.56.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/at-spi2-core/2.56/at-spi2-core-2.56.4.tar.xz
+      md5: 1bdef0e54532c4f3f004d7e2d40e256a
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D gtk2_atk_adaptor=false
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - dbus-pass2
+    - glib2
+
+recommended:
+    - libX11
+    - libXi
+    - libXtst
+
+optional:
+    - gsettings-desktop-schemas
+    - gi-docgen
+    - sphinx

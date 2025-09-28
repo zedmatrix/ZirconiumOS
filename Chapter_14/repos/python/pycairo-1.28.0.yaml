@@ -1,0 +1,25 @@
+package:
+    name: pycairo
+    version: 1.28.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/pygobject/pycairo/releases/download/v1.28.0/pycairo-1.28.0.tar.gz
+      md5: f1bb0ee59ddd78a452f27ffda3ed68ae
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - cairo
+
+optional:
+    - pytest

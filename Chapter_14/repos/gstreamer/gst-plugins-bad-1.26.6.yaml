@@ -1,0 +1,52 @@
+package:
+    name: gst-plugins-bad
+    version: 1.26.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.26.6.tar.xz
+      md5: 408d8b789a02e9c25264c5b19fb1d815
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D gpl=enabled
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gst-plugins-base
+
+recommended:
+    - libdvdread
+    - libdvdnav
+    - libva
+    - soundtouch
+    - svt-av1
+
+optional:
+    - bluez
+    - curl
+    - faac
+    - faad
+    - fdk-aac
+    - gtk3
+    - gst-plugins-good
+    - json-glib
+    - lcms2
+    - libaom
+    - libass
+    - libexif
+    - librsvg
+    - libsndfile
+    - libssh2
+    - libusb
+    - libwebp
+    - libxkbcommon
+    - libxml2
+    - nettle
+    - libqrencode

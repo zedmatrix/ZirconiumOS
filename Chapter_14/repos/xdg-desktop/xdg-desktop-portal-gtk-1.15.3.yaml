@@ -1,0 +1,24 @@
+package:
+    name: xdg-desktop-portal-gtk
+    version: 1.15.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/flatpak/xdg-desktop-portal-gtk/releases/download/1.15.3/xdg-desktop-portal-gtk-1.15.3.tar.xz
+      md5: 2d6e2ad2953c386a1db11618fa3803b0
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gnome-desktop
+    - gtk3
+    - xdg-desktop-portal

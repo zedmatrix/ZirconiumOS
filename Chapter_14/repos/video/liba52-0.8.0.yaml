@@ -1,0 +1,24 @@
+package:
+    name: liba52
+    version: 0.8.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://distfiles.adelielinux.org/source/a52dec/a52dec-0.8.0.tar.gz
+      md5: 4debeed0257f5312e84d92711a5cfcec
+      rename: true
+
+build: |
+    ./configure --prefix=/usr --mandir=/usr/share/man --enable-shared \
+    --disable-static CFLAGS="${CFLAGS:--g -O3} -fPIC" &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install &&
+    cp liba52/a52_internal.h /usr/include/a52dec &&
+    install -vDm644 doc/liba52.txt /usr/share/doc/liba52-0.8.0/liba52.txt

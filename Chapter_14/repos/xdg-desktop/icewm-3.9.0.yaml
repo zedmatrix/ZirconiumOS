@@ -1,0 +1,40 @@
+package:
+    name: icewm
+    version: 3.9.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/ice-wm/icewm/archive/3.9.0/icewm-3.9.0.tar.gz
+      md5: 3a2bb3874467fb1bcc2e943e699d3202
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D CFGDIR=/etc \
+      -D ENABLE_LTO=ON -D DOCDIR=/usr/share/doc/icewm-3.9.0
+
+build: |
+    cmake --build Ybuild
+
+install: |
+    cmake --install Ybuild;
+    rm -v /usr/share/xsessions/icewm.desktop
+
+required:
+    - cmake
+
+recommended:
+    - libSM
+    - libXcomposite
+    - libXcursor
+    - libXdamage
+    - libXinerama
+    - libXrandr
+
+optional:
+    - asciidoc
+    - fribidi
+    - librsvg
+    - libao
+    - libsndfile
+    - alsa-lib

@@ -1,0 +1,30 @@
+package:
+    name: svt-av1
+    version: 3.1.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/v3.1.2/SVT-AV1-v3.1.2.tar.gz
+      md5: 77b9d52e8c26bacf8bca742f8448dbc1
+      rename: true
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -W no-dev -G Ninja \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON -D BUILD_SHARED_LIBS=ON
+
+build: |
+    ninja -C Ybuild
+
+install: |
+    ninja -C Ybuild install
+
+required:
+    - cmake
+
+recommended:
+    - nasm
+
+optional:
+    - valgrind

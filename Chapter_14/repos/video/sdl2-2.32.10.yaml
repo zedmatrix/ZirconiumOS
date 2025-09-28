@@ -1,0 +1,32 @@
+package:
+    name: sdl2
+    version: 2.32.10
+    rel: 1
+    archive: false
+    delete: true
+
+sources: 
+     - url: https://www.libsdl.org/release/SDL2-2.32.10.tar.gz
+       md5: 7b234751c91737168d88c83041ca5aa9
+       rename: true
+
+build: |
+    ./configure --prefix=/usr && make
+
+install: |
+    make install &&
+    rm -v /usr/lib/libSDL2*.a
+
+recommended:
+    - libxkbcommon
+    - wayland-protocols
+
+optional:
+    - alsa-lib
+    - doxygen
+    - ibus
+    - libsamplerate
+    - libunwind
+    - nasm
+    - pipewire
+    - pulseaudio

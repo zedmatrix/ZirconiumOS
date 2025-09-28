@@ -1,0 +1,27 @@
+package:
+    name: gavl
+    version: 1.4.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/gmerlin/gavl-1.4.0.tar.gz
+      md5: 2752013a817fbc43ddf13552215ec2c0
+
+prepare: |
+    sed -i "/stdio/a #include <string.h>" src/fill_test.c
+
+build: |
+    LIBS=-lm ./configure --prefix=/usr --without-doxygen \
+        --with-cpuflags=none --docdir=/usr/share/doc/gavl-1.4.0 &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpng
+
+optional:
+    - doxygen

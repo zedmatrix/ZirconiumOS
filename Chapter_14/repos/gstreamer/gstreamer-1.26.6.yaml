@@ -1,0 +1,35 @@
+package:
+    name: gstreamer
+    version: 1.26.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.26.6.tar.xz
+      md5: 16690fa81906af9119a8fbf658676927
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D gst_debug=false
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    rm -rf /usr/bin/gst-* /usr/{lib,libexec}/gstreamer-1.0 &&
+    ninja -C ybuild install
+
+required:
+    - gobject-introspection
+    - glib2
+
+optional:
+    - gtk3
+    - gsl
+    - libnsl
+    - libunwind
+    - rustc
+    - valgrind

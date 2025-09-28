@@ -1,0 +1,43 @@
+package:
+    name: cairo
+    version: 1.18.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.cairographics.org/releases/cairo-1.18.4.tar.xz
+      md5: db575fb41bbda127e0147e401f36f8ac
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - libpng
+    - pixman
+    - libX11
+    - libxcb
+    - libXext
+    - libXrender
+    - harfbuzz
+
+recommended:
+    - fontconfig
+    - glib2
+    - freetype2-pass1
+
+optional:
+    - ghostscript
+    - gtk-doc
+    - libdrm
+    - librsvg
+    - libxml2
+    - lzo
+    - poppler
+    - valgrind

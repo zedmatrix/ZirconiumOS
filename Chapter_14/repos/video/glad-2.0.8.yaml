@@ -1,0 +1,24 @@
+package:
+    name: glad
+    version: 2.0.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/Dav1dde/glad/archive/v2.0.8/glad-2.0.8.tar.gz
+      md5: 028c39d581e6b53e53871f1dc21cf442
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user glad2
+
+optional:
+    - pytest
+    - rust
+    - libX11
+    - libXcursor
+    - libXi
+    - libXinerama

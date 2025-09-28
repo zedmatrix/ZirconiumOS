@@ -1,0 +1,37 @@
+package:
+    name: gnome-desktop
+    version: 44.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/gnome-desktop/44/gnome-desktop-44.3.tar.xz
+      md5: 3b20ade3dfb4db9b71a94a66ecb8d4fc
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gsettings-desktop-schemas
+    - gtk3
+    - gtk4
+    - iso-codes
+    - itstool
+    - libseccomp
+    - xkeyboard-config
+
+recommended:
+    - bubblewrap
+    - glib2
+    - gobject-introspection
+
+optional:
+    - gtk-doc
+    - libxkbcommon

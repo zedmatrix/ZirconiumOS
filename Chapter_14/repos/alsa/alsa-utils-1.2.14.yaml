@@ -1,0 +1,34 @@
+package:
+    name: alsa-utils
+    version: 1.2.14
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.14.tar.bz2
+      md5: d098c3d677ee80cf3d9f87783cce2e53
+
+build: |
+    ./configure --disable-alsaconf --disable-bat --disable-xmlto \
+        --with-curses=ncursesw &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install &&
+    alsactl init || true
+
+final: |
+    alsactl -L store
+
+required:
+    - alsa-lib
+
+optional:
+    - docutils
+    - fftw
+    - libsamplerate
+    - xmlto

@@ -1,0 +1,30 @@
+package:
+    name: json-glib
+    version: 1.10.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.6.tar.xz
+      md5: d4bf13ddd1e6d607d039d39286f9e3d0
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gobject-introspection
+    - glib2
+
+optional:
+    - docutils
+    - gi-docgen

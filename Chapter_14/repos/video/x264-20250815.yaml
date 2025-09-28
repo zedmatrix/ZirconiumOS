@@ -1,0 +1,19 @@
+package:
+    name: x264
+    version: 20250815
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+     - url: https://anduin.linuxfromscratch.org/BLFS/x264/x264-20250815.tar.xz
+       md5: a4adb6f7d2644043765885e54abc3955
+
+build: |
+    ./configure --prefix=/usr --enable-shared --disable-cli && make
+
+install: |
+    make install
+
+recommended:
+    - nasm

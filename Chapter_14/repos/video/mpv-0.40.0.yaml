@@ -1,0 +1,48 @@
+package:
+    name: mpv
+    version: 0.40.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/mpv-player/mpv/archive/v0.40.0/mpv-0.40.0.tar.gz
+      md5: 1c1823dedca2cf4cd0a44c94637fa31b
+
+prepare: |
+    sed -i 's/AV_OPT_TYPE_CHANNEL_LAYOUT/AV_OPT_TYPE_CHLAYOUT/' filters/f_lavfi.c;
+    meson setup ybuild --prefix=/usr --buildtype=release -D x11=enabled
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    gtk-update-icon-cache -qtf /usr/share/icons/hicolor &&
+    update-desktop-database -q
+
+required:
+    - alsa-lib
+    - ffmpeg
+    - libass
+    - libplacebo
+    - mesa
+    - pulseaudio
+
+recommended:
+    - libjpeg-turbo
+    - libva
+    - libvdpau
+    - luajit
+    - uchardet
+    - vulkan-loader
+
+optional:
+    - libdvdcss
+    - libdvdread
+    - libdvdnav
+    - pipewire
+    - sdl2
+    - docutils

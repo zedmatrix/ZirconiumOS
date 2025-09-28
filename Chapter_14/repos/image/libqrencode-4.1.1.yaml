@@ -1,0 +1,27 @@
+package:
+    name: libqrencode
+    version: 4.1.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/fukuchi/libqrencode/archive/v4.1.1/libqrencode-4.1.1.tar.gz
+      md5: 486f879d1638d3fb58a4a5d45a88c600
+
+prepare: |
+    sh autogen.sh
+
+build: |
+    ./configure --prefix=/usr &&
+    make
+
+install: |
+    make install
+
+recommended:
+    - libpng
+
+optional:
+    - doxygen
+    - sdl2

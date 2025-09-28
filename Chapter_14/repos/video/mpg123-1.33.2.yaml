@@ -1,0 +1,26 @@
+package:
+    name: mpg123
+    version: 1.33.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/mpg123/mpg123-1.33.2.tar.bz2
+      md5: 368a249cf2e8ceef45a7a988af9c08d6
+
+build: |
+    ./configure --prefix=/usr && make
+
+check: |
+    make check
+
+install: |
+    make install
+
+recommended:
+    - alsa-lib
+
+optional:
+    - pulseaudio
+    - sdl2

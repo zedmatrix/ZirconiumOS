@@ -1,0 +1,17 @@
+package:
+    name: luajit
+    version: 20250816
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://anduin.linuxfromscratch.org/BLFS/luajit/luajit-20250816.tar.xz
+      md5: 14480377a512931b3cc47297905f893d
+
+build: |
+    make PREFIX=/usr amalg
+
+install: |
+    make PREFIX=/usr install &&
+    rm -v /usr/lib/libluajit-5.1.a

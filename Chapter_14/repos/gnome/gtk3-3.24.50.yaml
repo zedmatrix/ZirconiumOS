@@ -1,0 +1,50 @@
+package:
+    name: gtk3
+    version: 3.24.50
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/gtk/3.24/gtk-3.24.50.tar.xz
+      md5: 0b3c6d1d6fc321a32624e65750b60f5d
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D man=true -D broadway_backend=true
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    install -vdm755 /etc/gtk-3.0
+    install -vm644 ${YSRC}/gtk3-settings.ini /etc/gtk-3.0/settings.ini
+
+required:
+    - at-spi2-core
+    - gdk-pixbuf
+    - libepoxy
+    - pango
+
+recommended:
+    - glib2
+    - gobject-introspection
+    - docbook-xsl-nons
+    - hicolor-icon-theme
+    - iso-codes
+    - libxkbcommon
+    - libxslt
+    - wayland
+    - wayland-protocols
+
+optional:
+    - adwaita-icon-theme
+    - colord
+    - cups
+    - gtk-doc
+    - libcloudproviders
+    - py-at-spi2
+    - sassc
+    - tinysparql

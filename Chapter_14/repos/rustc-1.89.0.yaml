@@ -1,0 +1,49 @@
+package:
+    name: rustc
+    version: 1.89.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://static.rust-lang.org/dist/rustc-1.89.0-src.tar.xz
+      md5: 982f087479302e6d91432efc81852b00
+
+prepare: |
+    mkdir -pv /opt/rustc-1.89.0;
+    ln -svfn rustc-1.89.0 /opt/rustc;
+    cp -v ${YSRC}/rustc-config.toml bootstrap.toml
+
+build: |
+    export LIBSSH2_SYS_USE_PKG_CONFIG=1;
+    export LIBSQLITE3_SYS_USE_PKG_CONFIG=1;
+    ./x.py build
+
+check: |
+    ./x.py test --verbose --no-fail-fast | tee rustc-testlog
+    grep '^test result:' rustc-testlog |
+    awk '{sum1 += $4; sum2 += $6} END { print sum1 " passed; " sum2 " failed" }'
+
+install: |
+    export LIBSSH2_SYS_USE_PKG_CONFIG=1;
+    export LIBSQLITE3_SYS_USE_PKG_CONFIG=1;
+    ./x.py install
+
+final: |
+    rm -fv /opt/rustc-1.89.0/share/doc/rustc-1.89.0/*.old &&
+    install -vm644 README.md /opt/rustc-1.89.0/share/doc/rustc-1.89.0 &&
+    install -vdm755 /usr/share/zsh/site-functions &&
+    ln -sfv /opt/rustc/share/zsh/site-functions/_cargo /usr/share/zsh/site-functions &&
+    mv -v /etc/bash_completion.d/cargo /usr/share/bash-completion/completions
+
+required:
+    - cmake
+    - curl
+
+recommended:
+    - libssh2
+    - llvm
+
+optional:
+    - gdb
+    - git

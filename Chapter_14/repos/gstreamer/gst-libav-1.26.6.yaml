@@ -1,0 +1,29 @@
+package:
+    name: gst-libav
+    version: 1.26.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.26.6.tar.xz
+      md5: d4cc51b7f0a7449bdac7ee8d9690ed57
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - ffmpeg
+    - gst-plugins-base
+
+recommended:
+    - yasm

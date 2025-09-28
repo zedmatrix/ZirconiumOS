@@ -1,0 +1,30 @@
+package:
+    name: libgudev
+    version: 238
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/libgudev/238/libgudev-238.tar.xz
+      md5: 46da30a1c69101c3a13fa660d9ab7b73
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gobject-introspection
+    - glib2
+
+optional:
+    - gtk-doc
+    - umockdev

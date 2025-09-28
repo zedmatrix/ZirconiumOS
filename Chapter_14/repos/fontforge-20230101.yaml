@@ -1,0 +1,43 @@
+package:
+    name: fontforge
+    version: 20230101
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/fontforge/fontforge/releases/download/20230101/fontforge-20230101.tar.xz
+      md5: 7043f25368ed25bcd75d168564919fb7
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/fontforge-20230101-security_fixes-1.patch
+      md5: 000b781492b3153ce27591fa865e87d9
+
+prepare: |
+    sed -i.orig 's/\(%[^%[:space:]]*\)hs/\1s/g' fontforgeexe/searchview.c po/de.po po/ca.po \
+        po/hr.po po/it.po po/pl.po po/uk.po po/en_GB.po po/fr.po po/vi.po po/ko.po po/ja.po;
+    cmake -B ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -W no-dev
+
+build: |
+    cmake --build ybuild
+
+check: |
+    cd ybuild && make check
+
+install: |
+    cmake --install ybuild
+
+required:
+    - libspiro
+    - libxml2
+
+recommended:
+    - gtk3
+
+optional:
+    - giflib
+    - git
+    - libjpeg-turbo
+    - libtiff
+    - sphinx
+    - woff2

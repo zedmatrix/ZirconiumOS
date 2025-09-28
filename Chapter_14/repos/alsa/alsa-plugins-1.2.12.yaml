@@ -1,0 +1,25 @@
+package:
+    name: alsa-plugins
+    version: 1.2.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.alsa-project.org/files/pub/plugins/alsa-plugins-1.2.12.tar.bz2
+      md5: 71fce75baa38efab4e32e40db0a33716
+
+build: |
+    ./configure --sysconfdir=/etc && make
+
+install: |
+    make install
+
+required:
+    - alsa-lib
+
+optional:
+    - ffmpeg
+    - libsamplerate
+    - pulseaudio
+    - speex

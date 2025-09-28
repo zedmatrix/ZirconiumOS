@@ -1,0 +1,38 @@
+package:
+    name: libical
+    version: 3.0.20
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/libical/libical/releases/download/v3.0.20/libical-3.0.20.tar.gz
+      md5: 539a8a293d344e7aa8ccf3740494a46d
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+        -D SHARED_ONLY=yes -D ICAL_BUILD_DOCS=false -D GOBJECT_INTROSPECTION=true -D ICAL_GLIB_VAPI=true
+
+build: |
+    cmake --build Ybuild -j1
+
+check: |
+    cd Ybuild && make test
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake
+
+recommended:
+    - glib2
+    - libxml2
+    - vala
+
+optional:
+    - doxygen
+    - graphviz
+    - gtk-doc
+    - icu
+    - pygobject3

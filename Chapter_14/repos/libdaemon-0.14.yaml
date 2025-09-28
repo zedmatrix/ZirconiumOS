@@ -1,0 +1,21 @@
+package:
+    name: libdaemon
+    version: 0.14
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz
+      md5: 509dc27107c21bcd9fbf2f95f5669563
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+install: |
+    make docdir=/usr/share/doc/libdaemon-0.14 install
+
+optional:
+    - doxygen
+    - lynx

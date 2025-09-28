@@ -1,0 +1,36 @@
+package:
+    name: xdg-desktop-portal
+    version: 1.20.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/flatpak/xdg-desktop-portal/releases/download/1.20.3/xdg-desktop-portal-1.20.3.tar.xz
+      md5: 28c2d9b9bbeff811f2d999e1b985c728
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D tests=disabled
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - fuse
+    - gdk-pixbuf
+    - json-glib
+
+recommended:
+    - bubblewrap
+    - docutils
+
+optional:
+    - geoclue
+    - pytest
+    - libportal
+    - dbusmock
+    - umockdev
+    - sphinx

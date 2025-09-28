@@ -1,0 +1,28 @@
+package:
+    name: gst-plugins-rs
+    version: 1.26.6
+    rel: 1
+    archive: false
+    delete: false
+
+sources:
+    - url: https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs/-/archive/gstreamer-1.26.6/gst-plugins-rs-gstreamer-1.26.6.tar.gz
+      md5: e1296b6da755a225e7df15e61205cc53
+
+build: |
+    cd video/dav1d && cargo build --release &&
+    cd ../.. &&
+    cd video/gtk4 && cargo build --release
+
+install: |
+    install -vm755 target/release/libgstdav1d.so /usr/lib/gstreamer-1.0
+    install -vm755 target/release/libgstgtk4.so /usr/lib/gstreamer-1.0
+
+required:
+    - gst-plugins-base
+    - git
+    - rustc
+
+recommended:
+    - dav1d
+    - gtk4

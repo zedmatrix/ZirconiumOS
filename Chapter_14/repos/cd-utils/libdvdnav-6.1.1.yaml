@@ -1,0 +1,19 @@
+package:
+    name: libdvdnav
+    version: 6.1.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://get.videolan.org/libdvdnav/6.1.1/libdvdnav-6.1.1.tar.bz2
+      md5: 46c46cb0294fbd1fcb8a0181818dad15
+
+build: |
+    ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/libdvdnav-6.1.1 && make
+
+install: |
+    make install
+
+required:
+    - libdvdread

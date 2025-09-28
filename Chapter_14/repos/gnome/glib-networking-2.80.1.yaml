@@ -1,0 +1,32 @@
+package:
+    name: glib-networking
+    version: 2.80.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.gnome.org/sources/glib-networking/2.80/glib-networking-2.80.1.tar.xz
+      md5: 405e6c058723217a1307ba8415615f9d
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D libproxy=disabled
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - glib2
+    - gnutls
+
+recommended:
+    - gsettings-desktop-schemas
+
+optional:
+    - libepoxy

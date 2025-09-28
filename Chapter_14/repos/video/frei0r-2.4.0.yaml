@@ -1,0 +1,27 @@
+package:
+    name: frei0r
+    version: 2.4.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/dyne/frei0r/archive/v2.4.0/frei0r-2.4.0.tar.gz
+      md5: 4e994bb0d2c3436a6525d52c17f018b0
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+      -D CMAKE_POLICY_VERSION_MINIMUM=3.5 -D WITHOUT_OPENCV=TRUE -W no-dev
+
+build: |
+    cmake --build Ybuild
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - gavl
+
+optional:
+    - doxygen
+    - opencv

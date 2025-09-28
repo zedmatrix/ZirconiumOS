@@ -1,0 +1,33 @@
+package:
+    name: libtiff
+    version: 4.7.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.osgeo.org/libtiff/tiff-4.7.0.tar.gz
+      md5: 3a0fa4a270a4a192b08913f88d0cfbdd
+      rename: true
+
+prepare: |
+    cmake -B YBUILD -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_POLICY_VERSION_MINIMUM=3.5 -G Ninja \
+        -D CMAKE_INSTALL_DOCDIR=/usr/share/doc/libtiff-4.7.0
+
+build: |
+    ninja -C YBUILD
+
+check: |
+    ninja -C YBUILD test
+
+install: |
+    ninja -C YBUILD install
+
+recommended:
+    - cmake
+
+optional:
+    - freeglut
+    - libjpeg
+    - sphinx
+    - libwebp

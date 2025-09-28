@@ -1,0 +1,29 @@
+package:
+    name: x265
+    version: 4.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+     - url: https://bitbucket.org/multicoreware/x265_git/downloads/x265_4.1.tar.gz
+       md5: f1c3c80248d8574378a4aac8f374f6de
+       rename: true
+
+prepare: |
+    sed -r '/cmake_policy.*(0025|0054)/d' -i source/CMakeLists.txt &&
+    cmake -B YBUILD -S source -D CMAKE_INSTALL_PREFIX=/usr \
+        -D GIT_ARCHETYPE=1 -D CMAKE_POLICY_VERSION_MINIMUM=3.5 -W no-dev
+
+build: |
+    cmake --build YBUILD
+
+install: |
+    cmake --install YBUILD &&
+    rm -vf /usr/lib/libx265.a
+
+required:
+    - cmake
+
+recommended:
+    - nasm

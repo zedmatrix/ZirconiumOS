@@ -1,0 +1,41 @@
+package:
+    name: pulseaudio
+    version: 17.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-17.0.tar.xz
+      md5: c4a3596a26ff4b9dcd0c394dd1d4f8ee
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D database=gdbm \
+        -D doxygen=false -D bluez5=disabled -D tests=false
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install &&
+    rm /usr/share/dbus-1/system.d/pulseaudio-system.conf
+
+required:
+    - libsndfile
+
+recommended:
+    - alsa-lib
+    - dbus
+    - glib2
+    - speex
+
+optional:
+    - avahi
+    - bluez
+    - doxygen
+    - fftw
+    - gst-plugins-base
+    - gtk3
+    - libsamplerate
+    - sbc
+    - valgrind

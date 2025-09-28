@@ -1,0 +1,46 @@
+package:
+    name: gst-plugins-base
+    version: 1.26.6
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.26.6.tar.xz
+      md5: 40fa391fd16c379f8dd4215225f1564d
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release --wrap-mode=nodownload
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - gstreamer
+
+recommended:
+    - alsa-lib
+    - cdparanoia
+    - gobject-introspection
+    - glib2
+    - iso-codes
+    - libgudev
+    - libjpeg-turbo
+    - libogg
+    - libvorbis
+    - libpng
+    - mesa
+    - pango
+    - wayland-protocols
+    - libX11
+    - mpg123
+
+optional:
+    - graphene
+    - gtk3
+    - opus
+    - sdl2
+    - valgrind

@@ -1,0 +1,31 @@
+package:
+    name: libass
+    version: 0.17.4
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/libass/libass/releases/download/0.17.4/libass-0.17.4.tar.xz
+      md5: 10963e702850fd888cb270abcbe852c3
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+required:
+    - freetype2
+    - fribidi
+
+recommended:
+    - fontconfig
+    - nasm
+
+optional:
+    - harfbuzz

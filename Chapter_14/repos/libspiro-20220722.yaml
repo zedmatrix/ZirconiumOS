@@ -1,0 +1,20 @@
+package:
+    name: libspiro
+    version: 20220722
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/fontforge/libspiro/releases/download/20220722/libspiro-dist-20220722.tar.gz
+      md5: c21f86e6c1ad65ed4cb1f754f6d7563c
+
+build: |
+    ./configure --prefix=/usr --disable-static &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install

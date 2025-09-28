@@ -1,0 +1,26 @@
+package:
+    name: flac
+    version: 1.5.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/xiph/flac/releases/download/1.5.0/flac-1.5.0.tar.xz
+      md5: 0bb45bcf74338b00efeec121fff27367
+
+build: |
+    ./configure --prefix=/usr --disable-thorough-tests --docdir=/usr/share/doc/flac-1.5.0 &&
+    make
+
+check: |
+    make check
+
+install: |
+    make install
+
+optional:
+    - libogg
+    - docbook-utils
+    - doxygen
+    - valgrind

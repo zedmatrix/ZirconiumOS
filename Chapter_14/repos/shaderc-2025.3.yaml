@@ -1,0 +1,29 @@
+package:
+    name: shaderc
+    version: 2025.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/google/shaderc/archive/v2025.3/shaderc-2025.3.tar.gz
+      md5: c110401f6e36ee234008b4cabe991ee0
+
+prepare: |
+    sed '/build-version/d' -i glslc/CMakeLists.txt &&
+    sed '/third_party/d' -i CMakeLists.txt &&
+    sed 's|SPIRV|glslang/&|' -i libshaderc_util/src/compiler.cc &&
+    echo '"2025.3"' > glslc/src/build-version.inc &&
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release  \
+      -D SHADERC_SKIP_TESTS=ON -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+install: |
+    install -vm755 Ybuild/glslc/glslc /usr/bin
+
+required:
+    - cmake
+    - glslang
+    - spirv-tools

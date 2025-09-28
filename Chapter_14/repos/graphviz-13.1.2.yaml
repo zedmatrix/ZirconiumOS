@@ -1,0 +1,49 @@
+package:
+    name: graphviz
+    version: 13.1.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources: 
+    - url: https://gitlab.com/graphviz/graphviz/-/archive/13.1.2/graphviz-13.1.2.tar.bz2
+      md5: f069bffc04da2a9af9ae1eaa1abe9dd4
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D CMAKE_SKIP_INSTALL_RPATH=ON
+
+build: |
+    sed -i '/GZIP/s/:.*$/=/' Ybuild/CMakeCache.txt &&
+    cmake --build Ybuild
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake
+
+recommended:
+    - pango
+    - cairo
+    - fontconfig
+    - libpng
+
+optional:
+    - aalib
+    - cups
+    - qt6
+    - webkitgtk
+    - libjpeg
+    - libwebp
+    - ghostscript
+    - librsvg
+    - poppler
+    - freeglut
+    - swig
+    - guile
+    - openjdk
+    - lua
+    - php
+    - ruby
+    - tk
+ 

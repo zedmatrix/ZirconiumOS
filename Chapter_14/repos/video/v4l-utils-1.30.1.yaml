@@ -1,0 +1,33 @@
+package:
+    name: v4l-utils
+    version: 1.30.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.linuxtv.org/downloads/v4l-utils/v4l-utils-1.30.1.tar.xz
+      md5: 5f85c197e5dd348b2ce49b7007ea63d8
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D gconv=disabled -D doxygen-doc=disabled
+
+build: |
+    ninja -C ybuild
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    install -vm755 ybuild/contrib/test/{v4l2gl,v4l2grab} /usr/bin/
+
+required:
+    - alsa-lib
+    - glu
+    - libjpeg-turbo
+
+optional:
+    - doxygen
+    - qt6
+    - sdl2
+    - llvm

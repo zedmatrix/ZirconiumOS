@@ -1,0 +1,35 @@
+package:
+    name: libvdpau-va-gl
+    version: 0.4.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/i-rinat/libvdpau-va-gl/archive/v0.4.2/libvdpau-va-gl-0.4.2.tar.gz
+      md5: 8db21dcfd5cd14c6ec51b992e20369dc
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -D CMAKE_BUILD_TYPE=Release -W no-dev
+
+build: |
+    cmake --build Ybuild
+
+install: |
+    cmake --install Ybuild
+
+final: |
+    grep -qxF 'export VDPAU_DRIVER=va_gl' /etc/ybuild.d/0-paths.sh \
+    || echo 'export VDPAU_DRIVER=va_gl' >> /etc/ybuild.d/0-paths.sh
+
+required:
+    - cmake
+    - libvdpau
+    - libva
+    - mesa
+
+optional:
+    - doxygen
+    - graphviz
+    - texlive

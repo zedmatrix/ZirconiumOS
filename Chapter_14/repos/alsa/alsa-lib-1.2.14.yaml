@@ -1,0 +1,30 @@
+package:
+    name: alsa-lib
+    version: 1.2.14
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.14.tar.bz2
+      md5: d0efd7930da31f0034baddc0b993fa03
+    - url: https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.14.tar.bz2
+      md5: 72c8bf33f1e0befd80e5e467e74f6b33
+
+prepare: |
+    sed 's/playmidi1//' -i test/Makefile.am && autoreconf -fi
+
+build: |
+    ./configure && make
+
+check: |
+    make check
+
+install: |
+    make install
+
+final: |
+    tar -C /usr/share/alsa --strip-components=1 -xf ${YSRC}/alsa-ucm-conf-1.2.14.tar.bz2
+
+optional:
+    - doxygen

@@ -1,0 +1,23 @@
+package:
+    name: libcdio-paranoia
+    version: 10.2+2.0.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://ftp.gnu.org/gnu/libcdio/libcdio-paranoia-10.2+2.0.2.tar.bz2
+      md5:
+
+build: |
+    ./configure --prefix=/usr --disable-static && make
+
+check: |
+    make check
+
+install: |
+    make install
+
+optional:
+    - libcddb
+    - libcdio

@@ -1,0 +1,44 @@
+package:
+    name: wireplumber
+    version: 0.5.11
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/0.5.11/wireplumber-0.5.11.tar.bz2
+      md5: ff42bf142bac7e2b18c4389683e8e1ae
+
+prepare: |
+    meson setup ybuild --prefix=/usr --buildtype=release -D system-lua=true
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+final: |
+    mv -v /usr/share/doc/wireplumber{,-0.5.11} &&
+    rm -vf /etc/xdg/autostart/pulseaudio.desktop &&
+    rm -vf /etc/xdg/Xwayland-session.d/00-pulseaudio-x11 &&
+    sed -e '$a autospawn = no' -i /etc/pulse/client.conf &&
+    systemctl enable --global pipewire.socket &&
+    systemctl enable --global pipewire-pulse.socket &&
+    systemctl enable --global wireplumber
+
+required:
+    - glib2
+    - pipewire
+    - systemd-pam
+
+recommended:
+    - lua
+
+optional:
+    - doxygen
+    - lxml
+    - sphinx

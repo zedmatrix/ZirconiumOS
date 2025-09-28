@@ -1,0 +1,35 @@
+package:
+    name: libplacebo
+    version: 7.351.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/haasn/libplacebo/archive/v7.351.0/libplacebo-7.351.0.tar.gz
+      md5: 2bd64e3591e4689b29669cd915aa22a4
+
+prepare: |
+    sed -e '204a\    tree = ET.parse(xmlfile)' \
+        -e 's/VkXML(ET.parse(xmlfile))/VkXML(tree.getroot())/' -i src/vulkan/utils_gen.py &&
+    meson setup ybuild --prefix=/usr --buildtype=release -D tests=true -D demos=false
+
+build: |
+    ninja -C ybuild
+
+check: |
+    ninja -C ybuild test
+
+install: |
+    ninja -C ybuild install
+
+required:
+    - glad
+
+recommended:
+    - glslang
+    - vulkan-loader
+
+optional:
+    - lcms2
+    - libunwind

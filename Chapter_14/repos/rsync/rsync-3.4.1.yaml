@@ -1,0 +1,41 @@
+package:
+    name: rsync
+    version: 3.4.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.samba.org/ftp/rsync/src/rsync-3.4.1.tar.gz
+      md5: 04ce67866db04fd7a1cde0b78168406e
+
+prepare: |
+    getent group rsyncd >/dev/null || groupadd -g 48 rsyncd
+    id rsyncd >/dev/null 2>&1 || useradd -c "rsyncd Daemon" -m -d /home/rsync -g rsyncd -s /bin/false -u 48 rsyncd
+
+    [ ! $(getent group rsyncd >/dev/null) ] || groupadd -g 48 rsyncd &&
+    [ ! $(id rsyncd >/dev/null 2>&1) ] || useradd -c "rsyncd Daemon" -m -d /home/rsync -g rsyncd -s /bin/false -u 48 rsyncd
+
+build: |
+    ./configure --prefix=/usr --disable-xxhash --without-included-zlib &&
+    make
+
+check: |
+    sed -i '/typedef/d' wildtest.c && make check
+
+install: |
+    make install
+
+final: |
+    install -vm644 ${YSRC}/rsyncd.conf /etc/rsyncd.conf &&
+    install -o rsyncd -g rsyncd -vm644 ${YSRC}/welcome.msg /home/rsync/welcome.msg &&
+    install -vm644 ${YSRC}/rsyncd.service /usr/lib/systemd/system/ &&
+    install -vm644 ${YSRC}/rsyncdat.service /usr/lib/systemd/system/rsyncd@.service &&
+    install -vm644 ${YSRC}/rsyncd.socket /usr/lib/systemd/system/ &&
+    systemctl enable rsyncd.service
+
+recommended:
+    - popt
+
+optional:
+    - doxygen

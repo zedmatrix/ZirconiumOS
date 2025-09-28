@@ -1,0 +1,33 @@
+package:
+    name: libcanberra
+    version: 0.30
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz
+      md5: 34cb7e4430afaf6f447c4ebdb9b42072
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/blfs/svn/libcanberra-0.30-wayland-1.patch
+      md5: 63b8aa3272610d39c3114ffee292f1bc
+
+build: |
+    ./configure --prefix=/usr --disable-oss &&
+    make
+
+install: |
+    make docdir=/usr/share/doc/libcanberra-0.30 install
+
+required:
+    - libvorbis
+
+recommended:
+    - alsa-lib
+    - gstreamer
+    - gtk3
+
+optional:
+    - pulseaudio
+    - sound-theme-freedesktop

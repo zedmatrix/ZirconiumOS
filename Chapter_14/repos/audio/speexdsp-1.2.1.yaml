@@ -1,0 +1,24 @@
+package:
+    name: speexdsp
+    version: 1.2.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.xiph.org/releases/speex/speexdsp-1.2.1.tar.gz
+      md5: e6eb5ddef743a362c8018f260b91dca5
+
+build: |
+    ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/speexdsp-1.2.1 &&
+    make
+
+install: |
+    make install
+
+required:
+    - libogg
+    - speex
+
+optional:
+    - valgrind

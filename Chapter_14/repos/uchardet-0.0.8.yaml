@@ -1,0 +1,26 @@
+package:
+    name: uchardet
+    version: 0.0.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz
+      md5: 9e267be7aee81417e5875086dd9d44fd
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -D BUILD_STATIC=OFF -W no-dev
+
+build: |
+    cmake --build Ybuild
+
+check: |
+    cd Ybuild && make test
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - cmake
