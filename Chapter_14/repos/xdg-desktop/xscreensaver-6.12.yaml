@@ -1,0 +1,40 @@
+package:
+    name: xscreensaver
+    version: 6.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.jwz.org/xscreensaver/xscreensaver-6.12.tar.gz
+      md5: d8ee2ef9b90a9a54bda2200a8aa82c5d
+
+build: |
+    ./configure --prefix=/usr --with-systemd &&
+    make
+
+install: |
+    make install &&
+    install -vm644 ${YSRC}/xscreensaver.pam /etc/pam.d/xscreensaver
+
+required:
+    - gtk3
+    - libX11
+    - libxcrypt
+    - libXext
+    - libXft
+    - libXi
+    - libXinerama
+    - libXmu
+    - libXrandr
+    - libXt
+    - linux-pam
+    - systemd
+
+recommended:
+    - glu
+
+optional:
+    - gdm
+    - ffmpeg
+    - mitkrb5

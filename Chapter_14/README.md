@@ -165,3 +165,4 @@ Packages are grouped by category, but installation order is preserved.
 - `startup-notification` – Application startup feedback.  
 - `openbox` – Lightweight window manager.  
 - `icewm` – Lightweight desktop environment.  
+- `xscreensaver` - Screen saver and locker for the X Window System.  
