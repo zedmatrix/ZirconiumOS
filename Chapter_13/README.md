@@ -79,8 +79,8 @@ Packages are grouped by category but installation order is preserved.
 
 ### Xorg Fonts
 - *(script: `xorg-font.sh` – builds font packages batch)*  
-> `font-util, encodings, font-alias, font-adobe-utopia-type1, font-bh-ttf`
-> `font-bh-type1, font-ibm-type1, font-misc-ethiopic, font-xfree86-type1`
+> `font-util, encodings, font-alias, font-adobe-utopia-type1, font-bh-ttf`  
+> `font-bh-type1, font-ibm-type1, font-misc-ethiopic, font-xfree86-type1`  
 
 ---
 
@@ -130,8 +130,8 @@ Packages are grouped by category but installation order is preserved.
 
 ### Legacy Fonts
 - *(script: `xorg-legacy-font.sh` – builds legacy Xorg fonts)*  
-> `bdftopcf, font-adobe-100dpi, font-adobe-75dpi, font-jis-misc`
-> `font-daewoo-misc, font-isas-misc, font-misc-misc`
+> `bdftopcf, font-adobe-100dpi, font-adobe-75dpi, font-jis-misc`  
+> `font-daewoo-misc, font-isas-misc, font-misc-misc`  
 
 ---
 
