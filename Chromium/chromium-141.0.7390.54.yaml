@@ -1,0 +1,78 @@
+package:
+    name: chromium
+    version: 141.0.7390.54
+    rel: 1
+    archive: false
+    delete: false
+
+description:
+    - info-url: https://www.linuxfromscratch.org/blfs/view/8.2/xsoft/chromium.html
+      title: "Chromium is an open-source browser project aims to build a safer, faster, and more stable way for all users to experience the web."
+
+sources:
+    - url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-141.0.7390.54.tar.xz
+      sha256: 7b4dabb601e19ccf9746d65ee6ade9c297bc2654dad417b3cf400a67119956ec
+      md5: 5594b39faa0543ea1854d72cf8b799b9
+      size: 7312416
+
+extract:
+    - file: chromium-$pkgver.tar.xz
+      pkgver: 141.0.7390.54
+      size: 25
+      command: "tar -xf"
+
+required: ['libpng', 'libwebp', 'fontconfig', 'freetype', 'harfbuzz', 'libffi', 'libxslt', 'libxml2', 'libjpeg-turbo', 'zlib']
+recommend: ['cups', 'mitkrb5', '']
+optional: ['','','','']
+
+prepare: |
+    echo "llvmorg-21-init-16348-gbd809ffb-17" > third_party/llvm-build/Release+Asserts/cr_build_revision &&
+    python3 tools/gn/bootstrap/bootstrap.py --gn-gen-args "$(cat ${YSRC}/gn_config.bash)" &&
+    mkdir -p out/Release;
+    cp -v ${YSRC}/gn_config.bash out/Release/args.gn &&
+    out/Release/gn gen out/Release
+
+printvars: |
+    out/Release/gn args --list out/Release
+
+build: |
+    ninja -C out/Release chrome chrome_sandbox chromedriver
+
+install: |
+    install -vDm755  out/Release/chrome /usr/lib/chromium/chromium;
+    install -vDm4755 out/Release/chrome_sandbox /usr/lib/chromium/chrome-sandbox;
+    install -vDm755  out/Release/chromedriver /usr/lib/chromium/chromedriver;
+    install -vDm755  out/Release/chrome_crashpad_handler /usr/lib/chromium/chrome_crashpad_handler;
+    install -vm644 out/Release/vk_swiftshader_icd.json /usr/lib/chromium/vk_swiftshader_icd.json;
+
+    export install_files=(libEGL.so libGLESv2.so libvk_swiftshader.so libvulkan.so.1) &&
+    install -vm755 "${install_files[@]/#/out/Release/}" "/usr/lib/chromium/"
+
+    [ ! -L /usr/bin/chromium ] && ln -svf /usr/lib/chromium/chromium /usr/bin/chromium;
+    [ ! -L /usr/bin/chromedriver ] && ln -svf /usr/lib/chromium/chromedriver /usr/bin/chromedriver;
+
+    install -vDm644 out/Release/gen/content/content_resources.pak /usr/lib/chromium/;
+    install -vDm644 out/Release/icudtl.dat /usr/lib/chromium/icudtl.dat;
+    install -vDm644 out/Release/{*.pak,*.bin} /usr/lib/chromium/;
+
+    sed -i -e "s/@@MENUNAME@@/Chromium/g" -e "s/@@PACKAGE@@/chromium/g" -e "s/@@USR_BIN_SYMLINK_NAME@@/chromium/g" \
+        chrome/installer/linux/common/desktop.template chrome/app/resources/manpage.1.in;
+
+    install -vDm644 chrome/installer/linux/common/desktop.template /usr/share/applications/chromium.desktop;
+    install -vDm644 chrome/app/resources/manpage.1.in /usr/share/man/man1/chromium.1;
+
+    cp -av out/Release/locales /usr/lib/chromium/;
+    chown -Rv root:root /usr/lib/chromium/locales;
+
+    for size in 16 32; do
+        install -vDm644 "chrome/app/theme/default_100_percent/chromium/product_logo_$size.png" \
+            "/usr/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+    done;
+
+    for size in 24 48 64 128 256; do
+        install -vDm644 "chrome/app/theme/chromium/product_logo_$size.png" \
+        "/usr/share/icons/hicolor/${size}x${size}/apps/chromium.png"
+    done
+
+    install -vDm644 "chrome/app/theme/chromium/product_logo_22_mono.png" \
+        "/usr/share/icons/hicolor/22x22/apps/chromium.png"
