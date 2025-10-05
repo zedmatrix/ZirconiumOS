@@ -1,0 +1,16 @@
+package:
+    name: poppler-data
+    version: 0.4.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
+      md5: 67ee4a40aa830b1f6e2560ce5f6471ba
+
+install: |
+    make prefix=/usr install
+
+required:
+    - poppler

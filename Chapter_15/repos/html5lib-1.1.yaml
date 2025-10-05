@@ -1,0 +1,20 @@
+package:
+    name: html5lib
+    version: 1.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://files.pythonhosted.org/packages/source/h/html5lib/html5lib-1.1.tar.gz
+      md5: 6748742e2ec4cb99287a6bc82bcfe2b0
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user html5lib
+
+required:
+    - six
+    - webencodings

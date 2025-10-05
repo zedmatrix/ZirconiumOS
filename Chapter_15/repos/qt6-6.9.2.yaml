@@ -1,0 +1,70 @@
+package:
+    name: qt6
+    version: 6.9.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://download.qt.io/archive/qt/6.9/6.9.2/single/qt-everywhere-src-6.9.2.tar.xz
+      md5: 78fe69ae8049f6b0139ceaa28e643f53
+
+prepare: |
+    mkdir -pv /opt/qt-6.9.2;
+    ln -sfnv qt-6.9.2 /opt/qt6;
+    ./configure -prefix /opt/qt6 -sysconfdir /etc/xdg -dbus-linked -openssl-linked -system-sqlite \
+        -nomake examples -no-rpath -no-sbom -journald -skip qt3d -skip qtquick3dphysics -skip qtwebengine
+
+build: |
+    ninja
+
+install: |
+    ninja install &&
+    install -v -Dm644 qttools/src/assistant/assistant/images/assistant-128.png /usr/share/pixmaps/assistant-qt6.png &&
+    install -v -Dm644 qttools/src/designer/src/designer/images/designer.png /usr/share/pixmaps/designer-qt6.png &&
+    install -v -Dm644 qttools/src/linguist/linguist/images/icons/linguist-128-32.png /usr/share/pixmaps/linguist-qt6.png &&
+    install -v -Dm644 qttools/src/qdbus/qdbusviewer/images/qdbusviewer-128.png /usr/share/pixmaps/qdbusviewer-qt6.png &&
+    install -vm644 ${YSRC}/assistant-qt6.desktop /usr/share/applications/assistant-qt6.desktop &&
+    install -vm644 ${YSRC}/designer-qt6.desktop /usr/share/applications/designer-qt6.desktop &&
+    install -vm644 ${YSRC}/linguist-qt6.desktop /usr/share/applications/linguist-qt6.desktop &&
+    install -vm644 ${YSRC}/qdbusviewer-qt6.desktop /usr/share/applications/qdbusviewer-qt6.desktop
+
+final: |
+    find /opt/qt6/ -name \*.prl -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
+    printf "/opt/qt6/lib" >> /etc/ld.so.conf
+
+
+required:
+    - libX11
+    - alsa-lib
+    - cups
+    - glib2
+    - gst-plugins-base
+    - harfbuzz
+recommended:
+    - make-ca
+    - double-conversion
+    - icu
+    - jasper
+    - libjpeg-turbo
+    - libinput
+    - libmng
+    - libpng
+    - libtiff
+    - libwebp
+    - libxkbcommon
+    - mesa
+    - mtdev
+    - wayland
+    - xcb-util
+
+optional:
+    - bluez
+    - gtk3
+    - ibus
+    - llvm
+    - libproxy
+    - mitkrb5
+    - pciutils
+    - pulseaudio
+    - sdl2

@@ -1,0 +1,23 @@
+package:
+    name: OpenJDK
+    version: 24.0.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-24.0.2/OpenJDK-24.0.2+12-x86_64-bin.tar.xz
+      md5: 040761706a52d919e7f984d9a4a70b48
+
+install: |
+    install -vdm755 /opt/OpenJDK-24.0.2-bin &&
+    mv -v * /opt/OpenJDK-24.0.2-bin &&
+    chown -R root:root /opt/OpenJDK-24.0.2-bin &&
+    ln -sfn OpenJDK-24.0.2-bin /opt/jdk
+
+optional:
+    - alsa-lib
+    - cups
+    - giflib
+    - lcms2
+    - libX11

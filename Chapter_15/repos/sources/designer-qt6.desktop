@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Qt6 Designer
+GenericName=Interface Designer
+Comment=Design GUIs for Qt6 applications
+Exec=/opt/qt6/bin/designer
+Icon=designer-qt6.png
+MimeType=application/x-designer;
+Terminal=false
+Encoding=UTF-8
+Type=Application
+Categories=Qt;Development;

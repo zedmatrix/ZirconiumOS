@@ -1,0 +1,17 @@
+package:
+    name: zip
+    version: 30
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://downloads.sourceforge.net/infozip/zip30.tar.gz
+      md5: 7b74551e63f8ee6aab6fbc86676c0d37
+      rename: true
+
+build: |
+    make -f unix/Makefile generic CC="gcc -std=gnu89"
+
+install: |
+    make prefix=/usr MANDIR=/usr/share/man/man1 -f unix/Makefile install

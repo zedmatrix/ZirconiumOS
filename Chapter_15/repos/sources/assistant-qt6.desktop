@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Qt6 Assistant
+Comment=Shows Qt6 documentation and examples
+Exec=/opt/qt6/bin/assistant
+Icon=assistant-qt6.png
+Terminal=false
+Encoding=UTF-8
+Type=Application
+Categories=Qt;Development;Documentation;

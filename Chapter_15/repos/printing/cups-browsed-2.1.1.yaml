@@ -1,0 +1,32 @@
+package:
+    name: cups-browsed
+    version: 2.1.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/OpenPrinting/cups-browsed/releases/download/2.1.1/cups-browsed-2.1.1.tar.xz
+      md5: 293948973ebfc7ef4d5d8242d5733181
+
+prepare: |
+    ./configure --prefix=/usr --with-cups-rundir=/run/cups --without-rcdir \
+        --disable-static --disable-ghostscript --docdir=/usr/share/doc/cups-browsed-2.1.1
+
+build: |
+    make
+
+install: |
+    make install
+
+final: |
+    install -v -m644 daemon/cups-browsed.service /lib/systemd/system/cups-browsed.service &&
+    systemctl enable cups-browsed
+
+required:
+    - avahi
+    - libcupsfilters
+    - libppd
+
+optional:
+    - openldap

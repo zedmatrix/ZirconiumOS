@@ -1,0 +1,49 @@
+package:
+    name: cups
+    version: 2.4.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/OpenPrinting/cups/releases/download/v2.4.12/cups-2.4.12-source.tar.gz
+      md5: 1f9281c661b95acc7925a220919210e2
+
+prepare: |
+    useradd -c "Print Service User" -d /var/spool/cups -g lp -s /bin/false -u 9 lp &&
+    groupadd -g 19 lpadmin &&
+    sed -i 's#@CUPS_HTMLVIEW@#firefox#' desktop/cups.desktop.in
+
+build: |
+    ./configure --libdir=/usr/lib --with-rundir=/run/cups --with-system-groups=lpadmin \
+        --with-docdir=/usr/share/cups/doc-2.4.12 &&
+    make
+
+check: |
+    LC_ALL=C make -k check
+
+install: |
+    make install &&
+    install -vm644 ${YSRC}/cups.pam /etc/pam.d/cups &&
+    systemctl enable cups
+
+final: |
+    ln -svnf ../cups/doc-2.4.12 /usr/share/doc/cups-2.4.12 &&
+    echo "ServerName /run/cups/cups.sock" > /etc/cups/client.conf
+
+required:
+    - gnutls
+
+recommended:
+    - colord
+    - dbus
+    - libusb
+    - linux-pam
+    - xdg-utils
+
+optional:
+    - avahi
+    - libpaper
+    - php
+    - cups-filters
+    - gutenprint

@@ -1,0 +1,29 @@
+package:
+    name: apache-ant
+    version: 1.10.15
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://archive.apache.org/dist/ant/source/apache-ant-1.10.15-src.tar.xz
+      md5: 778c68be3787dfebc249de45598f63b2
+
+prepare: |
+    export JAVA_HOME=/opt/jdk;
+    ./bootstrap.sh &&
+    bootstrap/bin/ant -f fetch.xml -Ddest=optional
+
+build: |
+    export JAVA_HOME=/opt/jdk;
+    ./build.sh -Ddist.dir=$PWD/ant-1.10.15 dist
+
+install: |
+    cp -rv ant-1.10.15 /opt/ &&
+    chown -R root:root /opt/ant-1.10.15 &&
+    ln -sfv ant-1.10.15 /opt/ant;
+    install -vm755 ${YSRC}/ant.sh /etc/profile.d/ant.sh
+
+required:
+    - jdk
+    - glib2

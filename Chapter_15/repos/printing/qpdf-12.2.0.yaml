@@ -1,0 +1,34 @@
+package:
+    name: qpdf
+    version: 12.2.0
+    rel: 1
+    archive: false
+    delete: false
+
+sources:
+    - url: https://github.com/qpdf/qpdf/releases/download/v12.2.0/qpdf-12.2.0.tar.gz
+      md5: f10f5b3a0635e9fd2f305880c5cd8534
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D BUILD_STATIC_LIBS=OFF \
+      -D CMAKE_INSTALL_DOCDIR=/usr/share/doc/qpdf-12.2.0
+
+build: |
+    cmake --build Ybuild
+
+check: |
+    ctest --test-dir Ybuild
+
+install: |
+    cmake --install Ybuild
+
+required:
+    - libjpeg-turbo
+
+optional:
+    - ghostscript
+    - gnutls
+    - libtiff
+    - sphinx
+    - sphinx_rtd_theme
+    - texlive

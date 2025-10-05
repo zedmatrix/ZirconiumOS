@@ -1,0 +1,40 @@
+package:
+    name: mupdf
+    version: 1.26.8
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.mupdf.com/downloads/archive/mupdf-1.26.8-source.tar.gz
+      md5: 260455755343d1ce92300cfff3c71c94
+
+prepare: |
+    cp -v ${YSRC}/mupdf.make user.make
+
+build: |
+    export XCFLAGS=-fPIC &&
+    make build=release shared=yes verbose=yes
+
+install: |
+    make prefix=/usr shared=yes docdir=/usr/share/doc/mupdf-1.26.8 install
+
+final: |
+    ln -sfv libmupdf.so.26.8 /usr/lib/libmupdf.so.26 &&
+    ln -sfv libmupdf.so.26 /usr/lib/libmupdf.so &&
+    chmod 755 /usr/lib/libmupdf.so.26.8 &&
+    ln -sfv mupdf-x11 /usr/bin/mupdf
+
+required:
+    - libX11
+    - libXext
+
+recommended:
+    - freeglut
+    - harfbuzz
+    - libjpeg-turbo
+    - openjpeg
+    - curl
+
+optional:
+    - xdg-utils

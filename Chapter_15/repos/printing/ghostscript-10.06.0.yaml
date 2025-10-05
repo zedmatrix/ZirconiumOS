@@ -1,0 +1,55 @@
+package:
+    name: ghostscript
+    version: 10.06.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10060/ghostscript-10.06.0.tar.xz
+      md5: de467eb7ceb58c0b41537fb28ea2eb40
+    - url: https://downloads.sourceforge.net/gs-fonts/ghostscript-fonts-std-8.11.tar.gz
+      md5: 6865682b095f8c4500c54b285ff05ef6
+    - url: https://downloads.sourceforge.net/gs-fonts/gnu-gs-fonts-other-6.0.tar.gz
+      md5: 33457d3f37de7ef03d2eea05a9e6aa4f
+
+prepare: |
+    rm -rf freetype lcms2mt jpeg libpng openjpeg zlib &&
+    ./configure --prefix=/usr --disable-compile-inits --with-system-libtiff \
+        CFLAGS="${CFLAGS:--g -O3} -fPIC"
+
+build: |
+    make && make so
+
+install: |
+    make install && make soinstall &&
+    install -v -m644 base/*.h /usr/include/ghostscript &&
+    ln -sfvn ghostscript /usr/include/ps &&
+    mv -v /usr/share/doc/ghostscript/10.06.0 /usr/share/doc/ghostscript-10.06.0 &&
+    rmdir /usr/share/doc/ghostscript &&
+    cp -r examples/ -T /usr/share/ghostscript/10.06.0/examples
+
+final: |
+    tar -xvf ${YSRC}/ghostscript-fonts-std-8.11.tar.gz -C /usr/share/ghostscript --no-same-owner &&
+    tar -xvf ${YSRC}/gnu-gs-fonts-other-6.0.tar.gz -C /usr/share/ghostscript --no-same-owner &&
+    fc-cache -v /usr/share/ghostscript/fonts/
+
+required:
+    - cups
+    - fontconfig
+    - freetype2
+    - lcms2
+    - libjpeg-turbo
+    - libpng
+    - libtiff
+    - openjpeg
+    - libwebp
+
+recommended:
+    - gtk3
+    - zlib
+    - libX11
+
+optional:
+    - libidn
+    - libpaper

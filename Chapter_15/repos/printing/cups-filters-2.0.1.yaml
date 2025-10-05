@@ -1,0 +1,27 @@
+package:
+    name: cups-filters
+    version: 2.0.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/OpenPrinting/cups-filters/releases/download/2.0.1/cups-filters-2.0.1.tar.xz
+      md5: b40d0f135af414666e1c3917983a1bb3
+
+prepare: |
+    sed -i '/proc_func)()/s/()/(FILE*, FILE*, void*)/' filter/foomatic-rip/process.h &&
+    ./configure --prefix=/usr --disable-static --disable-ghostscript --docdir=/usr/share/doc/cups-filters-2.0.1
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - libcupsfilters
+    - libppd
+
+optional:
+    - cups-browsed

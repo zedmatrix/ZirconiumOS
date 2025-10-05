@@ -1,0 +1,38 @@
+package:
+    name: node-js
+    version: 22.19.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://nodejs.org/dist/v22.19.0/node-v22.19.0.tar.xz
+      md5: b3123ecaaac5eb0b4002149a443c3bbb
+
+prepare: |
+    ./configure --prefix=/usr --shared-brotli --shared-cares --shared-libuv \
+        --shared-openssl --shared-nghttp2 --shared-zlib --with-intl=system-icu
+
+build: |
+    make
+
+check: |
+    make test-only
+
+install: |
+    make install &&
+    ln -sf node /usr/share/doc/node-22.19.0
+
+required:
+    - which
+
+recommended:
+    - brotli
+    - c-ares
+    - icu
+    - libuv
+    - nghttp2
+
+optional:
+    - http-parser
+    - npm

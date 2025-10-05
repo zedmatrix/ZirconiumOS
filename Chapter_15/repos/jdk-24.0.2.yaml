@@ -1,0 +1,68 @@
+package:
+    name: jdk
+    version: 24.0.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/openjdk/jdk24u/archive/jdk-24.0.2-ga.tar.gz
+      md5: 160e4f0de98c13fddba4f1dc0bad3615
+    - url: https://anduin.linuxfromscratch.org/BLFS/OpenJDK/OpenJDK-24.0.2/jtreg-7.5.1+1.tar.gz
+      md5: deb728d5f67a84adadd6025b9ad3252f
+
+prepare: |
+    tar -xf ${YSRC}/jtreg-7.5.1+1.tar.gz &&
+    find src -name *.*pp -exec sed -i 's/uabs(/g_uabs(/' {} \;
+
+build: |
+    unset JAVA_HOME &&
+    unset CLASSPATH &&
+    unset MAKEFLAGS &&
+    bash configure --enable-unlimited-crypto --disable-warnings-as-errors --with-stdc++lib=dynamic \
+        --with-giflib=system --with-harfbuzz=system --with-jtreg=$PWD/jtreg --with-lcms=system --with-libjpeg=system \
+        --with-libpng=system --with-zlib=system --with-version-build="12" --with-version-pre="" --with-version-opt="" \
+        --with-jobs=$(nproc) --with-cacerts-file=/etc/pki/tls/java/cacerts &&
+    make images
+
+check: |
+    export JT_JAVA=$(echo $PWD/build/*/jdk) &&
+    jtreg/bin/jtreg -jdk:$JT_JAVA -automatic -ignore:quiet -v1 test/jdk:tier1 test/langtools:tier1 &&
+    unset JT_JAVA
+
+install: |
+    install -vdm755 /opt/jdk-24.0.2+12 &&
+    cp -Rv build/*/images/jdk/* /opt/jdk-24.0.2+12 &&
+    chown -R root:root /opt/jdk-24.0.2+12 &&
+    for s in 16 24 32 48; do
+        install -vDm644 src/java.desktop/unix/classes/sun/awt/X11/java-icon${s}.png \
+            /usr/share/icons/hicolor/${s}x${s}/apps/java.png
+    done
+
+final: |
+    find /opt/jdk-24.0.2+12 -name *.debuginfo -delete;
+    ln -v -nsf jdk-24.0.2+12 /opt/jdk;
+    install -vm644 ${YSRC}/openjdk-java.desktop /usr/share/applications/openjdk-java.desktop
+    install -vm644 ${YSRC}/openjdk-jconsole.desktop /usr/share/applications/openjdk-jconsole.desktop
+
+required:
+    - alsa-lib
+    - cups
+    - libarchive
+    - which
+    - zip
+    - libX11
+
+recommended:
+    - make-ca
+    - giflib
+    - harfbuzz
+    - lcms2
+    - libjpeg-turbo
+    - libpng
+    - wget
+
+optional:
+    - git
+    - graphviz
+    - mercurial

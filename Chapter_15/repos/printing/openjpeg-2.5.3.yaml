@@ -1,0 +1,36 @@
+package:
+    name: openjpeg
+    version: 2.5.3
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/uclouvain/openjpeg/archive/v2.5.3/openjpeg-2.5.3.tar.gz
+      md5: 12ae257cb21738c41b5f6ca977d01081
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr -D BUILD_STATIC_LIBS=OFF
+
+build: |
+    cmake --build Ybuild
+
+check: |
+    cd Ybuild &&
+    git clone https://github.com/uclouvain/openjpeg-data.git --depth 1 &&
+    OPJ_DATA_ROOT=$PWD/openjpeg-data cmake -D BUILD_TESTING=ON .. &&
+    make && make test
+
+install: |
+    cmake --install Ybuild &&
+    cp -rv doc/man -T /usr/share/man
+
+required:
+    - cmake
+
+optional:
+    - git
+    - lcms2
+    - libpng
+    - libtiff
+    - doxygen

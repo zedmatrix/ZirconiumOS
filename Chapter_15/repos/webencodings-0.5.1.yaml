@@ -1,0 +1,16 @@
+package:
+    name: webencodings
+    version: 0.5.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://files.pythonhosted.org/packages/source/w/webencodings/webencodings-0.5.1.tar.gz
+      md5: 32f6e261d52e57bf7e1c4d41546d15b8
+
+build: |
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+    pip3 install --no-index --find-links dist --no-user webencodings

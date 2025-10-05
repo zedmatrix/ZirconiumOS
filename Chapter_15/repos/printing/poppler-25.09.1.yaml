@@ -1,0 +1,52 @@
+package:
+    name: poppler
+    version: 25.09.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://poppler.freedesktop.org/poppler-25.09.1.tar.xz
+      md5: 516eb3134032c824a9cd8e9d05987193
+
+prepare: |
+    cmake -B Ybuild -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr -D TESTDATADIR=$PWD/testfiles \
+      -D ENABLE_QT5=OFF -D ENABLE_QT6=OFF -D ENABLE_UNSTABLE_API_ABI_HEADERS=ON -G Ninja
+
+build: |
+    ninja -C Ybuild
+
+check: |
+    git clone --depth 1 https://gitlab.freedesktop.org/poppler/test.git testfiles &&
+    ninja -C Ybuild test
+
+install: |
+    ninja -C Ybuild install
+
+final: |
+    install -vdm755 /usr/share/doc/poppler-25.09.1 &&
+    cp -vr glib/reference/html /usr/share/doc/poppler-25.09.1
+
+required:
+    - cmake
+    - fontconfig
+    - glib2
+    - gobject-introspection
+
+recommended:
+    - boost
+    - cairo
+    - gpgmepp
+    - lcms2
+    - libjpeg-turbo
+    - libpng
+    - libtiff
+    - nss
+    - openjpeg
+
+optional:
+    - curl
+    - gdk-pixbuf
+    - git
+    - gtk-doc
+    - gtk3

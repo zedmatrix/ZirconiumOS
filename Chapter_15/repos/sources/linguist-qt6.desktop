@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Qt6 Linguist
+Comment=Add translations to Qt6 applications
+Exec=/opt/qt6/bin/linguist
+Icon=linguist-qt6.png
+MimeType=text/vnd.trolltech.linguist;application/x-linguist;
+Terminal=false
+Encoding=UTF-8
+Type=Application
+Categories=Qt;Development;
