@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/libtool/libtool-2.5.4.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/libtool/libtool-2.5.4.tar.xz
       md5: 22e0a29df8af5fdde276ea3a7d351d30
 
 build: |
