@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+pushd /ybuild
 
 yinstall="/ybuild/yaml-install.sh"
 
@@ -13,8 +15,4 @@ for pkg in ${package_list[@]}; do
     ${yinstall} ${pkg} || { echo "Error in ${pkg}. Exiting."; break; }
 done
 
-# This Should Not Be Necessary
-# if [[ -d "/ybuild/tmp" && $keep -eq 0 ]]; then
-#     echo "Cleaning Up /ybuild/tmp/"
-#     rm -rf /ybuild/tmp/*
-# fi
+popd

@@ -50,4 +50,8 @@ chapter6: chapter5
 chapter7: chapter6
 	cd $(YBUILD) && ./exec-lfs-chroot.sh 7-7-chapter-install.sh || exit 1
 
+chapter8: chapter7
+	cd $(YBUILD) && ./exec-lfs-chroot.sh install-ch8.sh || exit 1
+
+
 .PHONY: all chapter1 chapter2 chapter3 chapter5 chapter6 chapter7
