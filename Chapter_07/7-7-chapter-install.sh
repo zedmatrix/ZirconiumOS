@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+pushd /ybuild
 
 ./7-5-creating-dirs.sh
 ./7-6-create-files_systemd.sh
@@ -15,3 +16,5 @@ for pkg in ${package_list[@]}; do
 done
 
 ./7-z-cleanup.sh
+
+popd
