@@ -1,13 +1,17 @@
 #!/bin/bash
+set -e
+
+./7-5-creating-dirs.sh
+./7-6-create-files_systemd.sh
+
 yinstall="/ybuild/yaml-install.sh"
 package_list=(gettext-temp bison-temp perl-temp python-temp texinfo-temp util-linux-temp)
 
 for pkg in ${package_list[@]}; do
-    ${yinstall} ${pkg} || { echo "Error in ${pkg}. Exiting."; break; }
+    if ! "${yinstall}" "$pkg"; then
+        echo "Error in ${pkg}. Exiting."
+        exit 1
+    fi
 done
 
-# This Should Not Be Necessary
-# if [[ -d "/ybuild/tmp" ]]; then
-#     echo "Cleaning Up /ybuild/tmp/"
-#     rm -rf /ybuild/tmp/*
-# fi
+./7-z-cleanup.sh
