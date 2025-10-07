@@ -6,13 +6,13 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz
       md5: b861b092bf1af683c46a8aa2e689a6fd
-    - url: https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz
       md5: 956dc04e864001a9c22429f761f2c283
-    - url: https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.3.1.tar.gz
       md5: 5c9bc658c9fd0f940e8e3e0f09530c62
-    - url: https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz
       md5: 7c32c39b8b6e3ae85f25156228156061
 
 prepare: |

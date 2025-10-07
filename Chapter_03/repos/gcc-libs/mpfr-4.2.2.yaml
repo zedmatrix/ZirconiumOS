@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.2.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz
       md5: 7c32c39b8b6e3ae85f25156228156061
 
 prepare: |

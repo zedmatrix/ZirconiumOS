@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/findutils/findutils-4.10.0.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/findutils/findutils-4.10.0.tar.xz
       md5: 870cfd71c07d37ebe56f9f4aaf4ad872
 
 build: |

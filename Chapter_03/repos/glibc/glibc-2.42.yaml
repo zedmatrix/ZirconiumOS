@@ -6,11 +6,11 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/glibc/glibc-2.42.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/glibc/glibc-2.42.tar.xz
       md5: 23c6f5a27932b435cae94e087cb8b1f5
 
 patches:
-    - url: https://www.linuxfromscratch.org/patches/lfs/development/glibc-2.42-fhs-1.patch
+    - url: https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.42-fhs-1.patch
       md5: 9a5997c3452909b1769918c759eff8a2
 
 prepare: |

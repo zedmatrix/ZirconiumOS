@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/texinfo/texinfo-7.2.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/texinfo/texinfo-7.2.tar.xz
       md5: 11939a7624572814912a18e76c8d8972
 
 prepare: |

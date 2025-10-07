@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/autoconf/autoconf-2.72.tar.xz
       md5: 1be79f7106ab6767f18391c5e22be701
 
 build: |

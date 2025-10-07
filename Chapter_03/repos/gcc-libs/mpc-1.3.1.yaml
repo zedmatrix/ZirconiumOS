@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.3.1.tar.gz
       md5: 5c9bc658c9fd0f940e8e3e0f09530c62
 
 prepare: |

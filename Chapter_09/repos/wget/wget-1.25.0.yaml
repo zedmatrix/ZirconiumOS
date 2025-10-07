@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.gz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/wget/wget-1.25.0.tar.gz
       md5: c70ba58b36f944e8ba1d655ace552881
 
 build: |

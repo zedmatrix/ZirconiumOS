@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/automake/automake-1.18.1.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/automake/automake-1.18.1.tar.xz
       md5: cea31dbf1120f890cbf2a3032cfb9a68
 
 build: |

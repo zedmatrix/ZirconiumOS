@@ -2,7 +2,7 @@
 set -e
 
 export LFS=${LFS:=/mnt/lfs}
-yinstall="${lfs}/ybuild/yaml-install.sh"
+yinstall="${LFS}/ybuild/yaml-install.sh"
 
 package_list=(m4-temp ncurses-temp bash-temp coreutils-temp diffutils-temp file-temp findutils-temp
  gawk-temp grep-temp gzip-temp make-temp patch-temp sed-temp tar-temp xz-temp binutils-temp2 gcc-temp2)

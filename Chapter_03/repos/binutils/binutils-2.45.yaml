@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://sourceware.org/pub/binutils/releases/binutils-2.45.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/binutils/binutils-2.45.tar.xz
       md5: dee5b4267e0305a99a3c9d6131f45759
 
 prepare: |

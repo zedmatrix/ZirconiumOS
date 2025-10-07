@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/bash/bash-5.3.tar.gz
       md5: 977c8c0c5ae6309191e7768e28ebc951
 
 build: |

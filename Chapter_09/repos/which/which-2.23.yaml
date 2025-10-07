@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/which/which-2.23.tar.gz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/which/which-2.23.tar.gz
       md5: 1963b85914132d78373f02a84cdb3c86
 
 build: |

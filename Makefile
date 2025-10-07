@@ -2,8 +2,8 @@
 DRIVE ?= a
 UEFI ?= 1
 FORCE ?= 0
-LFS ?= "/mnt/lfs"
-YBUILD ?= "$(LFS)/ybuild"
+LFS ?= /mnt/lfs
+YBUILD ?= $(LFS)/ybuild
 
 install_ybuild := ca-bundle.crt yaml-install.sh Ybuild ydatabase.yaml
 install_scripts := Chapter_05/install-ch5.sh Chapter_06/install-ch6.sh Chapter_08/install-ch8.sh Chapter_09/install-ch9.sh

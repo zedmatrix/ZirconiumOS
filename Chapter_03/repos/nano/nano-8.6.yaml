@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://www.nano-editor.org/dist/v8/nano-8.6.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/nano/nano-8.6.tar.xz
       md5: 3b5a70dd65ddee4bd848b620c1638526
 
 build: |

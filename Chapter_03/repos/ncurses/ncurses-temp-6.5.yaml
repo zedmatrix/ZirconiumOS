@@ -1,12 +1,12 @@
 package:
     name: ncurses-temp
-    version: 6.5-20250809
+    version: 6.5
     rel: 1
     archive: false
     delete: true
 
 sources:
-    - url: https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20250809.tgz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/ncurses/ncurses-6.5.tar.gz
       md5: 679987405412f970561cc85e1e6428a2
 
 prepare: |

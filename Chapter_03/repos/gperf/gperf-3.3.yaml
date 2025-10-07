@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/gperf/gperf-3.3.tar.gz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/gperf/gperf-3.3.tar.gz
       md5: 31753b021ea78a21f154bf9eecb8b079
 
 build: |
