@@ -42,7 +42,7 @@ fi
 # Check if drive is partitioned
 pttype=$(lsblk -n -o PTTYPE $DRIVE | head -1)
 
-if [[ -z "$pttype" ]]; then
+if [[ -z "$pttype" || $FORCE -eq 1 ]]; then
     if [[ $UEFI -eq 1 ]]; then
         echo "Creating GPT partition table with EFI, swap, and root..."
         sfdisk "$DRIVE" <<EOF
