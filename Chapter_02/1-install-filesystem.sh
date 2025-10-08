@@ -47,7 +47,7 @@ if [[ ! -b "$DRIVE" ]]; then
 fi
 
 nvme=""
-if [[ $DRIVE =~ 'nvme' ]];
+if [[ $DRIVE =~ 'nvme' ]]; then
     nvme=p
     UEFI=1
 fi
