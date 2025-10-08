@@ -1,19 +1,17 @@
 package:
     name: coreutils
-    version: 9.7
+    version: 9.8
     rel: 1
     archive: false
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.8.tar.xz
       md5: 6b7285faf7d5eb91592bdd689270d3f1
 
 patches:
-    - url: https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.7-upstream_fix-1.patch
-      md5: 96382a5aa85d6651a74f94ffb61785d9
-    - url: https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.7-i18n-1.patch
-      md5: 33ebfad32b2dfb8417c3335c08671206
+    - url: https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.8-i18n-2.patch
+      md5: c800540039fb0707954197486b1bde70
 
 prepare: |
     autoreconf -fv &&

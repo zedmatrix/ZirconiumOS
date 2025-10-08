@@ -1,12 +1,12 @@
 package:
     name: coreutils-temp
-    version: 9.7
+    version: 9.8
     rel: 1
     archive: false
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/coreutils/coreutils-9.7.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.8.tar.xz
       md5: 6b7285faf7d5eb91592bdd689270d3f1
 
 prepare: |

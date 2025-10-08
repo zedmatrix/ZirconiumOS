@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://mirror.csclub.uwaterloo.ca/gnu/ncurses/ncurses-6.5.tar.gz
+    - url: https://invisible-island.net/archives/ncurses/current/ncurses-6.5-20251004.tgz
       md5: 679987405412f970561cc85e1e6428a2
 
 prepare: |
