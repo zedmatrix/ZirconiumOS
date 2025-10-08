@@ -6,7 +6,7 @@ package:
     delete: true
 
 sources:
-    - url: https://ftp.gnu.org/gnu/gettext/gettext-0.26.tar.xz
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/gettext/gettext-0.26.tar.xz
       md5: 8e14e926f088e292f5f2bce95b81d10e
 
 build: |
