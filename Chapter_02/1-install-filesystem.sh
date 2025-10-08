@@ -1,11 +1,17 @@
 #!/bin/bash
+
+stars_sep() { echo -e "\033[1;36m $(printf '%.0s*' {1..100}) \033[0m"; }
+print_out() { echo -e "\033[1;33m *** ${*} *** \033[0m"; }
 bad_drive() {
     echo "Invalid Drive Options. Exiting."
     exit 666
 }
+# Start Of Program
+stars_sep
 DRIVE=""
 let UEFI=0
 let FORCE=0
+
 while (( "$#" )); do
    case $1 in
       [a-z])
@@ -25,11 +31,12 @@ while (( "$#" )); do
     shift
 done
 
+
 [ ! -z $DRIVE ] && echo "Format Options: DRIVE: $DRIVE " || bad_drive
 [ $UEFI -eq 1 ] && echo "Using UEFI Setup" || echo "Using MBR Setup"
 [ $FORCE -eq 1 ] && echo "Overwite Enabled" || echo "Overwite Disabled"
 
-printf "\n\t Partition Formatting Layout Creation \n"
+print_out "Partition Formatting Layout Creation"
 ROOTPATH="/usr/sbin"
 PATH=${ROOTPATH}:${PATH}
 
@@ -39,71 +46,124 @@ if [[ ! -b "$DRIVE" ]]; then
     exit 1
 fi
 
+nvme=""
+if [[ $DRIVE =~ 'nvme' ]];
+    nvme=p
+    UEFI=1
+fi
+
 # Check if drive is partitioned
-pttype=$(lsblk -n -o PTTYPE $DRIVE | head -1)
+if [[ $UEFI -eq 1 ]]; then
+    x=3
+    pt="gpt"
+else
+    x=2
+    pt="dos"
+fi
 
-if [[ -z "$pttype" || $FORCE -eq 1 ]]; then
-    if [[ $UEFI -eq 1 ]]; then
-        echo "Creating GPT partition table with EFI, swap, and root..."
-        sfdisk "$DRIVE" <<EOF
-label: gpt
-,512M,U
-,2G,S
-,,L
-EOF
-    else
-        echo "Creating DOS partition table with swap and root..."
-        sfdisk "$DRIVE" <<EOF
-label: dos
-,2G,S
-,,L
-EOF
+not_created=0
+pttype=$(lsblk -dn -o PTTYPE "$DRIVE" | head -1)
+
+if [[ "$pttype" != "$pt" ]]; then
+    print_out "Not Partitioned - Creating new $pt table"
+    not_created=1
+fi
+
+# Detect partitions
+for i in $(seq 1 $x); do
+    part="${DRIVE}${nvme}${i}"
+    if [[ ! -b "$part" ]]; then
+        print_out "Missing $part"
+        not_created=2
+        continue
     fi
-else
-    echo "Partition table already exists: $pttype"
-fi
 
-pttype=$(lsblk -n -o PTTYPE $DRIVE | head -1)
-printf "\n\t Drive: %s Partition Type: %s \n" $DRIVE $pttype
-[[ $DRIVE =~ 'nvme' ]] && P=p || P=
-
-if [[ $pttype == "dos" ]]; then
-    SWAP="${DRIVE}1"
-    ROOT="${DRIVE}2"
-    printf "\n\t Assuming (SWAP:%s) (ROOT:%s) \n" $SWAP $ROOT
-else
-    UEFI="${DRIVE}${P}1"
-    SWAP="${DRIVE}${P}2"
-    ROOT="${DRIVE}${P}3"
-    printf "\n\t Assuming (UEFI:%s) (SWAP:%s) (ROOT:%s) \n" $UEFI $SWAP $ROOT
-fi
-#
-# Check formatted && Collect partitions
-#
-PARTS=()
-[[ -n "$UEFI" ]] && PARTS+=("$UEFI")
-[[ -n "$SWAP" ]] && PARTS+=("$SWAP")
-[[ -n "$ROOT" ]] && PARTS+=("$ROOT")
-
-# Check for formatting
-for part in "${PARTS[@]}"; do
-    if [[ -b "$part" ]]; then
-        FSTYPE=$(lsblk -n -o FSTYPE "$part" | head -n 1)
-        if [[ -z "$FSTYPE" || $FORCE -eq 1 ]]; then
-            echo "$part is unformatted"
-
-            # Format depending on purpose
-            case "$part" in
-                "$UEFI") mkfs.vfat -v -F32 "$UEFI" ;;
-                "$SWAP") mkswap "$SWAP" ;;
-                "$ROOT") mkfs.ext4 -v "$ROOT" ;;
-            esac
-        else
-            echo "$part already formatted as $FSTYPE"
-        fi
+    parttype=$(lsblk -no FSTYPE "$part" | head -1)
+    if [[ -z "$parttype" ]]; then
+        print_out "Partition $part has no filesystem type yet."
+    else
+        print_out "Partition $part: $parttype"
     fi
 done
 
-[[ -n "$UEFI" ]] && export UEFI
-[[ -n "$SWAP" ]] && export SWAP
-[[ -n "$ROOT" ]] && export ROOT
+# Partition layout definitions
+GPT_UEFI="label: gpt
+size=512M, type=U
+size=2G, type=S
+type=L"
+
+MBR_DOS="label: dos
+size=2G, type=S
+type=L"
+
+# Create partitions if needed
+if [[ $not_created -ge 1 ]]; then
+    if [[ $UEFI -eq 1 ]]; then
+        print_out "Creating GPT partition table with EFI, swap, and root"
+        sfdisk "$DRIVE" <<< "$GPT_UEFI"
+    else
+        print_out "Creating DOS partition table with swap and root"
+        sfdisk "$DRIVE" <<< "$MBR_DOS"
+    fi
+else
+    # Double-check partition filesystems
+    for i in $(seq 1 $x); do
+        part="${DRIVE}${nvme}${i}"
+        parttype=$(lsblk -no FSTYPE "$part" | head -1)
+        if [[ -z "$parttype" ]]; then
+            print_out "Partition $part has no filesystem type yet. Unexpected Error."
+            exit 1
+        else
+            print_out "Partition $part: $parttype"
+        fi
+    done
+fi
+
+# Formatting and Checking Again
+pttype=$(lsblk -n -o PTTYPE "$DRIVE" | head -1)
+print_out "Drive: ${DRIVE} Partition Table Type: ${pttype}"
+
+# Determine partition count (UEFI has EFI+SWAP+ROOT)
+parts=2
+[[ "$pttype" == "gpt" ]] && parts=3
+
+for i in $(seq 1 $parts); do
+    part="${DRIVE}${nvme}${i}"
+
+    if [[ -b "$part" ]]; then
+        FSTYPE=$(lsblk -n -o FSTYPE "$part" | head -1)
+
+        if [[ -z "$FSTYPE" || "$FORCE" -eq 1 ]]; then
+            print_out "$part is unformatted or FORCE enabled"
+
+            case $i in
+                1)
+                    if [[ "$pttype" == "gpt" ]]; then
+                        print_out "Formatting EFI System Partition as FAT32"
+                        mkfs.vfat -F32 -v "$part"
+                    else
+                        print_out "Formatting swap (DOS type)"
+                        mkswap "$part"
+                    fi
+                    ;;
+                2)
+                    if [[ "$pttype" == "gpt" ]]; then
+                        print_out "Formatting swap partition"
+                        mkswap "$part"
+                    else
+                        print_out "Formatting root partition as ext4"
+                        mkfs.ext4 -v "$part"
+                    fi
+                    ;;
+                3)
+                    print_out "Formatting root partition as ext4"
+                    mkfs.ext4 -v "$part"
+                    ;;
+            esac
+        else
+            print_out "$part already formatted as $FSTYPE"
+        fi
+    else
+        print_out "Partition $part not found"
+    fi
+done
