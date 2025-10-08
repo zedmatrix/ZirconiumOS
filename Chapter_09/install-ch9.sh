@@ -6,9 +6,8 @@ ybuild_scripts=(ybuild-environment.sh ynetwork-files.sh yclock-locale.sh ysystem
 ybash-startup.sh yskel-files.sh)
 
 for script in ${ybuild_scripts[@]}; do
-    ./${script} || { echo "Error in ${script}. Exiting."; break; }
+    /ybuild/Chapter_09/${script} || { echo "Error in ${script}. Exiting."; break; }
 done
-
 
 package_list=(which libarchive libtasn1 p11-kit make-ca libunistring libidn2 libpsl wget curl openssh
  hwdata pciutils libusb usbutils)

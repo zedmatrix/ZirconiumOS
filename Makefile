@@ -11,7 +11,7 @@ install_scripts := Chapter_05/install-ch5.sh Chapter_06/install-ch6.sh Chapter_0
 $(foreach v,drive uefi force, \
   $(if $($(v)), $(eval $(shell echo $(v) | tr a-z A-Z) := $($(v))) ) )
 
-all: chapter1 chapter2 chapter3 chapter5 chapter6 chapter7
+all: chapter1 chapter2 chapter3 chapter5 chapter6 chapter7 chapter8
 
 chapter1:
 	@echo "Preparing $(DRIVE) with $(LFS)"
@@ -53,5 +53,4 @@ chapter7: chapter6
 chapter8: chapter7
 	cd $(YBUILD) && ./exec-lfs-chroot.sh install-ch8.sh || exit 1
 
-
-.PHONY: all chapter1 chapter2 chapter3 chapter5 chapter6 chapter7
+.PHONY: all chapter1 chapter2 chapter3 chapter5 chapter6 chapter7 chapter8
