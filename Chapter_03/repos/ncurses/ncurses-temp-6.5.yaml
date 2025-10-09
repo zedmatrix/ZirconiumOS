@@ -7,7 +7,8 @@ package:
 
 sources:
     - url: https://invisible-island.net/archives/ncurses/current/ncurses-6.5-20251004.tgz
-      md5: 679987405412f970561cc85e1e6428a2
+      md5: ec5bb613507c60a470105e269a91651f
+      sha256: da13d75fbfa75b9a52e28900b6369d5a73f8b6946e0a777e8cc1cd2923bb7e9c
 
 prepare: |
     mkdir build && pushd build &&

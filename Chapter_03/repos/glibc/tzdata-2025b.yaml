@@ -8,6 +8,7 @@ package:
 sources:
     - url: https://www.iana.org/time-zones/repository/releases/tzdata2025b.tar.gz
       md5: ad65154c48c74a9b311fe84778c5434f
+      sha256: 11810413345fc7805017e27ea9fa4885fd74cd61b2911711ad038f5d28d71474
 
 build: |
     mkdir -pv /usr/share/zoneinfo/{posix,right} &&
