@@ -119,6 +119,8 @@ else
         fi
     done
 fi
+# Wait for sync()
+sleep 5
 
 # Formatting and Checking Again
 pttype=$(lsblk -n -o PTTYPE "$DRIVE" | head -1)
