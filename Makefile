@@ -25,7 +25,7 @@ filesystem: prep
 		$(if $(FORCE),force,) || exit 1
 	@[ -f Chapter_02/2-install-directories.sh ] && Chapter_02/2-install-directories.sh $(DRIVE) || exit 1
 
-sources: filesystem
+sources: prep
 	@[ -d "$(LFS)/ybuild" ] || mkdir -p $(LFS)/ybuild || exit 1
 	@[ -d "$(LFS)/ybuild/repos" ] || mkdir -p $(LFS)/ybuild/repos || exit 1
 	@[ -d "$(LFS)/ybuild/Chapter_09" ] || mkdir -p $(LFS)/ybuild/Chapter_09 || exit 1
@@ -43,15 +43,15 @@ sources: filesystem
 		install -vm755 $$file $(LFS)/ybuild; \
 	done
 
-crosstools: sources
+crosstools: pre sources
 	cd $(YBUILD) && ./install-ch5.sh || exit 1
 	cd $(YBUILD) && ./install-ch6.sh || exit 1
 	cd $(YBUILD) && ./exec-lfs-chroot.sh 7-7-chapter-install.sh || exit 1
 
-basesystem: crosstools
+basesystem: prep sources
 	cd $(YBUILD) && ./exec-lfs-chroot.sh install-ch8.sh || exit 1
 
-extrapackages: basesystem
+extrapackages: prep sources
 	cd $(YBUILD) && ./exec-lfs-chroot.sh install-ch9.sh || exit 1
 
 .PHONY: all prep filesystem sources crosstools basesystem extrapackages

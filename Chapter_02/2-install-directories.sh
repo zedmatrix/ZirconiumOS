@@ -6,16 +6,16 @@ bad_drive() {
 DRIVE=""
 case $1 in
     sd[a-z]|vd[a-z]|hd[a-z]|nvme[0-9]n[0-9])
-    DRIVE="/dev/${1}"
-    [ -b $DRIVE ] || bad_drive
-    ;;
+        DRIVE="/dev/${1}"
+        [ -b $DRIVE ] || bad_drive
+        ;;
     [?])
-    echo "Usage: $0 [sda | vda | hda | nvme ] [uefi] [force]" >&2
-    exit 1
-    ;;
+        echo "Usage: $0 [sda | vda | hda | nvme ] [uefi] [force]" >&2
+        exit 1
+        ;;
 esac
 
-[ ! -z $DRIVE ] && echo "Install Drive: $DRIVE " || bad_drive
+[ -b $DRIVE ] && echo "Install Drive: $DRIVE " || bad_drive
 LFS=${LFS:-"/mnt/lfs"}
 
 ROOTPATH="/usr/sbin"
