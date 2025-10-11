@@ -5,17 +5,18 @@ bad_drive() {
 }
 DRIVE=""
 case $1 in
-    [a-z])
-    [ -z $DRIVE ] && DRIVE="/dev/sd${1}" || bad_drive
+    sd[a-z]|vd[a-z]|hd[a-z]|nvme[0-9]n[0-9])
+    DRIVE="/dev/${1}"
+    [ -b $DRIVE ] || bad_drive
     ;;
     [?])
-    echo "Usage: $0 /dev/sd[a or b or c or d] [uefi] [force]" >&2
+    echo "Usage: $0 [sda | vda | hda | nvme ] [uefi] [force]" >&2
     exit 1
     ;;
 esac
 
 [ ! -z $DRIVE ] && echo "Install Drive: $DRIVE " || bad_drive
-LFS="/mnt/lfs"
+LFS=${LFS:-"/mnt/lfs"}
 
 ROOTPATH="/usr/sbin"
 PATH=${ROOTPATH}:${PATH}

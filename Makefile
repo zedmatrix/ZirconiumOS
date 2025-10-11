@@ -1,5 +1,5 @@
 
-DRIVE ?= a
+DRIVE ?= sda
 UEFI ?= 1
 FORCE ?= 0
 LFS ?= /mnt/lfs

@@ -14,8 +14,9 @@ let FORCE=0
 
 while (( "$#" )); do
    case $1 in
-      [a-z])
-        [ -z $DRIVE ] && DRIVE="/dev/sd${1}" || bad_drive
+      sd[a-z]|vd[a-z]|hd[a-z]|nvme[0-9]n[0-9])
+        DRIVE="/dev/${1}"
+        [ -b $DRIVE ] || bad_drive
         ;;
       uefi)
         UEFI=1
@@ -25,14 +26,14 @@ while (( "$#" )); do
         ;;
 
       [?])
-        echo "Usage: $0 /dev/sd[a or b or c or d] [uefi] [force]" >&2
+        echo "Usage: $0 [sda | vda | hda | nvme ] [uefi] [force]" >&2
         exit 1 ;;
     esac
     shift
 done
 
 
-[ ! -z $DRIVE ] && echo "Format Options: DRIVE: $DRIVE " || bad_drive
+[ -b $DRIVE ] && echo "Format Options: DRIVE: $DRIVE " || bad_drive
 [ $UEFI -eq 1 ] && echo "Using UEFI Setup" || echo "Using MBR Setup"
 [ $FORCE -eq 1 ] && echo "Overwite Enabled" || echo "Overwite Disabled"
 
