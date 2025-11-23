@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>1.4. Creating a Limited Directory Layout in the LFS Filesystem</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 1. Preparing Environment</h3><ul><li class="prev"><a accesskey="p" href="settingenvironment.html" title="Setting Up the Environment">Prev</a><p>Setting Up the Environment</p></li><li class="next"><a accesskey="n" href="introduction.html" title="Introduction">Next</a><p>Introduction</p></li><li class="up"><a accesskey="u" href="chapter01.html" title="Chapter 1. Preparing Environment">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-tools-creatingminlayout" name="ch-tools-creatingminlayout"></a>1.4. Creating a Limited Directory Layout in the LFS Filesystem</h1><div class="sect1" lang="en" xml:lang="en"><p>In this section, we begin populating the LFS filesystem with the
+  pieces that will constitute the final Linux system. The first step is to
+  create a limited directory hierarchy, so that the programs compiled in
+  "chapter-temporary-tools" (as well as Glibc and libstdc++ in "chapter-cross-tools")
+  can be installed in their final location. We do this so those temporary programs
+  will be overwritten when the final versions are built in "chapter-building-system".</p><p>Create the required directory layout by issuing the following commands as
+  <code class="systemitem">root</code>:</p><pre class="userinput"><kbd class="command">mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
+
+for i in bin lib sbin; do
+  ln -sv usr/$i $LFS/$i
+done
+
+case $(uname -m) in
+  x86_64) mkdir -pv $LFS/lib64 ;;
+esac</kbd></pre><p>Programs in "chapter-temporary-tools" will be compiled
+  with a cross-compiler (more details can be found in section
+  "ch-tools-toolchaintechnotes"). This cross-compiler will be installed
+  in a special directory, to separate it from the other programs. Still acting as
+  <code class="systemitem">root</code>, create that directory with this command:</p><pre class="userinput"><kbd class="command">mkdir -pv $LFS/tools</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+      The LFS editors have deliberately decided not to use a
+      <code class="filename">/usr/lib64</code> directory.  Several
+      steps are taken to be sure the toolchain will not use it. If for any
+      reason this directory appears (either because you made an error in
+      following the instructions, or because you installed a binary package that
+      created it after finishing LFS), it may break your system.
+      You should always be sure this directory does not exist.
+    </p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="settingenvironment.html" title="Setting Up the Environment">Prev</a><p>Setting Up the Environment</p></li><li class="next"><a accesskey="n" href="introduction.html" title="Introduction">Next</a><p>Introduction</p></li><li class="up"><a accesskey="u" href="chapter01.html" title="Chapter 1. Preparing Environment">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

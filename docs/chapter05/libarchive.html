@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>5.50. Libarchive-3.8.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 5. Installing Basic System Software</h3><ul><li class="prev"><a accesskey="p" href="openssl.html" title="OpenSSL-3.6.0">Prev</a><p>OpenSSL-3.6.0</p></li><li class="next"><a accesskey="n" href="libelf.html" title="Libelf from Elfutils-0.194">Next</a><p>Libelf from Elfutils-0.194</p></li><li class="up"><a accesskey="u" href="chapter05.html" title="Chapter 5. Installing Basic System Software">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-system-libarchive" name="ch-system-libarchive"></a>5.50. Libarchive-3.8.1</h1><div class="wrap" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>
+      The <span class="application">libarchive</span> library provides a single
+      interface for reading/writing various compression formats.
+    </p><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Approximate build time: </strong><span class="segbody">0.3 SBU (add 0.8 SBU for tests)</span></div><div class="seg"><strong class="segtitle">Required disk space: </strong><span class="segbody">43 MB (add 32 MB for tests)</span></div><div class="seg"><strong class="segtitle">SHA256 Checksum: </strong><span class="segbody">19f917d42d530f98815ac824d90c7eaf648e9d9a50e4f309c812457ffa5496b5</span></div></div></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">5.50.1. Installation of libarchive</h2><p>
+      Install <span class="application">libarchive</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">./configure --prefix=/usr \
+        --without-xml2</kbd></pre><p>Compile the package:</p><pre class="userinput"><kbd class="command">make</kbd></pre><p>Install the package and remove some harmful libtool archive and static library files:</p><pre class="userinput"><kbd class="command">make install
+rm -v /usr/lib/libarchive.{a,la}</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+        As discussed in locale-wrong-filename-encoding,
+        if the Zip archive to be extracted contains any file with a name
+        containing any non-Latin characters, you need to manually specify
+        the encoding of those characters or they will be turned into
+        unreadable sequences in the extracted file name.  For example, if a
+        Zip archive created with WinZip, <code class="filename">archive.zip</code>,
+        contains a file named with Simplified Chinese characters, the
+        encoding should be CP936 and the <em class="parameter"><code>-I cp936</code></em>
+        option should be used.  I.e. the command to extract the archive
+        should be <span class="command"><strong>unzip -I cp936 archive.zip</strong></span>.
+      </p></div></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">5.50.2. Command Explanations</h2><p>
+      <code class="option">--without-xml2</code>: This switch sets expat for xar archive
+      format support instead of preferred libxml2 if both packages are installed.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">5.50.3. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          bsdcat, bsdcpio, bsdtar, and bsdunzip
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libarchive.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          None
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="bsdcat"></a><span class="term"><span class="command"><strong>bsdcat</strong></span></span></p></td><td><p>
+            expands files to standard output
+          </p></td></tr><tr><td><p><a id="bsdcpio"></a><span class="term"><span class="command"><strong>bsdcpio</strong></span></span></p></td><td><p>
+            is a tool similar to <span class="command"><strong>cpio</strong></span>
+          </p></td></tr><tr><td><p><a id="bsdtar"></a><span class="term"><span class="command"><strong>bsdtar</strong></span></span></p></td><td><p>
+            is a tool similar to GNU <span class="command"><strong>tar</strong></span>
+          </p></td></tr><tr><td><p><a id="bsdunzip"></a><span class="term"><span class="command"><strong>bsdunzip</strong></span></span></p></td><td><p>
+            is a tool similar to Info-ZIP <span class="command"><strong>unzip</strong></span>
+          </p></td></tr><tr><td><p><a id="libarchive-lib"></a><span class="term"><code class="filename">libarchive.so</code></span></p></td><td><p>
+            is a library that can create and read several streaming
+            archive formats
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="openssl.html" title="OpenSSL-3.6.0">Prev</a><p>OpenSSL-3.6.0</p></li><li class="next"><a accesskey="n" href="libelf.html" title="Libelf from Elfutils-0.194">Next</a><p>Libelf from Elfutils-0.194</p></li><li class="up"><a accesskey="u" href="chapter05.html" title="Chapter 5. Installing Basic System Software">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

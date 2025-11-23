@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.4. CMake-4.1.3</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Security and Networking</h3><ul><li class="prev"><a accesskey="p" href="libuv.html" title="libuv-1.51.0">Prev</a><p>libuv-1.51.0</p></li><li class="next"><a accesskey="n" href="gpm.html" title="GPM-1.20.7">Next</a><p>GPM-1.20.7</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Security and Networking">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="cmake" name="cmake"></a>11.4. CMake-4.1.3</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.4.1. Introduction to CMake</h2><p>
+      The <span class="application">CMake</span> package contains a modern
+      toolset used for generating Makefiles. It is a successor of the
+      auto-generated <span class="command"><strong>configure</strong></span> script and aims to
+      be platform- and compiler-independent. A significant user of
+      <span class="application">CMake</span> is <span class="application">KDE</span>
+      since version 4.
+    </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://cmake.org/files/v4.1/cmake-4.1.3.tar.gz">https://cmake.org/files/v4.1/cmake-4.1.3.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 765879a53d178bf1e1509768de4c9a672dabaa20047a9f3809571558e783be88
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: cf1d0fa7f9e88afaddf379a7b1ce65f0
+        </p></li><li class="listitem"><p>
+          Download size: 11 MB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 490 MB (add 1.4 GB for tests)
+        </p></li><li class="listitem"><p>
+          Estimated build time: 2.3 SBU (add 4.3 SBU for tests, both using parallelism=4)
+        </p></li></ul></div><h3>CMake Dependencies</h3><h4>Recommended</h4><p class="recommended">
+      <a class="xref" href="../chapter08/curl.html" title="8.6. cURL-8.17.0">cURL-8.17.0</a>,
+      <a class="xref" href="../chapter05/libarchive.html" title="5.50. Libarchive-3.8.1">Section 5.50, “Libarchive-3.8.1”</a>,
+      <a class="xref" href="libuv.html" title="11.3. libuv-1.51.0">libuv-1.51.0</a>, and
+      "nghttp2"
+    </p><h4>Optional</h4><p class="optional">
+      <a class="xref" href="../chapter05/gcc.html" title="5.30. GCC-15.2.0">Section 5.30, “GCC-15.2.0”</a> rebuilt for gfortran",
+      <a class="xref" href="../chapter10/git.html" title="10.1. Git-2.52.0">git-2.52.0</a> (for use during tests),
+      "mercurial" (for use during tests),
+      "openjdk" (for use during tests),
+      "Qt6" (for the Qt-based GUI),
+      "sphinx" (for building documents),
+      "subversion" (for testing),
+      <a class="ulink" href="https://github.com/google/cppdap/">cppdap</a>,
+      <a class="ulink" href="https://github.com/open-source-parsers/jsoncpp/">jsoncpp</a>, and
+      <a class="ulink" href="https://rhash.sourceforge.net/">rhash</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.4.2. Installation of CMake</h2><p>
+      Prepare <span class="application">CMake</span> by running the following
+      commands:
+    </p><pre class="pre"><kbd class="command">sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake</kbd></pre><p>
+      Now configure, issue:
+    </p><pre class="configure"><kbd class="command">./bootstrap --prefix=/usr        \
+            --system-libs        \
+            --mandir=/share/man  \
+            --no-system-jsoncpp  \
+            --no-system-cppdap   \
+            --no-system-librhash \
+            --no-system-nghttp2  \
+            --docdir=/share/doc/cmake-4.1.3</kbd></pre><p>
+      Now build, issue:
+    </p><pre class="make"><kbd class="command">make</kbd></pre><p>
+      Replace <em class="replaceable"><code>$(nproc)</code></em> with an integer between 1 and the
+      number of system logical cores if you don't want to use all.
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">bin/ctest -j<em class="replaceable"><code>$(nproc)</code></em></kbd></pre><p>
+      If you want to investigate a problem with a given "problem1-test",
+      use <span class="command"><strong>bin/ctest -R "problem1-test"</strong></span> and, to omit it, use
+      <span class="command"><strong>bin/ctest -E "problem1-test"</strong></span>. These options can be
+      used together:
+      <span class="command"><strong>bin/ctest -R "problem1-test" -E "problem2-test"</strong></span>.
+      Option <code class="option">-N</code> can be used to display all
+      available tests, and you can run <span class="command"><strong>bin/ctest</strong></span> for a
+      sub-set of tests by using separated by spaces names or numbers as
+      options. Option <code class="option">--help</code> can be used to show all options.
+    </p><p>
+      Now, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.4.3. Command Explanations</h2><p>
+      <span class="command"><strong>sed ... Modules/GNUInstallDirs.cmake</strong></span>:
+      This command disables applications using cmake from attempting to
+      install files in /usr/lib64/.
+    </p><p>
+      <em class="parameter"><code>--system-libs</code></em>: This switch forces the build
+      system to link against the system installed version for all needed
+      libraries but those explicitly specified via a
+      <code class="option">--no-system-*</code> option.
+    </p><p>
+      <em class="parameter"><code>--no-system-jsoncpp</code></em> and
+      <em class="parameter"><code>--no-system-cppdap</code></em>: These switches remove the
+      <span class="application">JSON-C++</span> library from the list of system
+      libraries. A bundled version of that library is used instead.
+    </p><p>
+      <em class="parameter"><code>--no-system-librhash</code></em>: This switch removes the
+      <span class="application">librhash</span> library from the list of system
+      libraries used. A bundled version of that library is used instead.
+    </p><p>
+      <code class="option">--no-system-{curl,libarchive,libuv,nghttp2}</code>: Use
+      the corresponding option in the list for the
+      <span class="command"><strong>bootstrap</strong></span> if one of the recommended dependencies is
+      not installed. A bundled version of the dependency will be used instead.
+    </p><p>
+      <code class="option">--qt-gui</code>: This switch enables building the
+      <span class="application">Qt</span>-based  GUI for
+      <span class="application">CMake</span>.
+    </p><p>
+      <code class="option">--parallel=</code>: This switch enables performing the
+      <span class="application">CMake</span> bootstrap with multiple jobs
+      at one time.  It's not needed if the <code class="envar">MAKEFLAGS</code> variable
+      has been already set for using multiple processors following
+      'parallel-builds'.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.4.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          ccmake, cmake, cmake-gui (optional), cpack, and ctest
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/share/cmake-4.1 and
+          /usr/share/doc/cmake-4.1.3
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="ccmake"></a><span class="term"><span class="command"><strong>ccmake</strong></span></span></p></td><td><p>
+            is a curses based interactive frontend to
+            <span class="command"><strong>cmake</strong></span>
+          </p></td></tr><tr><td><p><a id="cmake-prog"></a><span class="term"><span class="command"><strong>cmake</strong></span></span></p></td><td><p>
+            is the makefile generator
+          </p></td></tr><tr><td><p><a id="cmake-gui"></a><span class="term"><span class="command"><strong>cmake-gui</strong></span></span></p></td><td><p>
+            (optional) is the <span class="application">Qt</span>-based frontend to
+            <span class="command"><strong>cmake</strong></span>
+          </p></td></tr><tr><td><p><a id="cpack"></a><span class="term"><span class="command"><strong>cpack</strong></span></span></p></td><td><p>
+            is the <span class="application">CMake</span> packaging program
+          </p></td></tr><tr><td><p><a id="ctest"></a><span class="term"><span class="command"><strong>ctest</strong></span></span></p></td><td><p>
+            is a testing utility for cmake-generated build trees
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libuv.html" title="libuv-1.51.0">Prev</a><p>libuv-1.51.0</p></li><li class="next"><a accesskey="n" href="gpm.html" title="GPM-1.20.7">Next</a><p>GPM-1.20.7</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Security and Networking">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

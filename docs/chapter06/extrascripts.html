@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>6.2. Extra Bash Scripts</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 6. Configuring the System</h3><ul><li class="prev"><a accesskey="p" href="bashscripts.html" title="Bash Scripts">Prev</a><p>Bash Scripts</p></li><li class="next"><a accesskey="n" href="kernel.html" title="Linux-6.12.58">Next</a><p>Linux-6.12.58</p></li><li class="up"><a accesskey="u" href="chapter06.html" title="Chapter 6. Configuring the System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-extra-scripts" name="ch-extra-scripts"></a>6.2. Extra Bash Scripts</h1><div class="wrap" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>CurlPaste Script for 0x0.st.</p><pre class="userinput"><kbd class="command">cat &gt; /etc/profile.d/CurlPaste.sh &lt;&lt; "EOF"
+#!/bin/bash
+# Begin of /etc/profile.d/CurlPaste.sh
+[ -x /usr/bin/curl ] || return
+CurlPaste() {
+    local file=$1
+    if [[ -z $file ]]; then
+        printf "Error: Usage: $0 [file] \n"
+        return 1
+    fi
+
+    if [[ -f $file ]]; then
+        printf "\n\t Uploading ${file} to 0x0 \n"
+        curl -F'file=@-' https://0x0.st &lt; "${file}"
+    else
+        printf "\n\t Warning: File does not exist. \n"
+        return 1
+    fi
+}
+export -f CurlPaste
+
+# End of /etc/profile.d/CurlPaste.sh
+EOF</kbd></pre><p>
+    Media Functions for when "blfs/mpv" is installed.
+  </p><pre class="userinput"><kbd class="command">cat &gt; /etc/profile.d/MediaFunctions.sh &lt;&lt; "EOF"
+#!/bin/bash
+# Begin of /etc/profile.d/MediaFunctions.sh
+[ -x /usr/bin/mpv ] || return
+Radio() {
+    mpv --audio-display=no --loop-playlist --shuffle --playlist="$1"
+}
+
+alias MPV='mpv --geometry=1280x720+1280+60'
+
+keep_awake() {
+    while pgrep -x mpv &gt;/dev/null; do
+        xscreensaver-command -deactivate &gt;/dev/null
+        sleep 50
+    done
+}
+
+# for single media playback
+Media() {
+    keep_awake &amp;
+    local pid=$!
+    trap "kill $pid 2&gt;/dev/null" EXIT
+
+    MPV --profile=fast --hwdec=auto-safe "${@}"
+}
+
+# for shuffle play and loop
+SPlay() {
+    Media --shuffle --loop-playlist --playlist="$1"
+}
+
+# for play and loop
+ZPlay() {
+    Media --loop-playlist --playlist="$1"
+}
+
+export -f keep_awake
+export -f Radio
+export -f Media
+export -f SPlay
+export -f ZPlay
+
+PlayList() {
+    if [[ $1 == "r" ]]; then
+        find . -name "*.mp4" -type f -printf '%T@ %p\n' | sort -r | cut -d' ' -f2-
+    elif [[ $1 == "n" ]]; then
+        find . -name "*.mp4" -type f -printf '%T@ %p\n' | sort | cut -d' ' -f2-
+    else
+        echo "Usage: PlayList [r|n] &gt; playlist.m3u"
+    fi
+}
+
+export -f PlayList
+
+# End of /etc/profile.d/MediaFunctions.sh
+EOF</kbd></pre></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="bashscripts.html" title="Bash Scripts">Prev</a><p>Bash Scripts</p></li><li class="next"><a accesskey="n" href="kernel.html" title="Linux-6.12.58">Next</a><p>Linux-6.12.58</p></li><li class="up"><a accesskey="u" href="chapter06.html" title="Chapter 6. Configuring the System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
