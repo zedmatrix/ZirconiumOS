@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.36. nghttp2-1.68.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="c-ares.html" title="c-ares-1.34.5">Prev</a><p>c-ares-1.34.5</p></li><li class="next"><a accesskey="n" href="libnl.html" title="libnl-3.11.0">Next</a><p>libnl-3.11.0</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="nghttp2" name="nghttp2"></a>11.36. nghttp2-1.68.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.36.1. Introduction to nghttp2</h2><p>
+      <span class="application">nghttp2</span> is an implementation of HTTP/2 and
+      its header compression algorithm, HPACK.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/nghttp2/nghttp2/releases/download/v1.68.0/nghttp2-1.68.0.tar.xz">https://github.com/nghttp2/nghttp2/releases/download/v1.68.0/nghttp2-1.68.0.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 5511d3128850e01b5b26ec92bf39df15381c767a63441438b25ad6235def902c
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: d5ba082629f15c67e72b4c26f7935500
+        </p></li><li class="listitem"><p>
+          Download size: 1.6 MB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 25 MB
+        </p></li><li class="listitem"><p>
+          Estimated build time: 0.1 SBU
+        </p></li></ul></div><h3>nghttp2 Dependencies</h3><h4>Recommended</h4><p class="required">
+      <a class="xref" href="libxml2.html" title="11.10. libxml2-2.15.1">libxml2-2.15.1</a>
+    </p><h4>Optional</h4><p class="optional">
+      The following are only used if building the full package instead of
+      only the main libraries:
+      <a class="xref" href="boost.html" title="11.9. boost-1.89.0">Boost-1.89.0</a>, 
+      <a class="xref" href="c-ares.html" title="11.35. c-ares-1.34.5">c-ares-1.34.5</a>, 
+      <a class="xref" href="ch11s26.html" title="11.26. Cython-3.2.1">cython-3.2.1</a>, 
+      <a class="xref" href="jansson.html" title="11.32. Jansson-2.14.1">jansson-2.14.1</a>, 
+      <a class="xref" href="libevent.html" title="11.17. libevent-2.1.12">libevent-2.1.12</a>, 
+      "sphinx", 
+
+      <a class="ulink" href="https://jemalloc.net/">jemalloc</a>,
+      
+      <a class="ulink" href="http://software.schmorp.de/pkg/libev.html">libev</a>,
+      
+      <a class="ulink" href="https://mruby.org/">mruby</a>, and
+      
+      <a class="ulink" href="https://tatsuhiro-t.github.io/spdylay/">Spdylay</a>.
+      
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.36.2. Installation of nghttp2</h2><p>
+      Prepare <span class="application">nghttp2</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">./configure --prefix=/usr     \
+            --disable-static  \
+            --enable-lib-only \
+            --docdir=/usr/share/doc/nghttp2-1.68.0</kbd></pre><p>
+      To Build <span class="application">nghttp2</span>, issue:
+    </p><pre class="make"><kbd class="command">make</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">make check</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.36.3. Command Explanations</h2><p>
+      <em class="parameter"><code>--enable-lib-only</code></em>: only build libnghttp2. Omit
+      this switch if you'd like to build the example applications, Python
+      bindings, or the C++ asio library.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.36.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libnghttp2.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/nghttp2,
+          /usr/share/nghttp2, and
+          /usr/share/doc/nghttp2-1.68.0
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="libnghttp2"></a><span class="term"><code class="filename">libnghttp2.so</code></span></p></td><td><p>
+            an implementation of the Hypertext Transfer Protocol version 2 in C
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="c-ares.html" title="c-ares-1.34.5">Prev</a><p>c-ares-1.34.5</p></li><li class="next"><a accesskey="n" href="libnl.html" title="libnl-3.11.0">Next</a><p>libnl-3.11.0</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

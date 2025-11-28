@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.50. libssh2-1.11.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libgcrypt.html" title="libgcrypt-1.11.2">Prev</a><p>libgcrypt-1.11.2</p></li><li class="next"><a accesskey="n" href="lmdb.html" title="lmdb-0.9.33">Next</a><p>lmdb-0.9.33</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libssh2" name="libssh2"></a>11.50. libssh2-1.11.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.50.1. Introduction to libssh2</h2><p>
+      <span class="application">Libssh2</span> package is a client-side C library
+      implementing the SSH2 protocol.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://www.libssh2.org/download/libssh2-1.11.1.tar.gz">https://www.libssh2.org/download/libssh2-1.11.1.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: d9ec76cbe34db98eec3539fe2c899d26b0c837cb3eb466a56b0f109cabf658f7
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 38857d10b5c5deb198d6989dacace2e6
+        </p></li><li class="listitem"><p>
+          Download size: 1.0 MB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 15 MB (with tests)
+        </p></li><li class="listitem"><p>
+          Estimated build time: 0.2 SBU (with tests)
+        </p></li></ul></div><h3>libssh2 Dependencies</h3><h4>Optional</h4><p class="optional">
+      <a class="xref" href="cmake.html" title="11.4. CMake-4.1.3">CMake-4.1.3</a> (can be used instead of the
+      <span class="command"><strong>configure</strong></span> script),
+      <a class="xref" href="libgcrypt.html" title="11.49. libgcrypt-1.11.2">libgcrypt-1.11.2</a> (can be used instead of OpenSSL),
+      <a class="xref" href="../chapter08/openssh.html" title="8.1. OpenSSH-10.2p1">OpenSSH-10.2p1</a> (for some tests), and
+      <a class="ulink" href="https://www.docker.com">Docker</a> (for some tests)
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.50.2. Installation of libssh2</h2><p>
+      Prepare <span class="application">libssh2</span> by running the following
+      commands:
+    </p><pre class=""><kbd class="command">./configure --prefix=/usr          \
+            --disable-docker-tests \
+            --disable-static</kbd></pre><p>
+      To Build <span class="application">libssh2</span>, issue:
+    </p><pre class=""><kbd class="command">make</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">make check</kbd></pre><p>
+      Now Install <span class="application">libssh2</span>, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.50.3. Command Explanations</h2><p>
+      <em class="parameter"><code>--disable-docker-tests</code></em>: Disable the tests
+      requiring Docker, which is beyond the scope of BLFS.  Remove this
+      switch if you've installed Docker and you wish to run the test suite.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.50.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
+          libssh2.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          None
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="libssh2-lib"></a><span class="term"><code class="filename">libssh2.so</code></span></p></td><td><p>
+            contains functions to use the SSH2 protocol
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libgcrypt.html" title="libgcrypt-1.11.2">Prev</a><p>libgcrypt-1.11.2</p></li><li class="next"><a accesskey="n" href="lmdb.html" title="lmdb-0.9.33">Next</a><p>lmdb-0.9.33</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

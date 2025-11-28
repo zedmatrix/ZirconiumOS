@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.10. libxml2-2.15.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="boost.html" title="boost-1.89.0">Prev</a><p>boost-1.89.0</p></li><li class="next"><a accesskey="n" href="docbook45.html" title="docbook-xml-4.5">Next</a><p>docbook-xml-4.5</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libxml2" name="libxml2"></a>11.10. libxml2-2.15.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.10.1. Introduction to libxml2</h2><p>
+      The <span class="application">libxml2</span> package contains libraries
+      and utilities used for parsing XML files.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.1.tar.xz">https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.1.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: c008bac08fd5c7b4a87f7b8a71f283fa581d80d80ff8d2efd3b26224c39bc54c
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: fcf38f534bb8996984dba978ee3e27f4
+        </p></li><li class="listitem"><p>
+          Download size: 1.9 MB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 49 MB (add 28 MB for documentation and 16 MB for tests)
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.1 SBU (Using parallelism=4; with tests and documentation)
+        </p></li></ul></div><h3>Additional Downloads</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Optional Test Suite:
+          <a class="ulink" href="https://www.w3.org/XML/Test/xmlts20130923.tar.gz">https://www.w3.org/XML/Test/xmlts20130923.tar.gz</a> - This
+          enables <span class="command"><strong>make check</strong></span> to do complete testing.
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: "9b61db9f5dbffa545f4b8d78422167083a8568c59bd1129f94138f936cf6fc1f"
+        </p></li></ul></div><h3>libxml2 Dependencies</h3><h4>Recommended</h4><p class="recommended">
+      <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a>
+    </p><h4>Optional (for generating the documentation)</h4><p class="optional">
+      "doxygen" and
+      <a class="xref" href="libxslt.html" title="11.12. libxslt-1.1.43">libxslt-1.1.43</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.10.2. Installation of libxml2</h2><p>
+      First, remove an unnecessary call to <span class="command"><strong>git</strong></span> in
+      <code class="filename">meson.build</code>:
+    </p><pre class="pre"><kbd class="command">sed -i "/'git'/,+3d" meson.build</kbd></pre><p>
+      Install <span class="application">libxml2</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">meson setup build        \
+      --prefix=/usr      \
+      -D history=enabled \
+      -D icu=enabled</kbd></pre><p>
+      Now build libxml2, issue the following command:
+    </p><pre class="pre"><kbd class="command">ninja -C build</kbd></pre><p>
+      If you downloaded the test suite, and want to test the results
+      issue the following commands:
+    </p><pre class="test"><kbd class="command">tar xf ../xmlts20130923.tar.gz
+ninja -C build test</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+        The tests use <a class="ulink" href="http://localhost/">http://localhost/</a>
+        to test parsing of external entities. If the machine where you run the
+        tests serves as a web site, the tests may hang, depending on the
+        content of the file served. It is therefore recommended to shut down
+        the server during the tests, as the <code class="systemitem">root</code> user:
+      </p><pre class="userinput"><kbd class="command">systemctl stop httpd.service</kbd></pre></div><p>
+      Now, Install as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">ninja -C build install</kbd></pre><p>
+      The <span class="command"><strong>xml2-config</strong></span> may return flags needed to link
+      against the static library for the project, including the references
+      to the <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a> libraries.  That would be pointless
+      because we only install the shared library.  To make things worse,
+      that may cause some packages using <span class="application">libxml2</span>
+      to be unnecessarily linked against some <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a> library,
+      then those packages will need a rebuild if ICU is upgraded to a new
+      major version.  Fix this by issuing, as <code class="systemitem">root</code>:
+    </p><pre class="install"><kbd class="command">sed "s/--static/--shared/" -i /usr/bin/xml2-config</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.10.3. Command Explanations</h2><p>
+      <em class="parameter"><code>-D history=enabled</code></em>: This switch enables
+      <span class="application">Readline</span> support when running
+      <span class="command"><strong>xmlcatalog</strong></span> or <span class="command"><strong>xmllint</strong></span> in shell mode.
+    </p><p>
+      <em class="parameter"><code>-D icu=enabled</code></em>: This switch enables support for
+      <span class="application">ICU</span>, which provides additional Unicode support.
+      This is needed for some packages in BLFS, such as for QtWebEngine.
+    </p><p>
+      <code class="option">-D python=enabled</code>: This switch enables the libxml2
+      Python bindings.  Note
+      that those bindings are deprecated due to flaws in the API design and
+      they will be removed in libxml2-2.16.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.10.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          xml2-config,
+          xmlcatalog, and
+          xmllint
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libxml2.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/libxml2,
+          /usr/lib/cmake/libxml2, and
+          /usr/share/doc/libxml2-2.15.1,
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="xml2-config"></a><span class="term"><span class="command"><strong>xml2-config</strong></span></span></p></td><td><p>
+            determines the compile and linker flags that should be used to
+            compile and link programs that use
+            <code class="filename">libxml2</code>
+          </p></td></tr><tr><td><p><a id="xmlcatalog"></a><span class="term"><span class="command"><strong>xmlcatalog</strong></span></span></p></td><td><p>
+            is used to monitor and manipulate XML and SGML catalogs
+          </p></td></tr><tr><td><p><a id="xmllint"></a><span class="term"><span class="command"><strong>xmllint</strong></span></span></p></td><td><p>
+            parses XML files and outputs reports (based upon options) to detect
+            errors in XML coding
+          </p></td></tr><tr><td><p><a id="libxml2-lib"></a><span class="term"><code class="filename">libxml2.so</code></span></p></td><td><p>
+            provides functions for programs to parse files that use the XML
+            format
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="boost.html" title="boost-1.89.0">Prev</a><p>boost-1.89.0</p></li><li class="next"><a accesskey="n" href="docbook45.html" title="docbook-xml-4.5">Next</a><p>docbook-xml-4.5</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

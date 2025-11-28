@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.26. Cython-3.2.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="lzo.html" title="LZO-2.10">Prev</a><p>LZO-2.10</p></li><li class="next"><a accesskey="n" href="nettle.html" title="Nettle-3.10.2">Next</a><p>Nettle-3.10.2</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="cython" name="cython"></a>11.26. Cython-3.2.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.26.1. Introduction to Cython Module</h2><p>
+        The <span class="application">Cython</span> package provides a
+        compiler for writing C extensions for the Python language.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://github.com/cython/cython/releases/download/3.2.1/cython-3.2.1.tar.gz">https://github.com/cython/cython/releases/download/3.2.1/cython-3.2.1.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 2be1e4d0cbdf7f4cd4d9b8284a034e1989b59fd060f6bd4d24bf3729394d2ed8
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 9967470d0b33063657a6f4f0fe595cfe
+          </p></li><li class="listitem"><p>
+            Download size: 3.2 MB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 138 MB
+          </p></li><li class="listitem"><p>
+            Estimated build time: 1.1 SBU
+          </p></li></ul></div><h3>Cython Dependencies</h3><h4>Optional (for tests)</h4><p class="optional">
+        "gdb" and
+        "pytest"
+      </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.26.2. Installation of Cython</h2><p>
+        Build the module:
+      </p><pre class="make"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+        Now, as the <code class="systemitem">root</code> user:
+      </p><pre class="install"><kbd class="command">pip3 install --no-index --find-links dist --no-user Cython</kbd></pre><p>
+        This package does come with a test suite, but running it takes a long
+        time (over 40 SBUs). The test suite will print data to the screen
+        though to note to the user that it is still running. To run the tests,
+        issue: <span class="command"><strong>python3 runtests.py</strong></span>.
+      </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.26.3. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+            cygdb,
+            cython, and
+            cythonize
+          </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3/site-packages/Cython,
+            /usr/lib/python3/site-packages/Cython-3.2.1.dist-info, and
+            /usr/lib/python3/site-packages/pyximport
+          </span></div></div></div><div class="variablelist"><h5>Short Descriptions</h5><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="cygdb"></a><span class="term"><span class="command"><strong>cygdb</strong></span></span></p></td><td><p>
+              is the Cython debugger
+            </p></td></tr><tr><td><p><a id="cython-prog"></a><span class="term"><span class="command"><strong>cython</strong></span></span></p></td><td><p>
+              is a compiler for code written in the Cython language. It outputs
+              a C/C++ program which can be compiled with a C/C++ compiler
+            </p></td></tr><tr><td><p><a id="cythonize"></a><span class="term"><span class="command"><strong>cythonize</strong></span></span></p></td><td><p>
+              is a compiler for code written in the Cython language. It outputs
+              an extension module which is directly importable from Python
+            </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="lzo.html" title="LZO-2.10">Prev</a><p>LZO-2.10</p></li><li class="next"><a accesskey="n" href="nettle.html" title="Nettle-3.10.2">Next</a><p>Nettle-3.10.2</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
