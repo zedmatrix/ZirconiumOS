@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.10. libxml2-2.15.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="boost.html" title="boost-1.89.0">Prev</a><p>boost-1.89.0</p></li><li class="next"><a accesskey="n" href="docbook45.html" title="docbook-xml-4.5">Next</a><p>docbook-xml-4.5</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libxml2" name="libxml2"></a>11.10. libxml2-2.15.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.10.1. Introduction to libxml2</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libxml2-2.15.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="boost.html" title="boost-1.89.0">Prev</a><p>boost-1.89.0</p></li><li class="next"><a accesskey="n" href="docbook45.html" title="docbook-xml-4.5">Next</a><p>docbook-xml-4.5</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libxml2" name="libxml2"></a>libxml2-2.15.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libxml2</h2><p>
       The <span class="application">libxml2</span> package contains libraries
       and utilities used for parsing XML files.
     </p><p>This package is known to build and work properly
@@ -21,11 +21,11 @@
         </p></li><li class="listitem"><p>
           Download SHA256 Sum: "9b61db9f5dbffa545f4b8d78422167083a8568c59bd1129f94138f936cf6fc1f"
         </p></li></ul></div><h3>libxml2 Dependencies</h3><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a>
+      <a class="xref" href="icu.html" title="icu-78.1">ICU-78.1</a>
     </p><h4>Optional (for generating the documentation)</h4><p class="optional">
       "doxygen" and
-      <a class="xref" href="libxslt.html" title="11.12. libxslt-1.1.43">libxslt-1.1.43</a>
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.10.2. Installation of libxml2</h2><p>
+      <a class="xref" href="libxslt.html" title="libxslt-1.1.43">libxslt-1.1.43</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libxml2</h2><p>
       First, remove an unnecessary call to <span class="command"><strong>git</strong></span> in
       <code class="filename">meson.build</code>:
     </p><pre class="pre"><kbd class="command">sed -i "/'git'/,+3d" meson.build</kbd></pre><p>
@@ -51,13 +51,13 @@ ninja -C build test</kbd></pre><div class="admon note"><img alt="[Note]" src="..
     </p><pre class="install"><kbd class="command">ninja -C build install</kbd></pre><p>
       The <span class="command"><strong>xml2-config</strong></span> may return flags needed to link
       against the static library for the project, including the references
-      to the <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a> libraries.  That would be pointless
+      to the <a class="xref" href="icu.html" title="icu-78.1">ICU-78.1</a> libraries.  That would be pointless
       because we only install the shared library.  To make things worse,
       that may cause some packages using <span class="application">libxml2</span>
-      to be unnecessarily linked against some <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a> library,
+      to be unnecessarily linked against some <a class="xref" href="icu.html" title="icu-78.1">ICU-78.1</a> library,
       then those packages will need a rebuild if ICU is upgraded to a new
       major version.  Fix this by issuing, as <code class="systemitem">root</code>:
-    </p><pre class="install"><kbd class="command">sed "s/--static/--shared/" -i /usr/bin/xml2-config</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.10.3. Command Explanations</h2><p>
+    </p><pre class="install"><kbd class="command">sed "s/--static/--shared/" -i /usr/bin/xml2-config</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>-D history=enabled</code></em>: This switch enables
       <span class="application">Readline</span> support when running
       <span class="command"><strong>xmlcatalog</strong></span> or <span class="command"><strong>xmllint</strong></span> in shell mode.
@@ -70,7 +70,7 @@ ninja -C build test</kbd></pre><div class="admon note"><img alt="[Note]" src="..
       Python bindings.  Note
       that those bindings are deprecated due to flaws in the API design and
       they will be removed in libxml2-2.16.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.10.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           xml2-config,
           xmlcatalog, and
           xmllint

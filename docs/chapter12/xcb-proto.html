@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>xcb-proto-1.17.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="libXdmcp.html" title="libXdmcp-1.1.5">Prev</a><p>libXdmcp-1.1.5</p></li><li class="next"><a accesskey="n" href="libxcb.html" title="libxcb-1.17.0">Next</a><p>libxcb-1.17.0</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="xcb-proto" name="xcb-proto"></a>xcb-proto-1.17.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to xcb-proto</h2><p>
+      The <span class="application">xcb-proto</span> package provides the
+      XML-XCB protocol descriptions that <span class="application">libxcb</span>
+      uses to generate the majority of its code and API.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz">https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-1.17.0.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 2c1bacd2110f4799f74de6ebb714b94cf6f80fb112316b1219480fd22562148c
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: c415553d2ee1a8cea43c3234a079b53f
+        </p></li><li class="listitem"><p>
+          Download size: 152 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 1.3 MB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.1 SBU
+        </p></li></ul></div><h3>xcb-proto Dependencies</h3><h4>Optional</h4><p class="optional">
+      <a class="xref" href="../chapter11/libxml2.html" title="libxml2-2.15.1">libxml2-2.15.1</a> (required to run the tests)
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of xcb-proto</h2><p>
+      Prepare <span class="application">xcb-proto</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">PYTHON=python3 ./configure --prefix=/usr    \
+    --sysconfdir=/etc    \
+    --localstatedir=/var \
+    --disable-static</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">make check</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">make install</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+        If you are upgrading from version 1.15.1 or lower, the old pkgconfig
+        file needs to be removed. Issue, as the <code class="systemitem">root</code> user:
+      </p><pre class="userinput"><kbd class="command">rm -f /usr/lib/pkgconfig/xcb-proto.pc</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directory: </strong><span class="segbody">/usr/share/xcb and
+             /usr/lib/python3.14/site-packages/xcbgen</span></div></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libXdmcp.html" title="libXdmcp-1.1.5">Prev</a><p>libXdmcp-1.1.5</p></li><li class="next"><a accesskey="n" href="libxcb.html" title="libxcb-1.17.0">Next</a><p>libxcb-1.17.0</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

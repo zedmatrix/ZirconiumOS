@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>9.7. FreeType-2.14.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="fuse.html" title="Fuse-3.17.4">Prev</a><p>Fuse-3.17.4</p></li><li class="next"><a accesskey="n" href="efivar.html" title="efivar-39">Next</a><p>efivar-39</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-freetype2" name="ch-freetype2"></a>9.7. FreeType-2.14.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">9.7.1. Introduction to FreeType2</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>FreeType-2.14.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="fuse.html" title="Fuse-3.17.4">Prev</a><p>Fuse-3.17.4</p></li><li class="next"><a accesskey="n" href="efivar.html" title="efivar-39">Next</a><p>efivar-39</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-freetype2" name="ch-freetype2"></a>FreeType-2.14.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to FreeType2</h2><p>
       The <span class="application">FreeType2</span> package contains
       a library which allows applications to properly render
       <span class="application">TrueType</span> fonts.
@@ -24,13 +24,13 @@
           Download size: 2,176 KB
         </p></li></ul></div><h3>FreeType2 Dependencies</h3><h4>Recommended</h4><p class="recommended">
       "harfbuzz" (pass - 2 runtime),
-      <a class="xref" href="libpng.html" title="9.3. libpng-1.6.50">libpng-1.6.50</a>, and
-      <a class="xref" href="../chapter07/which.html" title="7.1. Which-2.23 and Alternatives">Which-2.23</a>
+      <a class="xref" href="libpng.html" title="libpng-1.6.50">libpng-1.6.50</a>, and
+      <a class="xref" href="../chapter07/which.html" title="Which-2.23 and Alternatives">Which-2.23</a>
     </p><h4>Optional</h4><p class="optional">
       "brotli" and "librsvg"
     </p><h4>Optional (for documentation)</h4><p class="optional">
       <a class="ulink" href="https://pypi.org/project/docwriter/">docwriter</a>
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">9.7.2. Installation of FreeType2</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of FreeType2</h2><p>
       If you downloaded the additional documentation, and wish to install in
       this pass unpack it into the source tree using the following command:
     </p><pre class="pre"><kbd class="command">tar -xf ../freetype-doc-2.14.1.tar.xz --strip-components=2 -C docs</kbd></pre><p>
@@ -50,7 +50,7 @@ sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
     </p><pre class="install"><kbd class="command">make install</kbd></pre><p>
       If you downloaded the optional documentation, install it using:
     </p><pre class="install"><kbd class="command">cp -v -R docs -T /usr/share/doc/freetype-2.14.1
-rm -v /usr/share/doc/freetype-2.14.1/freetype-config.1</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">9.7.3. Command Explanations</h2><p>
+rm -v /usr/share/doc/freetype-2.14.1/freetype-config.1</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <span class="command"><strong>sed -ri ...</strong></span>: First command enables GX/AAT and OpenType
       table validation and second command enables Subpixel Rendering. Note that
       Subpixel Rendering may have patent issues.  Be sure to read the
@@ -68,7 +68,7 @@ rm -v /usr/share/doc/freetype-2.14.1/freetype-config.1</kbd></pre></div><div cla
       <span class="application">freetype</span> without
       <span class="application">freetype</span> support, use this switch to avoid a
       build failure.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">9.7.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">
           freetype-config
         </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
           libfreetype.so

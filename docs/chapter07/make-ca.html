@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>7.8. make-ca-1.16.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="p11-kit.html" title="p11-kit-0.25.10">Prev</a><p>p11-kit-0.25.10</p></li><li class="next"><a accesskey="n" href="../chapter08/chapter08.html" title="Network Utilities">Next</a><p>Network Utilities</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-make-ca" name="ch-make-ca"></a>7.8. make-ca-1.16.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">7.8.1. Introduction to make-ca</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>make-ca-1.16.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="p11-kit.html" title="p11-kit-0.25.10">Prev</a><p>p11-kit-0.25.10</p></li><li class="next"><a accesskey="n" href="../chapter08/chapter08.html" title="Network Utilities">Next</a><p>Network Utilities</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-make-ca" name="ch-make-ca"></a>make-ca-1.16.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to make-ca</h2><p>
       Public Key Infrastructure (PKI) is a method to validate the authenticity
       of an otherwise unknown entity across untrusted networks. PKI works by
       establishing a chain of trust, rather than trusting each individual host
@@ -37,16 +37,16 @@
         release page</a> if this issue happens.
       </p></div><h3>make-ca Dependencies</h3><h4>Required</h4><p class="required">
       
-      <a class="xref" href="p11-kit.html" title="7.7. p11-kit-0.25.10">p11-kit-0.25.10</a> (runtime, built after
-      <a class="xref" href="libtasn1.html" title="7.6. libtasn1-4.20.0">libtasn1-4.20.0</a>, required in the following
+      <a class="xref" href="p11-kit.html" title="p11-kit-0.25.10">p11-kit-0.25.10</a> (runtime, built after
+      <a class="xref" href="libtasn1.html" title="libtasn1-4.20.0">libtasn1-4.20.0</a>, required in the following
       instructions to generate certificate stores from trust anchors, and
       each time <span class="command"><strong>make-ca</strong></span> is run)
     </p><h4>Optional (runtime)</h4><p class="optional">
       "nss" (to generate a shared NSSDB)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">7.8.2. Installation of make-ca and Generation of the CA-certificates stores</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of make-ca and Generation of the CA-certificates stores</h2><p>
       The <span class="application">make-ca</span> script will download and process
       the certificates included in the <code class="filename">certdata.txt</code> file
-      for use as trust anchors for the <a class="xref" href="p11-kit.html" title="7.7. p11-kit-0.25.10">p11-kit-0.25.10</a> trust module.
+      for use as trust anchors for the <a class="xref" href="p11-kit.html" title="p11-kit-0.25.10">p11-kit-0.25.10</a> trust module.
       Additionally, it will generate system certificate stores used by BLFS
       applications (if the recommended and optional applications are present
       on the system). Any local certificates stored in
@@ -91,7 +91,7 @@ install -vdm755 /etc/ssl/local</kbd></pre><div class="admon important"><img alt=
       enabled, will check for updates weekly. Execute the following commands, as the
       <code class="systemitem">root</code> user,
       to enable the systemd timer:
-    </p><pre class="install"><kbd class="command">systemctl enable update-pki.timer</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2"><a id="make-ca-config" name="make-ca-config"></a>7.8.3. Configuring make-ca</h2><p>
+    </p><pre class="install"><kbd class="command">systemctl enable update-pki.timer</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2"><a id="make-ca-config" name="make-ca-config"></a>Configuring make-ca</h2><p>
       For most users, no additional configuration is necessary, however,
       the default <code class="filename">certdata.txt</code> file provided by make-ca
       is obtained from the mozilla-release branch, and is modified to provide a
@@ -128,11 +128,11 @@ install -vdm755 /etc/ssl/local</kbd></pre><div class="admon important"><img alt=
       The <code class="filename">/etc/ssl/local</code> directory
       is available to add additional CA certificates to the system trust store.
       This directory is also used to store certificates that were added to or
-      modified  in the system trust store by <a class="xref" href="p11-kit.html" title="7.7. p11-kit-0.25.10">p11-kit-0.25.10</a> so that
+      modified  in the system trust store by <a class="xref" href="p11-kit.html" title="p11-kit-0.25.10">p11-kit-0.25.10</a> so that
       trust values are maintained across upgrades. Files in this directory must
       be in the <span class="application">OpenSSL</span> trusted certificate format.
       Certificates imported using the <span class="command"><strong>trust</strong></span> utility from
-      <a class="xref" href="p11-kit.html" title="7.7. p11-kit-0.25.10">p11-kit-0.25.10</a> will utilize the x509 Extended Key Usage values
+      <a class="xref" href="p11-kit.html" title="p11-kit-0.25.10">p11-kit-0.25.10</a> will utilize the x509 Extended Key Usage values
       to assign default trust values for the system anchors.
     </p><p>If you need to override trust values, or otherwise need to create
       an <span class="application">OpenSSL</span> trusted certificate manually
@@ -165,7 +165,7 @@ openssl x509 -in class3.crt -text -fingerprint -setalias "CAcert Class 3 root" \
              -addreject emailProtection \
              -addreject codeSigning \
        &gt; /etc/ssl/local/Disabled_Makebelieve_CA_Root.pem
-/usr/sbin/make-ca -r</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2"><a id="make-ca-python" name="make-ca-python"></a>7.8.4. Using make-ca with Python3</h2><p>
+/usr/sbin/make-ca -r</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2"><a id="make-ca-python" name="make-ca-python"></a>Using make-ca with Python3</h2><p>
       When <span class="application">Python3</span> was installed in LFS, it included
       the <span class="application">pip3</span> module with vendored certificates
       from the <span class="application">Certifi</span> module. That was necessary,
@@ -203,7 +203,7 @@ cat &gt; /etc/profile.d/pythoncerts.sh &lt;&lt; "EOF"
 export _PIP_STANDALONE_CERT=/etc/pki/tls/certs/ca-bundle.crt
 
 # End /etc/profile.d/pythoncerts.sh</code>
-EOF</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">7.8.5. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">make-ca</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/etc/ssl/{certs,local} and
+EOF</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">make-ca</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/etc/ssl/{certs,local} and
         /etc/pki/{nssdb,anchors,tls/{certs,java}}</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="make-ca-bin"></a><span class="term"><span class="command"><strong>make-ca</strong></span></span></p></td><td><p>
             is a shell script that adapts a current version of
             <code class="filename">certdata.txt</code>, and prepares it for use

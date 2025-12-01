@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>ISO Codes-4.19.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="ch11s68.html" title="PyYAML-6.0.3">Prev</a><p>PyYAML-6.0.3</p></li><li class="next"><a accesskey="n" href="../part7.html" title="Graphical Environments and Libraries">Next</a><p>Graphical Environments and Libraries</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="iso-codes" name="iso-codes"></a>ISO Codes-4.19.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to ISO Codes</h2><p>
+      The <span class="application">ISO Codes</span> package contains a list of
+      country, language and currency names and it is used as a central
+      database for accessing this data.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.19.0/iso-codes-v4.19.0.tar.gz">https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.19.0/iso-codes-v4.19.0.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 4b143a891feb7d1bb64e44fe3ef253ef36ba1185d1d129c1425338dc6e46e27d
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 73428da2a8a3740e3d3b487a0a5d1f45
+        </p></li><li class="listitem"><p>
+          Download size: 15 MB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 104 MB
+        </p></li><li class="listitem"><p>
+          Estimated build time: 0.3 SBU (with tests)
+        </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of ISO Codes</h2><p>
+      Prepare <span class="application">ISO Codes</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">./configure --prefix=/usr</kbd></pre><p>
+      To Build <span class="application">ISO Codes</span>, issue:
+    </p><pre class="make"><kbd class="command">make</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">make check</kbd></pre><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">make install LN_S='ln -sfn'</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <em class="parameter"><code>LN_S='ln -sfn'</code></em>: This override ensures the
+      installed symlinks correctly recreated in case we are upgrading or
+      reinstalling the package.  It's unneeded but harmless when installing
+      the package onto the system for the first time.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Directory: </strong><span class="segbody">
+          /usr/share/iso-codes, /usr/share/xml/iso-codes
+        </span></div></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="ch11s68.html" title="PyYAML-6.0.3">Prev</a><p>PyYAML-6.0.3</p></li><li class="next"><a accesskey="n" href="../part7.html" title="Graphical Environments and Libraries">Next</a><p>Graphical Environments and Libraries</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.15. docbook-xsl-nons-1.79.2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="itstool.html" title="itstool-2.0.7">Prev</a><p>itstool-2.0.7</p></li><li class="next"><a accesskey="n" href="xmlto.html" title="xmlto-0.0.29">Next</a><p>xmlto-0.0.29</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="docbook-xsl" name="docbook-xsl"></a>11.15. docbook-xsl-nons-1.79.2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.15.1. Introduction to DocBook XSL Stylesheets</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>docbook-xsl-nons-1.79.2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="itstool.html" title="itstool-2.0.7">Prev</a><p>itstool-2.0.7</p></li><li class="next"><a accesskey="n" href="xmlto.html" title="xmlto-0.0.29">Next</a><p>xmlto-0.0.29</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="docbook-xsl" name="docbook-xsl"></a>docbook-xsl-nons-1.79.2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to DocBook XSL Stylesheets</h2><p>
       The <span class="application">DocBook XSL Stylesheets</span>
       package contains XSL stylesheets. These are useful for
       performing transformations on XML DocBook files.
@@ -28,11 +28,11 @@
         </p></li><li class="listitem"><p>
           Download size: 522 KB
         </p></li></ul></div><h3>DocBook XSL Stylesheets Dependencies</h3><h4>Recommended (at runtime)</h4><p class="recommended">
-      <a class="xref" href="libxml2.html" title="11.10. libxml2-2.15.1">libxml2-2.15.1</a>
+      <a class="xref" href="libxml2.html" title="libxml2-2.15.1">libxml2-2.15.1</a>
     </p><h4>Optional (all used at runtime)</h4><p class="optional">
       "apache-ant"
          (to produce <span class="quote">“<span class="quote">webhelp</span>”</span> documents),
-      <a class="xref" href="libxslt.html" title="11.12. libxslt-1.1.43">libxslt-1.1.43</a>
+      <a class="xref" href="libxslt.html" title="libxslt-1.1.43">libxslt-1.1.43</a>
          (or any other XSLT processor), to process
           Docbook documents,
       "ruby"
@@ -45,7 +45,7 @@
       <a class="ulink" href="http://xerces.apache.org/xerces2-j/">Xerces2 Java</a>
          (used with "apache-ant"
           to produce <span class="quote">“<span class="quote">webhelp</span>”</span> documents)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.15.2. Installation of DocBook XSL Stylesheets</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of DocBook XSL Stylesheets</h2><p>
       First, fix a problem that causes stack overflows when doing recursion:
     </p><pre class="pre"><kbd class="command">patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch</kbd></pre><p>
       If you downloaded the optional documentation tarball, unpack it
@@ -72,9 +72,9 @@ install -v -m644    RELEASE-NOTES* NEWS* /usr/share/doc/docbook-xsl-nons-1.79.2<
       If you downloaded the optional documentation tarball,
       install the documentation by issuing the
       following command as the <code class="systemitem">root</code> user:
-    </p><pre class="install"><kbd class="command">cp -v -R doc/* /usr/share/doc/docbook-xsl-nons-1.79.2</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.15.3. Configuring DocBook XSL Stylesheets</h2><div class="sect3"><h3 class="sect3"><a id="docbook-xsl-config" name="docbook-xsl-config"></a>11.15.3.1. Config Files</h3><p>
+    </p><pre class="install"><kbd class="command">cp -v -R doc/* /usr/share/doc/docbook-xsl-nons-1.79.2</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring DocBook XSL Stylesheets</h2><div class="sect3"><h3 class="sect3"><a id="docbook-xsl-config" name="docbook-xsl-config"></a>Config Files</h3><p>
         <code class="filename">/etc/xml/catalog</code>
-      </p></div><div class="sect3"><h3 class="sect3">11.15.3.2. Configuration Information</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><p>
         Create (or append) and populate the XML catalog file using the
         following commands as the <code class="systemitem">root</code> user (both <span class="emphasis"><em>http</em></span>
         and <span class="emphasis"><em>https</em></span> forms are used because upstream
@@ -148,7 +148,7 @@ xmlcatalog --noout --add "rewriteURI"                           \
 xmlcatalog --noout --add "rewriteURI"                             \
            "http://docbook.sourceforge.net/release/xsl/<em class="replaceable"><code>&lt;version&gt;</code></em>" \
            "/usr/share/xml/docbook/xsl-stylesheets-<em class="replaceable"><code>&lt;version&gt;</code></em>"     \
-           /etc/xml/catalog</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.15.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Files: </strong><span class="segbody">/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/*/*.xsl</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 and
+           /etc/xml/catalog</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Files: </strong><span class="segbody">/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/*/*.xsl</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 and
         /usr/share/doc/docbook-xsl-nons-1.79.2</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="xsl-stylesheets"></a><span class="term"><code class="filename">XSL Stylesheets</code></span></p></td><td><p>
             are used for performing transformations on XML files
           </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="itstool.html" title="itstool-2.0.7">Prev</a><p>itstool-2.0.7</p></li><li class="next"><a accesskey="n" href="xmlto.html" title="xmlto-0.0.29">Next</a><p>xmlto-0.0.29</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

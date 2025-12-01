@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.9. boost-1.89.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="icu.html" title="icu-78.1">Prev</a><p>icu-78.1</p></li><li class="next"><a accesskey="n" href="libxml2.html" title="libxml2-2.15.1">Next</a><p>libxml2-2.15.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="boost" name="boost"></a>11.9. boost-1.89.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.9.1. Introduction to Boost</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>boost-1.89.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="icu.html" title="icu-78.1">Prev</a><p>icu-78.1</p></li><li class="next"><a accesskey="n" href="libxml2.html" title="libxml2-2.15.1">Next</a><p>libxml2-2.15.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="boost" name="boost"></a>boost-1.89.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Boost</h2><p>
       <span class="application">Boost</span> provides a set of free peer-reviewed
       portable C++ source libraries. It includes libraries for linear algebra,
       pseudorandom number generation, multithreading, image processing, regular
@@ -20,14 +20,14 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 1.5 SBU (Using parallelism=4; add 0.1 SBU for tests)
         </p></li></ul></div><h3>Boost Dependencies</h3><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="../chapter07/which.html" title="7.1. Which-2.23 and Alternatives">Which-2.23</a>
+      <a class="xref" href="../chapter07/which.html" title="Which-2.23 and Alternatives">Which-2.23</a>
     </p><h4>Optional</h4><p class="optional">
-      <a class="xref" href="icu.html" title="11.8. icu-78.1">ICU-78.1</a>,
+      <a class="xref" href="icu.html" title="icu-78.1">ICU-78.1</a>,
       "numpy", and
       <a class="ulink" href="https://www.open-mpi.org/">Open MPI</a>
     </p><p class="usernotes">Editor Notes:
       <a class="ulink" href="https://wiki.linuxfromscratch.org/blfs/wiki/boost">https://wiki.linuxfromscratch.org/blfs/wiki/boost</a>
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.9.2. Installation of Boost</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Boost</h2><p>
       First, fix a build issue which occurs in the stacktrace library. This
       issue is specific to i686 systems.
     </p><pre class="pre"><kbd class="command">case $(uname -m) in
@@ -55,7 +55,7 @@ popd</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.pn
         before installing the new version.
       </p></div><p>
       Now, as the <code class="systemitem">root</code> user:
-    </p><pre class="install"><kbd class="command">./b2 install threading=multi link=shared</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.9.3. Command Explanations</h2><p>
+    </p><pre class="install"><kbd class="command">./b2 install threading=multi link=shared</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>threading=multi</code></em>: This parameter ensures that
       <span class="application">Boost</span> is built with multithreading support.
     </p><p>
@@ -68,7 +68,7 @@ popd</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.pn
     </p><p>
       <em class="parameter"><code>--with-python=python3</code></em>: This switch ensures Python3
       is used if Python2 is installed.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.9.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           None
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
           libboost_atomic.so, libboost_charconv.so, libboost_chrono.so,

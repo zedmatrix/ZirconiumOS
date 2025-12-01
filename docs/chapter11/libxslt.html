@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.12. libxslt-1.1.43</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="docbook45.html" title="docbook-xml-4.5">Prev</a><p>docbook-xml-4.5</p></li><li class="next"><a accesskey="n" href="ch11s13.html" title="lxml-6.0.2">Next</a><p>lxml-6.0.2</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libxslt" name="libxslt"></a>11.12. libxslt-1.1.43</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.12.1. Introduction to libxslt</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libxslt-1.1.43</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="docbook45.html" title="docbook-xml-4.5">Prev</a><p>docbook-xml-4.5</p></li><li class="next"><a accesskey="n" href="ch11s13.html" title="lxml-6.0.2">Next</a><p>lxml-6.0.2</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libxslt" name="libxslt"></a>libxslt-1.1.43</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libxslt</h2><p>
       The <span class="application">libxslt</span> package contains
       XSLT libraries used for extending <code class="filename">libxml2</code> libraries to
       support XSLT files.
@@ -16,20 +16,20 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.2 SBU (with tests)
         </p></li></ul></div><h3>libxslt Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="libxml2.html" title="11.10. libxml2-2.15.1">libxml2-2.15.1</a>
+      <a class="xref" href="libxml2.html" title="libxml2-2.15.1">libxml2-2.15.1</a>
     </p><h4>Recommended (at runtime)</h4><p class="recommended">
-      <a class="xref" href="docbook45.html" title="11.11. docbook-xml-4.5">docbook-xml-4.5</a> and
-      <a class="xref" href="docbook-xsl.html" title="11.15. docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>
+      <a class="xref" href="docbook45.html" title="docbook-xml-4.5">docbook-xml-4.5</a> and
+      <a class="xref" href="docbook-xsl.html" title="docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>
     </p><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
         Although it is not a direct dependency, many applications
         using <span class="application">libxslt</span> will expect
-        <a class="xref" href="docbook45.html" title="11.11. docbook-xml-4.5">docbook-xml-4.5</a> and <a class="xref" href="docbook-xsl.html" title="11.15. docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>
+        <a class="xref" href="docbook45.html" title="docbook-xml-4.5">docbook-xml-4.5</a> and <a class="xref" href="docbook-xsl.html" title="docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>
         to be present.
       </p></div><h4>Optional</h4><p class="optional">
        "libgcrypt"
       (only needed for the deprecated EXSLT
       crypto extension, see Command Explanations)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.12.2. Installation of libxslt</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libxslt</h2><p>
       Prepare <span class="application">libxslt</span> by running the following
       commands:
     </p><pre class="configure"><kbd class="command">./configure --prefix=/usr    \
@@ -40,7 +40,7 @@
       Many tests are known to fail with libxml2-2.15 or newer.
     </p><pre class="test"><kbd class="command">make check</kbd></pre><p>
       Now Install, as the <code class="systemitem">root</code> user:
-    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.12.3. Command Explanations</h2><p>
+    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <code class="option">--with-crypto</code>: Enable the non-standard and deprecated
       EXSLT crypto extension feature.  It needs 'libgcrypt'
       and the upstream will remove it in the future.
@@ -48,7 +48,7 @@
       <code class="option">--with-debug</code>: Enables thorough diagnostics with
       the <code class="option">-v, --verbose</code> of <span class="command"><strong>xsltproc</strong></span>.
       Use it if you plan to debug XSLT stylesheets.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.12.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           xslt-config and xsltproc
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
           libexslt.so, libxslt.so and optionally, libxsltmod.so

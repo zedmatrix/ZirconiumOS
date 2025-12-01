@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>ply-3.11</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="ch11s64.html" title="docutils-0.22.3">Prev</a><p>docutils-0.22.3</p></li><li class="next"><a accesskey="n" href="ch11s66.html" title="Mako-1.3.10">Next</a><p>Mako-1.3.10</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ply" name="ply"></a>ply-3.11</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to ply Module</h2><p>
+        The <span class="application">ply</span> package is a 100% Python
+        implementation of the common parsing tools 'lex' and 'yacc'.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/p/ply/ply-3.11.tar.gz">https://files.pythonhosted.org/packages/source/p/ply/ply-3.11.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 6465f602e656455affcd7c5734c638f8
+          </p></li><li class="listitem"><p>
+            Download size: 156 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 2.2 MB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of ply</h2><p> Build the module: </p><pre class="make"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      Now, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">pip3 install --no-index --find-links dist --no-user ply</kbd></pre><p>
+      To run the tests, issue:
+    </p><pre class="test"><kbd class="command">pushd test
+sed -i 's/self.assert_/self.assertTrue/' test{lex,yacc}.py
+sed -i 's/"ERROR:/r"ERROR:/' testlex.py
+python3 testlex.py
+python3 testyacc.py
+popd</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3/site-packages/ply and
+            /usr/lib/python3/site-packages/ply-3.11.dist-info
+          </span></div></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="ch11s64.html" title="docutils-0.22.3">Prev</a><p>docutils-0.22.3</p></li><li class="next"><a accesskey="n" href="ch11s66.html" title="Mako-1.3.10">Next</a><p>Mako-1.3.10</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

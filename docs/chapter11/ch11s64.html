@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>docutils-0.22.3</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="gpgmepp.html" title="gpgmepp-2.0.0">Prev</a><p>gpgmepp-2.0.0</p></li><li class="next"><a accesskey="n" href="ch11s65.html" title="ply-3.11">Next</a><p>ply-3.11</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="docutils" name="docutils"></a>docutils-0.22.3</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to docutils</h2><p>
+        <span class="application">docutils</span> is a set of
+        <span class="application">Python</span> modules and programs
+        for processing plaintext docs into formats such as HTML, XML, or LaTeX.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/d/docutils/docutils-0.22.3.tar.gz">https://files.pythonhosted.org/packages/source/d/docutils/docutils-0.22.3.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 21486ae730e4ca9f622677b1412b879af1791efcfba517e4c6f60be543fc8cdd
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 98a6168e7f4719c9fd90184e88157656
+          </p></li><li class="listitem"><p>
+            Download size: 2.2 MB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 20 MB (with tests)
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of docutils</h2><p>
+        First, remove some files installed in a previous version
+        that are no longer valid. As the <code class="systemitem">root</code> user:
+      </p><pre class="pre"><kbd class="command">for f in /usr/bin/rst*.py; do
+  rm -fv /usr/bin/$(basename $f .py)
+done</kbd></pre><p>
+        To build the <span class="application">Python 3</span> applications,
+        run the following command:
+      </p><pre class="make"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+        To install the <span class="application">Python</span> applications
+        run the following as the <code class="systemitem">root</code> user:
+      </p><pre class="install"><kbd class="command">pip3 install --no-index --find-links dist --no-user docutils</kbd></pre><p>
+        To test the installation, issue:
+        <span class="command"><strong>test/alltests.py</strong></span>. 
+      </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+            docutils, rst2html4, rst2html5, rst2html, rst2latex, rst2man,
+             rst2odt, rst2pseudoxml, rst2s5,
+            rst2xetex, and rst2xml
+          </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+            None
+          </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3/site-packages/docutils{,-0.22.3.dist-info}
+          </span></div></div></div><div class="variablelist"><h4>Short Descriptions</h4><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="docutils-prog"></a><span class="term"><span class="command"><strong>docutils</strong></span></span></p></td><td><p>
+              converts documents into various formats
+            </p></td></tr><tr><td><p><a id="rst2html"></a><span class="term"><span class="command"><strong>rst2html</strong></span></span></p></td><td><p>
+              generates (X)HTML documents from standalone reStructuredText
+              sources
+            </p></td></tr><tr><td><p><a id="rst2html4"></a><span class="term"><span class="command"><strong>rst2html4</strong></span></span></p></td><td><p>
+              generates (X)HTML documents from standalone reStructuredText
+              sources
+            </p></td></tr><tr><td><p><a id="rst2html5"></a><span class="term"><span class="command"><strong>rst2html5</strong></span></span></p></td><td><p>
+              generates HTML5 documents from standalone reStructuredText
+              sources
+            </p></td></tr><tr><td><p><a id="rst2latex"></a><span class="term"><span class="command"><strong>rst2latex</strong></span></span></p></td><td><p>
+              generates LaTeX documents from standalone reStructuredText
+              sources
+            </p></td></tr><tr><td><p><a id="rst2man"></a><span class="term"><span class="command"><strong>rst2man</strong></span></span></p></td><td><p>
+              generates plain unix manual documents from standalone
+              reStructuredText sources
+            </p></td></tr><tr><td><p><a id="rst2odt"></a><span class="term"><span class="command"><strong>rst2odt</strong></span></span></p></td><td><p>
+              generates OpenDocument/OpenOffice/ODF documents from standalone
+              reStructuredText sources
+            </p></td></tr><tr><td><p><a id="rst2odt_prepstyles"></a><span class="term"><span class="command"><strong>rst2odt_prepstyles</strong></span></span></p></td><td><p>
+              Fix a word-processor-generated styles.odt for odtwriter use
+            </p></td></tr><tr><td><p><a id="rst2pseudoxml"></a><span class="term"><span class="command"><strong>rst2pseudoxml</strong></span></span></p></td><td><p>
+              generates pseudo-XML from standalone reStructuredText sources
+              (for testing purposes)
+            </p></td></tr><tr><td><p><a id="rst2s5"></a><span class="term"><span class="command"><strong>rst2s5</strong></span></span></p></td><td><p>
+              generates S5 (X)HTML slideshow from standalone reStructuredText
+              sources
+            </p></td></tr><tr><td><p><a id="rst2xetex"></a><span class="term"><span class="command"><strong>rst2xetex</strong></span></span></p></td><td><p>
+              generates LaTeX documents  from standalone reStructuredText
+              sources for compilation with the Unicode-aware TeX variants
+              XeLaTeX or LuaLaTeX
+            </p></td></tr><tr><td><p><a id="rst2xml"></a><span class="term"><span class="command"><strong>rst2xml</strong></span></span></p></td><td><p>
+              generates Docutils-native XML from standalone reStructuredText
+              sources
+            </p></td></tr><tr><td><p><a id="rstpep2html"></a><span class="term"><span class="command"><strong>rstpep2html</strong></span></span></p></td><td><p>
+              generates (X)HTML from reStructuredText-format PEP files
+            </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="gpgmepp.html" title="gpgmepp-2.0.0">Prev</a><p>gpgmepp-2.0.0</p></li><li class="next"><a accesskey="n" href="ch11s65.html" title="ply-3.11">Next</a><p>ply-3.11</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

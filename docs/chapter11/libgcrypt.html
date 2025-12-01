@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.49. libgcrypt-1.11.2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libgpg-error.html" title="libgpg-error-1.56">Prev</a><p>libgpg-error-1.56</p></li><li class="next"><a accesskey="n" href="libssh2.html" title="libssh2-1.11.1">Next</a><p>libssh2-1.11.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libgcrypt" name="libgcrypt"></a>11.49. libgcrypt-1.11.2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.49.1. Introduction to libgcrypt</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libgcrypt-1.11.2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libgpg-error.html" title="libgpg-error-1.56">Prev</a><p>libgpg-error-1.56</p></li><li class="next"><a accesskey="n" href="libssh2.html" title="libssh2-1.11.1">Next</a><p>libssh2-1.11.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libgcrypt" name="libgcrypt"></a>libgcrypt-1.11.2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libgcrypt</h2><p>
       The <span class="application">libgcrypt</span> package contains a general
       purpose crypto library based on the code used in
       <span class="application">GnuPG</span>. The library provides a high level
@@ -18,12 +18,12 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.2 SBU (with documentation; add 0.9 SBU for tests)
         </p></li></ul></div><h3>libgcrypt Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="libgpg-error.html" title="11.48. libgpg-error-1.56">libgpg-error-1.56</a>
+      <a class="xref" href="libgpg-error.html" title="libgpg-error-1.56">libgpg-error-1.56</a>
     </p><h4>Optional</h4><p class="optional">
       
       "texlive" (or "tl-installer")
       
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.49.2. Installation of libgcrypt</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libgcrypt</h2><p>
       Prepare <span class="application">libgcrypt</span> by running the
       following commands:
     </p><pre class="configure"><kbd class="command">./configure --prefix=/usr</kbd></pre><p>
@@ -46,10 +46,10 @@ install -v -m644 doc/gcrypt.html/* \
 install -v -m644 doc/gcrypt_nochunks.html \
                     /usr/share/doc/libgcrypt-1.11.2
 install -v -m644 doc/gcrypt.{txt,texi} \
-                    /usr/share/doc/libgcrypt-1.11.2</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.49.3. Command Explanations</h2><p>
+                    /usr/share/doc/libgcrypt-1.11.2</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <code class="option">--with-capabilities</code>: This option enables libcap2 support.
       Note that this breaks "cryptsetup"
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.49.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           dumpsexp, hmac256, and mpicalc
         </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
           libgcrypt.so

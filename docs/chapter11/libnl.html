@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.37. libnl-3.11.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="nghttp2.html" title="nghttp2-1.68.0">Prev</a><p>nghttp2-1.68.0</p></li><li class="next"><a accesskey="n" href="rpcbind.html" title="rpcbind-1.2.8">Next</a><p>rpcbind-1.2.8</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libnl" name="libnl"></a>11.37. libnl-3.11.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.37.1. Introduction to libnl</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libnl-3.11.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="nghttp2.html" title="nghttp2-1.68.0">Prev</a><p>nghttp2-1.68.0</p></li><li class="next"><a accesskey="n" href="rpcbind.html" title="rpcbind-1.2.8">Next</a><p>rpcbind-1.2.8</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libnl" name="libnl"></a>libnl-3.11.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libnl</h2><p>
       The <span class="application">libnl</span> suite is a collection of libraries
       providing APIs to netlink protocol based Linux kernel interfaces.
     </p><p>This package is known to build and work properly
@@ -22,7 +22,7 @@
           Download MD5 sum: 5c74044c92f2eb08de69cce88714cd1b
         </p></li><li class="listitem"><p>
           Download size: 3.8 MB
-        </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.37.2. Installation of libnl</h2><p>
+        </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libnl</h2><p>
       Prepare <span class="application">libnl</span> by running the following
       commands:
     </p><pre class="configure"><kbd class="command">./configure --prefix=/usr     \
@@ -91,10 +91,10 @@
       If you wish to install the API documentation, as the <code class="systemitem">root</code> user:
     </p><pre class="install"><kbd class="command">mkdir -vp /usr/share/doc/libnl-3.11.0
 tar -xf ../libnl-doc-3.11.0.tar.gz --strip-components=1 --no-same-owner \
-    -C  /usr/share/doc/libnl-3.11.0</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.37.3. Command Explanations</h2><p>
+    -C  /usr/share/doc/libnl-3.11.0</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <code class="option">--disable-cli</code>: Use this parameter if you
       don't want to install cli tools provided by the package.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.37.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           genl-ctrl-list,
           idiag-socket-details,
           nl-class-add,

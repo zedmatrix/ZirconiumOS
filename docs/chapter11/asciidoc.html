@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.19. Asciidoc-10.2.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="links.html" title="Links-2.30">Prev</a><p>Links-2.30</p></li><li class="next"><a accesskey="n" href="pyproject-hooks.html" title="Pyproject_Hooks-1.2.0">Next</a><p>Pyproject_Hooks-1.2.0</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="asciidoc" name="asciidoc"></a>11.19. Asciidoc-10.2.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.19.1. Introduction to Asciidoc Module</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Asciidoc-10.2.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="links.html" title="Links-2.30">Prev</a><p>Links-2.30</p></li><li class="next"><a accesskey="n" href="pyproject-hooks.html" title="Pyproject_Hooks-1.2.0">Next</a><p>Pyproject_Hooks-1.2.0</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="asciidoc" name="asciidoc"></a>Asciidoc-10.2.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Asciidoc Module</h2><p>
         The <span class="application">Asciidoc</span> package is a text document
         format for writing notes, documentation, articles, books, ebooks,
         slideshows, web pages, man pages and blogs. AsciiDoc files can be
@@ -17,19 +17,19 @@
           </p></li><li class="listitem"><p>
             Estimated build time: less than 0.1 SBU
           </p></li></ul></div><h3>Asciidoc Dependencies</h3><h4>Optional (runtime)</h4><p class="optional">
-        <a class="xref" href="docbook-xsl.html" title="11.15. docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>,
+        <a class="xref" href="docbook-xsl.html" title="docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>,
         "fop",
-        <a class="xref" href="libxslt.html" title="11.12. libxslt-1.1.43">libxslt-1.1.43</a>,
+        <a class="xref" href="libxslt.html" title="libxslt-1.1.43">libxslt-1.1.43</a>,
         "lynx",
         <a class="ulink" href="https://sourceforge.net/projects/dblatex/">dblatex</a>, and
         <a class="ulink" href="https://w3m.sourceforge.net/">W3m</a>
-      </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.19.2. Installation of Asciidoc</h2><p>
+      </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Asciidoc</h2><p>
         Build the module:
       </p><pre class="make"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
         This package does not come with a test suite.
       </p><p>
         Now, as the <code class="systemitem">root</code> user:
-      </p><pre class="install"><kbd class="command">pip3 install --no-index --find-links dist --no-user asciidoc</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.19.3. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+      </p><pre class="install"><kbd class="command">pip3 install --no-index --find-links dist --no-user asciidoc</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
             a2x and
             asciidoc
           </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">

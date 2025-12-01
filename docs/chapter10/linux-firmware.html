@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>10.2. Linux-Firmware-20251111</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 10. Finishing the System</h3><ul><li class="prev"><a accesskey="p" href="git.html" title="Git-2.52.0">Prev</a><p>Git-2.52.0</p></li><li class="next"><a accesskey="n" href="reboot.html" title="Rebooting the System">Next</a><p>Rebooting the System</p></li><li class="up"><a accesskey="u" href="chapter10.html" title="Chapter 10. Finishing the System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="linux-firmware" name="linux-firmware"></a>10.2. Linux-Firmware-20251111</h1><div class="sect1" lang="en" xml:lang="en"><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">10.2.1. Introduction to Linux Firmware</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Linux-Firmware-20251111</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 10. Finishing the System</h3><ul><li class="prev"><a accesskey="p" href="git.html" title="Git-2.52.0">Prev</a><p>Git-2.52.0</p></li><li class="next"><a accesskey="n" href="reboot.html" title="Rebooting the System">Next</a><p>Rebooting the System</p></li><li class="up"><a accesskey="u" href="chapter10.html" title="Chapter 10. Finishing the System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="linux-firmware" name="linux-firmware"></a>Linux-Firmware-20251111</h1><div class="sect1" lang="en" xml:lang="en"><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Linux Firmware</h2><p>
         To get the firmware, If you want all these firmware files
         (for example you are distributing the system onto multiple hardware systems),
-        install <a class="xref" href="git.html" title="10.1. Git-2.52.0">git-2.52.0</a> and clone <a class="ulink" href="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git">https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git</a>
+        install <a class="xref" href="git.html" title="Git-2.52.0">git-2.52.0</a> and clone <a class="ulink" href="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git">https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git</a>
         , or open this URL in a browser and download the latest snapshot listed in the Tag table.
     </p><pre class="install"><kbd class="command">cd linux-firmware
 mkdir -pv /usr/lib/firmware
@@ -9,27 +9,27 @@ mkdir -pv /usr/lib/firmware
         At this point you can remove the firmware files as they are no longer needed
     </p><p>
         For convenience, the LFS Project has created a mirror, updated daily,
-        where these firmware files can be accessed via <a class="xref" href="../chapter08/wget.html" title="8.5. Wget-1.25.0">Wget-1.25.0</a> with a
+        where these firmware files can be accessed via <a class="xref" href="../chapter08/wget.html" title="Wget-1.25.0">Wget-1.25.0</a> with a
         web browser at <a class="ulink" href="https://anduin.linuxfromscratch.org/BLFS/linux-firmware/">https://anduin.linuxfromscratch.org/BLFS/linux-firmware/</a>.
-    </p></div><div class="package" lang="en" xml:lang="en"><h2 class="sect2"><a id="wireless-db" name="wireless-db"></a>10.2.2. Firmware for Regulatory Database of Wireless Devices</h2><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+    </p></div><div class="package" lang="en" xml:lang="en"><h2 class="sect2"><a id="wireless-db" name="wireless-db"></a>Firmware for Regulatory Database of Wireless Devices</h2><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
           Download Homepage: https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/
         </p></li><li class="listitem"><p>
           Download (HTTP): <a class="ulink" href="https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2025.10.07.tar.xz">https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2025.10.07.tar.xz</a>
         </p></li><li class="listitem"><p>
           Download SHA256 Sum: d4c872a44154604c869f5851f7d21d818d492835d370af7f58de8847973801c3
-        </p></li></ul></div><div class="sect3"><h3 class="sect3">10.2.2.1. </h3><p>
-        First visit <a class="ulink" href="https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/">https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/</a> and download using <a class="xref" href="../chapter08/wget.html" title="8.5. Wget-1.25.0">Wget-1.25.0</a>
+        </p></li></ul></div><div class="sect3"><h3 class="sect3"></h3><p>
+        First visit <a class="ulink" href="https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/">https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/</a> and download using <a class="xref" href="../chapter08/wget.html" title="Wget-1.25.0">Wget-1.25.0</a>
         To install it, simply extract <code class="filename">regulatory.db</code> and
         <code class="filename">regulatory.db.p7s</code> from the tarball into /usr/lib/firmware.
     </p><pre class="userinput"><kbd class="command">tar xf ../wireless-regdb-2025.10.07.tar.xz
-cp -v regulatory.db regulatory.db.p7s /usr/lib/firmware</kbd></pre></div></div><div class="package" lang="en" xml:lang="en"><h2 class="sect2"><a id="intel-microcode" name="intel-microcode"></a>10.2.3. Intel Microcode</h2><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+cp -v regulatory.db regulatory.db.p7s /usr/lib/firmware</kbd></pre></div></div><div class="package" lang="en" xml:lang="en"><h2 class="sect2"><a id="intel-microcode" name="intel-microcode"></a>Intel Microcode</h2><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
           Download Homepage: https://github.comIntel-Linux-Processor-Microcode-Data-Files
         </p></li><li class="listitem"><p>
           Download (HTTP): <a class="ulink" href="https://github.comIntel-Linux-Processor-Microcode-Data-Files/archive/refs/tags/microcode-20251111.tar.gz">https://github.comIntel-Linux-Processor-Microcode-Data-Files/archive/refs/tags/microcode-20251111.tar.gz</a>
         </p></li><li class="listitem"><p>
           Download SHA256 Sum: 5a9a0d17240f486461bc101ef74f2b8c10675cdd02d0ba0bd6168b061c62e970
-        </p></li></ul></div><div class="sect3"><h3 class="sect3">10.2.3.1. </h3><p>
-        Since <a class="xref" href="../chapter05/libarchive.html" title="5.50. Libarchive-3.8.1">Section 5.50, “Libarchive-3.8.1”</a> is installed you can use the bsdcpio to build the
+        </p></li></ul></div><div class="sect3"><h3 class="sect3"></h3><p>
+        Since <a class="xref" href="../chapter05/libarchive.html" title="Libarchive-3.8.1">the section called “Libarchive-3.8.1”</a> is installed you can use the bsdcpio to build the
         linux microcode.
     </p><pre class="make"><kbd class="command">mkdir -pv initrd/kernel/x86/microcode
 

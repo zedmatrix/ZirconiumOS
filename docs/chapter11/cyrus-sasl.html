@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.52. Cyrus SASL-2.1.28</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="lmdb.html" title="lmdb-0.9.33">Prev</a><p>lmdb-0.9.33</p></li><li class="next"><a accesskey="n" href="../part7.html" title="Graphical Environments and Libraries">Next</a><p>Graphical Environments and Libraries</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="cyrus-sasl" name="cyrus-sasl"></a>11.52. Cyrus SASL-2.1.28</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.52.1. Introduction to Cyrus SASL</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Cyrus SASL-2.1.28</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="lmdb.html" title="lmdb-0.9.33">Prev</a><p>lmdb-0.9.33</p></li><li class="next"><a accesskey="n" href="openldap.html" title="OpenLDAP-2.6.10">Next</a><p>OpenLDAP-2.6.10</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="cyrus-sasl" name="cyrus-sasl"></a>Cyrus SASL-2.1.28</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Cyrus SASL</h2><p>
       The <span class="application">Cyrus SASL</span> package contains a Simple
       Authentication and Security Layer implementation, a method for adding
       authentication support to connection-based protocols. To use SASL, a
@@ -24,9 +24,9 @@
        </p></li><li class="listitem"><p>
           Patch SHA256 Sum: 361310425a4a8f19e5f9479f682cc042f191450f2bb6e8bd8d9fb80b6052197e
        </p></li></ul></div><h3>Cyrus SASL Dependencies</h3><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="lmdb.html" title="11.51. lmdb-0.9.33">lmdb-0.9.33</a>
+      <a class="xref" href="lmdb.html" title="lmdb-0.9.33">lmdb-0.9.33</a>
     </p><h4>Optional</h4><p class="optional">
-      <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a>,
+      <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a>,
       "mitkrb",
       "mariadb" or <a class="ulink" href="https://www.mysql.com/">MySQL</a>,
       "openldap",
@@ -35,7 +35,7 @@
       <a class="ulink" href="https://stuff.mit.edu/afs/net.mit.edu/project/attic/krb4/">krb4</a>,
       <a class="ulink" href="https://dmalloc.com/">Dmalloc</a>, and
       <a class="ulink" href="https://metacpan.org/pod/Pod::POM::View::Restructured">Pod::POM::View::Restructured</a> (needed for regenerating the documentation)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.52.2. Installation of Cyrus SASL</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Cyrus SASL</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
         This package does not support parallel build.
       </p></div><p>
       First, fix the package to be compatible with gcc-15:
@@ -67,7 +67,7 @@ sed '/plugin_common/a #include &lt;time.h&gt;' -i plugins/cram.c</kbd></pre><p>
 install -v -dm755                          /usr/share/doc/cyrus-sasl-2.1.28/html
 install -v -m644  saslauthd/LDAP_SASLAUTHD /usr/share/doc/cyrus-sasl-2.1.28
 install -v -m644  doc/legacy/*.html        /usr/share/doc/cyrus-sasl-2.1.28/html
-install -v -dm700 /var/lib/sasl</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.52.3. Command Explanations</h2><p>
+install -v -dm700 /var/lib/sasl</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>--with-dbpath=/var/lib/sasl/sasldb2</code></em>: This
       switch forces the <span class="command"><strong>sasldb</strong></span> database to be created
       in <code class="filename">/var/lib/sasl</code> instead of
@@ -105,12 +105,12 @@ install -v -dm700 /var/lib/sasl</kbd></pre></div><div class="commands" lang="en"
       must exist when starting <span class="command"><strong>saslauthd</strong></span> or using the
       sasldb plugin. If you're not going to be running the daemon or
       using the plugins, you may omit the creation of this directory.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.52.4. Configuring Cyrus SASL</h2><div class="sect3"><h3 class="sect3"><a id="cyrus-sasl-config" name="cyrus-sasl-config"></a>11.52.4.1. Config Files</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring Cyrus SASL</h2><div class="sect3"><h3 class="sect3"><a id="cyrus-sasl-config" name="cyrus-sasl-config"></a>Config Files</h3><p>
         <code class="filename">/etc/saslauthd.conf</code>
         (for <span class="command"><strong>saslauthd</strong></span> LDAP configuration) and
         <code class="filename">/etc/sasl2/Appname.conf</code>
         (where "Appname" is the application defined name of the application)
-      </p></div><div class="sect3"><h3 class="sect3">11.52.4.2. Configuration Information</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><p>
         See
         <a class="ulink" href="https://www.cyrusimap.org/sasl/sasl/sysadmin.html">https://www.cyrusimap.org/sasl/sasl/sysadmin.html</a>
         for information on what to include in the application configuration files.
@@ -123,7 +123,7 @@ install -v -dm700 /var/lib/sasl</kbd></pre></div><div class="commands" lang="en"
         See
         <a class="ulink" href="https://www.cyrusimap.org/sasl/sasl/gssapi.html#gssapi">https://www.cyrusimap.org/sasl/sasl/gssapi.html#gssapi</a>
         for configuring <span class="command"><strong>saslauthd</strong></span> with <span class="application">Kerberos</span>.
-      </p></div><div class="sect3"><h3 class="sect3"><a id="cyrus-sasl-init" name="cyrus-sasl-init"></a>11.52.4.3. Systemd Unit</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3"><a id="cyrus-sasl-init" name="cyrus-sasl-init"></a>Systemd Unit</h3><p>
         If you need to run the <span class="command"><strong>saslauthd</strong></span> daemon at system
         startup, install the <code class="filename">saslauthd.service</code> unit
         included in the "blfs-systemd-units"
@@ -135,7 +135,7 @@ install -v -dm700 /var/lib/sasl</kbd></pre></div><div class="commands" lang="en"
           parameter with your desired authentication mechanism.
           <span class="phrase">The default authentication
           mechanism is "shadow".</span>
-        </p></div></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.52.5. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+        </p></div></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           pluginviewer,
           saslauthd,
           sasldblistusers2,
@@ -164,4 +164,4 @@ install -v -dm700 /var/lib/sasl</kbd></pre></div><div class="commands" lang="en"
           </p></td></tr><tr><td><p><a id="libsasl2"></a><span class="term"><code class="filename">libsasl2.so</code></span></p></td><td><p>
             is a general purpose authentication library for server
             and client applications
-          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="lmdb.html" title="lmdb-0.9.33">Prev</a><p>lmdb-0.9.33</p></li><li class="next"><a accesskey="n" href="../part7.html" title="Graphical Environments and Libraries">Next</a><p>Graphical Environments and Libraries</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="lmdb.html" title="lmdb-0.9.33">Prev</a><p>lmdb-0.9.33</p></li><li class="next"><a accesskey="n" href="openldap.html" title="OpenLDAP-2.6.10">Next</a><p>OpenLDAP-2.6.10</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.51. lmdb-0.9.33</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libssh2.html" title="libssh2-1.11.1">Prev</a><p>libssh2-1.11.1</p></li><li class="next"><a accesskey="n" href="cyrus-sasl.html" title="Cyrus SASL-2.1.28">Next</a><p>Cyrus SASL-2.1.28</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="lmdb" name="lmdb"></a>11.51. lmdb-0.9.33</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.51.1. Introduction to lmdb</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>lmdb-0.9.33</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libssh2.html" title="libssh2-1.11.1">Prev</a><p>libssh2-1.11.1</p></li><li class="next"><a accesskey="n" href="cyrus-sasl.html" title="Cyrus SASL-2.1.28">Next</a><p>Cyrus SASL-2.1.28</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="lmdb" name="lmdb"></a>lmdb-0.9.33</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to lmdb</h2><p>
       The <span class="application">lmdb</span> package is a fast, compact, key-value
       embedded data store.  It uses memory-mapped files, so it has the read
       performance of a pure in-memory database while still offering the
@@ -8,7 +8,7 @@
                           using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
           Download (HTTP): <a class="ulink" href="https://git.openldap.org/openldap/openldap/-/archive/LMDB_0.9.33.tar.bz2">https://git.openldap.org/openldap/openldap/-/archive/LMDB_0.9.33.tar.bz2</a>
         </p></li><li class="listitem"><p>
-          Download SHA256 Sum: 
+          Download SHA256 Sum: bfd085edd5940925140484d757b92d10d19c09438b775c22ccc85b0cdd4b4279
         </p></li><li class="listitem"><p>
           Download MD5 sum: 28d648201f967e20b454df23ab4bd5b4
         </p></li><li class="listitem"><p>
@@ -17,7 +17,7 @@
           Estimated disk space required: 4.8 MB
         </p></li><li class="listitem"><p>
           Estimated build time: less than 0.1 SBU
-        </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.51.2. Installation of lmdb</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+        </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of lmdb</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
         This package extracts to openldap-LMDB_0.9.33-3a29a24777c82a0165de813ae696a5068b5add30.
       </p></div><p>
       Install <span class="application">lmdb</span> by running the following
@@ -28,11 +28,11 @@ sed -i 's| liblmdb.a||' Makefile</kbd></pre><p>
       This package does not come with a test suite.
     </p><p>
       Now, as the <code class="systemitem">root</code> user:
-    </p><pre class="install"><kbd class="command">make prefix=/usr install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.51.3. Command Explanations</h2><p>
+    </p><pre class="install"><kbd class="command">make prefix=/usr install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <span class="command"><strong>sed ... liblmdb.a ... Makefile</strong></span>: The package executables
       use a static library so it must be created.  This command suppresses installation
       of the static library.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.51.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">
           mdb_copy, mdb_dump, mdb_load, and mdb_stat
         </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
           liblmdb.so

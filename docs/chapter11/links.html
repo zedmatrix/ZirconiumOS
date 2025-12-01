@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.18. Links-2.30</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libevent.html" title="libevent-2.1.12">Prev</a><p>libevent-2.1.12</p></li><li class="next"><a accesskey="n" href="asciidoc.html" title="Asciidoc-10.2.1">Next</a><p>Asciidoc-10.2.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="Links" name="Links"></a>11.18. Links-2.30</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.18.1. Introduction to Links</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Links-2.30</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libevent.html" title="libevent-2.1.12">Prev</a><p>libevent-2.1.12</p></li><li class="next"><a accesskey="n" href="asciidoc.html" title="Asciidoc-10.2.1">Next</a><p>Asciidoc-10.2.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="Links" name="Links"></a>Links-2.30</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Links</h2><p>
       <span class="application">Links</span> is a text and graphics mode
       WWW browser. It includes support for rendering
       tables and frames, features background downloads, can display colors
@@ -17,10 +17,10 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.2 SBU
         </p></li></ul></div><h3>Links Dependencies</h3><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="libevent.html" title="11.17. libevent-2.1.12">libevent-2.1.12</a>
+      <a class="xref" href="libevent.html" title="libevent-2.1.12">libevent-2.1.12</a>
     </p><h4>Optional</h4><p class="optional">
       Graphics mode requires at least one of
-      <a class="xref" href="gpm.html" title="11.6. GPM-1.20.7">GPM-1.20.7</a> (mouse support to be used with a framebuffer-based
+      <a class="xref" href="gpm.html" title="GPM-1.20.7">GPM-1.20.7</a> (mouse support to be used with a framebuffer-based
       console),
       <a class="ulink" href="https://www.svgalib.org/">SVGAlib</a>,
       <a class="ulink" href="https://pkgs.fedoraproject.org/repo/pkgs/directfb/">
@@ -30,7 +30,7 @@
       For decoding various image formats <span class="application">Links</span>
       can utilize
       "libavif",
-      <a class="xref" href="../chapter09/libpng.html" title="9.3. libpng-1.6.50">libpng-1.6.50</a>,
+      <a class="xref" href="../chapter09/libpng.html" title="libpng-1.6.50">libpng-1.6.50</a>,
       "libjpeg",
       "librsvg", and
       "libtiff"
@@ -38,7 +38,7 @@
       For decompressing web pages that are compressed with Brotli,
       <span class="application">Links</span> can utilize "brotli"
       
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.18.2. Installation of Links</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Links</h2><p>
       Prepare <span class="application">Links</span> by running the following
       commands:
     </p><pre class="configure"><kbd class="command">./configure --prefix=/usr --mandir=/usr/share/man</kbd></pre><pre class="make"><kbd class="command">make</kbd></pre><p>
@@ -48,16 +48,16 @@
     </p><pre class="install"><kbd class="command">make install
 install -v -d -m755 /usr/share/doc/links-2.30 &amp;&amp;
 install -v -m644 doc/links_cal/* KEYS BRAILLE_HOWTO \
-    /usr/share/doc/links-2.30</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.18.3. Command Explanations</h2><p>
+    /usr/share/doc/links-2.30</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <code class="option">--enable-graphics</code>: This switch enables support
       for graphics mode.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.18.4. Configuring Links</h2><div class="sect3"><h3 class="sect3"><a id="links-config" name="links-config"></a>11.18.4.1. Config Files</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring Links</h2><div class="sect3"><h3 class="sect3"><a id="links-config" name="links-config"></a>Config Files</h3><p>
         <code class="filename">~/.links/*</code>
-      </p></div><div class="sect3"><h3 class="sect3">11.18.4.2. Configuration Information</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><p>
         <span class="application">Links</span> stores its configuration in per-user
         files in the <code class="filename">~/.links</code> directory.
         These files are created automatically when <span class="command"><strong>links</strong></span> is
         run for the first time.
-      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.18.5. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">links</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/usr/share/doc/links-2.30</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="links"></a><span class="term"><span class="command"><strong>links</strong></span></span></p></td><td><p>
+      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">links</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/usr/share/doc/links-2.30</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="links"></a><span class="term"><span class="command"><strong>links</strong></span></span></p></td><td><p>
             is a text and graphics mode WWW browser
           </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libevent.html" title="libevent-2.1.12">Prev</a><p>libevent-2.1.12</p></li><li class="next"><a accesskey="n" href="asciidoc.html" title="Asciidoc-10.2.1">Next</a><p>Asciidoc-10.2.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

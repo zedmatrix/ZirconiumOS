@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.42. Systemd-258.1 with PAM</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="shadow.html" title="Shadow-4.18.0 with PAM">Prev</a><p>Shadow-4.18.0 with PAM</p></li><li class="next"><a accesskey="n" href="libcap.html" title="libcap-2.77 with PAM">Next</a><p>libcap-2.77 with PAM</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="systemd" name="systemd"></a>11.42. Systemd-258.1 with PAM</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.42.1. Introduction to systemd</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Systemd-258.1 with PAM</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="shadow.html" title="Shadow-4.18.0 with PAM">Prev</a><p>Shadow-4.18.0 with PAM</p></li><li class="next"><a accesskey="n" href="libcap.html" title="libcap-2.77 with PAM">Next</a><p>libcap-2.77 with PAM</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="systemd" name="systemd"></a>Systemd-258.1 with PAM</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to systemd</h2><p>
       While <span class="application">systemd</span> was installed when
       building LFS, there are many features provided by the package that
       were not included in the initial installation because
@@ -20,34 +20,34 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 1.6 SBU (with tests using 4 cores)
         </p></li></ul></div><h3>systemd Dependencies</h3><h4>Recommended</h4><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
-        <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> is not strictly required to build
+        <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> is not strictly required to build
         <span class="application">systemd</span>, but the main reason to rebuild
         <span class="application">systemd</span> in BLFS (it's already built in
         LFS anyway) is for the <span class="command"><strong>systemd-logind</strong></span> daemon and
         the
         <code class="filename">pam_systemd.so</code> PAM module.
-        <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> is required for them.  All packages in
+        <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> is required for them.  All packages in
         BLFS book with a dependency on <span class="application">systemd</span>
-        expect that it has been rebuilt with <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a>.
+        expect that it has been rebuilt with <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a>.
       </p></div><p class="recommended">
-      <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> and
+      <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> and
       "polkit" (runtime)
     </p><h4>Optional</h4><p class="optional">
       "btrfs-progs", 
-      <a class="xref" href="../chapter08/curl.html" title="8.6. cURL-8.17.0">cURL-8.17.0</a>,
+      <a class="xref" href="../chapter08/curl.html" title="cURL-8.17.0">cURL-8.17.0</a>,
       
-      <a class="xref" href="../chapter10/git.html" title="10.1. Git-2.52.0">git-2.52.0</a>,
+      <a class="xref" href="../chapter10/git.html" title="Git-2.52.0">git-2.52.0</a>,
       
-      <a class="xref" href="../chapter05/libarchive.html" title="5.50. Libarchive-3.8.1">Section 5.50, “Libarchive-3.8.1”</a>,
-      <a class="xref" href="../chapter08/libidn2.html" title="8.3. libidn2-2.3.8">libidn2-2.3.8</a>,
+      <a class="xref" href="../chapter05/libarchive.html" title="Libarchive-3.8.1">the section called “Libarchive-3.8.1”</a>,
+      <a class="xref" href="../chapter08/libidn2.html" title="libidn2-2.3.8">libidn2-2.3.8</a>,
       
-      <a class="xref" href="libseccomp.html" title="11.34. libseccomp-2.6.0">libseccomp-2.6.0</a>,
+      <a class="xref" href="libseccomp.html" title="libseccomp-2.6.0">libseccomp-2.6.0</a>,
       
-      <a class="xref" href="../chapter07/make-ca.html" title="7.8. make-ca-1.16.1">make-ca-1.16.1</a>,
-      <a class="xref" href="../chapter07/p11-kit.html" title="7.7. p11-kit-0.25.10">p11-kit-0.25.10</a>,
+      <a class="xref" href="../chapter07/make-ca.html" title="make-ca-1.16.1">make-ca-1.16.1</a>,
+      <a class="xref" href="../chapter07/p11-kit.html" title="p11-kit-0.25.10">p11-kit-0.25.10</a>,
       
       
-      <a class="xref" href="rsync.html" title="11.23. rsync-3.4.1">rsync-3.4.1</a>,
+      <a class="xref" href="rsync.html" title="rsync-3.4.1">rsync-3.4.1</a>,
       
       
       
@@ -69,11 +69,11 @@
       <a class="ulink" href="https://tpm2-tss.readthedocs.io/en/latest/">tpm2-tss</a>
       and <a class="ulink" href="https://xenproject.org">Xen</a>
     </p><h4>Optional (to rebuild the manual pages)</h4><p class="optional">
-      <a class="xref" href="docbook45.html" title="11.11. docbook-xml-4.5">docbook-xml-4.5</a>,
-      <a class="xref" href="docbook-xsl.html" title="11.15. docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>,
-      <a class="xref" href="libxslt.html" title="11.12. libxslt-1.1.43">libxslt-1.1.43</a>, and
-      <a class="xref" href="ch11s13.html" title="11.13. lxml-6.0.2">lxml-6.0.2</a> (to build the index of systemd manual pages)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.42.2. Installation of systemd</h2><div class="admon warning"><img alt="[Warning]" src="../images/warning.png" /><h3>Warning</h3><p>
+      <a class="xref" href="docbook45.html" title="docbook-xml-4.5">docbook-xml-4.5</a>,
+      <a class="xref" href="docbook-xsl.html" title="docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>,
+      <a class="xref" href="libxslt.html" title="libxslt-1.1.43">libxslt-1.1.43</a>, and
+      <a class="xref" href="ch11s13.html" title="lxml-6.0.2">lxml-6.0.2</a> (to build the index of systemd manual pages)
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of systemd</h2><div class="admon warning"><img alt="[Warning]" src="../images/warning.png" /><h3>Warning</h3><p>
         If a previous version of systemd has been installed, remove a service
         that will generate errors on following boots.
       </p><pre class="root"><kbd class="command">rm -fv /usr/lib/systemd/system/systemd-update-utmp-runlevel.service</kbd></pre></div><p>
@@ -115,7 +115,7 @@
       configuration options. To test the results, issue:
     </p><pre class="make"><kbd class="command">ninja -C build test</kbd></pre><p>
      Now, as the <code class="systemitem">root</code> user:
-   </p><pre class="install"><kbd class="command">ninja -C install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.42.3. Command Explanations</h2><p>
+   </p><pre class="install"><kbd class="command">ninja -C install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>-D pamconfdir=/etc/pam.d</code></em>: Forces the PAM files to
       be installed in /etc/pam.d rather than /usr/lib/pam.d.
     </p><p>
@@ -139,7 +139,7 @@
       <span class="application">pefile</span> module and then change
       <span class="quote">“<span class="quote">disabled</span>”</span> to <span class="quote">“<span class="quote">enabled</span>”</span> in the above
       <span class="command"><strong>meson setup</strong></span> command.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.42.4. Configuring systemd</h2><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring systemd</h2><p>
       The <code class="filename">/etc/pam.d/system-session</code> file needs to
       be modified and a new file needs to be created in order for
       <span class="command"><strong>systemd-logind</strong></span> to work correctly. Run the following
@@ -175,8 +175,8 @@ EOF</kbd></pre><p>
       manager (the <span class="command"><strong>init</strong></span> process) with the
       <span class="command"><strong>systemd</strong></span> executable newly built and installed:
     </p><pre class="root"><kbd class="command">systemctl daemon-reexec</kbd></pre><div class="admon important"><img alt="[Important]" src="../images/important.png" /><h3>Important</h3><p>
-        Now ensure <a class="xref" href="shadow.html" title="11.41. Shadow-4.18.0 with PAM">Shadow-4.18.0</a> has been already rebuilt with
-        <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> support first, then logout, and login
+        Now ensure <a class="xref" href="shadow.html" title="Shadow-4.18.0 with PAM">Shadow-4.18.0</a> has been already rebuilt with
+        <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> support first, then logout, and login
         again. This will ensure that the running login session is registered
         with <span class="command"><strong>systemd-logind</strong></span>, and that a per-user systemd
         instance is running for each user owning a login session. Many BLFS
@@ -187,9 +187,9 @@ EOF</kbd></pre><p>
         If you are upgrading from a previous version of systemd and an
         initrd is used for system boot, you should generate a new initrd before
         rebooting the system.
-      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.42.5. Contents</h2><p>
+      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><p>
         A list of the installed files, along with their short
-        descriptions can be found at <a class="xref" href="../chapter05/systemd.html" title="5.78. Systemd-258.1">Section 5.78, “Systemd-258.1”</a>.
+        descriptions can be found at <a class="xref" href="../chapter05/systemd.html" title="Systemd-258.1">the section called “Systemd-258.1”</a>.
       </p><p>
         Listed below are the newly installed programs
         along with short descriptions.

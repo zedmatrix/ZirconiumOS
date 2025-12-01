@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>1.2. Creating a New Partition</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 1. Preparing Environment</h3><ul><li class="prev"><a accesskey="p" href="creatingfilesystem.html" title="Creating a File System on the Partition">Prev</a><p>Creating a File System on the Partition</p></li><li class="next"><a accesskey="n" href="settingenvironment.html" title="Setting Up the Environment">Next</a><p>Setting Up the Environment</p></li><li class="up"><a accesskey="u" href="chapter01.html" title="Chapter 1. Preparing Environment">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-partitioning-creatingpartition" name="ch-partitioning-creatingpartition"></a>1.2. Creating a New Partition</h1><div class="sect1" lang="en" xml:lang="en"><p>Like most other operating systems, LFS is usually installed on a
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Creating a New Partition</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 1. Preparing Environment</h3><ul><li class="prev"><a accesskey="p" href="creatingfilesystem.html" title="Creating a File System on the Partition">Prev</a><p>Creating a File System on the Partition</p></li><li class="next"><a accesskey="n" href="settingenvironment.html" title="Setting Up the Environment">Next</a><p>Setting Up the Environment</p></li><li class="up"><a accesskey="u" href="chapter01.html" title="Chapter 1. Preparing Environment">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-partitioning-creatingpartition" name="ch-partitioning-creatingpartition"></a>Creating a New Partition</h1><div class="sect1" lang="en" xml:lang="en"><p>Like most other operating systems, LFS is usually installed on a
   dedicated partition. The recommended approach to building an LFS system
   is to use an available empty partition or, if you have enough unpartitioned
   space, to create one.</p><p>A minimal system requires a partition of around 10 gigabytes (GB).
@@ -30,17 +30,17 @@
   an advanced topic.  These partitioning methodologies are not recommended for
   first time LFS users.</p></div><p>Remember the designation of the new partition (e.g., <code class="filename">sda5</code>). This book will refer to this as
   the LFS partition. Also remember the designation of the <code class="systemitem">swap</code> partition. These names will be
-  needed later for the <code class="filename">/etc/fstab</code> file.</p><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2">1.2.1. Other Partition Issues</h2><p>Requests for advice on system partitioning are often posted on the LFS mailing
+  needed later for the <code class="filename">/etc/fstab</code> file.</p><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2">Other Partition Issues</h2><p>Requests for advice on system partitioning are often posted on the LFS mailing
   lists. This is a highly subjective topic.  The default for most distributions
   is to use the entire drive with the exception of one small swap partition.  This
   is not optimal for LFS for several reasons.  It reduces flexibility, makes
   sharing of data across multiple distributions or LFS builds more difficult, makes
   backups more time consuming, and can waste disk space through inefficient
-  allocation of file system structures.</p><div class="sect3"><h3 class="sect3">1.2.1.1. The Root Partition</h3><p>A root LFS partition (not to be confused with the
+  allocation of file system structures.</p><div class="sect3"><h3 class="sect3">The Root Partition</h3><p>A root LFS partition (not to be confused with the
     <code class="filename">/root</code> directory) of
     twenty gigabytes is a good compromise for most systems.  It provides enough
     space to build LFS and most of BLFS, but is small enough so that multiple
-    partitions can be easily created for experimentation.</p></div><div class="sect3"><h3 class="sect3">1.2.1.2. The Swap Partition</h3><p>Most distributions automatically create a swap partition.  Generally
+    partitions can be easily created for experimentation.</p></div><div class="sect3"><h3 class="sect3">The Swap Partition</h3><p>Most distributions automatically create a swap partition.  Generally
     the recommended size of the swap partition is about twice the amount of
     physical RAM, however this is rarely needed.  If disk space is limited,
     hold the swap partition to two gigabytes and monitor the amount of disk
@@ -56,7 +56,7 @@
     reaction to swapping should be to check for an unreasonable command such as
     trying to edit a five gigabyte file. If swapping becomes a normal
     occurrence, the best solution is to purchase more RAM for your
-    system.</p></div><div class="sect3"><h3 class="sect3">1.2.1.3. The Grub Bios Partition</h3><p>If the <span class="emphasis"><em>boot disk</em></span> has been partitioned with a
+    system.</p></div><div class="sect3"><h3 class="sect3">The Grub Bios Partition</h3><p>If the <span class="emphasis"><em>boot disk</em></span> has been partitioned with a
     GUID Partition Table (GPT), then a small, typically 1 MB, partition must be
     created if it does not already exist.  This partition is not formatted, but
     must be available for GRUB to use during installation of the boot
@@ -66,7 +66,7 @@
     uses to boot the system.  This is not necessarily the drive that holds
     the LFS root partition. The disks on a system may use different
     partition table types. The necessity of the Grub Bios partition depends
-    only on the partition table type of the boot disk.</p></div></div><div class="sect3"><h3 class="sect3">1.2.1.4. Convenience Partitions</h3><p>There are several other partitions that are not required, but should
+    only on the partition table type of the boot disk.</p></div></div><div class="sect3"><h3 class="sect3">Convenience Partitions</h3><p>There are several other partitions that are not required, but should
     be considered when designing a disk layout.  The following list
     is not comprehensive, but is meant as a guide.</p><div class="itemizedlist"><ul><li class="listitem"><p>/boot – Highly recommended.  Use this partition to
       store kernels and other booting information.  To minimize potential boot

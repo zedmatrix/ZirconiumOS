@@ -1,13 +1,13 @@
 /* Global settings */
 body {
-  font-family: verdana, tahoma, arial, sans-serif;
+  font-family: verdana, tahoma, helvetica, arial, sans-serif;
   text-align: left;
   background: #fff;
   color: #222;
   margin: 1em;
   padding: 0;
   font-size: 1em;
-  line-height: 1.2em;
+  line-height: 1.2em
 }
 
 
@@ -39,8 +39,7 @@ div.dedication {
 }
 
 /* Section titles */
-h1.sect1, h1.preface, h1.part, h1.chapter, h1.appendix, .glossary h1, .index h1
- {
+h1.sect1, h1.preface, h1.part, h1.chapter, h1.appendix, .glossary h1, .index h1 {
   background: #f5f6f7;
   border-bottom: .1em solid #dbddec;
   margin-bottom:1em;
@@ -50,17 +49,17 @@ h1.sect1, h1.preface, h1.part, h1.chapter, h1.appendix, .glossary h1, .index h1
 
 /* Scrolling parts
    The header is taller for sect1 and chapter pages than on the
-   other pages.  Since we want fixed boxes, their top has to be calculated
-   by trial and errors to fit below the static header box.*/
+   other pages. Since we want a fix box, it's top has to be calculated
+   by trial and errors to fit below the static header fox.*/
 
-div.sect1, div.chapter, div.appendix, div.wrap {
-  top: 11.55em;
+div.sect1, div.chapter {
+  top: 11.9em;
 }
-div.preface, div.part, .index div.index {
-  top: 10.15em;
+div.appendix, div.preface, div.part, div.glossdiv, .index div.index {
+  top: 10.4em;
 }
-div.sect1, div.appendix, div.preface, div.part, div.chapter, div.wrap, .index div.index {
-/*  padding-left: .3em;*/
+div.sect1, div.appendix, div.preface, div.part, div.chapter, div.glossdiv, .index div.index {
+  padding-left: .3em;
   overflow:auto;
   height: auto;
   position: fixed;
@@ -68,16 +67,6 @@ div.sect1, div.appendix, div.preface, div.part, div.chapter, div.wrap, .index di
   right:1em;
   bottom: 1em;
   border-bottom: 1em solid #dbddec;
-}
-
-div.important ul {
-  padding-left: 1.5em;
-  list-style-type: disc;
-}
-
-div.important ul li p {
-  margin: 0px;
-  padding: 0px 0.6em;
 }
 
 .package, .kernel, .installation, .commands, .testing, .configuration, .content {
@@ -89,12 +78,8 @@ div.important ul li p {
   background: #f5f6f7;
   border-bottom: 0.2em solid #dbddec;
   padding-top: .1em;
-/*  margin-top: 0;*/
-}
-/*
-.lfs .package p:first-child {
   margin-top: 0;
-}*/
+}
 
 .lfs .configuration {
   background:   #fefefe;
@@ -104,9 +89,8 @@ div.important ul li p {
 .lfs .content {
   background: #f5f6f7;
   border-top: 0.2em solid #dbddec;
-  border-bottom: 0.2em solid #dbddec;
   padding-bottom: .1em;
-  margin-bottom: .5em;
+  margin-bottom: 0;
 }
 
 /* Headers */
@@ -257,12 +241,8 @@ div.toc {
   padding-left: 1em;
 }
 
-.book li.preface, .part li.appendix {
+li.preface, .part li.appendix {
   margin-left: 1em;
-}
-
-.part li.preface {
-  margin-left: 0em;
 }
 
 div.toc h3 {
@@ -310,7 +290,7 @@ span.blue {
 }
 
 .item + .indexref {
-    margin-left: 20em;
+    margin-left: 22em;
 }
 
 .secitem + .indexref {
@@ -330,7 +310,6 @@ div.admon h3 {
 
 div.admon p {
   margin-left: .5em;
-  padding-bottom: .4em;
 }
 
 div.admon pre {
@@ -361,6 +340,9 @@ div.important em, div.warning em, div.caution em {
   font-weight: bold;
 }
 
+table.simplelist {
+  margin-left: 5em;
+}
 
 /* table */
 .table p.title {
@@ -459,39 +441,18 @@ div.materials dd {
 
 .segtitle {
   float: left;
-  padding-left: 1em;
-  width: 14.5em;
 }
 
-.content .segtitle {
-  width: 12em;
-}
-
-.package .segbody {
+.package .segbody, .appendix .segbody {
   display: block;
   padding-left: 14em;
 }
 
-.appendix .segbody{
-  display: block;
-  padding-left: 16em;
-}
-
 .content .segbody {
   display: block;
-  padding-left: 13em;
+  padding-left: 12em;
 }
 
-.content table tr td:first-child
-{
-  width: 9em;
-  padding-right: 0px;
-}
-
-.content table tr td:first-child p
-{
-  padding-right: 0px;
-}
 
 /* itemizedlist */
 ul {
@@ -575,6 +536,10 @@ tt, code, kbd, pre, .command {
 
 .systemitem {
   font-style: italic;
+}
+
+code.systemitem {
+  font-weight: bold;
 }
 
 code.computeroutput {

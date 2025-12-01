@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.6. GPM-1.20.7</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="yaml-cpp.html" title="Yaml-cpp-0.8.0">Prev</a><p>Yaml-cpp-0.8.0</p></li><li class="next"><a accesskey="n" href="unix-tree.html" title="tree-2.2.1">Next</a><p>tree-2.2.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="gpm" name="gpm"></a>11.6. GPM-1.20.7</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.6.1. Introduction to GPM</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>GPM-1.20.7</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="yaml-cpp.html" title="Yaml-cpp-0.8.0">Prev</a><p>Yaml-cpp-0.8.0</p></li><li class="next"><a accesskey="n" href="unix-tree.html" title="tree-2.2.1">Next</a><p>tree-2.2.1</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="gpm" name="gpm"></a>GPM-1.20.7</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to GPM</h2><p>
       The <span class="application">GPM</span> (General Purpose Mouse daemon)
       package contains a mouse server for the console and
       <span class="command"><strong>xterm</strong></span>. It not only provides cut and paste support
@@ -30,10 +30,10 @@
           SHA256 Sum: ce5421d566d16105d042a9715aecfb70e6d5df669ec605ff4a6399cb31fc8d27
         </p></li></ul></div><h3>GPM Dependencies</h3><h4>Optional</h4><p class="optional">
       "texlive" (for documentation)
-    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="gpm-kernel" name="gpm-kernel"></a>11.6.2. Kernel Configuration</h2><p>
+    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="gpm-kernel" name="gpm-kernel"></a>Kernel Configuration</h2><p>
       Enable the following option in the kernel configuration and recompile the
       kernel if necessary:
-     </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.6.3. Installation of GPM</h2><p>
+     </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of GPM</h2><p>
       Prepare <span class="application">GPM</span> by running the following commands:
     </p><pre class="pre"><kbd class="command">patch -Np1 -i ../gpm-1.20.7-consolidated-1.patch
 patch -Np1 -i ../gpm-1.20.7-gcc15_fixes-1.patch</kbd></pre><pre class="configure"><kbd class="command">./autogen.sh
@@ -51,7 +51,7 @@ install -v -m644 conf/gpm-root.conf /etc
 
 install -v -m755 -d /usr/share/doc/gpm-1.20.7/support
 install -v -m644    doc/support/* /usr/share/doc/gpm-1.20.7/support
-install -v -m644    doc/{FAQ,HACK_GPM,README*} /usr/share/doc/gpm-1.20.7</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.6.4. Command Explanations</h2><p>
+install -v -m644    doc/{FAQ,HACK_GPM,README*} /usr/share/doc/gpm-1.20.7</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <span class="command"><strong>./autogen.sh</strong></span>: This command creates the missing
       <span class="command"><strong>configure</strong></span> script.
     </p><p>
@@ -69,16 +69,16 @@ install -v -m644    doc/{FAQ,HACK_GPM,README*} /usr/share/doc/gpm-1.20.7</kbd></
     </p><p>
       <span class="command"><strong>ln -v -sfn libgpm.so.2.1.0 /usr/lib/libgpm.so</strong></span>: This
       command is used to create (or update) the <code class="filename">.so</code> symlink to the library.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.6.5. Configuring GPM</h2><div class="sect3"><h3 class="sect3"><a id="gpm-init" name="gpm-init"></a>11.6.5.1. Systemd Unit</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring GPM</h2><div class="sect3"><h3 class="sect3"><a id="gpm-init" name="gpm-init"></a>Systemd Unit</h3><p>
         To start the <span class="command"><strong>gpm</strong></span> daemon at boot,
         install the systemd unit from the "systemd-units"
         package by running the following command as the
         <code class="systemitem">root</code> user:
-      </p><pre class="install"><kbd class="command">make install-gpm</kbd></pre></div><div class="sect3"><h3 class="sect3"><a id="gpm-config" name="gpm-config"></a>11.6.5.2. Config Files</h3><p>
+      </p><pre class="install"><kbd class="command">make install-gpm</kbd></pre></div><div class="sect3"><h3 class="sect3"><a id="gpm-config" name="gpm-config"></a>Config Files</h3><p>
         <code class="filename">/etc/gpm-root.conf</code> and
         <code class="filename">~/.gpm-root</code>: The default and individual user
         <span class="command"><strong>gpm-root</strong></span> configuration files.
-      </p></div><div class="sect3"><h3 class="sect3">11.6.5.3. Configuration Information</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><p>
         <span class="application">GPM</span> is by default started with
         the following parameters:
         <em class="parameter"><code>-m /dev/input/mice -t imps2</code></em>. If the
@@ -89,7 +89,7 @@ install -v -m644    doc/{FAQ,HACK_GPM,README*} /usr/share/doc/gpm-1.20.7</kbd></
 cat &gt; /etc/systemd/system/gpm.service.d/99-user.conf &lt;&lt; EOF
 <code class="literal">[Service]
 ExecStart=/usr/sbin/gpm <em class="replaceable"><code>&lt;list of parameters&gt;</code></em>
-</code>EOF</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.6.6. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">disable-paste, display-buttons, display-coords, get-versions, gpm,
+</code>EOF</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">disable-paste, display-buttons, display-coords, get-versions, gpm,
         gpm-root, hltest, mev, and mouse-test</span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">libgpm.so</span></div><div class="seg"><strong class="segtitle">Installed Directory: </strong><span class="segbody">/usr/share/doc/gpm-1.20.7</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="disable-paste"></a><span class="term"><span class="command"><strong>disable-paste</strong></span></span></p></td><td><p>
             is a security mechanism used to disable the paste buffer
           </p></td></tr><tr><td><p><a id="display-buttons"></a><span class="term"><span class="command"><strong>display-buttons</strong></span></span></p></td><td><p>

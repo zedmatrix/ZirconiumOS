@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>8.6. cURL-8.17.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 8. Network Utilities</h3><ul><li class="prev"><a accesskey="p" href="wget.html" title="Wget-1.25.0">Prev</a><p>Wget-1.25.0</p></li><li class="next"><a accesskey="n" href="whois.html" title="Whois-5.6.5">Next</a><p>Whois-5.6.5</p></li><li class="up"><a accesskey="u" href="chapter08.html" title="Chapter 8. Network Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-curl" name="ch-curl"></a>8.6. cURL-8.17.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">8.6.1. Introduction to cURL</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>cURL-8.17.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 8. Network Utilities</h3><ul><li class="prev"><a accesskey="p" href="wget.html" title="Wget-1.25.0">Prev</a><p>Wget-1.25.0</p></li><li class="next"><a accesskey="n" href="whois.html" title="Whois-5.6.5">Next</a><p>Whois-5.6.5</p></li><li class="up"><a accesskey="u" href="chapter08.html" title="Chapter 8. Network Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-curl" name="ch-curl"></a>cURL-8.17.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to cURL</h2><p>
       The <span class="application">cURL</span> package contains a utility
       and a library used for transferring files with URL syntax to any of
       the following protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP,
@@ -19,15 +19,15 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.3 SBU (add 4.5 SBU for tests (without valgrind, add 17 SBU with valgrind) using parallelism=4)
         </p></li></ul></div><h3>cURL Dependencies</h3><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="libpsl.html" title="8.4. libpsl-0.21.5">libpsl-0.21.5</a>
+      <a class="xref" href="libpsl.html" title="libpsl-0.21.5">libpsl-0.21.5</a>
     </p><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
         While there is an option to build the package without libpsl, both
         the upstream developers and the BLFS editors alike highly recommend
         not disabling support for libpsl due to severe security implications.
       </p></div><h4>Recommended at runtime</h4><p class="recommended">
-      <a class="xref" href="../chapter07/make-ca.html" title="7.8. make-ca-1.16.1">make-ca-1.16.1</a>
+      <a class="xref" href="../chapter07/make-ca.html" title="make-ca-1.16.1">make-ca-1.16.1</a>
     </p><h4>Optional</h4><p class="optional">
-      "brotli", "c-ares", "gnutls", <a class="xref" href="libidn2.html" title="8.3. libidn2-2.3.8">libidn2-2.3.8</a>,
+      "brotli", "c-ares", "gnutls", <a class="xref" href="libidn2.html" title="libidn2-2.3.8">libidn2-2.3.8</a>,
       "libssh2", "mitkrb", "nghttp2", "openldap",
       
       'runtime' "samba"
@@ -42,9 +42,9 @@
     </p><h4>Optional if Running the Test Suite</h4><p class="optional">
       
       "apache" and "stunnel" (for the HTTPS and FTPS tests),
-      <a class="xref" href="openssh.html" title="8.1. OpenSSH-10.2p1">OpenSSH-10.2p1</a>, and
+      <a class="xref" href="openssh.html" title="OpenSSH-10.2p1">OpenSSH-10.2p1</a>, and
       "valgrind" (this will slow the tests down and may cause failures)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">8.6.2. Installation of cURL</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of cURL</h2><p>
       First, resolve a problem with a security fix:
     </p><pre class="pre"><kbd class="command">sed -i 's/2F 5C/%2F %5C/' scripts/wcurl</kbd></pre><p>
       Configure <span class="application">cURL</span> by running the following commands:
@@ -85,7 +85,7 @@ cp -v -R docs -T /usr/share/doc/curl-8.17.0</kbd></pre><p>
       Inspect the locally created trace files <code class="filename">debugdump.txt</code>
       and <code class="filename">d.txt</code>, which contains version information,
       downloaded files information, etc. One file has the time for each action logged.
-    </p></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">8.6.3. Command Explanations</h2><p>
+    </p></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>--with-ca-path=/etc/ssl/certs</code></em>: This
       switch sets the location of the BLFS Certificate Authority store.
     </p><p>
@@ -117,7 +117,7 @@ cp -v -R docs -T /usr/share/doc/curl-8.17.0</kbd></pre><p>
       <span class="command"><strong>find docs ... -exec rm {} \;</strong></span>: This command removes
       <code class="filename">Makefiles</code> and man files from the documentation
       directory that would otherwise be installed by the commands that follow.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">8.6.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
            curl, curl-config, and wcurl
         </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
            libcurl.so

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>9.5. LVM2-2.03.36</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="dosfstools.html" title="dosfstools-4.2">Prev</a><p>dosfstools-4.2</p></li><li class="next"><a accesskey="n" href="fuse.html" title="Fuse-3.17.4">Next</a><p>Fuse-3.17.4</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-lvm2" name="ch-lvm2"></a>9.5. LVM2-2.03.36</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">9.5.1. Introduction to LVM2</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>LVM2-2.03.36</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="dosfstools.html" title="dosfstools-4.2">Prev</a><p>dosfstools-4.2</p></li><li class="next"><a accesskey="n" href="fuse.html" title="Fuse-3.17.4">Next</a><p>Fuse-3.17.4</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-lvm2" name="ch-lvm2"></a>LVM2-2.03.36</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to LVM2</h2><p>
       The <span class="application">LVM2</span> package is a set of tools that manage
       logical partitions. It allows spanning of file systems across multiple
       physical disks and disk partitions and provides for dynamic growing or
@@ -17,19 +17,19 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.4 SBU (add 9 to 48 SBU for tests, depending on disk speed and options enabled in the kernel)
         </p></li></ul></div><h3>LVM2 Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="libaio.html" title="9.2. libaio-0.3.113">libaio-0.3.113</a>
+      <a class="xref" href="libaio.html" title="libaio-0.3.113">libaio-0.3.113</a>
      </p><h4>Optional for tests</h4><p class="optional">
       'btrfs-progs',
-      <a class="xref" href="dosfstools.html" title="9.4. dosfstools-4.2">dosfstools-4.2</a>,
+      <a class="xref" href="dosfstools.html" title="dosfstools-4.2">dosfstools-4.2</a>,
       'jfsutils', 'mdadm', 'parted', 'valgrind',
-      <a class="xref" href="../chapter07/which.html" title="7.1. Which-2.23 and Alternatives">Which-2.23</a>,
+      <a class="xref" href="../chapter07/which.html" title="Which-2.23 and Alternatives">Which-2.23</a>,
       'xfsprogs',
       <a class="ulink" href="https://mirrors.edge.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/">
         reiserfsprogs</a>,
       <a class="ulink" href="https://github.com/jthornber/thin-provisioning-tools">
         thin-provisioning-tools</a>, and
         <a class="ulink" href="https://github.com/dm-vdo/vdo">vdo</a>
-    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="lvm2-kernel" name="lvm2-kernel"></a>9.5.2. Kernel Configuration</h2><p>
+    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="lvm2-kernel" name="lvm2-kernel"></a>Kernel Configuration</h2><p>
       Enable the following options in the kernel configuration
       and recompile the kernel:
     </p><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
@@ -57,7 +57,7 @@
 
 <span class="blue">K</span>ernel hacking ---&gt;
   <span class="blue">G</span>eneric Kernel Debugging Instruments ---&gt;
-    [*] M<span class="blue">a</span>gic SysRq key                                            [MAGIC_SYSRQ]</pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">9.5.3. Installation of LVM2</h2><p>
+    [*] M<span class="blue">a</span>gic SysRq key                                            [MAGIC_SYSRQ]</pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of LVM2</h2><p>
       Configure <span class="application">LVM2</span> by running the following commands:
     </p><pre class="configure"><kbd class="command">PATH+=:/usr/sbin                \
 ./configure --prefix=/usr       \
@@ -125,7 +125,7 @@ make -C libdm install</kbd></pre><p>
     </p><p>
       Now, Istall <span class="application">LVM2</span> by running the following commands:
     </p><pre class="install"><kbd class="command">make install
-make install_systemd_units</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">9.5.4. Command Explanations</h2><p>
+make install_systemd_units</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <span class="command"><strong>PATH+=:/usr/sbin</strong></span>: The path
       must contain
       <code class="filename">/usr/sbin</code> for proper system tool
@@ -149,13 +149,13 @@ make install_systemd_units</kbd></pre></div><div class="commands" lang="en" xml:
       <span class="command"><strong>make install_systemd_units</strong></span>: This is needed to install
       a unit that activates logical volumes at boot. It is not installed
       by default.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">9.5.5. Configuring LVM2</h2><div class="sect3"><h3 class="sect3"><a id="lvm2-config" name="lvm2-config"></a>9.5.5.1. Config File</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring LVM2</h2><div class="sect3"><h3 class="sect3"><a id="lvm2-config" name="lvm2-config"></a>Config File</h3><p>
         <code class="filename">/etc/lvm/lvm.conf</code>
-      </p></div><div class="sect3"><h3 class="sect3">9.5.5.2. Configuration Information</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><p>
         The default configuration still references the obsolete <code class="filename">/var/lock</code> directory. This creates
         a deadlock at boot time. Change this (as the <code class="systemitem">root</code> user):
       </p><pre class="root"><kbd class="command">sed -e '/locking_dir =/{s/#//;s/var/run/}' \
-    -i /etc/lvm/lvm.conf</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">9.5.6. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    -i /etc/lvm/lvm.conf</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           blkdeactivate, dmeventd (optional), dmsetup, fsadm, lvm, lvmdump,
           and lvm_import_vdo.
           There are also numerous symbolic links to lvm that implement specific

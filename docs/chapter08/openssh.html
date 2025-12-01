@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>8.1. OpenSSH-10.2p1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 8. Network Utilities</h3><ul><li class="prev"><a accesskey="p" href="chapter08.html" title="Network Utilities">Prev</a><p>Network Utilities</p></li><li class="next"><a accesskey="n" href="libunistring.html" title="libunistring-1.4.1">Next</a><p>libunistring-1.4.1</p></li><li class="up"><a accesskey="u" href="chapter08.html" title="Chapter 8. Network Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-openssh" name="ch-openssh"></a>8.1. OpenSSH-10.2p1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">8.1.1. Introduction to OpenSSH</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>OpenSSH-10.2p1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 8. Network Utilities</h3><ul><li class="prev"><a accesskey="p" href="chapter08.html" title="Network Utilities">Prev</a><p>Network Utilities</p></li><li class="next"><a accesskey="n" href="libunistring.html" title="libunistring-1.4.1">Next</a><p>libunistring-1.4.1</p></li><li class="up"><a accesskey="u" href="chapter08.html" title="Chapter 8. Network Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-openssh" name="ch-openssh"></a>OpenSSH-10.2p1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to OpenSSH</h2><p>
       The <span class="application">OpenSSH</span> package contains
       <span class="command"><strong>ssh</strong></span> clients and the <span class="command"><strong>sshd</strong></span> daemon.
       This is useful for encrypting authentication and subsequent traffic over
@@ -20,12 +20,12 @@
         </p></li></ul></div><h3>OpenSSH Dependencies</h3><h4>Optional</h4><p class="optional">
       "gdb" "linux-pam" (PAM configuration files from
       "shadow" are used to create openssh ones),
-      "xorg7-app" "mitkrb", <a class="xref" href="../chapter07/which.html" title="7.1. Which-2.23 and Alternatives">Which-2.23</a> (for tests),
+      "xorg7-app" "mitkrb", <a class="xref" href="../chapter07/which.html" title="Which-2.23 and Alternatives">Which-2.23</a> (for tests),
       <a class="ulink" href="https://www.thrysoee.dk/editline/">libedit</a>,
       <a class="ulink" href="https://www.libressl.org/">LibreSSL Portable</a>,
       <a class="ulink" href="https://github.com/OpenSC/OpenSC/wiki">OpenSC</a>, and
       <a class="ulink" href="http://www.citi.umich.edu/projects/smartcard/sectok.html">libsectok</a>
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">8.1.2. Installation of OpenSSH</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of OpenSSH</h2><p>
       <span class="application">OpenSSH</span> runs as two processes when connecting
       to other computers. The first process is a privileged process and controls
       the issuance of privileges as necessary. The second process communicates
@@ -65,7 +65,7 @@ install -v -m755    contrib/ssh-copy-id /usr/bin
 install -v -m644    contrib/ssh-copy-id.1 /usr/share/man/man1
 
 install -v -m755 -d /usr/share/doc/openssh-10.2p1
-install -v -m644    INSTALL LICENCE OVERVIEW README* /usr/share/doc/openssh-10.2p1</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">8.1.3. Command Explanations</h2><p>
+install -v -m644    INSTALL LICENCE OVERVIEW README* /usr/share/doc/openssh-10.2p1</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>--sysconfdir=/etc/ssh</code></em>: This prevents the
       configuration files from being installed in
       <code class="filename">/usr/etc</code>.
@@ -95,7 +95,7 @@ install -v -m644    INSTALL LICENCE OVERVIEW README* /usr/share/doc/openssh-10.2
     </p><p>
       <code class="option">--with-libedit</code>: This option enables line editing
       and history features for <span class="command"><strong>sftp</strong></span>.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">8.1.4. Configuring OpenSSH</h2><div class="sect3"><h3 class="sect3"><a id="openssh-config" name="openssh-config"></a>8.1.4.1. Config Files</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring OpenSSH</h2><div class="sect3"><h3 class="sect3"><a id="openssh-config" name="openssh-config"></a>Config Files</h3><p>
         <code class="filename">~/.ssh/*</code>,
       <code class="filename">/etc/ssh/ssh_config</code>, and
       <code class="filename">/etc/ssh/sshd_config</code>
@@ -108,7 +108,7 @@ echo "KbdInteractiveAuthentication yes" &gt;&gt; /etc/ssh/sshd_config</kbd></pre
         Additional configuration information can be found in the man
         pages for <span class="command"><strong>sshd</strong></span>, <span class="command"><strong>ssh</strong></span> and
         <span class="command"><strong>ssh-agent</strong></span>.
-      </p></div><div class="sect3"><h3 class="sect3"><a id="openssh-init" name="openssh-init"></a>8.1.4.2. Systemd Unit</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3"><a id="openssh-init" name="openssh-init"></a>Systemd Unit</h3><p>
         To start the SSH server at system boot, install the
         <code class="filename">sshd.service</code> unit included in the
         "systemd-units" package.
@@ -152,7 +152,7 @@ Description=SSH Per-Connection Server
 ExecStart=-/usr/sbin/sshd -i
 StandardInput=socket
 StandardError=journal
-EOF</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">8.1.5. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+EOF</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           scp, sftp,  ssh, ssh-add, ssh-agent,
           ssh-copy-id, ssh-keygen, ssh-keyscan, and sshd
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">

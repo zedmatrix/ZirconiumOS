@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>7.5. usbutils-019</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="libusb.html" title="libusb-1.0.29">Prev</a><p>libusb-1.0.29</p></li><li class="next"><a accesskey="n" href="libtasn1.html" title="libtasn1-4.20.0">Next</a><p>libtasn1-4.20.0</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-usbutils" name="ch-usbutils"></a>7.5. usbutils-019</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">7.5.1. Introduction to USB Utils</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>usbutils-019</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="libusb.html" title="libusb-1.0.29">Prev</a><p>libusb-1.0.29</p></li><li class="next"><a accesskey="n" href="libtasn1.html" title="libtasn1-4.20.0">Next</a><p>libtasn1-4.20.0</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-usbutils" name="ch-usbutils"></a>usbutils-019</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to USB Utils</h2><p>
       The <span class="application">USB Utils</span> package contains utilities
       used to display information about USB buses in the system and the
       devices connected to them.
@@ -15,10 +15,10 @@
         </p></li><li class="listitem"><p>
           Estimated build time: less than 0.1 SBU
         </p></li></ul></div><h3>USB Utils Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="libusb.html" title="7.4. libusb-1.0.29">libusb-1.0.29</a>
+      <a class="xref" href="libusb.html" title="libusb-1.0.29">libusb-1.0.29</a>
     </p><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="hwdata.html" title="7.2. hwdata-0.401">hwdata-0.401</a> (runtime)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">7.5.2. Installation of USB Utils</h2><p>
+      <a class="xref" href="hwdata.html" title="hwdata-0.401">hwdata-0.401</a> (runtime)
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of USB Utils</h2><p>
       Install <span class="application">USB Utils</span> by
       running the following commands:
     </p><pre class="configure"><kbd class="command">meson setup build         \
@@ -31,13 +31,13 @@
       Now, Install as the <code class="systemitem">root</code> user:
     </p><pre class="install"><kbd class="command">ninja -C build install</kbd></pre><p>
       For the <code class="filename">usb.ids</code> data file, install the
-      <a class="xref" href="hwdata.html" title="7.2. hwdata-0.401">hwdata-0.401</a> package.
+      <a class="xref" href="hwdata.html" title="hwdata-0.401">hwdata-0.401</a> package.
     </p><p>
       The script <span class="command"><strong>lsusb.py</strong></span> displays information in a more
       easily readable form than <span class="command"><strong>lsusb</strong></span>. To find the options,
       use <span class="command"><strong>lsusb.py -h</strong></span>. One form of use recommended by the
       developer is <span class="command"><strong>lsusb.py -ciu</strong></span>.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">7.5.3. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           lsusb, lsusb.py, usb-devices, and usbhid-dump
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
           None

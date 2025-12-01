@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libksba-1.6.7</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="npth.html" title="npth-1.8">Prev</a><p>npth-1.8</p></li><li class="next"><a accesskey="n" href="libassuan.html" title="libassuan-3.0.2">Next</a><p>libassuan-3.0.2</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libksba" name="libksba"></a>libksba-1.6.7</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Libksba</h2><p>
+      The <span class="application">Libksba</span> package contains a library
+      used to make X.509 certificates as well as making the CMS (Cryptographic
+      Message Syntax) easily accessible by other applications. Both
+      specifications are building blocks of S/MIME and TLS. The library does
+      not rely on another cryptographic library but provides hooks for easy
+      integration with <span class="application">Libgcrypt</span>.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.6.7.tar.bz2">https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.6.7.tar.bz2</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: cf72510b8ebb4eb6693eef765749d83677a03c79291a311040a5bfd79baab763
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 7e736de467b67c7ea88de746c31ea12f
+        </p></li><li class="listitem"><p>
+          Download size: 692 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 9.4 MB (with tests)
+        </p></li><li class="listitem"><p>
+          Estimated build time: 0.1 SBU (with tests)
+        </p></li></ul></div><h3>Libksba Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="libgpg-error.html" title="libgpg-error-1.56">libgpg-error-1.56</a>
+    </p><h4>Optional</h4><p class="optional">"valgrind"
+      
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Libksba</h2><p>
+      To Prepare <span class="application">Libksba</span> by running the
+      following commands:
+    </p><pre class="configure"><kbd class="command">./configure --prefix=/usr</kbd></pre><pre class="make"><kbd class="command">make</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">make check</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">libksba.so</span></div><div class="seg"><strong class="segtitle">Installed Directory: </strong><span class="segbody">None</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="libksba-lib"></a><span class="term"><code class="filename">libksba.so</code></span></p></td><td><p>
+            contains the cryptographic API functions
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="npth.html" title="npth-1.8">Prev</a><p>npth-1.8</p></li><li class="next"><a accesskey="n" href="libassuan.html" title="libassuan-3.0.2">Next</a><p>libassuan-3.0.2</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

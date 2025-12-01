@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.24. lm-sensors-3-6-2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="rsync.html" title="rsync-3.4.1">Prev</a><p>rsync-3.4.1</p></li><li class="next"><a accesskey="n" href="lzo.html" title="LZO-2.10">Next</a><p>LZO-2.10</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="lm-sensors" name="lm-sensors"></a>11.24. lm-sensors-3-6-2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.24.1. Introduction to lm-sensors</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>lm-sensors-3-6-2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="rsync.html" title="rsync-3.4.1">Prev</a><p>rsync-3.4.1</p></li><li class="next"><a accesskey="n" href="lzo.html" title="LZO-2.10">Next</a><p>LZO-2.10</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="lm-sensors" name="lm-sensors"></a>lm-sensors-3-6-2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to lm-sensors</h2><p>
       The <span class="application">lm-sensors</span> package provides userspace
       support for the hardware monitoring drivers in the Linux kernel.
       This is useful for monitoring the temperature of the CPU and adjusting the
@@ -17,12 +17,12 @@
         </p></li><li class="listitem"><p>
           Estimated build time: less than 0.1 SBU
         </p></li></ul></div><h3>lm-sensors Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="../chapter07/which.html" title="7.1. Which-2.23 and Alternatives">Which-2.23</a>
+      <a class="xref" href="../chapter07/which.html" title="Which-2.23 and Alternatives">Which-2.23</a>
     </p><h4>Optional</h4><p class="optional">
       <a class="ulink" href="https://oss.oetiker.ch/rrdtool/">RRDtool</a> (required to
       build the <span class="command"><strong>sensord</strong></span> program) and
       <a class="ulink" href="https://www.nongnu.org/dmidecode/">dmidecode</a> (runtime)
-    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="lm-sensors-kernel" name="lm-sensors-kernel"></a>11.24.2. Kernel Configuration</h2><p>
+    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="lm-sensors-kernel" name="lm-sensors-kernel"></a>Kernel Configuration</h2><p>
       The following configuration options attempt to cover the most common
       hardware monitoring devices in a typical desktop or laptop system.
       View the help of each (by pressing the <span class="keycap"><strong>H</strong></span> button
@@ -49,7 +49,7 @@
     &lt; /*/M&gt; <span class="blue">A</span>MD Family 15h processor power                [SENSORS_FAM15H_POWER]
     &lt; /*/M&gt; <span class="blue">I</span>ntel Core/Core2/Atom temperature sensor          [SENSORS_CORETEMP]</pre><p>
       Recompile your kernel and reboot into the new kernel.
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.24.3. Installation of lm-sensors</h2><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of lm-sensors</h2><p>
       Install <span class="application">lm-sensors</span> by running the following
       commands:
     </p><pre class="make"><kbd class="command">make PREFIX=/usr        \
@@ -64,7 +64,7 @@
 
 install -v -m755 -d /usr/share/doc/lm-sensors-3-6-2
 cp -rv README INSTALL doc/* \
-       /usr/share/doc/lm-sensors-3-6-2</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.24.4. Command Explanations</h2><p>
+       /usr/share/doc/lm-sensors-3-6-2</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>BUILD_STATIC_LIB=0</code></em>: This parameter disables
       compiling and installing the static version of
       <code class="filename">libsensors</code>.
@@ -76,9 +76,9 @@ cp -rv README INSTALL doc/* \
       to install RRDtool in <code class="filename">/usr</code>
       by running <span class="command"><strong>make prefix=/usr</strong></span> when building it.
       Otherwise, lm-sensors will not find it easily.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.24.5. Configuring lm-sensors</h2><div class="sect3"><h3 class="sect3"><a id="lm-sensors-config" name="lm-sensors-config"></a>11.24.5.1. Config File</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring lm-sensors</h2><div class="sect3"><h3 class="sect3"><a id="lm-sensors-config" name="lm-sensors-config"></a>Config File</h3><p>
         <code class="filename">/etc/sensors3.conf</code>
-      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.24.6. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           fancontrol, isadump, isaset, pwmconfig, sensors, sensors-conf-convert,
           sensors-detect, and optionally, sensord
         </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.41. Shadow-4.18.0 with PAM</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="linux-pam.html" title="Linux-PAM-1.7.1">Prev</a><p>Linux-PAM-1.7.1</p></li><li class="next"><a accesskey="n" href="systemd.html" title="Systemd-258.1 with PAM">Next</a><p>Systemd-258.1 with PAM</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="shadow" name="shadow"></a>11.41. Shadow-4.18.0 with PAM</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.41.1. Introduction to Shadow</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Shadow-4.18.0 with PAM</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="linux-pam.html" title="Linux-PAM-1.7.1">Prev</a><p>Linux-PAM-1.7.1</p></li><li class="next"><a accesskey="n" href="systemd.html" title="Systemd-258.1 with PAM">Next</a><p>Systemd-258.1 with PAM</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="shadow" name="shadow"></a>Shadow-4.18.0 with PAM</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Shadow</h2><p>
       <span class="application">Shadow</span> was indeed installed in LFS and there is
       no reason to reinstall it unless you installed
       <span class="application">Linux-PAM</span> after your LFS system was completed.
@@ -19,11 +19,11 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.2 SBU
         </p></li></ul></div><h3>Shadow Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a>
+      <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a>
     </p><h4>Optional</h4><p class="optional">
       <a class="ulink" href="https://libbsd.freedesktop.org/wiki/">libbsd</a> and
       <a class="ulink" href="https://www.openwall.com/tcb/">tcb</a>
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.41.2. Installation of Shadow</h2><div class="admon important"><img alt="[Important]" src="../images/important.png" /><h3>Important</h3><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Shadow</h2><div class="admon important"><img alt="[Important]" src="../images/important.png" /><h3>Important</h3><p>
         The installation commands shown below are for installations where
         <span class="application">Linux-PAM</span> has been installed and
         <span class="application">Shadow</span> is being reinstalled to support the
@@ -50,7 +50,7 @@ sed -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD YESCRYPT@' \
     </p><pre class="install"><kbd class="command">make exec_prefix=/usr pamddir= install</kbd></pre><p>
       The man pages were installed in LFS, but if reinstallation is
       desired, run (as the <code class="systemitem">root</code> user):
-    </p><pre class="root"><kbd class="command">make -C man install-man</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">11.41.3. Command Explanations</h2><p>
+    </p><pre class="root"><kbd class="command">make -C man install-man</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <span class="command"><strong>sed -i 's/groups$(EXEEXT) //' src/Makefile.in</strong></span>: This sed
       is used to suppress the installation of the <span class="command"><strong>groups</strong></span>
       program as the version from the <span class="application">Coreutils</span>
@@ -86,29 +86,29 @@ sed -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD YESCRYPT@' \
       <code class="filename">/etc/pam.d</code>. The shipped
       configuration does not work with the BLFS PAM configuration and we
       will create these configuration files explicitly.
-    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.41.4. Configuring Linux-PAM to Work with Shadow</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring Linux-PAM to Work with Shadow</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
         The rest of this page is devoted to configuring
         <span class="application">Shadow</span> to work properly with
         <span class="application">Linux-PAM</span>.
-      </p></div><div class="sect3"><h3 class="sect3"><a id="pam.d" name="pam.d"></a>11.41.4.1. Config Files</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3"><a id="pam.d" name="pam.d"></a>Config Files</h3><p>
         <code class="filename">/etc/pam.d/*</code> or alternatively
         <code class="filename">/etc/pam.conf</code>,
         <code class="filename">/etc/login.defs</code> and
         <code class="filename">/etc/security/*</code>
-      </p></div><div class="sect3"><h3 class="sect3">11.41.4.2. Configuration Information</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><p>
         Configuring your system to use <span class="application">Linux-PAM</span> can
         be a complex task. The information below will provide a basic setup so
         that <span class="application">Shadow</span>'s login and password
         functionality will work effectively with
         <span class="application">Linux-PAM</span>. Review the information and links
-        on the <a class="xref" href="linux-pam.html" title="11.40. Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> page for further configuration
+        on the <a class="xref" href="linux-pam.html" title="Linux-PAM-1.7.1">Linux-PAM-1.7.1</a> page for further configuration
         information. For information specific to integrating
         <span class="application">Shadow</span>, <span class="application">Linux-PAM</span>
         and <span class="application">libpwquality</span>, you can visit the
         following link:
       </p><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
             <a class="ulink" href="http://web.archive.org/web/20240812102759/https://deer-run.com/users/hal/linux_passwords_pam.html">http://web.archive.org/web/20240812102759/https://deer-run.com/users/hal/linux_passwords_pam.html</a>
-          </p></li></ul></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="pam-login-defs"></a>11.41.4.2.1. Configuring /etc/login.defs</h5></div></div></div><p>
+          </p></li></ul></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="pam-login-defs"></a>Configuring /etc/login.defs</h5></div></div></div><p>
           The <span class="command"><strong>login</strong></span> program currently performs many functions
           which <span class="application">Linux-PAM</span> modules should now handle.
           The following <span class="command"><strong>sed</strong></span> command will comment out the
@@ -135,7 +135,7 @@ for FUNCTION in FAIL_DELAY               \
                 ENVIRON_FILE
 do
     sed -i "s/^${FUNCTION}/# &amp;/" /etc/login.defs
-done</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25320"></a>11.41.4.2.2. Configuring the /etc/pam.d/ Files</h5></div></div></div><p>
+done</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25353"></a>Configuring the /etc/pam.d/ Files</h5></div></div></div><p>
           As mentioned previously in the <span class="application">Linux-PAM</span>
           instructions, <span class="application">Linux-PAM</span> has two supported
           methods for configuration. The commands below assume that you've
@@ -150,7 +150,7 @@ done</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 cl
           in the <code class="filename">/etc/pam.d/</code> directory
           (or add the contents to the <code class="filename">/etc/pam.conf</code> file)
           using the following commands:
-        </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25331"></a>11.41.4.2.3. 'login'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/login &lt;&lt; "EOF"
+        </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25364"></a>'login'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/login &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/login
 
 # Set failure delay before next prompt to 3 seconds
@@ -193,13 +193,13 @@ session   include     system-session
 password  include     system-password
 
 # End /etc/pam.d/login</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25336"></a>11.41.4.2.4. 'passwd'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/passwd &lt;&lt; "EOF"
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25369"></a>'passwd'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/passwd &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/passwd
 
 password  include     system-password
 
 # End /etc/pam.d/passwd</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25341"></a>11.41.4.2.5. 'su'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/su &lt;&lt; "EOF"
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25374"></a>'su'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/su &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/su
 
 # always allow root
@@ -226,7 +226,7 @@ session   required    pam_env.so
 session   include     system-session
 
 # End /etc/pam.d/su</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25346"></a>11.41.4.2.6. 'chpasswd' and 'newusers'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chpasswd &lt;&lt; "EOF"
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25379"></a>'chpasswd' and 'newusers'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chpasswd &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/chpasswd
 
 # always allow root
@@ -240,7 +240,7 @@ password  include     system-password
 # End /etc/pam.d/chpasswd</code>
 EOF
 
-sed -e s/chpasswd/newusers/ /etc/pam.d/chpasswd &gt;/etc/pam.d/newusers</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25351"></a>11.41.4.2.7. 'chage'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chage &lt;&lt; "EOF"
+sed -e s/chpasswd/newusers/ /etc/pam.d/chpasswd &gt;/etc/pam.d/newusers</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25384"></a>'chage'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chage &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/chage
 
 # always allow root
@@ -251,7 +251,7 @@ auth      include     system-auth
 account   include     system-account
 
 # End /etc/pam.d/chage</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25356"></a>11.41.4.2.8. Other shadow utilities</h5></div></div></div><pre class="root"><kbd class="command">for PROGRAM in chfn chgpasswd chsh groupadd groupdel \
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25389"></a>Other shadow utilities</h5></div></div></div><pre class="root"><kbd class="command">for PROGRAM in chfn chgpasswd chsh groupadd groupdel \
                groupmems groupmod useradd userdel usermod
 do
     install -v -m644 /etc/pam.d/chage /etc/pam.d/${PROGRAM}
@@ -277,14 +277,14 @@ done</kbd></pre><div class="admon warning"><img alt="[Warning]" src="../images/w
             file to <code class="filename">/etc/login.defs</code>). If you fail to do
             this and the errors remain, you will be unable to log into your
             system.
-          </p></div></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="pam-access"></a>11.41.4.2.9. Configuring Login Access</h5></div></div></div><p>
+          </p></div></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="pam-access"></a>Configuring Login Access</h5></div></div></div><p>
           Instead of using the <code class="filename">/etc/login.access</code> file for
           controlling access to the system, <span class="application">Linux-PAM</span>
           uses the <code class="filename">pam_access.so</code> module
           along with the <code class="filename">/etc/security/access.conf</code> file.
           Rename the <code class="filename">/etc/login.access</code> file using the
           following command:
-        </p><pre class="root"><kbd class="command">if [ -f /etc/login.access ]; then mv -v /etc/login.access{,.NOUSE}; fi</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="pam-limits"></a>11.41.4.2.10. Configuring Resource Limits</h5></div></div></div><p>
+        </p><pre class="root"><kbd class="command">if [ -f /etc/login.access ]; then mv -v /etc/login.access{,.NOUSE}; fi</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="pam-limits"></a>Configuring Resource Limits</h5></div></div></div><p>
           Instead of using the <code class="filename">/etc/limits</code> file for
           limiting usage of system resources,
           <span class="application">Linux-PAM</span> uses the
@@ -296,7 +296,7 @@ done</kbd></pre><div class="admon warning"><img alt="[Warning]" src="../images/w
           out.  Errors in the configuration can cause a permanent
           lockout requiring a boot from an external source to correct the
           problem.
-          </p></div></div></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.41.5. Contents</h2><p>
+          </p></div></div></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><p>
       A list of the installed files, along with their short descriptions can be
-      found at <a class="xref" href="../chapter05/shadow.html" title="5.29. Shadow-4.18.0">Section 5.29, “Shadow-4.18.0”</a>.
+      found at <a class="xref" href="../chapter05/shadow.html" title="Shadow-4.18.0">the section called “Shadow-4.18.0”</a>.
     </p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="linux-pam.html" title="Linux-PAM-1.7.1">Prev</a><p>Linux-PAM-1.7.1</p></li><li class="next"><a accesskey="n" href="systemd.html" title="Systemd-258.1 with PAM">Next</a><p>Systemd-258.1 with PAM</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

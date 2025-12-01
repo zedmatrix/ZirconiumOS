@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>9.8. efivar-39</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="freetype2.html" title="FreeType-2.14.1">Prev</a><p>FreeType-2.14.1</p></li><li class="next"><a accesskey="n" href="efibootmgr.html" title="efibootmgr-18">Next</a><p>efibootmgr-18</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-efivar" name="ch-efivar"></a>9.8. efivar-39</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">9.8.1. Introduction to efivar</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>efivar-39</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="freetype2.html" title="FreeType-2.14.1">Prev</a><p>FreeType-2.14.1</p></li><li class="next"><a accesskey="n" href="efibootmgr.html" title="efibootmgr-18">Next</a><p>efibootmgr-18</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-efivar" name="ch-efivar"></a>efivar-39</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to efivar</h2><p>
       The <span class="application">efivar</span> package provides tools and
       libraries to manipulate EFI variables.
     </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
@@ -16,7 +16,7 @@
         </p></li></ul></div><h3>efivar Dependencies</h3><h4>Optional</h4><p class="optional">
       <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a> (for the man page of
       <span class="command"><strong>efisecdb</strong></span>)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">9.8.2. Installation of efivar</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of efivar</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
         This package cannot function properly on a 32-bit system with a
         64-bit UEFI implementation.  Don't install this package (or
         efibootmgr) on 32-bit system unless you are absolutely sure you have
@@ -36,7 +36,7 @@
       do not need <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a>.  Still as the <code class="systemitem">root</code> user,
       install these man pages:
     </p><pre class="install"><kbd class="command">install -vm644 docs/efivar.1 /usr/share/man/man1
-install -vm644 docs/*.3      /usr/share/man/man3</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">9.8.3. Command Explanations</h2><p>
+install -vm644 docs/*.3      /usr/share/man/man3</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>ENABLE_DOCS=0</code></em>: Disable the generation of man
       pages, in order to allow building this package without
       <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a> installed.
@@ -45,7 +45,7 @@ install -vm644 docs/*.3      /usr/share/man/man3</kbd></pre></div><div class="co
       This option overrides the default library directory of the package
       (<code class="filename">/usr/lib64</code>, which is not used
       by LFS).
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">9.8.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           efisecdb and efivar
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
           libefiboot.so, libefisec.so, and libefivar.so

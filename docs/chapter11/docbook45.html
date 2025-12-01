@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>11.11. docbook-xml-4.5</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libxml2.html" title="libxml2-2.15.1">Prev</a><p>libxml2-2.15.1</p></li><li class="next"><a accesskey="n" href="libxslt.html" title="libxslt-1.1.43">Next</a><p>libxslt-1.1.43</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="DocBook" name="DocBook"></a>11.11. docbook-xml-4.5</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">11.11.1. Introduction to DocBook-4.5 XML DTD</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>docbook-xml-4.5</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 11. Post Networking, Compilers and Markup Language</h3><ul><li class="prev"><a accesskey="p" href="libxml2.html" title="libxml2-2.15.1">Prev</a><p>libxml2-2.15.1</p></li><li class="next"><a accesskey="n" href="libxslt.html" title="libxslt-1.1.43">Next</a><p>libxslt-1.1.43</p></li><li class="up"><a accesskey="u" href="chapter11.html" title="Chapter 11. Post Networking, Compilers and Markup Language">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="DocBook" name="DocBook"></a>docbook-xml-4.5</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to DocBook-4.5 XML DTD</h2><p>
       The <span class="application">DocBook-4.5 XML DTD</span>-4.5
       package contains document type definitions for verification of XML data
       files against the DocBook rule set. These are useful for structuring
@@ -18,9 +18,9 @@
         </p></li><li class="listitem"><p>
           Estimated build time: less than 0.1 SBU
         </p></li></ul></div><h3>DocBook-4.5 XML DTD Dependencies</h3><h4>Required</h4><p class="required">
-      <a class="xref" href="../chapter05/libarchive.html" title="5.50. Libarchive-3.8.1">Section 5.50, “Libarchive-3.8.1”</a> and
-      <a class="xref" href="libxml2.html" title="11.10. libxml2-2.15.1">libxml2-2.15.1</a>
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">11.11.2. Installation of DocBook-4.5 XML DTD</h2><p>
+      <a class="xref" href="../chapter05/libarchive.html" title="Libarchive-3.8.1">the section called “Libarchive-3.8.1”</a> and
+      <a class="xref" href="libxml2.html" title="libxml2-2.15.1">libxml2-2.15.1</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of DocBook-4.5 XML DTD</h2><p>
       Install <span class="application">DocBook XML DTD</span> by running the
       following commands as the <code class="systemitem">root</code> user:
     </p><pre class="install"><kbd class="command">install -v -d -m755 /usr/share/xml/docbook/xml-dtd-4.5
@@ -113,10 +113,10 @@ xmlcatalog --noout --add "delegateSystem" \
 xmlcatalog --noout --add "delegateURI"    \
     "http://www.oasis-open.org/docbook/"  \
     "file:///etc/xml/docbook"             \
-    /etc/xml/catalog</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">11.11.3. Configuring DocBook-4.5 XML DTD</h2><div class="sect3"><h3 class="sect3"><a id="docbook-config" name="docbook-config"></a>11.11.3.1. Config Files</h3><p>
+    /etc/xml/catalog</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring DocBook-4.5 XML DTD</h2><div class="sect3"><h3 class="sect3"><a id="docbook-config" name="docbook-config"></a>Config Files</h3><p>
         <code class="filename">/etc/xml/catalog</code> and
         <code class="filename">/etc/xml/docbook</code>
-      </p></div><div class="sect3"><h3 class="sect3">11.11.3.2. Configuration Information</h3><div class="admon caution"><img alt="[Caution]" src="../images/caution.png" /><h3>Caution</h3><p>
+      </p></div><div class="sect3"><h3 class="sect3">Configuration Information</h3><div class="admon caution"><img alt="[Caution]" src="../images/caution.png" /><h3>Caution</h3><p>
           Various BLFS packages request
           <span class="application">DocBook XML DTD</span> version 4.x before
           V4.5, so the following step must be done for
@@ -156,7 +156,7 @@ do
     "http://www.oasis-open.org/docbook/xml/$DTDVERSION/" \
     "file:///etc/xml/docbook"                            \
     /etc/xml/catalog
-done</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">11.11.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Files: </strong><span class="segbody">DTD, MOD and ENT files</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/etc/xml and /usr/share/xml/docbook/xml-dtd-4.5</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="DTD-files"></a><span class="term"><code class="filename">DTD files</code></span></p></td><td><p>
+done</kbd></pre></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Files: </strong><span class="segbody">DTD, MOD and ENT files</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/etc/xml and /usr/share/xml/docbook/xml-dtd-4.5</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="DTD-files"></a><span class="term"><code class="filename">DTD files</code></span></p></td><td><p>
             contain a document type definition which defines the element
             types and the attribute lists that can be used in the corresponding
             <code class="filename">XML</code> files

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>7.4. libusb-1.0.29</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="pciutils.html" title="pciutils-3.14.0">Prev</a><p>pciutils-3.14.0</p></li><li class="next"><a accesskey="n" href="usbutils.html" title="usbutils-019">Next</a><p>usbutils-019</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-libusb" name="ch-libusb"></a>7.4. libusb-1.0.29</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">7.4.1. Introduction to libusb</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libusb-1.0.29</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="pciutils.html" title="pciutils-3.14.0">Prev</a><p>pciutils-3.14.0</p></li><li class="next"><a accesskey="n" href="usbutils.html" title="usbutils-019">Next</a><p>usbutils-019</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-libusb" name="ch-libusb"></a>libusb-1.0.29</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libusb</h2><p>
       The <span class="application">libusb</span> package contains a library
       used by some applications for USB device access.
     </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
@@ -15,7 +15,7 @@
             Estimated build time: less than 0.1 SBU
           </p></li></ul></div><h3>libusb Dependencies</h3><h4>Optional</h4><p class="optional">
           Doxygen
-        </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2">7.4.2. Configuring Libusb</h2><p><a id="libusb-kernel"></a>
+        </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2">Configuring Libusb</h2><p><a id="libusb-kernel"></a>
       To access raw USB devices (those not treated as a disk by the mass-storage
       driver), appropriate support must be available in the kernel.  Check your
       kernel configuration:
@@ -28,14 +28,14 @@
     # even if the system has USB 2.0 ports:
     &lt; /*/M&gt; <span class="blue">x</span>HCI HCD (USB 3.0) support                            [USB_XHCI_HCD]
     &lt; /*/M&gt; <span class="blue">E</span>HCI HCD (USB 2.0) support                            [USB_EHCI_HCD]
-    &lt; /*/M&gt; <span class="blue">O</span>HCI HCD (USB 1.1) support                            [USB_OHCI_HCD]</pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">7.4.3. Installation of libusb</h2><p>
+    &lt; /*/M&gt; <span class="blue">O</span>HCI HCD (USB 1.1) support                            [USB_OHCI_HCD]</pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libusb</h2><p>
       Install <span class="application">libusb</span> by running the following
       commands:
     </p><pre class="configure"><kbd class="command">./configure --prefix=/usr --disable-static</kbd></pre><p>To Compile the package, issue:</p><pre class="make"><kbd class="command">make</kbd></pre><p>
       This package does not come with a test suite.
     </p><p>
       Now, Install the package:
-    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">7.4.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p><pre class="install"><kbd class="command">make install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           None
         </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
           libusb-1.0.so

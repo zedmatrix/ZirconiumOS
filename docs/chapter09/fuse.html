@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>9.6. Fuse-3.17.4</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="lvm2.html" title="LVM2-2.03.36">Prev</a><p>LVM2-2.03.36</p></li><li class="next"><a accesskey="n" href="freetype2.html" title="FreeType-2.14.1">Next</a><p>FreeType-2.14.1</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-fuse3" name="ch-fuse3"></a>9.6. Fuse-3.17.4</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">9.6.1. Introduction to Fuse</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Fuse-3.17.4</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="lvm2.html" title="LVM2-2.03.36">Prev</a><p>LVM2-2.03.36</p></li><li class="next"><a accesskey="n" href="freetype2.html" title="FreeType-2.14.1">Next</a><p>FreeType-2.14.1</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-fuse3" name="ch-fuse3"></a>Fuse-3.17.4</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Fuse</h2><p>
       <span class="application">FUSE</span> (Filesystem in Userspace) is a simple
       interface for userspace programs to export a virtual filesystem to the
       Linux kernel. <span class="application">Fuse</span> also aims to provide a
@@ -21,7 +21,7 @@
       "pytest" (required for tests), and
       <a class="ulink" href="https://pypi.org/project/looseversion/">looseversion</a>
       (for tests)
-    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="fuse-kernel" name="fuse-kernel"></a>9.6.2. Kernel Configuration</h2><p>
+    </p></div><div class="kernel" lang="en" xml:lang="en"><h2 class="sect2"><a id="fuse-kernel" name="fuse-kernel"></a>Kernel Configuration</h2><p>
       Enable the following options in the kernel configuration and recompile the
       kernel if necessary:
     </p><pre class="screen"><span class="blue">F</span>ile systems ---&gt;
@@ -30,7 +30,7 @@
       tests:
     </p><pre class="screen"><span class="blue">F</span>ile systems ---&gt;
   &lt;*/M&gt; <span class="blue">F</span>USE (Filesystem in Userspace) support                         [FUSE_FS]
-  &lt;*/M&gt;   <span class="blue">C</span>haracter device in Userspace support                           [CUSE]</pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">9.6.3. Installation of Fuse</h2><p> The <span class="command"><strong>sed ... util/meson.build</strong></span> command removes the installation
+  &lt;*/M&gt;   <span class="blue">C</span>haracter device in Userspace support                           [CUSE]</pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Fuse</h2><p> The <span class="command"><strong>sed ... util/meson.build</strong></span> command removes the installation
       of an unnecessary boot script and udev rule. After applying this change,
       prepare <span class="application">Fuse</span> by running the following commands: </p><pre class="pre"><kbd class="command">sed -i '/^udev/,$ s/^/#/' util/meson.build</kbd></pre><pre class="configure"><kbd class="command">meson setup build --prefix=/usr --buildtype=release</kbd></pre><p>
       Compile <span class="application">Fuse</span> by running the following commands:
@@ -54,7 +54,7 @@ chmod u+s /usr/bin/fusermount3
 
 cp -Rv doc/html -T /usr/share/doc/fuse-3.17.4
 install -v -m644   doc/{README.NFS,kernel.txt} \
-                   /usr/share/doc/fuse-3.17.4</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2"><a id="fuse-configuration" name="fuse-configuration"></a>9.6.4. Configuring fuse</h2><div class="sect3"><h3 class="sect3"><a id="fuse-config" name="fuse-config"></a>9.6.4.1. Config Files</h3><p>
+                   /usr/share/doc/fuse-3.17.4</kbd></pre></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2"><a id="fuse-configuration" name="fuse-configuration"></a>Configuring fuse</h2><div class="sect3"><h3 class="sect3"><a id="fuse-config" name="fuse-config"></a>Config Files</h3><p>
         Some options regarding mount policy can be set in the file
         <code class="filename">/etc/fuse.conf</code>. To install the file run the
         following command as the <code class="systemitem">root</code>
@@ -72,7 +72,7 @@ install -v -m644   doc/{README.NFS,kernel.txt} \
 EOF</kbd></pre><p>
         Additional information about the meaning of the configuration
         options are found in the man page.
-      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">9.6.5. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           fusermount3 and mount.fuse3
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
           libfuse3.so

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>7.7. p11-kit-0.25.10</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="libtasn1.html" title="libtasn1-4.20.0">Prev</a><p>libtasn1-4.20.0</p></li><li class="next"><a accesskey="n" href="make-ca.html" title="make-ca-1.16.1">Next</a><p>make-ca-1.16.1</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-p11-kit" name="ch-p11-kit"></a>7.7. p11-kit-0.25.10</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">7.7.1. Introduction to p11-kit</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>p11-kit-0.25.10</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 7. System Utilities</h3><ul><li class="prev"><a accesskey="p" href="libtasn1.html" title="libtasn1-4.20.0">Prev</a><p>libtasn1-4.20.0</p></li><li class="next"><a accesskey="n" href="make-ca.html" title="make-ca-1.16.1">Next</a><p>make-ca-1.16.1</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 7. System Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-p11-kit" name="ch-p11-kit"></a>p11-kit-0.25.10</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to p11-kit</h2><p>
       The <span class="application">p11-kit</span> package provides a way to load and
       enumerate PKCS #11 (a Cryptographic Token Interface Standard) modules.
     </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
@@ -14,10 +14,10 @@
         </p></li><li class="listitem"><p>
           Estimated build time: 0.7 SBU (with tests)
         </p></li></ul></div><h3>p11-kit Dependencies</h3><h4>Recommended</h4><p class="recommended">
-      <a class="xref" href="libtasn1.html" title="7.6. libtasn1-4.20.0">libtasn1-4.20.0</a>
+      <a class="xref" href="libtasn1.html" title="libtasn1-4.20.0">libtasn1-4.20.0</a>
     </p><h4>Recommended (runtime)</h4><p class="recommended">
-      <a class="xref" href="make-ca.html" title="7.8. make-ca-1.16.1">make-ca-1.16.1</a>
-    </p><h4>Optional</h4><p class="optional">"gtk-doc" ,"libxslt" and "nss" (runtime)</p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">7.7.2. Installation of p11-kit</h2><p>
+      <a class="xref" href="make-ca.html" title="make-ca-1.16.1">make-ca-1.16.1</a>
+    </p><h4>Optional</h4><p class="optional">"gtk-doc" ,"libxslt" and "nss" (runtime)</p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of p11-kit</h2><p>
       Prepare the distribution specific anchor hook:
     </p><pre class="pre"><kbd class="command">sed '20,$ d' -i trust/trust-extract-compat &amp;&amp;
 
@@ -46,14 +46,14 @@ ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so</kbd></pre><div class="
       transparently make the system CAs available to
       <span class="application">NSS</span> aware applications, rather than the static
       list provided by <code class="filename">/usr/lib/libnssckbi.so</code>.
-    </p></div></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">7.7.3. Command Explanations</h2><p>
+    </p></div></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
       <em class="parameter"><code>-D trust_paths=/etc/pki/anchors</code></em>: this switch
       sets the location of trusted certificates used by libp11-kit.so.
     </p><p>
       <code class="option">-D hash_impl=freebl</code>: Use this switch if you want to
       use the Freebl library from <span class="application">NSS</span> for SHA1 and
       MD5 hashing.
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">7.7.4. Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
           p11-kit, trust, and update-ca-certificates
         </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
           libp11-kit.so and p11-kit-proxy.so
