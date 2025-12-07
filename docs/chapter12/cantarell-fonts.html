@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Cantarell Fonts-0.303</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="freeglut.html" title="Freeglut-3.8.0">Prev</a><p>Freeglut-3.8.0</p></li><li class="next"><a accesskey="n" href="dejavu-fonts-ttf.html" title="Dejavu Fonts TTF-2.37">Next</a><p>Dejavu Fonts TTF-2.37</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="cantarell-fonts" name="cantarell-fonts"></a>Cantarell Fonts-0.303</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>The Cantarell typeface family is a contemporary Humanist sans serif,
+            and is used by the GNOME project for its user interface. </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://cantarell.gnome.org/releases/cantarell-fonts-0.303.tar.xz">https://cantarell.gnome.org/releases/cantarell-fonts-0.303.tar.xz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 54f644b5edf5da9a48a942452e38ff1bc2382aa25cabb8742222247944f1dc3a
+          </p></li><li class="listitem"><p>
+            Extracted Size: 330 KB
+          </p></li><li class="listitem"><p>
+            Build Size: 3,417.9 KB
+          </p></li><li class="listitem"><p>
+            Build Time: less than 0.1 SBU
+          </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Cantarell Fonts</h2><p>
+          Prepare <span class="application">Cantarell</span> by running the following commands:
+        </p><pre class="userinput"><kbd class="command">meson setup build \
+    -D useprebuilt=true    \
+    -D buildappstream=true \
+    -D buildstatics=false  \
+    -D buildvf=true        \
+    -D fontsdir=/usr/share/fonts/cantarell</kbd></pre><p>
+          To build <span class="application">Cantarell</span>, issue:
+        </p><pre class="userinput"><kbd class="command">ninja -C build</kbd></pre><p>
+          Now Install the font, as the <code class="systemitem">root</code> user:
+        </p><pre class="userinput"><kbd class="command">ninja -C build install</kbd></pre><p> Now update the font cache </p><pre class="root"><kbd class="command">fc-cache -v /usr/share/fonts/dejavu</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/usr/share/fonts/cantarell and
+                  /usr/local/share/metainfo</span></div></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="freeglut.html" title="Freeglut-3.8.0">Prev</a><p>Freeglut-3.8.0</p></li><li class="next"><a accesskey="n" href="dejavu-fonts-ttf.html" title="Dejavu Fonts TTF-2.37">Next</a><p>Dejavu Fonts TTF-2.37</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

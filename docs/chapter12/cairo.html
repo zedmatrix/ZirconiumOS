@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Cairo-1.18.4</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="libdrm.html" title="Libdrm-2.4.129">Prev</a><p>Libdrm-2.4.129</p></li><li class="next"><a accesskey="n" href="graphene.html" title="Graphene-1.10.8">Next</a><p>Graphene-1.10.8</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="cairo" name="cairo"></a>Cairo-1.18.4</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Cairo</h2><p>
+      <span class="application">Cairo</span> is a 2D graphics library with support for
+      multiple output devices. Currently supported output targets include the
+      <span class="application">X</span> Window System, Win32, image buffers,
+      PostScript, PDF and SVG. Experimental backends include OpenGL, Quartz and
+      XCB file output. <span class="application">Cairo</span> is designed to produce
+      consistent output on all output media while taking advantage of display
+      hardware acceleration when available (e.g. through the X Render
+      Extension). The <span class="application">Cairo</span> API provides operations
+      similar to the drawing operators of PostScript and PDF. Operations in
+      <span class="application">Cairo</span> include stroking and filling cubic
+      Bézier splines, transforming and compositing translucent images,
+      and antialiased text rendering. All drawing operations can be transformed
+      by any
+      <a class="ulink" href="https://en.wikipedia.org/wiki/Affine_transformation">affine
+      transformation</a> (scale, rotation, shear, etc.)
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://www.cairographics.org/releases/cairo-1.18.4.tar.xz">https://www.cairographics.org/releases/cairo-1.18.4.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: db575fb41bbda127e0147e401f36f8ac
+        </p></li><li class="listitem"><p>
+          Download size: 59,375.3 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 79,698.6 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 1.0 SBU
+        </p></li></ul></div><h3>Cairo Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="../chapter09/libpng.html" title="libpng-1.6.50">libpng-1.6.50</a> and
+      <a class="xref" href="pixman.html" title="Pixman-0.46.4">Pixman-0.46.4</a>
+    </p><h4>Recommended</h4><p class="recommended">
+      <a class="xref" href="fontconfig.html" title="Fontconfig-2.17.1">Fontconfig-2.17.1</a>,
+      <a class="xref" href="glib2.html" title="GLib-2.86.2">GLib-2.86.2</a> (required for most GUIs), and
+      <a class="xref" href="xorg7-libraries.html" title="Xorg7 Libraries">Xorg7 Libraries</a>
+    </p><h4>Optional</h4><p class="optional">
+      ,
+      
+      <a class="xref" href="libdrm.html" title="Libdrm-2.4.129">libdrm-2.4.129</a>,
+      
+      <a class="xref" href="../chapter11/libxml2.html" title="libxml2-2.15.1">libxml2-2.15.1</a>,
+      
+      
+      
+      and <a class="ulink" href="https://www.freedesktop.org/wiki/Software/libspectre/">libspectre</a>
+    </p><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+        There is a circular dependency between cairo and harfbuzz.
+        If cairo is built before harfbuzz, it is necessary to rebuild cairo
+        after harfbuzz in order to build pango.
+      </p></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Cairo</h2><p>
+      Prepare <span class="application">Cairo</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">meson setup build --prefix=/usr --buildtype=release</kbd></pre><pre class="make"><kbd class="command">ninja -C build</kbd></pre><p>
+      This package does not have a working test suite.
+      
+    </p><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">ninja -C build install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <code class="option">-D xlib-xcb=enabled</code>: This switch enables several
+      experimental Xlib/XCB functions used by some window managers.
+    </p><p>
+      <code class="option">-D gtk_doc=true</code>: Use this parameter if GTK-Doc is
+      installed and you wish to create and install the documentation.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          cairo-trace
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libcairo.so,
+          libcairo-gobject.so, and
+          libcairo-script-interpreter.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/cairo and
+          /usr/lib/cairo
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="cairo-trace"></a><span class="term"><span class="command"><strong>cairo-trace</strong></span></span></p></td><td><p>
+            generates a log of all calls made by an application to
+            <span class="application">Cairo</span>
+          </p></td></tr><tr><td><p><a id="libcairo"></a><span class="term"><code class="filename">libcairo.so</code></span></p></td><td><p>
+            contains the 2D graphics functions required for rendering to the
+            various output targets
+          </p></td></tr><tr><td><p><a id="libcairo-gobject"></a><span class="term"><code class="filename">libcairo-gobject.so</code></span></p></td><td><p>
+            contains functions that integrate
+            <span class="application">Cairo</span> with
+            <span class="application">Glib</span>'s GObject type system
+          </p></td></tr><tr><td><p><a id="libcairo-script-interpreter"></a><span class="term"><code class="filename">libcairo-script-interpreter.so</code></span></p></td><td><p>
+            contains the script interpreter functions for executing and
+            manipulating <span class="application">Cairo</span> execution traces
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libdrm.html" title="Libdrm-2.4.129">Prev</a><p>Libdrm-2.4.129</p></li><li class="next"><a accesskey="n" href="graphene.html" title="Graphene-1.10.8">Next</a><p>Graphene-1.10.8</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

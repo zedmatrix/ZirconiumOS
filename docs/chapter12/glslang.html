@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>glslang-16.0.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="vulkan-loader.html" title="Vulkan-Loader-1.4.328.1">Prev</a><p>Vulkan-Loader-1.4.328.1</p></li><li class="next"><a accesskey="n" href="libva.html" title="libva-2.22.0">Next</a><p>libva-2.22.0</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="glslang" name="glslang"></a>glslang-16.0.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Glslang</h2><p>
+      The <span class="application">Glslang</span> package contains an frontend and
+      validator for OpenGL, OpenGL ES, and Vulkan shaders.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/KhronosGroup/glslang/archive/16.0.0/glslang-16.0.0.tar.gz">https://github.com/KhronosGroup/glslang/archive/16.0.0/glslang-16.0.0.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 172385478520335147d3b03a1587424af0935398184095f24beab128a254ecc7
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: e59dfe645b7894119f2a676132812d6c
+        </p></li><li class="listitem"><p>
+          Download size: 41,992.2 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 171,920.2 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: 1.00 SBU
+        </p></li></ul></div><h3>Glslang Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="../chapter11/cmake.html" title="CMake-4.1.3">CMake-4.1.3</a> and
+      <a class="xref" href="spirv-tools.html" title="SPIRV-Tools-1.4.328.1">SPIRV-Tools-1.4.328.1</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Glslang</h2><p>
+      Prepare <span class="application">Glslang</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">cmake -B build \
+      -D CMAKE_INSTALL_PREFIX=/usr     \
+      -D CMAKE_BUILD_TYPE=Release      \
+      -D ALLOW_EXTERNAL_SPIRV_TOOLS=ON \
+      -D BUILD_SHARED_LIBS=ON          \
+      -D GLSLANG_TESTS=ON              \
+      -G Ninja</kbd></pre><pre class="make"><kbd class="command">ninja -C build</kbd></pre><p>
+      To test the results, issue: <span class="command"><strong></strong></span>.
+    </p><pre class="test"><kbd class="command">ninja -C build test</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="install"><kbd class="command">ninja -C build install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <em class="parameter"><code>-D ALLOW_EXTERNAL_SPIRV_TOOLS=ON</code></em>: This switch allows
+      the build system to use the system-installed copy of
+      <a class="xref" href="spirv-tools.html" title="SPIRV-Tools-1.4.328.1">SPIRV-Tools-1.4.328.1</a>, instead of downloading and
+      installing it's own copy.
+    </p><p>
+      <em class="parameter"><code>-D BUILD_SHARED_LIBS=ON</code></em>: This switch builds shared
+      versions of the libraries, and does not install static versions of them.
+    </p><p>
+      <em class="parameter"><code>-D GLSLANG_TESTS=ON</code></em>: This switch builds the 
+      tests for the package.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          glslang and
+          glslang-validator (symlink to glslang)
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libglslang.so,
+          libglslang-default-resource-limits.so, and
+          libSPIRV.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/glslang and
+          /usr/lib/cmake/glslang
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="glslang-prog"></a><span class="term"><span class="command"><strong>glslang</strong></span></span></p></td><td><p>
+            provides a front end and validator for OpenGL, OpenGL ES, and
+            Vulkan shaders
+          </p></td></tr><tr><td><p><a id="libglslang"></a><span class="term"><code class="filename">libglslang.so</code></span></p></td><td><p>
+            contains functions that provide a front-end and validator for
+            OpenGL, OpenGL ES, and Vulkan shaders to other programs
+          </p></td></tr><tr><td><p><a id="libSPIRV"></a><span class="term"><code class="filename">libSPIRV.so</code></span></p></td><td><p>
+            provides a front-end and generator for SPIR-V binaries
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="vulkan-loader.html" title="Vulkan-Loader-1.4.328.1">Prev</a><p>Vulkan-Loader-1.4.328.1</p></li><li class="next"><a accesskey="n" href="libva.html" title="libva-2.22.0">Next</a><p>libva-2.22.0</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

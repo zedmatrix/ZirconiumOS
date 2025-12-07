@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Wayland-Protocols-1.45</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="wayland.html" title="Wayland-1.24.0">Prev</a><p>Wayland-1.24.0</p></li><li class="next"><a accesskey="n" href="spirv-headers.html" title="SPIRV-Headers-1.4.328.1">Next</a><p>SPIRV-Headers-1.4.328.1</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="wayland-protocols" name="wayland-protocols"></a>Wayland-Protocols-1.45</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Wayland-Protocols</h2><p>
+      The <span class="application">Wayland-Protocols</span> package contains
+      additional Wayland protocols that add functionality outside of
+      protocols already in the Wayland core.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/1.45/downloads/wayland-protocols-1.45.tar.xz">https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/1.45/downloads/wayland-protocols-1.45.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 4d2b2a9e3e099d017dc8107bf1c334d27bb87d9e4aff19a0c8d856d17cd41ef0
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: a235baeab3f1c6d57ac4c7c00ecd7e48
+        </p></li><li class="listitem"><p>
+          Download size: 928.6 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 8,696.7 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.5 SBU
+        </p></li></ul></div><h3>Wayland-protocols Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="wayland.html" title="Wayland-1.24.0">Wayland-1.24.0</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Wayland-protocols</h2><p>
+      Prepare <span class="application">Wayland-protocols</span> by running the following
+      commands:
+    </p><pre class="configure"><kbd class="command">meson setup build --prefix=/usr --buildtype=release</kbd></pre><p>
+      Now Build, the package issue:
+    </p><pre class="make"><kbd class="command">ninja -C build</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="test"><kbd class="command">ninja -C build test</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">ninja -C build install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/share/wayland-protocols
+        </span></div></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="wayland.html" title="Wayland-1.24.0">Prev</a><p>Wayland-1.24.0</p></li><li class="next"><a accesskey="n" href="spirv-headers.html" title="SPIRV-Headers-1.4.328.1">Next</a><p>SPIRV-Headers-1.4.328.1</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

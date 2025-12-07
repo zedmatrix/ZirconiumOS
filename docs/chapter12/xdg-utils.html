@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>xdg-utils-1.2.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="dbus.html" title="dbus-1.16.2">Prev</a><p>dbus-1.16.2</p></li><li class="next"><a accesskey="n" href="xdg-user-dirs.html" title="Xdg-user-dirs-0.19">Next</a><p>Xdg-user-dirs-0.19</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="xdg-utils" name="xdg-utils"></a>xdg-utils-1.2.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to xdg-utils</h2><p>
+      <span class="application">xdg-utils</span> is a set of command line
+      tools that assist applications with a variety of desktop integration tasks.
+      It is required for Linux Standards Base (LSB) conformance.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v1.2.1/xdg-utils-v1.2.1.tar.gz">https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v1.2.1/xdg-utils-v1.2.1.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: f6b648c064464c2636884c05746e80428110a576f8daacf46ef2e554dcfdae75
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 4c72585a98ba8f775cb9e72b066cc0df
+        </p></li><li class="listitem"><p>
+          Download size: 760.8 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 1,220.0 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.5 SBU
+        </p></li></ul></div><h3>xdg-utils Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="../chapter11/xmlto.html" title="xmlto-0.0.29">xmlto-0.0.29</a> with one of
+      "lynx",
+      <a class="xref" href="../chapter11/links.html" title="Links-2.30">Links-2.30</a>, or
+      <a class="ulink" href="https://w3m.sourceforge.net/">W3m</a>
+    </p><h4>Required (runtime)</h4><p class="required">
+      <a class="xref" href="xorg7-apps.html" title="Xorg7 Applications">Xorg7 Applications</a>
+    </p><h4>Optional (runtime)</h4><p class="optional">
+      <a class="xref" href="dbus.html" title="dbus-1.16.2">dbus-1.16.2</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of xdg-utils</h2><p>
+      Compile <span class="application">xdg-utils</span> with the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">./configure --prefix=/usr</kbd></pre><pre class="userinput"><kbd class="command">make</kbd></pre><div class="admon caution"><img alt="[Caution]" src="../images/caution.png" /><h3>Caution</h3><p>
+        The tests for the scripts must be made from an X-Window
+        based session.  There are several run-time requirements to run
+        the tests including a browser and an MTA.
+        Running the tests as <code class="systemitem">root</code> user is not recommended.
+      </p></div><p>
+      To run the tests, issue:
+    </p><pre class="userinput"><kbd class="command">make -k test</kbd></pre><p>
+      Now install it as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">make install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">xdg-desktop-menu, xdg-desktop-icon, xdg-mime, xdg-icon-resource,
+        xdg-open, xdg-email, xdg-screensaver, xdg-settings</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">None</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="xdg-desktop-menu"></a><span class="term"><span class="command"><strong>xdg-desktop-menu</strong></span></span></p></td><td><p>
+            is a command line tool for (un)installing desktop menu items
+          </p></td></tr><tr><td><p><a id="xdg-desktop-icon"></a><span class="term"><span class="command"><strong>xdg-desktop-icon</strong></span></span></p></td><td><p>
+            is a command line tool for (un)installing icons to the desktop
+          </p></td></tr><tr><td><p><a id="xdg-mime"></a><span class="term"><span class="command"><strong>xdg-mime</strong></span></span></p></td><td><p>
+            is a command line tool for querying information about file
+            type handling and adding descriptions for new file types
+          </p></td></tr><tr><td><p><a id="xdg-icon-resource"></a><span class="term"><span class="command"><strong>xdg-icon-resource</strong></span></span></p></td><td><p>
+            is a command line tool for (un)installing icon resources
+          </p></td></tr><tr><td><p><a id="xdg-open"></a><span class="term"><span class="command"><strong>xdg-open</strong></span></span></p></td><td><p>
+            opens a file or URL in the user's preferred application
+          </p></td></tr><tr><td><p><a id="xdg-email"></a><span class="term"><span class="command"><strong>xdg-email</strong></span></span></p></td><td><p>
+            opens the user's preferred e-mail composer in order to send a mail
+            message
+          </p></td></tr><tr><td><p><a id="xdg-screensaver"></a><span class="term"><span class="command"><strong>xdg-screensaver</strong></span></span></p></td><td><p>
+            is a command line tool for controlling the screensaver
+          </p></td></tr><tr><td><p><a id="xdg-settings"></a><span class="term"><span class="command"><strong>xdg-settings</strong></span></span></p></td><td><p>
+            is a command line tool for managing various settings from
+            the desktop environment
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="dbus.html" title="dbus-1.16.2">Prev</a><p>dbus-1.16.2</p></li><li class="next"><a accesskey="n" href="xdg-user-dirs.html" title="Xdg-user-dirs-0.19">Next</a><p>Xdg-user-dirs-0.19</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

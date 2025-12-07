@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libxkbcommon-1.13.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 12. Preparing Xorg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="xorg7-fonts.html" title="Xorg7 Fonts">Prev</a><p>Xorg7 Fonts</p></li><li class="next"><a accesskey="n" href="xkeyboard-config.html" title="XKeyboardConfig-2.46">Next</a><p>XKeyboardConfig-2.46</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libxkbcommon" name="libxkbcommon"></a>libxkbcommon-1.13.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libxkbcommon</h2><p>
+      <span class="application">libxkbcommon</span> is a keymap compiler and
+      support library which processes a reduced subset of keymaps as
+      defined by the XKB specification.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/lfs-book/libxkbcommon/archive/v1.13.0/libxkbcommon-1.13.0.tar.gz">https://github.com/lfs-book/libxkbcommon/archive/v1.13.0/libxkbcommon-1.13.0.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 78c4604d574d5a3081eb1ee34ec099a7644951a05e6c5eea322c7d64d9861e80
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: ff4270718434eb0f311b74e5967e295d
+        </p></li><li class="listitem"><p>
+          Download size: 6,884.2 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 27,516.9 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.5 SBU
+        </p></li></ul></div><p>
+      https://github.com/lfs-book/libxkbcommon/blob/lfs/action/README.md
+      in case the new release doesn't show up in the fork.
+      
+    </p><h3>libxkbcommon Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="xkeyboard-config.html" title="XKeyboardConfig-2.46">xkeyboard-config-2.46</a> (runtime)
+    </p><h4>Recommended</h4><p class="recommended">
+       <a class="xref" href="libxcb.html" title="libxcb-1.17.0">libxcb-1.17.0</a>,
+       <a class="xref" href="wayland.html" title="Wayland-1.24.0">Wayland-1.24.0</a>, and
+       <a class="xref" href="wayland-protocols.html" title="Wayland-Protocols-1.45">wayland-protocols-1.45</a>
+    </p><h4>Optional</h4><p class="optional">
+      "doxygen" (for generating the documentation) and
+      <span class="command"><strong>Xvfb</strong></span>
+      <a class="xref" href="xorg-server.html" title="Xorg-Server-21.1.21">Xorg-Server-21.1.21</a> or
+      <a class="xref" href="xwayland.html" title="Xwayland-24.1.9">Xwayland-24.1.9</a>)
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libxkbcommon</h2><p>
+      Prepare <span class="application">libxkbcommon</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">meson setup build          \
+      --prefix=/usr        \
+      --buildtype=release  \
+      -D enable-docs=false</kbd></pre><pre class="userinput"><kbd class="command">ninja -C build</kbd></pre><p>
+      To test the results, ensure <span class="command"><strong>Xvfb</strong></span> and
+      <span class="application">xkeyboard-config</span> are available, then issue:
+    </p><pre class="userinput"><kbd class="command">ninja -C build test</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">ninja -C build install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <code class="option">-D enable-docs=true</code>: This switch enables
+      documentation generation. <span class="application">"doxygen"</span> is
+      required.
+    </p><p>
+      <span class="command"><strong>mv -v /usr/share/doc/libxkbcommon{,-1.13.0}</strong></span>:
+      If you built the documentation, use this command to install 
+      it in a versioned directory.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          xkbcli
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libxkbcommon.so,
+          libxkbcommon-x11.so, and
+          libxkbregistry.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/xkbcommon,
+          /usr/libexec/xkbcommon, and
+          (optionally) /usr/share/doc/libxkbcommon-1.13.0
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="xkbcli"></a><span class="term"><span class="command"><strong>xkbcli</strong></span></span></p></td><td><p>
+            provides a debugger and compiler for XKB keymaps
+          </p></td></tr><tr><td><p><a id="libxkbcommon-lib"></a><span class="term"><code class="filename">libxkbcommon.so</code></span></p></td><td><p>
+            contains the <span class="application">libxkbcommon</span> API functions
+          </p></td></tr><tr><td><p><a id="libxkbcommon-x11"></a><span class="term"><code class="filename">libxkbcommon-x11.so</code></span></p></td><td><p>
+            contains the <span class="application">libxkbcommon</span> X11 specific API
+            functions
+          </p></td></tr><tr><td><p><a id="libxkbregistry"></a><span class="term"><code class="filename">libxkbregistry.so</code></span></p></td><td><p>
+           contains a list of available XKB models, layouts, and variants for a
+           given ruleset
+         </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="xorg7-fonts.html" title="Xorg7 Fonts">Prev</a><p>Xorg7 Fonts</p></li><li class="next"><a accesskey="n" href="xkeyboard-config.html" title="XKeyboardConfig-2.46">Next</a><p>XKeyboardConfig-2.46</p></li><li class="up"><a accesskey="u" href="chapter12.html" title="Chapter 12. Preparing Xorg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
