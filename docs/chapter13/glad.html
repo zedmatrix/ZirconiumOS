@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Glad-2.0.8</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="libwebp.html" title="libwebp-1.6.0">Prev</a><p>libwebp-1.6.0</p></li><li class="next"><a accesskey="n" href="libplacebo.html" title="libplacebo-7.351.0">Next</a><p>libplacebo-7.351.0</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="glad" name="glad"></a>Glad-2.0.8</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Glad</h2><p>
+      The <span class="application">Glad</span> package contains a generator for
+      loading Vulkan, OpenGL, EGL, GLES, and GLX contexts.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/Dav1dde/glad/archive/v2.0.8/glad-2.0.8.tar.gz">https://github.com/Dav1dde/glad/archive/v2.0.8/glad-2.0.8.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 44f06f9195427c7017f5028d0894f57eb216b0a8f7c4eda7ce883732aeb2d0fc
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 028c39d581e6b53e53871f1dc21cf442
+        </p></li><li class="listitem"><p>
+          Download size: 6,172.0 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 12,726.4 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.1 SBU
+        </p></li></ul></div><h3>Glad Dependencies</h3><h4>Optional (required to run the tests)</h4><p class="optional">
+      
+      
+      <a class="xref" href="../chapter12/xorg7-libraries.html" title="Xorg7 Libraries">Xorg7 Libraries</a>,
+      <a class="ulink" href="https://www.glfw.org/">glfw</a>, and
+      <a class="ulink" href="http://winehq.org/">WINE</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Glad</h2><p>
+      Install <span class="application">Glad</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      This package comes with a test suite, but it cannot be run without
+      installing the external dependencies listed above.
+    </p><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">pip3 install --no-index --find-links dist --no-user glad2</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          glad
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/lib/python3.14/site-packages/glad and
+          /usr/lib/python3.14/site-packages/glad2-2.0.8.dist-info
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="glad-prog"></a><span class="term"><span class="command"><strong>glad</strong></span></span></p></td><td><p>
+            generates loaders for Vulkan, OpenGL, EGL, GLES, and GLX contexts
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libwebp.html" title="libwebp-1.6.0">Prev</a><p>libwebp-1.6.0</p></li><li class="next"><a accesskey="n" href="libplacebo.html" title="libplacebo-7.351.0">Next</a><p>libplacebo-7.351.0</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

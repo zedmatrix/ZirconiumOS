@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Liba52-0.8.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="fdk-aac.html" title="fdk-aac-2.0.3">Prev</a><p>fdk-aac-2.0.3</p></li><li class="next"><a accesskey="n" href="libaom.html" title="libaom-3.13.1">Next</a><p>libaom-3.13.1</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="a52dec" name="a52dec"></a>Liba52-0.8.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Liba52</h2><p>
+      <span class="application">a52dec</span> is a free library for decoding
+      ATSC A/52 (also known as AC-3) streams. The A/52 standard is used
+      in a variety of applications, including digital television and DVD.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://distfiles.adelielinux.org/source/a52dec/a52dec-0.8.0.tar.gz">https://distfiles.adelielinux.org/source/a52dec/a52dec-0.8.0.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 03c181ce9c3fe0d2f5130de18dab9bd8bc63c354071515aa56983c74a9cffcc9
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 4debeed0257f5312e84d92711a5cfcec
+        </p></li><li class="listitem"><p>
+          Download size: 1,809.2 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 3,352.5 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.5 SBU
+        </p></li></ul></div><h4>Optional</h4><p class="optional">
+      <a class="ulink" href="https://cr.yp.to/djbfft.html">djbfft</a>
+    </p><p class="usernotes">
+      Editor Notes: <a class="ulink" href="https://wiki.linuxfromscratch.org/blfs/wiki/a52dec">https://wiki.linuxfromscratch.org/blfs/wiki/a52dec</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Liba52</h2><p>
+      Prepare <span class="application">a52dec</span> by running the
+      following commands:
+    </p><pre class="userinput"><kbd class="command">./configure --prefix=/usr           \
+            --mandir=/usr/share/man \
+            --enable-shared         \
+            --disable-static        \
+            CFLAGS="${CFLAGS:--g -O3} -fPIC"</kbd></pre><pre class="userinput"><kbd class="command">make</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="userinput"><kbd class="command">make check</kbd></pre><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">make install
+cp a52dec/a52_internal.h /usr/include/a52dec
+install -v -m644 -D doc/a52dec.txt /usr/share/doc/a52dec-0.8.0/a52dec.txt</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <em class="parameter"><code>CFLAGS="${CFLAGS:--g -O3} -fPIC"</code></em>: This appends
+      <code class="option">-fPIC</code> to <code class="envar">CFLAGS</code> but use
+      <code class="option">-g -O3</code> (the default of this package) instead of an
+      empty string when <code class="envar">CFLAGS</code> is not set.
+      This is needed to compile <span class="application">a52dec</span> without
+      runtime text relocation.  Runtime text relocation is prohibited on
+      x86_64 so <code class="option">-fPIC</code> is strictly required.  On 32-bit x86
+      runtime text relocation is allowed but it's insecure and it may waste
+      physical RAM, so <code class="option">-fPIC</code> is still better.
+    </p><p>
+      <span class="command"><strong>cp a52dec/a52_internal.h ...</strong></span>: Copying this header
+      file into /usr/include/a52dec allows some other programs (such as
+      <span class="application">xine-lib</span>) to compile and link against a system
+      installed <span class="application">a52dec</span>.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">a52dec and extract_a52</span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">a52dec.so</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">/usr/include/a52dec and
+        /usr/share/doc/a52dec-0.8.0</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><span class="term"><span class="command"><strong>a52dec</strong></span></span></p></td><td><p>
+            plays ATSC A/52 audio streams
+          </p></td></tr><tr><td><p><a id="extract_a52"></a><span class="term"><span class="command"><strong>extract_a52</strong></span></span></p></td><td><p>
+            extracts ATSC A/52 audio from an MPEG stream
+          </p></td></tr><tr><td><p><a id="a52dec-lib"></a><span class="term"><code class="filename">a52dec.so</code></span></p></td><td><p>
+            provides functions for the programs dealing with ATSC A/52 streams
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="fdk-aac.html" title="fdk-aac-2.0.3">Prev</a><p>fdk-aac-2.0.3</p></li><li class="next"><a accesskey="n" href="libaom.html" title="libaom-3.13.1">Next</a><p>libaom-3.13.1</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>faac-1.31.1</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="faad2.html" title="faad2-2.11.2">Prev</a><p>faad2-2.11.2</p></li><li class="next"><a accesskey="n" href="mpg123.html" title="mpg123-1.33.3">Next</a><p>mpg123-1.33.3</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="faac" name="faac"></a>faac-1.31.1</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to faac</h2><p>
+      The <span class="application">faac</span> application is an encoder for a lossy sound
+      compression scheme specified in MPEG-2 Part 7 and MPEG-4 Part 3 standards
+      and known as Advanced Audio Coding (AAC). This encoder is useful for
+      producing files that can be played back on an iPod. Moreover, the iPod
+      does not understand other sound compression schemes used in video files.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/lfs-book/faac/archive/v1.31.1/faac-1.31.1.tar.gz">https://github.com/lfs-book/faac/archive/v1.31.1/faac-1.31.1.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 24f9ca44d75eca534b27671b129e6cb2d718a8be63cc476a0d0d745ad5d1299e
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: f9eeff03ad4a27a4973fe728ab065924
+        </p></li><li class="listitem"><p>
+          Download size: 851.5 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 6,321.2 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.1 SBU
+        </p></li></ul></div><h3>FAAC Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="faad2.html" title="faad2-2.11.2">faad2-2.11.2</a>, and
+      <a class="xref" href="alsa-utils.html" title="alsa-utils-1.2.14">alsa-utils-1.2.14</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of faac</h2><p>
+      Prepare <span class="application">faac</span> by running the
+      following commands:
+    </p><pre class="userinput"><kbd class="command">./bootstrap
+./configure --prefix=/usr --disable-static</kbd></pre><pre class="userinput"><kbd class="command">make</kbd></pre><p>
+      This package does not come with a test suite. However, basic
+      functionality can be tested by encoding a sample WAV file (the sample
+      file is installed by the <span class="application">Alsa-Utils</span> package.
+      Then, decode the result using the <span class="command"><strong>faad</strong></span> program and
+      play back the decoded file <span class="command"><strong>aplay</strong></span> issue the following commands:
+    </p><pre class="userinput"><kbd class="command">./frontend/faac -o Front_Left.mp4 /usr/share/sounds/alsa/Front_Left.wav
+faad Front_Left.mp4
+aplay Front_Left.wav</kbd></pre><p>
+      <span class="command"><strong>aplay</strong></span> should identify the file as
+      <code class="computeroutput">Signed 16 bit Little Endian, Rate 48000 Hz, Stereo</code>, and
+      you should hear the words <span class="quote">“<span class="quote">front left.</span>”</span>
+    </p><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">make install</kbd></pre></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2">Other AAC encoders</h2><p>
+      The quality of <span class="application">faac</span> is not up
+      to par with the best AAC encoders currently available. Also, it only
+      supports AAC and not High Efficiency AAC (also known as aacPlus), which
+      provides better quality at low bitrates by means of using the
+      <span class="quote">“<span class="quote">spectral band replication</span>”</span> technology. One example of an
+      alternative program for producing AAC and HE-AAC streams is:
+    </p><div class="itemizedlist"><ul><li class="listitem"><p>
+          <a class="ulink" href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1459">3GPP
+          Enhanced aacPlus general audio codec</a>:
+          available in the source form, can encode only HE-AAC up to 48 kbps
+          out of the box, but the maximum bitrate can be changed by editing
+          the tuning table in the
+          <code class="filename">FloatFR_sbrenclib/src/sbr_main.c</code> file.
+        </p></li></ul></div><p>
+      Note, however, that the iPod supports only the Low Complexity AAC profile,
+      which is the default in faac, but is completely unavailable in the 3GPP
+      encoder.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">faac</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">libfaac.so and libmp4v2.so</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">None</span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="faac-prog"></a><span class="term"><span class="command"><strong>faac</strong></span></span></p></td><td><p>
+            is a command-line AAC encoder
+          </p></td></tr><tr><td><p><a id="libfaac"></a><span class="term"><code class="filename">libfaac.so</code></span></p></td><td><p>
+            contains functions for encoding AAC streams
+          </p></td></tr><tr><td><p><a id="libmp4v2"></a><span class="term"><code class="filename">libmp4v2.so</code></span></p></td><td><p>
+            contains functions for creating and manipulating MP4 files
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="faad2.html" title="faad2-2.11.2">Prev</a><p>faad2-2.11.2</p></li><li class="next"><a accesskey="n" href="mpg123.html" title="mpg123-1.33.3">Next</a><p>mpg123-1.33.3</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

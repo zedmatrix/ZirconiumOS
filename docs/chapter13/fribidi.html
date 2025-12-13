@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>FriBidi-1.0.16</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="chapter13.html" title="Preparing FFMpeg and Support Libraries">Prev</a><p>Preparing FFMpeg and Support Libraries</p></li><li class="next"><a accesskey="n" href="bubblewrap.html" title="Bubblewrap-0.11.0">Next</a><p>Bubblewrap-0.11.0</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="fribidi" name="fribidi"></a>FriBidi-1.0.16</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to FriBidi</h2><p>
+      The <span class="application">FriBidi</span> package is an implementation
+      of the <a class="ulink" href="https://www.unicode.org/reports/tr9/">Unicode
+      Bidirectional Algorithm (BIDI)</a>. This is useful for supporting
+      Arabic and Hebrew alphabets in other packages.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz">https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 1b1cde5b235d40479e91be2f0e88a309e3214c8ab470ec8a2744d82a5a9ea05c
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: 333ad150991097a627755b752b87f9ff
+        </p></li><li class="listitem"><p>
+          Download size: 1.1 MB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 22 MB (with tests)
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.1 SBU (with tests)
+        </p></li></ul></div><h3>FriBidi Dependencies</h3><h4>Optional</h4><p class="optional">
+      <a class="ulink" href="https://www.ciselant.de/c2man/c2man.html">c2man (to build man pages)</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of FriBidi</h2><p>
+      Prepare <span class="application">FriBidi</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">meson setup build --prefix=/usr --buildtype=release</kbd></pre><pre class="userinput"><kbd class="command">ninja -C build</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="userinput"><kbd class="command">ninja -C build test</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">ninja -C build install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Program: </strong><span class="segbody">
+          fribidi
+        </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
+          libfribidi.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directory: </strong><span class="segbody">
+          /usr/include/fribidi
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="fribidi-prog"></a><span class="term"><span class="command"><strong>fribidi</strong></span></span></p></td><td><p>
+            is a command-line interface to the
+            <code class="filename">libfribidi</code> library and
+            can be used to convert a logical string to visual output
+          </p></td></tr><tr><td><p><a id="libfribidi"></a><span class="term"><code class="filename">libfribidi.so</code></span></p></td><td><p>
+            contains functions used to implement the
+            <a class="ulink" href="https://www.unicode.org/reports/tr9/">Unicode
+            Bidirectional Algorithm</a>
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="chapter13.html" title="Preparing FFMpeg and Support Libraries">Prev</a><p>Preparing FFMpeg and Support Libraries</p></li><li class="next"><a accesskey="n" href="bubblewrap.html" title="Bubblewrap-0.11.0">Next</a><p>Bubblewrap-0.11.0</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

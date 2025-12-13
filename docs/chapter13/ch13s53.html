@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>PyGObject-3.54.5</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="ch13s52.html" title="PyCairo-1.28.0">Prev</a><p>PyCairo-1.28.0</p></li><li class="next"><a accesskey="n" href="glslc.html" title="glslc from shaderc-2025.4">Next</a><p>glslc from shaderc-2025.4</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="pygobject3" name="pygobject3"></a>PyGObject-3.54.5</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to PyGObject3 Module</h2><p>
+        <span class="application">PyGObject3</span> provides
+        <span class="application">Python</span> bindings to the GObject
+        class from <span class="application">GLib</span>.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://download.gnome.org/sources//pygobject/3.54/pygobject-3.54.5.tar.gz">https://download.gnome.org/sources//pygobject/3.54/pygobject-3.54.5.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: b6656f6348f5245606cf15ea48c384c7f05156c75ead206c1b246c80a22fb585
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 613245df25142059c2b1c04850e23532
+          </p></li><li class="listitem"><p>
+            Download size: 4,265.6 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 8,548.4 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div><h3>PyGObject3 Dependencies</h3><h4>Required</h4><p class="required">
+        <a class="xref" href="../chapter12/glib2.html" title="GLib-2.86.2">GLib-2.86.2</a> (with GObject Introspection)
+      </p><h4>Recommended</h4><p class="recommended">
+        <a class="xref" href="ch13s52.html" title="PyCairo-1.28.0">PyCairo-1.28.0</a>
+      </p><h4>Optional (for the tests)</h4><p class="optional">
+        "GTK4",
+        <a class="ulink" href="https://pypi.python.org/pypi/pep8">pep8</a>,
+        <a class="ulink" href="https://pypi.python.org/pypi/pyflakes">pyflakes</a>, and
+        "pytest"
+      </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of PyGObject3</h2><p>
+      Prepare <span class="application">pygobject3</span> by running the following
+      commands:
+    </p><p>
+      First, if you do not have <span class="application">"gtk4"</span> installed, remove two
+      tests:
+    </p><pre class="userinput"><kbd class="command">mv -v tests/test_gdbus.py{,.nouse}
+mv -v tests/test_overrides_gtk.py{,.nouse}</kbd></pre><pre class="userinput"><kbd class="command">meson setup build --prefix=/usr --buildtype=release</kbd></pre><pre class="userinput"><kbd class="command">ninja -C build</kbd></pre><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
+        An already active graphical session with a bus address is necessary
+        to run the tests.  To test the results, issue:
+      </p><pre class="userinput"><kbd class="command">ninja -C build test</kbd></pre></div><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">ninja -C build install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <em class="parameter"><code>--buildtype=release</code></em>: Specify a buildtype
+      suitable for stable releases of the package, as the default may
+      produce unoptimized binaries.
+    </p><p>
+        <code class="option">-D pycairo=disabled</code>: use this switch if you do not
+        have <a class="xref" href="ch13s52.html" title="PyCairo-1.28.0">PyCairo-1.28.0</a> installed.
+      </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+            None
+           </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/gi/_gi{,_cairo}.cpython-314-x86_64-linux-gnu.so
+           </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/include/pygobject-3.0 and
+            /usr/lib/python3.14/site-packages/{gi,pygtkcompat}
+          </span></div></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="ch13s52.html" title="PyCairo-1.28.0">Prev</a><p>PyCairo-1.28.0</p></li><li class="next"><a accesskey="n" href="glslc.html" title="glslc from shaderc-2025.4">Next</a><p>glslc from shaderc-2025.4</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

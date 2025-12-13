@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Opus-1.5.2</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="speex-pkg.html" title="Speex-1.2.1 and Speexdsp-1.2.1">Prev</a><p>Speex-1.2.1 and Speexdsp-1.2.1</p></li><li class="next"><a accesskey="n" href="lame.html" title="LAME-3.100">Next</a><p>LAME-3.100</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="opus" name="opus"></a>Opus-1.5.2</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Opus</h2><p>
+      <span class="application">Opus</span> is a lossy audio compression format
+      developed by the Internet Engineering Task Force (IETF) that is
+      particularly suitable for interactive speech and audio transmission over
+      the Internet. This package provides the Opus development library and
+      headers.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz">https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 65c1d2f78b9f2fb20082c38cbe47c951ad5839345876e46941612ee87f9a7ce1
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: c40b3a1fbdbb9a7aa178600b88200c76
+        </p></li><li class="listitem"><p>
+          Download size: 22,517.5 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 27,132.8 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 1.0 SBU
+        </p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Opus</h2><p>
+      Prepare <span class="application">Opus</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">meson setup build --prefix=/usr \
+            --buildtype=release  \
+            -D docdir=/usr/share/doc/opus-1.5.2</kbd></pre><p>
+      Now Build the package, issue:
+    </p><pre class="userinput"><kbd class="command">ninja -C build</kbd></pre><p>
+      To test the results, issue:
+    </p><pre class="userinput"><kbd class="command">ninja -C build test</kbd></pre><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">ninja -C build install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
+          libopus.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directory: </strong><span class="segbody">
+          /usr/include/opus and /usr/share/doc/opus-1.5.2
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="libopus"></a><span class="term"><code class="filename">libopus.so</code></span></p></td><td><p>
+            provides the functions used to read and write Opus format
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="speex-pkg.html" title="Speex-1.2.1 and Speexdsp-1.2.1">Prev</a><p>Speex-1.2.1 and Speexdsp-1.2.1</p></li><li class="next"><a accesskey="n" href="lame.html" title="LAME-3.100">Next</a><p>LAME-3.100</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

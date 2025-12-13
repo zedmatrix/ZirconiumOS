@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Pango-1.57.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 13. Preparing FFMpeg and Support Libraries</h3><ul><li class="prev"><a accesskey="p" href="bubblewrap.html" title="Bubblewrap-0.11.0">Prev</a><p>Bubblewrap-0.11.0</p></li><li class="next"><a accesskey="n" href="graphviz.html" title="Graphviz-14.0.4">Next</a><p>Graphviz-14.0.4</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="pango" name="pango"></a>Pango-1.57.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to Pango</h2><p>
+      <span class="application">Pango</span> is a library for laying out and rendering
+      text, with an emphasis on internationalization. It can be used anywhere
+      that text layout is needed, though most of the work on
+      <span class="application">Pango</span> so far has been done in the context of
+      the <span class="application">GTK+</span> widget toolkit.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://download.gnome.org/sources//pango/1.57/pango-1.57.0.tar.xz">https://download.gnome.org/sources//pango/1.57/pango-1.57.0.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 890640c841dae77d3ae3d8fe8953784b930fa241b17423e6120c7bfdf8b891e7
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: c027445c1325603a2a11df2fd868e6b8
+        </p></li><li class="listitem"><p>
+          Download size: 14,231.7 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 24,714.0 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 0.5 SBU
+        </p></li></ul></div><h3>Pango Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="../chapter12/fontconfig.html" title="Fontconfig-2.17.1">Fontconfig-2.17.1</a> (must be built with
+       <a class="xref" href="../chapter09/freetype2.html" title="FreeType-2.14.1">FreeType-2.14.1</a> using <a class="xref" href="../chapter12/harfbuzz.html" title="harfBuzz-12.2.0">harfBuzz-12.2.0</a>),
+      <a class="xref" href="fribidi.html" title="FriBidi-1.0.16">FriBidi-1.0.16</a>, and
+      <a class="xref" href="../chapter12/glib2.html" title="GLib-2.86.2">GLib-2.86.2</a> (GObject Introspection required for GNOME)
+    </p><h4>Recommended</h4><p class="recommended">
+      <a class="xref" href="../chapter12/cairo.html" title="Cairo-1.18.4">Cairo-1.18.4</a> (built after <a class="xref" href="../chapter12/harfbuzz.html" title="harfBuzz-12.2.0">harfBuzz-12.2.0</a>) and
+      <a class="xref" href="../chapter12/xorg7-libraries.html" title="Xorg7 Libraries">Xorg7 Libraries</a>
+    </p><h4>Optional</h4><p class="optional">
+      <a class="xref" href="../chapter11/ch11s64.html" title="docutils-0.22.3">docutils-0.22.3</a> (to generate manual pages),
+  
+      
+      <a class="ulink" href="https://ftpmirror.gnu.org/gnu/help2man">help2man</a>,
+      <a class="ulink" href="https://linux.thai.net/projects/libthai">libthai</a>, and
+      
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of Pango</h2><p>
+      Prepare <span class="application">Pango</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">meson setup build --prefix=/usr      \
+            --buildtype=release      \
+            --wrap-mode=nofallback   \
+            -D introspection=enabled</kbd></pre><pre class="userinput"><kbd class="command">ninja -C build</kbd></pre><p>
+      Three tests, test-font-data, test-font, and test-layout
+      are known to fail due to missing font data.
+      To test the results, issue:
+    </p><pre class="userinput"><kbd class="command">ninja -C build test</kbd></pre><p>
+      Now Install, as the <code class="systemitem">root</code> user:
+    </p><pre class="userinput"><kbd class="command">ninja -C build install</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <code class="option">-D introspection=disabled</code>: Use this switch if you do not
+      want to use GObject Introspection.
+    </p></div><div class="configuration" lang="en" xml:lang="en"><h2 class="sect2">Configuring Pango</h2><div class="sect3"><h3 class="sect3"><a id="pango-config" name="pango-config"></a>Config Files</h3><p>
+        <code class="filename">/etc/pango/pangorc</code>, <code class="filename">~/.pangorc</code>
+        and the file specified in the environment variable
+        <code class="envar">PANGO_RC_FILE</code>
+      </p></div></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          pango-list, pango-segmentation, and pango-view
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libpango-1.0.so, libpangocairo-1.0.so, libpangoft2-1.0.so,
+          and libpangoxft-1.0.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/pango-1.0 and
+          /usr/share/doc/pango-1.57.0 (if gi-docgen is available)
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="pango-list"></a><span class="term"><span class="command"><strong>pango-list</strong></span></span></p></td><td><p>
+            displays a list of fonts that <span class="application">Pango</span>
+            can use that are currently installed on the system
+          </p></td></tr><tr><td><p><a id="pango-segmentation"></a><span class="term"><span class="command"><strong>pango-segmentation</strong></span></span></p></td><td><p>
+            shows text segmentation as determined by Pango.
+          </p></td></tr><tr><td><p><a id="pango-view"></a><span class="term"><span class="command"><strong>pango-view</strong></span></span></p></td><td><p>
+            renders a given text file through <span class="application">Pango</span>
+            for viewing purposes
+          </p></td></tr><tr><td><p><a id="libpango-1"></a><span class="term"><code class="filename">libpango-1.0.so</code></span></p></td><td><p>
+            contains low level layout rendering routines, a high level driver for
+            laying out entire blocks of text, and routines to assist in editing
+            internationalized text
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="bubblewrap.html" title="Bubblewrap-0.11.0">Prev</a><p>Bubblewrap-0.11.0</p></li><li class="next"><a accesskey="n" href="graphviz.html" title="Graphviz-14.0.4">Next</a><p>Graphviz-14.0.4</p></li><li class="up"><a accesskey="u" href="chapter13.html" title="Chapter 13. Preparing FFMpeg and Support Libraries">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

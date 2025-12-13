@@ -27,7 +27,7 @@
         version, (e.g.,  from Glibc-2.36 to Glibc-2.42),
         some extra steps are needed to avoid breaking the system.
         Read <a class="xref" href="glibc.html" title="Glibc-2.42">the section called “Glibc-2.42”</a> for details.</p></li><li class="listitem"><p>If a package containing a shared library is updated, and
-      if the name of the library<a href="#ftn.id5710" class="footnote" id="id5710"><sup class="footnote">[1]</sup></a>
+      if the name of the library<a href="#ftn.id5858" class="footnote" id="id5858"><sup class="footnote">[1]</sup></a>
       changes, then any packages dynamically
       linked to the library must be recompiled, to link against the
       newer library.
@@ -223,7 +223,7 @@ make DESTDIR=/usr/pkg/libfoo/1.1 install</kbd></pre><p>Most packages support thi
     known to do so.  Thus simply rebuilding GMP on a complete LFS system
     is not enough: you'll need to recompile MPFR and maybe other packages
     using GMP if you want to <span class="quote">“<span class="quote">convert</span>”</span> a complete LFS system
-    to be used for a different CPU.</p></div><p>Finally, the new system has to be made bootable via ch-bootable-grub.</p></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.id5710" class="footnote"><p><a href="#id5710" class="para"><sup class="para">[1] </sup></a>The name of a shared library is
+    to be used for a different CPU.</p></div><p>Finally, the new system has to be made bootable via ch-bootable-grub.</p></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.id5858" class="footnote"><p><a href="#id5858" class="para"><sup class="para">[1] </sup></a>The name of a shared library is
       the string coded in the <code class="constant">DT_SONAME</code> entry of its
       ELF dynamic section.  You can get it with the
       <span class="command"><strong>readelf -d <em class="replaceable"><code>&lt;library file&gt;</code></em>
