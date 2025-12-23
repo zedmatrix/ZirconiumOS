@@ -135,7 +135,7 @@ for FUNCTION in FAIL_DELAY               \
                 ENVIRON_FILE
 do
     sed -i "s/^${FUNCTION}/# &amp;/" /etc/login.defs
-done</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25549"></a>Configuring the /etc/pam.d/ Files</h5></div></div></div><p>
+done</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25737"></a>Configuring the /etc/pam.d/ Files</h5></div></div></div><p>
           As mentioned previously in the <span class="application">Linux-PAM</span>
           instructions, <span class="application">Linux-PAM</span> has two supported
           methods for configuration. The commands below assume that you've
@@ -150,7 +150,7 @@ done</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 cl
           in the <code class="filename">/etc/pam.d/</code> directory
           (or add the contents to the <code class="filename">/etc/pam.conf</code> file)
           using the following commands:
-        </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25560"></a>'login'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/login &lt;&lt; "EOF"
+        </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25748"></a>'login'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/login &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/login
 
 # Set failure delay before next prompt to 3 seconds
@@ -193,13 +193,13 @@ session   include     system-session
 password  include     system-password
 
 # End /etc/pam.d/login</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25565"></a>'passwd'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/passwd &lt;&lt; "EOF"
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25753"></a>'passwd'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/passwd &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/passwd
 
 password  include     system-password
 
 # End /etc/pam.d/passwd</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25570"></a>'su'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/su &lt;&lt; "EOF"
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25758"></a>'su'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/su &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/su
 
 # always allow root
@@ -226,7 +226,7 @@ session   required    pam_env.so
 session   include     system-session
 
 # End /etc/pam.d/su</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25575"></a>'chpasswd' and 'newusers'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chpasswd &lt;&lt; "EOF"
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25763"></a>'chpasswd' and 'newusers'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chpasswd &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/chpasswd
 
 # always allow root
@@ -240,7 +240,7 @@ password  include     system-password
 # End /etc/pam.d/chpasswd</code>
 EOF
 
-sed -e s/chpasswd/newusers/ /etc/pam.d/chpasswd &gt;/etc/pam.d/newusers</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25580"></a>'chage'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chage &lt;&lt; "EOF"
+sed -e s/chpasswd/newusers/ /etc/pam.d/chpasswd &gt;/etc/pam.d/newusers</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25768"></a>'chage'</h5></div></div></div><pre class="root"><kbd class="command">cat &gt; /etc/pam.d/chage &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/pam.d/chage
 
 # always allow root
@@ -251,7 +251,7 @@ auth      include     system-auth
 account   include     system-account
 
 # End /etc/pam.d/chage</code>
-EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25585"></a>Other shadow utilities</h5></div></div></div><pre class="root"><kbd class="command">for PROGRAM in chfn chgpasswd chsh groupadd groupdel \
+EOF</kbd></pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a id="id25773"></a>Other shadow utilities</h5></div></div></div><pre class="root"><kbd class="command">for PROGRAM in chfn chgpasswd chsh groupadd groupdel \
                groupmems groupmod useradd userdel usermod
 do
     install -v -m644 /etc/pam.d/chage /etc/pam.d/${PROGRAM}

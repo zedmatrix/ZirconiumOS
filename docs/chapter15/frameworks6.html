@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Building KDE Frameworks 6.20.0 (KF6)</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 15. Preparing KDE Frameworks Integration</h3><ul><li class="prev"><a accesskey="p" href="chapter15.html" title="Preparing KDE Frameworks Integration">Prev</a><p>Preparing KDE Frameworks Integration</p></li><li class="next"><a accesskey="n" href="breeze-icons.html" title="Breeze-icons-6.20.0">Next</a><p>Breeze-icons-6.20.0</p></li><li class="up"><a accesskey="u" href="chapter15.html" title="Chapter 15. Preparing KDE Frameworks Integration">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="kf6-frameworks" name="kf6-frameworks"></a>Building KDE Frameworks 6.20.0 (KF6)</h1><div class="sect1" lang="en" xml:lang="en"><p>
+    KDE Frameworks is a collection of libraries based on top of Qt6 and
+    QML derived from the previous KDE libraries. They can be used
+    independent of the KDE Display Environment (Plasma 6).
+  </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><p>
+    The instructions below build all of the KDE Frameworks packages in one
+    step by using a bash script.
+  </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+        Download (HTTP): <a class="ulink" href="https://download.kde.org/stable/frameworks/6.20">https://download.kde.org/stable/frameworks/6.20</a>
+      </p></li><li class="listitem"><p>
+        Estimated disk space required: 3.0 GB (197 MB installed)
+      </p></li><li class="listitem"><p>
+        Estimated build time: 12 SBU (using parallelism=8)
+      </p></li></ul></div><h3>KF6 Dependencies</h3><p class="required">
+          <a class="xref" href="../chapter14/extra-cmake-modules.html" title="extra-cmake-modules-6.20.0">extra-cmake-modules-6.20.0</a>,
+          <a class="xref" href="breeze-icons.html" title="Breeze-icons-6.20.0">Breeze-icons-6.20.0</a>,
+          <a class="xref" href="../chapter11/docbook45.html" title="docbook-xml-4.5">docbook-xml-4.5</a>,
+          <a class="xref" href="../chapter11/docbook-xsl.html" title="docbook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>,
+          <a class="xref" href="../chapter13/libcanberra.html" title="libcanberra-0.30">libcanberra-0.30</a>,
+          <a class="xref" href="../chapter11/libgcrypt.html" title="libgcrypt-1.11.2">libgcrypt-1.11.2</a>,
+          <a class="xref" href="../chapter13/libical.html" title="libical-3.0.20">libical-3.0.20</a>,
+          <a class="xref" href="../chapter14/libsecret.html" title="libsecret-0.21.7">libsecret-0.21.7</a>,
+          <a class="xref" href="../chapter11/libxslt.html" title="libxslt-1.1.43">libxslt-1.1.43</a>,
+          <a class="xref" href="../chapter11/lmdb.html" title="lmdb-0.9.33">lmdb-0.9.33</a>,
+          <a class="xref" href="../chapter14/qca.html" title="Qca-2.3.10">qca-2.3.10</a>,
+          <a class="xref" href="../chapter13/libqrencode.html#libqrencode"><code class="filename">libqrencode.so</code></a>,
+          <a class="xref" href="../chapter14/plasma-wayland-protocols.html" title="plasma-wayland-protocols-1.19.0">plasma-wayland-protocols-1.19.0</a>,
+          <a class="xref" href="../chapter11/ch11s67.html" title="PyYAML-6.0.3">PyYAML-6.0.3</a>,
+          <a class="xref" href="../chapter12/shared-mime-info.html" title="shared-mime-info-2.4">shared-mime-info-2.4</a>,
+          <a class="xref" href="../chapter14/qt-perl.html#perl-uri" title="URI-5.34">URI-5.34</a>, and
+          <a class="xref" href="../chapter08/wget.html" title="Wget-1.25.0">Wget-1.25.0</a> (required to download the packages)
+        </p><h4>Recommended</h4><p class="recommended">
+    <a class="xref" href="../chapter14/aspell.html" title="Aspell-0.60.8.1">Aspell-0.60.8.1</a> (Dictionary backend for Sonnet),
+    <a class="xref" href="../chapter13/avahi.html" title="Avahi-0.8">Avahi-0.8</a> (DNS-SD backend for KDNSSD),
+    
+    
+    <a class="xref" href="../chapter14/polkit-qt.html" title="Polkit-Qt-0.200.0">polkit-qt-0.200.0</a> (Authentication backend for KAuth), 
+    <a class="xref" href="../chapter12/vulkan-loader.html" title="Vulkan-Loader-1.4.328.1">Vulkan-Loader-1.4.328.1</a> (Add support for Vulkan graphics drivers), and
+    <a class="xref" href="../chapter14/zxing-cpp.html" title="zxing-cpp-2.3.0">zxing-cpp-2.3.0</a> (Add support needed to build spectacle)
+  </p><h4>Optional</h4><p class="optional">
+    <a class="xref" href="../chapter13/bluez.html" title="BlueZ-5.84">BlueZ-5.84</a> (needed to build Bluez-Qt) and
+    <a class="ulink" href="https://libdmtx.sourceforge.net/">Datamatrix</a> (deemed
+    recommended for Prison by upstream)
+  </p><h4>Optional dependencies for Solid</h4><p class="optional">
+    <a class="xref" href="../chapter14/udisks2.html" title="UDisks-2.11.0">UDisks-2.11.0</a>,
+    <a class="xref" href="../chapter14/upower.html" title="UPower-1.90.10">UPower-1.90.10</a> and
+    <a class="ulink" href="https://www.freedesktop.org/software/media-player-info/">media-player-info</a> (runtime)
+  </p><h4>Optional dependency for KWallet</h4><p class="optional">
+    <a class="xref" href="../chapter11/gpgmepp.html" title="gpgmepp-2.0.0">gpgmepp-2.0.0</a>
+  </p><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2">Preparing KDE Frameworks</h2><p>
+      Now setup some scripts to auto start by either using nano or by
+      following the instructions, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+# Begin KF6 addition
+
+/opt/kf6/lib
+
+# End KF6 addition
+EOF</kbd></pre><pre class="root"><kbd class="command">cat &gt; /etc/profile.d/kf6.sh &lt;&lt; "EOF"
+# Begin /etc/profile.d/kf6.sh
+
+export KF6_PREFIX=/opt/kf6
+
+pathappend $KF6_PREFIX/bin              PATH
+pathappend $KF6_PREFIX/lib/pkgconfig    PKG_CONFIG_PATH
+
+pathappend $KF6_PREFIX/etc/xdg          XDG_CONFIG_DIRS
+pathappend $KF6_PREFIX/share            XDG_DATA_DIRS
+
+pathappend $KF6_PREFIX/lib/plugins      QT_PLUGIN_PATH
+pathappend $KF6_PREFIX/lib/plugins/kcms QT_PLUGIN_PATH
+
+pathappend $KF6_PREFIX/lib/qml          QML2_IMPORT_PATH
+
+pathappend $KF6_PREFIX/lib/python3.14/site-packages PYTHONPATH
+
+pathappend $KF6_PREFIX/include          CPLUS_INCLUDE_PATH
+
+pathappend $KF6_PREFIX/lib/gtk-3.0      GTK_PATH
+# End /etc/profile.d/kf6.sh
+EOF</kbd></pre><pre class="root"><kbd class="command">cat &gt; /etc/profile.d/qt6.sh &lt;&lt; "EOF"
+# Begin /etc/profile.d/qt6.sh
+
+QT6DIR=/opt/qt6
+export QT6DIR
+
+pathappend $QT6DIR/bin           PATH
+pathappend $QT6DIR/lib/pkgconfig PKG_CONFIG_PATH
+
+pathappend /usr/lib/plugins            QT_PLUGIN_PATH
+pathappend $QT6DIR/plugins             QT_PLUGIN_PATH
+pathappend $QT6DIR/qml                 QML2_IMPORT_PATH
+
+# End Qt6 changes for KF6
+EOF</kbd></pre></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2">Downloading KDE Frameworks</h2><p>
+      The Order of the package download is the same as the build order, so
+      easiest way to get the KDE Frameworks packages is to use a single
+      <span class="command"><strong>wget</strong></span> script to fetch them all at once:
+    </p><pre class="userinput"><kbd class="command">cat &gt; kde-kf6-download.sh &lt;&lt; "EOF"
+sources="/sources/"
+major="6.20"
+version="6.20.0"
+baseurl="https://download.kde.org/stable/frameworks/${major}/"
+
+kf6_libs=(breeze-icons attica karchive kcodecs kwindowsystem kconfig kcoreaddons kdbusaddons kdnssd kguiaddons
+  ki18n kidletime kimageformats kitemmodels kitemviews kplotting kwidgetsaddons solid sonnet threadweaver kauth
+  kcompletion kcrash kdoctools kpty kunitconversion kcolorscheme kconfigwidgets kservice kglobalaccel kpackage
+  kdesu kiconthemes knotifications kjobwidgets ktextwidgets kxmlgui kboommarks kwallet kded kio kdeclarative
+  kirigami kcmutils syndication knewstuff frameworkintegration kparts syntax-highlighting ktexteditor kcontacts
+  kpeople bluez-qt kfilemetadata baloo krunner prison qqc2-desktop-style kholidays purpose kcalendarcore
+  kquickcharts knotifyconfig kdav kstatusnotifieritem ksvg ktexttemplate kuserfeedback)
+
+for file in ${kf6_libs[@]}; do
+    archive="${file}-${version}.tar.xz"
+    echo "Downloading ${archive}"
+    wget -P ${sources} -nc -c "${baseurl}${archive}"
+done
+
+EOF</kbd></pre></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of KDE Frameworks</h2><div class="admon caution"><img alt="[Caution]" src="../images/caution.png" /><h3>Caution</h3><p>
+        If installing in <code class="filename">/opt</code> and there
+        is an existing /opt/kf6 either as a regular directory or a symbolic
+        link, it should be reinitialized (as <code class="systemitem">root</code>):
+      </p><pre class="root"><kbd class="command">export KF6_PREFIX=/opt/kf6
+
+mv -v /opt/kf6 /opt/kf6.old
+install -v -dm755           $KF6_PREFIX/{etc,share}
+ln -sfv /etc/dbus-1         $KF6_PREFIX/etc
+ln -sfv /usr/share/dbus-1   $KF6_PREFIX/share
+ln -sfv /usr/share/polkit-1 $KF6_PREFIX/share
+install -v -dm755           $KF6_PREFIX/lib
+ln -sfv /usr/lib/systemd    $KF6_PREFIX/lib</kbd></pre></div><p>
+      Sometimes the installation paths are hardcoded into installed files.
+      If the installed directory is not /usr, rename the directory and create a
+      symlink:
+    </p><pre class="root"><kbd class="command">mv -v /opt/kf6 /opt/kf6-6.20.0
+ln -sfvn kf6-6.20.0 /opt/kf6</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <em class="parameter"><code>-D CMAKE_PREFIX_PATH=$QT6DIR</code></em>: This switch is used
+      to allow cmake to find the proper Qt libraries.
+    </p><p>
+      <em class="parameter"><code>-D CMAKE_BUILD_TYPE=Release</code></em>: This switch is used
+      to apply higher level of the compiler optimizations.
+    </p><p>
+      <em class="parameter"><code>-D BUILD_TESTING=OFF</code></em>: This switch is used to prevent
+      building test programs and libraries that are of no use to an end user.
+    </p><p>
+      <em class="parameter"><code>-D BUILD_PYTHON_BINDINGS=OFF</code></em>: This switch is used to prevent
+      building Python modules that require external optional dependencies.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          balooctl,
+          baloo_file,
+          baloo_file_extractor,
+          baloosearch,
+          balooshow,
+          checkXML6,
+          depdiagram-generate,
+          depdiagram-generate-all,
+          depdiagram-prepare,
+          desktoptojson,
+          gentrigrams,
+          kactivities-cli,
+          kapidox_generate,
+          kate-syntax-highlighter,
+          kbuildsycoca6,
+          kcookiejar6,
+          kdebugdialog6,
+          kded6,
+          kdeinit6,
+          kdeinit6_shutdown,
+          kdeinit6_wrapper,
+          kf6-config,
+          kf6kross,
+          kgendesignerplugin,
+          kglobalaccel6,
+          kiconfinder6,
+          kjs6,
+          kjscmd6,
+          kjsconsole,
+          knewstuff-dialog,
+          kpackagelauncherqml,
+          kpackagetool6,
+          kquitapp6,
+          kreadconfig6,
+          kshell6,
+          ktelnetservice6,
+          ktrash6,
+          kwalletd6,
+          kwallet-query,
+          kwrapper6,
+          kwriteconfig6,
+          meinproc6,
+          parsetrigrams,
+          plasmapkg2,
+          preparetips6,
+          protocoltojson, and
+          solid-hardware6
+        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
+          libkdeinit6_klauncher.so,
+          libKF6Activities.so,
+          libKF6ActivitiesStats.so,
+          libKF6Archive.so,
+          libKF6Attica.so,
+          libKF6AuthCore.so,
+          libKF6Auth.so,
+          libKF6Baloo.so,
+          libKF6BluezQt.so,
+          libKF6Bookmarks.so,
+          libKF6CalendarCore.so,
+          libKF6CalendarEvents.so,
+          libKF6Codecs.so,
+          libKF6Completion.so,
+          libKF6ConfigCore.so,
+          libKF6ConfigGui.so,
+          libKF6ConfigWidgets.so,
+          libKF6Contacts.so,
+          libKF6CoreAddons.so,
+          libKF6Crash.so,
+          libKF6DAV.so,
+          libKF6DBusAddons.so,
+          libKF6Declarative.so,
+          libKF6DNSSD.so,
+          libKF6DocTools.so,
+          libKF6Emoticons.so,
+          libKF6FileMetaData.so,
+          libKF6GlobalAccel.so,
+          libKF6GuiAddons.so,
+          libKF6Holidays.so,
+          libKF6I18n.so,
+          libKF6IconThemes.so,
+          libKF6IdleTime.so,
+          libKF6ItemModels.so,
+          libKF6ItemViews.so,
+          libKF6JobWidgets.so,
+          libKF6JSApi.so,
+          libKF6JsEmbed.so,
+          libKF6JS.so,
+          libKF6KCMUtils.so,
+          libKF6KDELibs4Support.so,
+          libKF6KHtml.so,
+          libKF6KIOCore.so,
+          libKF6KIOFileWidgets.so,
+          libKF6KIOGui.so,
+          libKF6KIONTLM.so,
+          libKF6KIOWidgets.so,
+          libKF6Kirigami2.so,
+          libKF6KrossCore.so,
+          libKF6KrossUi.so,
+          libKF6MediaPlayer.so,
+          libKF6NetworkManagerQt.so,
+          libKF6NewStuffCore.so,
+          libKF6NewStuff.so,
+          libKF6Notifications.so,
+          libKF6NotifyConfig.so,
+          libKF6Package.so,
+          libKF6Parts.so,
+          libKF6PeopleBackend.so,
+          libKF6People.so,
+          libKF6PeopleWidgets.so,
+          libKF6PlasmaQuick.so,
+          libKF6Plasma.so,
+          libKF6Plotting.so,
+          libKF6Prison.so,
+          libKF6Pty.so,
+          libKF6Purpose.so,
+          libKF6PurposeWidgets.so,
+          libKF6QuickAddons.so,
+          libKF6Runner.so,
+          libKF6Service.so,
+          libKF6Solid.so,
+          libKF6SonnetCore.so,
+          libKF6SonnetUi.so,
+          libKF6Style.so,
+          libKF6Su.so,
+          libKF6SyntaxHighlighting.so,
+          libKF6TextEditor.so,
+          libKF6TextWidgets.so,
+          libKF6ThreadWeaver.so,
+          libKF6UnitConversion.so,
+          libKF6Wallet.so,
+          libKF6WaylandClient.so,
+          libKF6WaylandServer.so,
+          libKF6WidgetsAddons.so,
+          libKF6WindowSystem.so,
+          libKF6XmlGui.so,
+          libKF6XmlRpcClient.so, and
+          libkwalletbackend6.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /opt/kf6 (symlink to /opt/kf6-6.20.0) if installing in /opt
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="checkXML6"></a><span class="term"><span class="command"><strong>checkXML6</strong></span></span></p></td><td><p>
+            is a tool to check for syntax errors in KDE DocBook XML files
+          </p></td></tr><tr><td><p><a id="depdiagram-generate"></a><span class="term"><span class="command"><strong>depdiagram-generate</strong></span></span></p></td><td><p>
+            is a tool to generate a dependency diagram
+          </p></td></tr><tr><td><p><a id="depdiagram-generate-all"></a><span class="term"><span class="command"><strong>depdiagram-generate-all</strong></span></span></p></td><td><p>
+            is a tool to generate a dependency diagram for all frameworks at once
+          </p></td></tr><tr><td><p><a id="depdiagram-prepare"></a><span class="term"><span class="command"><strong>depdiagram-prepare</strong></span></span></p></td><td><p>
+            is a tool to prepare dot files
+          </p></td></tr><tr><td><p><a id="desktoptojson"></a><span class="term"><span class="command"><strong>desktoptojson</strong></span></span></p></td><td><p>
+            is a tool to convert a .desktop file to a .json file
+          </p></td></tr><tr><td><p><a id="kbuildsycoca6"></a><span class="term"><span class="command"><strong>kbuildsycoca6</strong></span></span></p></td><td><p>
+            rebuilds the KService desktop file system configuration
+       cache
+          </p></td></tr><tr><td><p><a id="kcookiejar6"></a><span class="term"><span class="command"><strong>kcookiejar6</strong></span></span></p></td><td><p>
+            is a command line interface to the HTTP cookie store used by KDE,
+            a D-BUS service to store/retrieve/clean cookies
+          </p></td></tr><tr><td><p><a id="kded6"></a><span class="term"><span class="command"><strong>kded6</strong></span></span></p></td><td><p>
+            consolidates several small services in one process
+          </p></td></tr><tr><td><p><a id="kdeinit6"></a><span class="term"><span class="command"><strong>kdeinit6</strong></span></span></p></td><td><p>
+            is a process launcher somewhat similar to the famous init used
+            for booting UNIX
+          </p></td></tr><tr><td><p><a id="kf6-config"></a><span class="term"><span class="command"><strong>kf6-config</strong></span></span></p></td><td><p>
+            is a command line program used to retrieve information about
+            KDE installation or user paths
+          </p></td></tr><tr><td><p><a id="kf6kross"></a><span class="term"><span class="command"><strong>kf6kross</strong></span></span></p></td><td><p>
+            executes kross scripts written in KDE Javascript, Python, Ruby,
+            Java and Falcon
+          </p></td></tr><tr><td><p><a id="kgendesignerplugin"></a><span class="term"><span class="command"><strong>kgendesignerplugin</strong></span></span></p></td><td><p>
+            generates widget plugins for Qt(TM) Designer
+          </p></td></tr><tr><td><p><a id="kglobalaccel6"></a><span class="term"><span class="command"><strong>kglobalaccel6</strong></span></span></p></td><td><p>
+            is a daemon use to register the key bindings and for getting
+            notified when the action triggered
+          </p></td></tr><tr><td><p><a id="kjs6"></a><span class="term"><span class="command"><strong>kjs6</strong></span></span></p></td><td><p>
+            is KDE ECMAScript/JavaScript engine
+          </p></td></tr><tr><td><p><a id="kjscmd6"></a><span class="term"><span class="command"><strong>kjscmd6</strong></span></span></p></td><td><p>
+             is a tool for launching KJSEmbed scripts from the command line
+          </p></td></tr><tr><td><p><a id="kjsconsole"></a><span class="term"><span class="command"><strong>kjsconsole</strong></span></span></p></td><td><p>
+            is a console for <span class="command"><strong>kjs6</strong></span>
+          </p></td></tr><tr><td><p><a id="kpackagelauncherqml"></a><span class="term"><span class="command"><strong>kpackagelauncherqml</strong></span></span></p></td><td><p>
+            is a commandline tool for launching kpackage QML application
+          </p></td></tr><tr><td><p><a id="kpackagetool6"></a><span class="term"><span class="command"><strong>kpackagetool6</strong></span></span></p></td><td><p>
+            is a command line kpackage tool
+          </p></td></tr><tr><td><p><a id="kreadconfig6"></a><span class="term"><span class="command"><strong>kreadconfig6</strong></span></span></p></td><td><p>
+            is a command line tool to retrieve values from KDE
+            configuration files
+          </p></td></tr><tr><td><p><a id="kshell6"></a><span class="term"><span class="command"><strong>kshell6</strong></span></span></p></td><td><p>
+            start applications via kdeinit
+          </p></td></tr><tr><td><p><a id="ktelnetservice6"></a><span class="term"><span class="command"><strong>ktelnetservice6</strong></span></span></p></td><td><p>
+            is a telnet service
+          </p></td></tr><tr><td><p><a id="ktrash6"></a><span class="term"><span class="command"><strong>ktrash6</strong></span></span></p></td><td><p>
+            is a helper program to handle the KDE trash can
+          </p></td></tr><tr><td><p><a id="kwalletd6"></a><span class="term"><span class="command"><strong>kwalletd6</strong></span></span></p></td><td><p>
+           is the wallet manager daemon
+          </p></td></tr><tr><td><p><a id="kwriteconfig6"></a><span class="term"><span class="command"><strong>kwriteconfig6</strong></span></span></p></td><td><p>
+            is a command line tool to write values in KDE
+            configuration files
+          </p></td></tr><tr><td><p><a id="meinproc6"></a><span class="term"><span class="command"><strong>meinproc6</strong></span></span></p></td><td><p>
+            converts DocBook files to HTML
+          </p></td></tr><tr><td><p><a id="plasmapkg2"></a><span class="term"><span class="command"><strong>plasmapkg2</strong></span></span></p></td><td><p>
+            is a tool to install, list, remove Plasma packages
+          </p></td></tr><tr><td><p><a id="preparetips6"></a><span class="term"><span class="command"><strong>preparetips6</strong></span></span></p></td><td><p>
+            is a script to extract the text from a tips file
+          </p></td></tr><tr><td><p><a id="solid-hardware6"></a><span class="term"><span class="command"><strong>solid-hardware6</strong></span></span></p></td><td><p>
+            is a command line tool to investigate available devices
+         </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="chapter15.html" title="Preparing KDE Frameworks Integration">Prev</a><p>Preparing KDE Frameworks Integration</p></li><li class="next"><a accesskey="n" href="breeze-icons.html" title="Breeze-icons-6.20.0">Next</a><p>Breeze-icons-6.20.0</p></li><li class="up"><a accesskey="u" href="chapter15.html" title="Chapter 15. Preparing KDE Frameworks Integration">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

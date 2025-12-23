@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Python Modules post Qt</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 14. Build Qt6 and Support</h3><ul><li class="prev"><a accesskey="p" href="libnvme.html" title="libnvme-1.16.1">Prev</a><p>libnvme-1.16.1</p></li><li class="next"><a accesskey="n" href="libbytesize.html" title="libbytesize-2.11">Next</a><p>libbytesize-2.11</p></li><li class="up"><a accesskey="u" href="chapter14.html" title="Chapter 14. Build Qt6 and Support">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="qt-python" name="qt-python"></a>Python Modules post Qt</h1><div class="sect1" lang="en" xml:lang="en"><p>
+     Various Python Modules Required For After Qt-6 Packages
+  </p><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="trove-classifiers" name="trove-classifiers"></a>Trove-Classifiers-2025.11.14.15</h2><div class="sect3"><h3 class="sect3">Introduction to Trove-Classifiers Module</h3><p>
+        <span class="application">Trove-Classifiers</span> is a Python library
+        to encompass all valid PyPI classifiers used to categorize projects
+        and releases per PEP 301, for example
+        <code class="literal">Topic :: System :: Filesystems</code> and
+        <code class="literal">Development Status :: 6 - Mature</code>.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/t/trove_classifiers/trove_classifiers-2025.11.14.15.tar.gz">https://files.pythonhosted.org/packages/source/t/trove_classifiers/trove_classifiers-2025.11.14.15.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 6b60f49d40bbd895bc61d8dc414fc2f2286d70eb72ed23548db8cf94f62804ca
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: f130cc982d8011d48c134eb67859edb5
+          </p></li><li class="listitem"><p>
+            Download size: 69.0 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 125.2 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div><h4>Trove-Classifiers Dependencies</h4><h5>Optional (for testing)</h5><p class="optional">
+        "pytest"
+      </p></div><div class="sect3"><h3 class="sect3">Installation of Trove-Classifiers</h3><p>
+      First, hard code the package version into
+      <code class="filename">setup.py</code> to work around an issue causing the
+      generated wheel to contain an incorrect version string when the
+      <span class="application">calver</span> module is not installed:
+    </p><pre class="userinput"><kbd class="command">sed -i '/calver/s/^/#/;$iversion="2025.11.14.15"' setup.py</kbd></pre><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      Now Install the module, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user trove-classifiers</kbd></pre><p>
+      To test the installation, issue: <span class="command"><strong>pytest</strong></span>.
+    </p></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/trove_classifiers and
+            /usr/lib/python3.14/site-packages/trove_classifiers-2025.11.14.15.dist-info
+          </span></div></div></div></div></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="setuptools_scm" name="setuptools_scm"></a>Setuptools_scm-9.2.2</h2><div class="sect3"><h3 class="sect3">Introduction to Setuptools_scm Module</h3><p>
+        The <span class="application">Setuptools_scm</span> package is used to
+        extract Python package versions from git or hg metadata instead
+        of declaring them.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/s/setuptools_scm/setuptools_scm-9.2.2.tar.gz">https://files.pythonhosted.org/packages/source/s/setuptools_scm/setuptools_scm-9.2.2.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 1c674ab4665686a0887d7e24c03ab25f24201c213e82ea689d2f3e169ef7ef57
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 72975fc3ec40a1ae06bb2d86ca8ac48d
+          </p></li><li class="listitem"><p>
+            Download size: 720.1 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 1,138.3 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div></div><div class="sect3"><h3 class="sect3">Installation of Setuptools_scm</h3><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      Now Install the module, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user setuptools_scm</kbd></pre></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/setuptools_scm and
+            /usr/lib/python3.14/site-packages/setuptools_scm-9.2.2.dist-info
+          </span></div></div></div></div></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="pluggy" name="pluggy"></a>Pluggy-1.6.0</h2><div class="sect3"><h3 class="sect3">Introduction to Pluggy Module</h3><p>
+        The <span class="application">Pluggy</span> package gives users the ability
+        to extend or modify the behaviour of a host program by installing a
+        plugin for that program. The plugin code will run as part of normal
+        program execution, changing or enhancing certain aspects of it. In
+        essence, <span class="application">pluggy</span> enables function hooking
+        so a user can build <span class="quote">“<span class="quote">pluggable</span>”</span> systems.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/p/pluggy/pluggy-1.6.0.tar.gz">https://files.pythonhosted.org/packages/source/p/pluggy/pluggy-1.6.0.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 54391218af778acb006c2d915085d469
+          </p></li><li class="listitem"><p>
+            Download size: 233.4 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 311.2 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div><h4>Pluggy Dependencies</h4><h5>Recommended</h5><p class="recommended">
+        <a class="xref" href="qt-python.html#setuptools_scm" title="Setuptools_scm-9.2.2">setuptools_scm-9.2.2</a>
+      </p></div><div class="sect3"><h3 class="sect3">Installation of Pluggy</h3><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      Now Install the module, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user pluggy</kbd></pre><p>
+      To test the installation, issue: <span class="command"><strong>pytest</strong></span>.
+    </p></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/pluggy and
+            /usr/lib/python3.14/site-packages/pluggy-1.6.0.dist-info
+          </span></div></div></div></div></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="pathspec" name="pathspec"></a>Pathspec-0.12.1</h2><div class="sect3"><h3 class="sect3">Introduction to Pathspec Module</h3><p>
+        <span class="application">Pathspec</span> is a utility library for pattern
+        matching of file paths.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-0.12.1.tar.gz">https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-0.12.1.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 2b26ad1981bfa23748e115f00085624c
+          </p></li><li class="listitem"><p>
+            Download size: 212.1 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 323.1 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div></div><div class="sect3"><h3 class="sect3">Installation of Pathspec</h3><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      Now Install the module, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user pathspec</kbd></pre></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/pathspec and
+            /usr/lib/python3.14/site-packages/pathspec-0.12.1.dist-info
+          </span></div></div></div></div></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="editables" name="editables"></a>Editables-0.5</h2><div class="sect3"><h3 class="sect3">Introduction to Editables Module</h3><p>
+        <span class="application">Editables</span> is python library for creating
+        <span class="quote">“<span class="quote">editable wheels.</span>”</span>
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/e/editables/editables-0.5.tar.gz">https://files.pythonhosted.org/packages/source/e/editables/editables-0.5.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 309627d9b5c4adc0e668d8c6fa7bac1ba7c8c5d415c2d27f60f081f8e80d1de2
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 520de8c3a9dc5dfb2b365d104541c9de
+          </p></li><li class="listitem"><p>
+            Download size: 40.2 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 45.2 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div></div><div class="sect3"><h3 class="sect3">Installation of Editables</h3><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      Now Install the module, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user editables</kbd></pre></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/editables and
+            /usr/lib/python3.14/site-packages/editables-0.5.dist-info
+          </span></div></div></div></div></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="hatchling" name="hatchling"></a>Hatchling-1.27.0</h2><div class="sect3"><h3 class="sect3">Introduction to Hatchling Module</h3><p>
+        <span class="application">Hatchling</span> is an extensible, standards
+        compliant build backend for python modules.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/h/hatchling/hatchling-1.27.0.tar.gz">https://files.pythonhosted.org/packages/source/h/hatchling/hatchling-1.27.0.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 971c296d9819abb3811112fc52c7a9751c8d381898f36533bb16f9791e941fd6
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 6ffb3087c9b6a9ffbfc1bb394f7ed1a8
+          </p></li><li class="listitem"><p>
+            Download size: 285.5 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 639.5 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div><h4>Hatchling Dependencies</h4><h5>Required</h5><p class="required">
+        <a class="xref" href="qt-python.html#editables" title="Editables-0.5">editables-0.5</a>,
+        <a class="xref" href="qt-python.html#pathspec" title="Pathspec-0.12.1">pathspec-0.12.1</a>,
+        <a class="xref" href="qt-python.html#pluggy" title="Pluggy-1.6.0">pluggy-1.6.0</a>, and
+        <a class="xref" href="qt-python.html#trove-classifiers" title="Trove-Classifiers-2025.11.14.15">trove-classifiers-2025.11.14.15</a>
+      </p></div><div class="sect3"><h3 class="sect3">Installation of Hatchling</h3><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+      This package does not come with a working test suite.
+    </p><p>
+      Now Install the module, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user hatchling</kbd></pre></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">hatchling</span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">None</span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/hatchling and
+            /usr/lib/python3.14/site-packages/hatchling-1.27.0.dist-info
+          </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="hatchling-prog"></a><span class="term"><span class="command"><strong>hatchling</strong></span></span></p></td><td><p>
+              is a python module builder
+            </p></td></tr></tbody></table></div></div></div><div class="sect2" lang="en" xml:lang="en"><h2 class="sect2"><a id="pygments" name="pygments"></a>Pygments-2.19.2</h2><div class="sect3"><h3 class="sect3">Introduction to Pygments Module</h3><p>
+        <span class="application">Pygments</span> is a general syntax highlighter
+        written in <span class="application">Python</span>, for more than 300
+        languages.
+      </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h4>Package Information</h4><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+            Download (HTTP): <a class="ulink" href="https://files.pythonhosted.org/packages/source/P/Pygments/pygments-2.19.2.tar.gz">https://files.pythonhosted.org/packages/source/P/Pygments/pygments-2.19.2.tar.gz</a>
+          </p></li><li class="listitem"><p>
+            Download SHA256 Sum: 636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887
+          </p></li><li class="listitem"><p>
+            Download MD5 sum: 79260d1c566a507953a81d24b1c51c72
+          </p></li><li class="listitem"><p>
+            Download size: 43,780.2 KB
+          </p></li><li class="listitem"><p>
+            Estimated disk space required: 44,976.7 KB
+          </p></li><li class="listitem"><p>
+            Estimated build time: less than 0.1 SBU
+          </p></li></ul></div><h4>Pygments Dependencies</h4><h5>Required</h5><p class="required">
+        <a class="xref" href="qt-python.html#hatchling" title="Hatchling-1.27.0">hatchling-1.27.0</a>
+      </p></div><div class="sect3"><h3 class="sect3">Installation of Pygments</h3><p>Build the module: </p><pre class="userinput"><kbd class="command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre><p>
+        Now Install the module, as the <code class="systemitem">root</code> user:
+      </p><pre class="root"><kbd class="command">pip3 install --no-index --find-links dist --no-user Pygments</kbd></pre></div><div class="sect3"><h3 class="sect3">Command Explanations</h3><p>
+      <em class="parameter"><code>-w dist</code></em>: builds the appropriate
+      "wheel" for this module in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-build-isolation</code></em>: tells pip3 to run the
+      build in the system environment instead of creating a temporary
+      build environment.
+    </p><p>
+      <em class="parameter"><code>--no-deps</code></em>: prevents pip3 from building wheels for
+      the project's dependencies.
+    </p><p>
+      <em class="parameter"><code>--no-index</code></em>: ignores the package index
+      (only looking at --find-links URLs instead).
+    </p><p>
+      <em class="parameter"><code>--find-links dist</code></em>: looks for links to archives
+      such as wheel (.whl) files in the directory
+      <code class="filename">dist</code>.
+    </p><p>
+      <em class="parameter"><code>--no-cache-dir</code></em>: Disables the cache to prevent
+      a warning when installing as the <code class="systemitem">root</code> user.
+    </p><p>
+      <em class="parameter"><code>--no-user</code></em>: Prevent mistakenly running the
+      install command as a non-root user.
+    </p><p>
+      <em class="parameter"><code>--system-site-packages</code></em>: Allow the
+      <span class="application">Python3</span> venv module to access the
+      system-installed <code class="filename">/usr/lib/python3.14/site-packages</code>
+      directory.
+    </p><p>
+      <code class="option">--upgrade</code>: Upgrade the package to the newest
+       available version.  This option is used with the install command
+       if a version of the package is already installed.
+    </p><p>
+      <code class="option">--force-reinstall</code>: Reinstall the package even if
+      it is up-to-date. This option is used with the install command
+      if reinstalling the package or reverting to an earlier version
+      of the package.
+    </p><p>
+      <code class="option">--no-deps</code>: Do not install package dependencies.
+      This option may be needed with the --upgrade or --force-reinstall
+      options.
+    </p></div><div class="sect3"><h3 class="sect3">Contents</h3><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+            pygmentize
+           </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
+            None
+           </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+            /usr/lib/python3.14/site-packages/pygments and
+            /usr/lib/python3.14/site-packages/Pygments-2.19.2.dist-info
+          </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="pygmentize"></a><span class="term"><span class="command"><strong>pygmentize</strong></span></span></p></td><td><p>
+              highlights an input file and writes the result to an output file
+            </p></td></tr></tbody></table></div></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libnvme.html" title="libnvme-1.16.1">Prev</a><p>libnvme-1.16.1</p></li><li class="next"><a accesskey="n" href="libbytesize.html" title="libbytesize-2.11">Next</a><p>libbytesize-2.11</p></li><li class="up"><a accesskey="u" href="chapter14.html" title="Chapter 14. Build Qt6 and Support">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

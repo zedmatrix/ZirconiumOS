@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>libqtxdg-4.3.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 16. Finalizing the LXQt - KDE Desktop</h3><ul><li class="prev"><a accesskey="p" href="libdbusmenu-lxqt.html" title="libdbusmenu-lxqt-0.3.0">Prev</a><p>libdbusmenu-lxqt-0.3.0</p></li><li class="next"><a accesskey="n" href="lxqt-menu-data.html" title="lxqt-menu-data-2.3.0">Next</a><p>lxqt-menu-data-2.3.0</p></li><li class="up"><a accesskey="u" href="chapter16.html" title="Chapter 16. Finalizing the LXQt - KDE Desktop">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="libqtxdg" name="libqtxdg"></a>libqtxdg-4.3.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to libqtxdg</h2><p>
+      The <span class="application">libqtxdg</span> is a Qt implementation of
+      freedesktop.org xdg specifications.
+    </p><p>This package is known to build and work properly
+                          using an LFS 12.4 platform.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
+          Download (HTTP): <a class="ulink" href="https://github.com/lxde/libqtxdg/releases/download/4.3.0/libqtxdg-4.3.0.tar.xz">https://github.com/lxde/libqtxdg/releases/download/4.3.0/libqtxdg-4.3.0.tar.xz</a>
+        </p></li><li class="listitem"><p>
+          Download SHA256 Sum: 846cb8a35ab55ea3d513a860b6bb5fdf45e2de95a037afb73538b316908efa55
+        </p></li><li class="listitem"><p>
+          Download MD5 sum: dd6d86167ea86213d00dd82ec7ac88bb
+        </p></li><li class="listitem"><p>
+          Download size: 383.9 KB
+        </p></li><li class="listitem"><p>
+          Estimated disk space required: 7,213.7 KB
+        </p></li><li class="listitem"><p>
+          Estimated build time: less than 1.0 SBU
+        </p></li></ul></div><h3>libqtxdg Dependencies</h3><h4>Required</h4><p class="required">
+      <a class="xref" href="../chapter11/cmake.html" title="CMake-4.1.3">CMake-4.1.3</a>,
+      <a class="xref" href="../chapter14/qt6.html" title="Qt-6.10.1">Qt-6.10.1</a> and
+      <a class="xref" href="lxqt-build-tools.html" title="lxqt-build-tools-2.3.0">lxqt-build-tools-2.3.0</a>
+    </p><h4>Optional (runtime)</h4><p class="optional">
+      <a class="xref" href="../chapter13/gtk3.html" title="GTK-3.24.51">GTK-3.24.51</a> (for <span class="command"><strong>gtk-update-icon-cache</strong></span>)
+      <a class="xref" href="../chapter12/xterm.html" title="xterm-403">xterm-403</a>
+    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of libqtxdg</h2><p>
+      Install <span class="application">libqtxdg</span> by running the following
+      commands:
+    </p><pre class="userinput"><kbd class="command">cmake -B build \
+      -DCMAKE_BUILD_TYPE=Release          \
+      -DCMAKE_INSTALL_PREFIX=/usr</kbd></pre><pre class="userinput"><kbd class="command">cmake --build build</kbd></pre><p>
+      This package does not come with a test suite.
+    </p><p>
+      Now Install the package, as the <code class="systemitem">root</code> user:
+    </p><pre class="root"><kbd class="command">cmake --install build</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
+      <code class="option">-DBUILD_TESTS=ON</code>: Builds tests.
+    </p><p>
+      <code class="option">-DBUILD_DEV_UTILS=ON</code>: Builds and installs development
+      utilities.
+    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
+          None
+        </span></div><div class="seg"><strong class="segtitle">Installed Library: </strong><span class="segbody">
+          libQt6Xdg.so and libQt6XdgIconLoader.so
+        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
+          /usr/include/{qt6xdg,qt6xdgiconloader} and
+          /usr/share/cmake/{qt6xdg,qt6xdgiconloader}
+        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="libQt6Xdg-lib"></a><span class="term"><code class="filename">libQt6Xdg.so</code></span></p></td><td><p>
+            contains the <span class="application">libQt6Xdg</span> API functions.
+          </p></td></tr><tr><td><p><a id="libQt6XdgIconLoader-lib"></a><span class="term"><code class="filename">libQt6XdgIconLoader.so</code></span></p></td><td><p>
+            contains the <span class="application">libQt6XdgIconLoader</span> API functions.
+          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="libdbusmenu-lxqt.html" title="libdbusmenu-lxqt-0.3.0">Prev</a><p>libdbusmenu-lxqt-0.3.0</p></li><li class="next"><a accesskey="n" href="lxqt-menu-data.html" title="lxqt-menu-data-2.3.0">Next</a><p>lxqt-menu-data-2.3.0</p></li><li class="up"><a accesskey="u" href="chapter16.html" title="Chapter 16. Finalizing the LXQt - KDE Desktop">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>

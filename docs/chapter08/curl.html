@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>cURL-8.17.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 8. Network Utilities</h3><ul><li class="prev"><a accesskey="p" href="wget.html" title="Wget-1.25.0">Prev</a><p>Wget-1.25.0</p></li><li class="next"><a accesskey="n" href="whois.html" title="Whois-5.6.5">Next</a><p>Whois-5.6.5</p></li><li class="up"><a accesskey="u" href="chapter08.html" title="Chapter 8. Network Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-curl" name="ch-curl"></a>cURL-8.17.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to cURL</h2><p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>cURL-8.17.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 8. Network Utilities</h3><ul><li class="prev"><a accesskey="p" href="wget.html" title="Wget-1.25.0">Prev</a><p>Wget-1.25.0</p></li><li class="next"><a accesskey="n" href="whois.html" title="Whois-5.6.5">Next</a><p>Whois-5.6.5</p></li><li class="up"><a accesskey="u" href="chapter08.html" title="Chapter 8. Network Utilities">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="curl" name="curl"></a>cURL-8.17.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to cURL</h2><p>
       The <span class="application">cURL</span> package contains a utility
       and a library used for transferring files with URL syntax to any of
       the following protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP,
@@ -27,8 +27,13 @@
       </p></div><h4>Recommended at runtime</h4><p class="recommended">
       <a class="xref" href="../chapter07/make-ca.html" title="make-ca-1.16.1">make-ca-1.16.1</a>
     </p><h4>Optional</h4><p class="optional">
-      "brotli", "c-ares", "gnutls", <a class="xref" href="libidn2.html" title="libidn2-2.3.8">libidn2-2.3.8</a>,
-      "libssh2", "mitkrb", "nghttp2", "openldap",
+      <a class="xref" href="../chapter11/brotli.html" title="brotli-1.2.0">Brotli-1.2.0</a>,
+      <a class="xref" href="../chapter11/c-ares.html" title="c-ares-1.34.5">c-ares-1.34.5</a>,
+      <a class="xref" href="../chapter11/gnutls.html" title="GnuTLS-3.8.11">GnuTLS-3.8.11</a>,
+      <a class="xref" href="libidn2.html" title="libidn2-2.3.8">libidn2-2.3.8</a>,
+      <a class="xref" href="../chapter11/nghttp2.html" title="nghttp2-1.68.0">nghttp2-1.68.0</a>,
+      <a class="xref" href="../chapter11/openldap.html" title="OpenLDAP-2.6.10">OpenLDAP-2.6.10</a>,
+      "libssh2", "mitkrb",
       
       'runtime' "samba"
       (runtime, for NTLM authentication),
