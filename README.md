@@ -1,8 +1,8 @@
 # Linux From Scratch - r12.4
 
 [Zirconium Live ISO 23-Jan-2026](https://ln5.sync.com/dl/e0bf1eda0#krjew2c6-xry8b3rd-r468s92k-2fcap5cr)
-> Complete with Ybuild and yaml definitions for LFS r12.4-63-wip
-> Source Archives and Patches compressed in /mnt/cdrom tar.zst to build.
+> Complete with Ybuild and yaml definitions for LFS r12.4-63-wip<br>
+> Source Archives and Patches compressed in /mnt/cdrom tar.zst to build.<br>
 
 ## Zirconium OS - systemd
 
