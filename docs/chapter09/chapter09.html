@@ -1,1 +1,187 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Chapter 9. Grub Uefi Programs</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Part IV. Finalizing the LFS System</h3><ul><li class="prev"><a accesskey="p" href="../chapter08/whois.html" title="Whois-5.6.5">Prev</a><p>Whois-5.6.5</p></li><li class="next"><a accesskey="n" href="popt.html" title="Popt-1.19">Next</a><p>Popt-1.19</p></li><li class="up"><a accesskey="u" href="../part4.html" title="Part IV. Finalizing the LFS System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="chapter"><a id="chapter-grub-uefi" name="chapter-grub-uefi"></a>Grub Uefi Programs</h1><div class="chapter" lang="en" xml:lang="en"><div class="toc"><h3>Table of Contents</h3><ul><li class="sect1"><a href="popt.html">Popt-1.19</a></li><li class="sect1"><a href="libaio.html">libaio-0.3.113</a></li><li class="sect1"><a href="libpng.html">libpng-1.6.50</a></li><li class="sect1"><a href="dosfstools.html">dosfstools-4.2</a></li><li class="sect1"><a href="lvm2.html">LVM2-2.03.36</a></li><li class="sect1"><a href="fuse.html">Fuse-3.17.4</a></li><li class="sect1"><a href="freetype2.html">FreeType-2.14.1</a></li><li class="sect1"><a href="efivar.html">efivar-39</a></li><li class="sect1"><a href="efibootmgr.html">efibootmgr-18</a></li><li class="sect1"><a href="grub-efi.html">GRUB-2.12 for EFI</a></li><li class="sect1"><a href="grub-efi-setup.html">Using GRUB to Set Up the Boot Process with UEFI</a></li></ul></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="../chapter08/whois.html" title="Whois-5.6.5">Prev</a><p>Whois-5.6.5</p></li><li class="next"><a accesskey="n" href="popt.html" title="Popt-1.19">Next</a><p>Popt-1.19</p></li><li class="up"><a accesskey="u" href="../part4.html" title="Part IV. Finalizing the LFS System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      Chapter&nbsp;9.&nbsp;System Configuration
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Part&nbsp;IV.&nbsp;Building the LFS System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter08/stripping.html" title=
+          "Stripping">Prev</a>
+          <p>
+            Stripping
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="introduction.html" title=
+          "Introduction">Next</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part4.html" title=
+          "Part&nbsp;IV.&nbsp;Building the LFS System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="chapter">
+      <a id="chapter-config" name="chapter-config"></a>9. System
+      Configuration
+    </h1>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="sect1">
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li class="sect1">
+            <a href="network.html">General Network Configuration</a>
+          </li>
+          <li class="sect1">
+            <a href="zlfs-scripts.html">zlfs-scripts-20260506T1015Z</a>
+          </li>
+          <li class="sect1">
+            <a href="udev.html">Overview of Device and Module Handling</a>
+          </li>
+          <li class="sect1">
+            <a href="symlinks.html">Managing Devices</a>
+          </li>
+          <li class="sect1">
+            <a href="clock.html">Configuring the System Clock</a>
+          </li>
+          <li class="sect1">
+            <a href="console.html">Configuring the Linux Console</a>
+          </li>
+          <li class="sect1">
+            <a href="locale.html">Configuring the System Locale</a>
+          </li>
+          <li class="sect1">
+            <a href="inputrc.html">Creating the /etc/inputrc File</a>
+          </li>
+          <li class="sect1">
+            <a href="etcshells.html">Creating the /etc/shells File</a>
+          </li>
+          <li class="sect1">
+            <a href="systemd-custom.html">Systemd Usage and Configuration</a>
+          </li>
+          <li class="sect1">
+            <a href="libaio.html">libaio-0.3.113</a>
+          </li>
+          <li class="sect1">
+            <a href="libunistring.html">libunistring-1.4.2</a>
+          </li>
+          <li class="sect1">
+            <a href="libidn2.html">libidn2-2.3.8</a>
+          </li>
+          <li class="sect1">
+            <a href="libtasn1.html">libtasn1-4.21.0</a>
+          </li>
+          <li class="sect1">
+            <a href="libpsl.html">libpsl-0.21.5</a>
+          </li>
+          <li class="sect1">
+            <a href="libusb.html">libusb-1.0.29</a>
+          </li>
+          <li class="sect1">
+            <a href="libpng.html">Libpng-1.6.58</a>
+          </li>
+          <li class="sect1">
+            <a href="hwdata.html">Hwdata-0.407</a>
+          </li>
+          <li class="sect1">
+            <a href="popt.html">Popt-1.19</a>
+          </li>
+          <li class="sect1">
+            <a href="p11-kit.html">p11-kit-0.26.2</a>
+          </li>
+          <li class="sect1">
+            <a href="make-ca.html">make-ca-1.16.1</a>
+          </li>
+          <li class="sect1">
+            <a href="pciutils.html">pciutils-3.15.0</a>
+          </li>
+          <li class="sect1">
+            <a href="usbutils.html">usbutils-019</a>
+          </li>
+          <li class="sect1">
+            <a href="wget.html">Wget-1.25.0</a>
+          </li>
+          <li class="sect1">
+            <a href="curl.html">cURL-8.20.0</a>
+          </li>
+          <li class="sect1">
+            <a href="dosfstools.html">dosfstools-4.2</a>
+          </li>
+          <li class="sect1">
+            <a href="efivar.html">efivar-39</a>
+          </li>
+          <li class="sect1">
+            <a href="efibootmgr.html">efibootmgr-18</a>
+          </li>
+          <li class="sect1">
+            <a href="lvm2.html">LVM2-2.03.40</a>
+          </li>
+          <li class="sect1">
+            <a href="fuse.html">Fuse-3.18.2</a>
+          </li>
+          <li class="sect1">
+            <a href="freetype2.html">FreeType-2.14.3</a>
+          </li>
+          <li class="sect1">
+            <a href="grub.html">GRUB-2.14</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter08/stripping.html" title=
+          "Stripping">Prev</a>
+          <p>
+            Stripping
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="introduction.html" title=
+          "Introduction">Next</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part4.html" title=
+          "Part&nbsp;IV.&nbsp;Building the LFS System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

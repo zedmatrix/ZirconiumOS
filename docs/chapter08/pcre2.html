@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      8.12.&nbsp;Pcre2-10.47
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="readline.html" title="Readline-8.3">Prev</a>
+          <p>
+            Readline-8.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="m4.html" title="M4-1.4.21">Next</a>
+          <p>
+            M4-1.4.21
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-pcre2" name="ch-system-pcre2"></a>8.12. Pcre2-10.47
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The pcre2 package contains a new generation of the Perl Compatible
+          Regular Expression libraries.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">19.8 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.12.1. Installation of Pcre2
+        </h2>
+        <p>
+          Prepare pcre2 for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/pcre2-10.47 \
+            --enable-unicode                    \
+            --enable-jit                        \
+            --enable-pcre2-16                   \
+            --enable-pcre2-32                   \
+            --enable-pcre2grep-libz             \
+            --enable-pcre2grep-libbz2           \
+            --enable-pcre2test-libreadline      \
+            --disable-static</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-unicode</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option enables Unicode support and includes the
+                functions for handling UTF-8/16/32 character strings in the
+                library.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-jit</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option enables Just-in-time compiling, which can greatly
+                speed up pattern matching.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-pcre2-16</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option enables 16 bit character support.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-pcre2-32</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option enables 32 bit character support.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-pcre2grep-libz</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option adds support for reading .gz compressed files to
+                pcre2grep.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-pcre2grep-libbz2</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option adds support for reading .bz2 compressed files to
+                pcre2grep.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-pcre2test-libreadline</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option adds line editing and history features to the
+                pcre2test program.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-pcre2" name="contents-pcre2"></a>8.12.2. Contents
+          of Pcre2
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">pcre2grep and pcre2test</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed library:</strong>
+              <span class="segbody">libpcre2-8.so, libpcre2-16.so,
+              libpcre2-32.so, and libpcre2-posix.so</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pcre2grep" name="pcre2grep"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pcre2grep</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a version of grep that understands Perl compatible
+                    regular expressions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pcre2test" name="pcre2test"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pcre2test</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    can test a Perl compatible regular expression
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="readline.html" title="Readline-8.3">Prev</a>
+          <p>
+            Readline-8.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="m4.html" title="M4-1.4.21">Next</a>
+          <p>
+            M4-1.4.21
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

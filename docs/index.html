@@ -1,1 +1,928 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Zirconium Linux From Scratch</title><link rel="stylesheet" type="text/css" href="stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="book"><div class="titlepage"><div><div><h1 class="title"><a id="id1337"></a>Zirconium Linux From Scratch</h1></div><div><h2 class="subtitle">Version r12.4-45-systemd</h2></div><div><h2 class="subtitle">Published November 14th, 2025</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Maintained by Zed</span> <span class="surname">Matrix</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Created By: Gerard</span> <span class="surname">Beekmans</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Managing Editor: Bruce</span> <span class="surname">Dubbs</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Editor: Douglas R.</span> <span class="surname">Reno</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Editor: DJ</span> <span class="surname">Lucas</span></h3></div></div></div><div><p class="copyright"><a href="legalnotice.html">Copyright</a> © 1999-2025 Gerard Beekmans</p></div><div></div></div><hr /></div><div class="dedication"><h2>Dedication</h2><p>This book is dedicated</p></div><div class="toc"><h3>Table of Contents</h3><ul><li class="preface"><h4><a href="prologue/preface.html">Preface</a></h4><ul><li class="sect1"><a href="prologue/foreword.html">Foreword</a></li><li class="sect1"><a href="prologue/audience.html">Audience</a></li><li class="sect1"><a href="prologue/architecture.html">LFS Target Architectures</a></li><li class="sect1"><a href="prologue/prerequisites.html">Prerequisites</a></li><li class="sect1"><a href="prologue/standards.html">LFS and Standards</a></li><li class="sect1"><a href="prologue/package-choices.html">Rationale for Packages in the Book</a></li><li class="sect1"><a href="prologue/typography.html">Typography</a></li><li class="sect1"><a href="prologue/organization.html">Structure</a></li><li class="sect1"><a href="prologue/errata.html">Errata and Security Advisories</a></li></ul></li><li class="part"><h3><a href="part1.html">I. Preparing for the Build</a></h3><ul><li class="chapter"><h4><a href="chapter01/chapter01.html">1. Preparing Environment</a></h4><ul><li class="sect1"><a href="chapter01/creatingfilesystem.html">Creating a File System on the Partition</a></li><li class="sect1"><a href="chapter01/creatingpartition.html">Creating a New Partition</a></li><li class="sect1"><a href="chapter01/settingenvironment.html">Setting Up the Environment</a></li><li class="sect1"><a href="chapter01/creatingminlayout.html">Creating a Limited Directory Layout in the LFS Filesystem</a></li><li class="sect1"><a href="chapter01/introduction.html">Introduction</a></li><li class="sect1"><a href="chapter01/packages.html">All Packages</a></li><li class="sect1"><a href="chapter01/patches.html">Needed Patches</a></li></ul></li></ul></li><li class="part"><h3><a href="part2.html">II. Building the LFS Cross Toolchain and Temporary Tools</a></h3><ul><li class="chapter"><h4><a href="chapter02/chapter02.html">2. Compiling a Cross-Toolchain</a></h4><ul><li class="sect1"><a href="chapter02/introduction.html">Introduction</a></li><li class="sect1"><a href="chapter02/binutils-pass1.html">Binutils-2.45.1 - Pass 1</a></li><li class="sect1"><a href="chapter02/gcc-pass1.html">GCC-15.2.0 - Pass 1</a></li><li class="sect1"><a href="chapter02/linux-headers.html">Linux-6.12.58 API Headers</a></li><li class="sect1"><a href="chapter02/glibc.html">Glibc-2.42</a></li><li class="sect1"><a href="chapter02/gcc-libstdc++.html">Libstdc++ from GCC-15.2.0</a></li></ul></li><li class="chapter"><h4><a href="chapter03/chapter03.html">3. Cross Compiling Temporary Tools</a></h4><ul><li class="sect1"><a href="chapter03/introduction.html">Introduction</a></li><li class="sect1"><a href="chapter03/m4.html">M4-1.4.20</a></li><li class="sect1"><a href="chapter03/ncurses.html">Ncurses-6.5-20250809</a></li><li class="sect1"><a href="chapter03/bash.html">Bash-5.3</a></li><li class="sect1"><a href="chapter03/coreutils.html">Coreutils-9.9</a></li><li class="sect1"><a href="chapter03/diffutils.html">Diffutils-3.12</a></li><li class="sect1"><a href="chapter03/file.html">File-5.46</a></li><li class="sect1"><a href="chapter03/findutils.html">Findutils-4.10.0</a></li><li class="sect1"><a href="chapter03/gawk.html">Gawk-5.3.2</a></li><li class="sect1"><a href="chapter03/grep.html">Grep-3.12</a></li><li class="sect1"><a href="chapter03/gzip.html">Gzip-1.14</a></li><li class="sect1"><a href="chapter03/make.html">Make-4.4.1</a></li><li class="sect1"><a href="chapter03/patch.html">Patch-2.8</a></li><li class="sect1"><a href="chapter03/sed.html">Sed-4.9</a></li><li class="sect1"><a href="chapter03/xz.html">Xz-5.8.1</a></li><li class="sect1"><a href="chapter03/libarchive.html">Libarchive-3.8.1</a></li><li class="sect1"><a href="chapter03/binutils-pass2.html">Binutils-2.45.1 - Pass 2</a></li><li class="sect1"><a href="chapter03/gcc-pass2.html">GCC-15.2.0 - Pass 2</a></li></ul></li><li class="chapter"><h4><a href="chapter04/chapter04.html">4. Entering Chroot and Building Additional Temporary Tools</a></h4><ul><li class="sect1"><a href="chapter04/introduction.html">Introduction</a></li><li class="sect1"><a href="chapter04/changingowner.html">Changing Ownership</a></li><li class="sect1"><a href="chapter04/kernfs.html">Preparing Virtual Kernel File Systems</a></li><li class="sect1"><a href="chapter04/chroot.html">Entering the Chroot Environment</a></li><li class="sect1"><a href="chapter04/creatingdirs.html">Creating Directories</a></li><li class="sect1"><a href="chapter04/createfiles.html">Creating Essential Files and Symlinks</a></li><li class="sect1"><a href="chapter04/gettext.html">Gettext-0.26</a></li><li class="sect1"><a href="chapter04/bison.html">Bison-3.8.2</a></li><li class="sect1"><a href="chapter04/perl.html">Perl-5.42.0</a></li><li class="sect1"><a href="chapter04/Python.html">Python-3.14.0</a></li><li class="sect1"><a href="chapter04/texinfo.html">Texinfo-7.2</a></li><li class="sect1"><a href="chapter04/util-linux.html">Util-linux-2.41.2</a></li><li class="sect1"><a href="chapter04/nano.html">Nano-8.7</a></li><li class="sect1"><a href="chapter04/cleanup.html">Cleaning up and Saving the Temporary System</a></li></ul></li></ul></li><li class="part"><h3><a href="part3.html">III. Building the LFS System</a></h3><ul><li class="chapter"><h4><a href="chapter05/chapter05.html">5. Installing Basic System Software</a></h4><ul><li class="sect1"><a href="chapter05/introduction.html">Introduction</a></li><li class="sect1"><a href="chapter05/pkgmgt.html">Package Management</a></li><li class="sect1"><a href="chapter05/man-pages.html">Man-pages-6.16</a></li><li class="sect1"><a href="chapter05/iana-etc.html">Iana-Etc-20251022</a></li><li class="sect1"><a href="chapter05/glibc.html">Glibc-2.42</a></li><li class="sect1"><a href="chapter05/zlib.html">Zlib-1.3.1</a></li><li class="sect1"><a href="chapter05/bzip2.html">Bzip2-1.0.8</a></li><li class="sect1"><a href="chapter05/xz.html">Xz-5.8.1</a></li><li class="sect1"><a href="chapter05/lz4.html">Lz4-1.10.0</a></li><li class="sect1"><a href="chapter05/zstd.html">Zstd-1.5.7</a></li><li class="sect1"><a href="chapter05/file.html">File-5.46</a></li><li class="sect1"><a href="chapter05/readline.html">Readline-8.3</a></li><li class="sect1"><a href="chapter05/pcre2.html">Pcre2-10.47</a></li><li class="sect1"><a href="chapter05/m4.html">M4-1.4.20</a></li><li class="sect1"><a href="chapter05/bc.html">Bc-7.0.3</a></li><li class="sect1"><a href="chapter05/flex.html">Flex-2.6.4</a></li><li class="sect1"><a href="chapter05/tcl.html">Tcl-8.6.17</a></li><li class="sect1"><a href="chapter05/expect.html">Expect-5.45.4</a></li><li class="sect1"><a href="chapter05/dejagnu.html">DejaGNU-1.6.3</a></li><li class="sect1"><a href="chapter05/pkgconf.html">Pkgconf-2.5.1</a></li><li class="sect1"><a href="chapter05/binutils.html">Binutils-2.45.1</a></li><li class="sect1"><a href="chapter05/gmp.html">GMP-6.3.0</a></li><li class="sect1"><a href="chapter05/mpfr.html">MPFR-4.2.2</a></li><li class="sect1"><a href="chapter05/mpc.html">MPC-1.3.1</a></li><li class="sect1"><a href="chapter05/attr.html">Attr-2.5.2</a></li><li class="sect1"><a href="chapter05/acl.html">Acl-2.3.2</a></li><li class="sect1"><a href="chapter05/libcap.html">Libcap-2.77</a></li><li class="sect1"><a href="chapter05/libxcrypt.html">Libxcrypt-4.5.1</a></li><li class="sect1"><a href="chapter05/shadow.html">Shadow-4.18.0</a></li><li class="sect1"><a href="chapter05/gcc.html">GCC-15.2.0</a></li><li class="sect1"><a href="chapter05/ncurses.html">Ncurses-6.5-20250809</a></li><li class="sect1"><a href="chapter05/sed.html">Sed-4.9</a></li><li class="sect1"><a href="chapter05/psmisc.html">Psmisc-23.7</a></li><li class="sect1"><a href="chapter05/gettext.html">Gettext-0.26</a></li><li class="sect1"><a href="chapter05/bison.html">Bison-3.8.2</a></li><li class="sect1"><a href="chapter05/grep.html">Grep-3.12</a></li><li class="sect1"><a href="chapter05/bash.html">Bash-5.3</a></li><li class="sect1"><a href="chapter05/libtool.html">Libtool-2.5.4</a></li><li class="sect1"><a href="chapter05/gdbm.html">GDBM-1.26</a></li><li class="sect1"><a href="chapter05/gperf.html">Gperf-3.3</a></li><li class="sect1"><a href="chapter05/expat.html">Expat-2.7.3</a></li><li class="sect1"><a href="chapter05/inetutils.html">Inetutils-2.6</a></li><li class="sect1"><a href="chapter05/less.html">Less-685</a></li><li class="sect1"><a href="chapter05/perl.html">Perl-5.42.0</a></li><li class="sect1"><a href="chapter05/xml-parser.html">XML::Parser-2.47</a></li><li class="sect1"><a href="chapter05/intltool.html">Intltool-0.51.0</a></li><li class="sect1"><a href="chapter05/autoconf.html">Autoconf-2.72</a></li><li class="sect1"><a href="chapter05/automake.html">Automake-1.18.1</a></li><li class="sect1"><a href="chapter05/openssl.html">OpenSSL-3.6.0</a></li><li class="sect1"><a href="chapter05/libarchive.html">Libarchive-3.8.1</a></li><li class="sect1"><a href="chapter05/libelf.html">Libelf from Elfutils-0.194</a></li><li class="sect1"><a href="chapter05/libffi.html">Libffi-3.5.2</a></li><li class="sect1"><a href="chapter05/sqlite.html">Sqlite-3510000</a></li><li class="sect1"><a href="chapter05/Python.html">Python-3.14.0</a></li><li class="sect1"><a href="chapter05/flit-core.html">Flit-Core-3.12.0</a></li><li class="sect1"><a href="chapter05/packaging.html">Packaging-25.0</a></li><li class="sect1"><a href="chapter05/wheel.html">Wheel-0.46.1</a></li><li class="sect1"><a href="chapter05/setuptools.html">Setuptools-80.9.0</a></li><li class="sect1"><a href="chapter05/ninja.html">Ninja-1.13.1</a></li><li class="sect1"><a href="chapter05/meson.html">Meson-1.9.1</a></li><li class="sect1"><a href="chapter05/kmod.html">Kmod-34.2</a></li><li class="sect1"><a href="chapter05/coreutils.html">Coreutils-9.9</a></li><li class="sect1"><a href="chapter05/diffutils.html">Diffutils-3.12</a></li><li class="sect1"><a href="chapter05/gawk.html">Gawk-5.3.2</a></li><li class="sect1"><a href="chapter05/findutils.html">Findutils-4.10.0</a></li><li class="sect1"><a href="chapter05/groff.html">Groff-1.23.0</a></li><li class="sect1"><a href="chapter05/grub.html">GRUB-2.12</a></li><li class="sect1"><a href="chapter05/gzip.html">Gzip-1.14</a></li><li class="sect1"><a href="chapter05/iproute2.html">IPRoute2-6.17.0</a></li><li class="sect1"><a href="chapter05/kbd.html">Kbd-2.9.0</a></li><li class="sect1"><a href="chapter05/libpipeline.html">Libpipeline-1.5.8</a></li><li class="sect1"><a href="chapter05/make.html">Make-4.4.1</a></li><li class="sect1"><a href="chapter05/patch.html">Patch-2.8</a></li><li class="sect1"><a href="chapter05/texinfo.html">Texinfo-7.2</a></li><li class="sect1"><a href="chapter05/nano.html">Nano-8.7</a></li><li class="sect1"><a href="chapter05/markupsafe.html">MarkupSafe-3.0.3</a></li><li class="sect1"><a href="chapter05/jinja2.html">Jinja2-3.1.6</a></li><li class="sect1"><a href="chapter05/systemd.html">Systemd-258.1</a></li><li class="sect1"><a href="chapter05/dbus.html">D-Bus-1.16.2</a></li><li class="sect1"><a href="chapter05/man-db.html">Man-DB-2.13.1</a></li><li class="sect1"><a href="chapter05/procps-ng.html">Procps-ng-4.0.5</a></li><li class="sect1"><a href="chapter05/util-linux.html">Util-linux-2.41.2</a></li><li class="sect1"><a href="chapter05/e2fsprogs.html">E2fsprogs-1.47.3</a></li><li class="sect1"><a href="chapter05/aboutdebug.html">About Debugging Symbols</a></li><li class="sect1"><a href="chapter05/stripping.html">Stripping</a></li><li class="sect1"><a href="chapter05/cleanup.html">Cleaning Up</a></li></ul></li></ul></li><li class="part"><h3><a href="part4.html">IV. Finalizing the LFS System</a></h3><ul><li class="chapter"><h4><a href="chapter06/chapter06.html">6. Configuring the System</a></h4><ul><li class="sect1"><a href="chapter06/bashscripts.html">Bash Scripts</a></li><li class="sect1"><a href="chapter06/extrascripts.html">Extra Bash Scripts</a></li><li class="sect1"><a href="chapter06/grub-uefi.html">Grub and Fstab Configuration</a></li><li class="sect1"><a href="chapter06/fstab.html">Creating the /etc/fstab File</a></li><li class="sect1"><a href="chapter06/kernel.html">Linux-6.12.58</a></li></ul></li><li class="chapter"><h4><a href="chapter07/chapter07.html">7. System Utilities</a></h4><ul><li class="sect1"><a href="chapter07/which.html">Which-2.23 and Alternatives</a></li><li class="sect1"><a href="chapter07/hwdata.html">hwdata-0.401</a></li><li class="sect1"><a href="chapter07/pciutils.html">pciutils-3.14.0</a></li><li class="sect1"><a href="chapter07/libusb.html">libusb-1.0.29</a></li><li class="sect1"><a href="chapter07/usbutils.html">usbutils-019</a></li><li class="sect1"><a href="chapter07/libtasn1.html">libtasn1-4.20.0</a></li><li class="sect1"><a href="chapter07/p11-kit.html">p11-kit-0.25.10</a></li><li class="sect1"><a href="chapter07/make-ca.html">make-ca-1.16.1</a></li></ul></li><li class="chapter"><h4><a href="chapter08/chapter08.html">8. Network Utilities</a></h4><ul><li class="sect1"><a href="chapter08/openssh.html">OpenSSH-10.2p1</a></li><li class="sect1"><a href="chapter08/libunistring.html">libunistring-1.4.1</a></li><li class="sect1"><a href="chapter08/libidn2.html">libidn2-2.3.8</a></li><li class="sect1"><a href="chapter08/libpsl.html">libpsl-0.21.5</a></li><li class="sect1"><a href="chapter08/wget.html">Wget-1.25.0</a></li><li class="sect1"><a href="chapter08/curl.html">cURL-8.17.0</a></li><li class="sect1"><a href="chapter08/whois.html">Whois-5.6.5</a></li></ul></li><li class="chapter"><h4><a href="chapter09/chapter09.html">9. Grub Uefi Programs</a></h4><ul><li class="sect1"><a href="chapter09/popt.html">Popt-1.19</a></li><li class="sect1"><a href="chapter09/libaio.html">libaio-0.3.113</a></li><li class="sect1"><a href="chapter09/libpng.html">libpng-1.6.50</a></li><li class="sect1"><a href="chapter09/dosfstools.html">dosfstools-4.2</a></li><li class="sect1"><a href="chapter09/lvm2.html">LVM2-2.03.36</a></li><li class="sect1"><a href="chapter09/fuse.html">Fuse-3.17.4</a></li><li class="sect1"><a href="chapter09/freetype2.html">FreeType-2.14.1</a></li><li class="sect1"><a href="chapter09/efivar.html">efivar-39</a></li><li class="sect1"><a href="chapter09/efibootmgr.html">efibootmgr-18</a></li><li class="sect1"><a href="chapter09/grub-efi.html">GRUB-2.12 for EFI</a></li><li class="sect1"><a href="chapter09/grub-efi-setup.html">Using GRUB to Set Up the Boot Process with UEFI</a></li></ul></li></ul></li><li class="part"><h3><a href="part5.html">V. Finish to Reboot</a></h3><ul><li class="chapter"><h4><a href="chapter10/chapter10.html">10. Finishing the System</a></h4><ul><li class="sect1"><a href="chapter10/git.html">Git-2.52.0</a></li><li class="sect1"><a href="chapter10/linux-firmware.html">Linux-Firmware-20251111</a></li><li class="sect1"><a href="chapter10/reboot.html">Rebooting the System</a></li></ul></li></ul></li><li class="part"><h3><a href="part6.html">VI. Going Beyond the Basesystem</a></h3><ul><li class="chapter"><h4><a href="chapter11/chapter11.html">11. Post Networking, Compilers and Markup Language</a></h4><ul><li class="sect1"><a href="chapter11/libtirpc.html">libtirpc-1.3.7</a></li><li class="sect1"><a href="chapter11/libnsl.html">libnsl-2.0.1</a></li><li class="sect1"><a href="chapter11/libuv.html">libuv-1.51.0</a></li><li class="sect1"><a href="chapter11/cmake.html">CMake-4.1.3</a></li><li class="sect1"><a href="chapter11/yaml-cpp.html">Yaml-cpp-0.8.0</a></li><li class="sect1"><a href="chapter11/gpm.html">GPM-1.20.7</a></li><li class="sect1"><a href="chapter11/unix-tree.html">tree-2.2.1</a></li><li class="sect1"><a href="chapter11/icu.html">icu-78.1</a></li><li class="sect1"><a href="chapter11/boost.html">boost-1.89.0</a></li><li class="sect1"><a href="chapter11/libxml2.html">libxml2-2.15.1</a></li><li class="sect1"><a href="chapter11/docbook45.html">docbook-xml-4.5</a></li><li class="sect1"><a href="chapter11/libxslt.html">libxslt-1.1.43</a></li><li class="sect1"><a href="chapter11/ch11s13.html">lxml-6.0.2</a></li><li class="sect1"><a href="chapter11/itstool.html">itstool-2.0.7</a></li><li class="sect1"><a href="chapter11/docbook-xsl.html">docbook-xsl-nons-1.79.2</a></li><li class="sect1"><a href="chapter11/xmlto.html">xmlto-0.0.29</a></li><li class="sect1"><a href="chapter11/libevent.html">libevent-2.1.12</a></li><li class="sect1"><a href="chapter11/links.html">Links-2.30</a></li><li class="sect1"><a href="chapter11/asciidoc.html">Asciidoc-10.2.1</a></li><li class="sect1"><a href="chapter11/pyproject-hooks.html">Pyproject_Hooks-1.2.0</a></li><li class="sect1"><a href="chapter11/pybuild.html">Build-1.3.0</a></li><li class="sect1"><a href="chapter11/installer.html">Installer-0.7.0</a></li><li class="sect1"><a href="chapter11/rsync.html">rsync-3.4.1</a></li><li class="sect1"><a href="chapter11/lm-sensors.html">lm-sensors-3-6-2</a></li><li class="sect1"><a href="chapter11/lzo.html">LZO-2.10</a></li><li class="sect1"><a href="chapter11/ch11s26.html">Cython-3.2.1</a></li><li class="sect1"><a href="chapter11/nettle.html">Nettle-3.10.2</a></li><li class="sect1"><a href="chapter11/nasm.html">NASM-3.01</a></li><li class="sect1"><a href="chapter11/yasm.html">yasm-1.3.0</a></li><li class="sect1"><a href="chapter11/brotli.html">brotli-1.2.0</a></li><li class="sect1"><a href="chapter11/llvm.html">LLVM-21.1.2</a></li><li class="sect1"><a href="chapter11/jansson.html">Jansson-2.14.1</a></li><li class="sect1"><a href="chapter11/net-tools.html">Net-tools-2.10</a></li><li class="sect1"><a href="chapter11/libseccomp.html">libseccomp-2.6.0</a></li><li class="sect1"><a href="chapter11/c-ares.html">c-ares-1.34.5</a></li><li class="sect1"><a href="chapter11/nghttp2.html">nghttp2-1.68.0</a></li><li class="sect1"><a href="chapter11/libnl.html">libnl-3.11.0</a></li><li class="sect1"><a href="chapter11/rpcbind.html">rpcbind-1.2.8</a></li><li class="sect1"><a href="chapter11/rpcsvc-proto.html">rpcsvc-proto-1.4.4</a></li><li class="sect1"><a href="chapter11/linux-pam.html">Linux-PAM-1.7.1</a></li><li class="sect1"><a href="chapter11/shadow.html">Shadow-4.18.0 with PAM</a></li><li class="sect1"><a href="chapter11/systemd.html">Systemd-258.1 with PAM</a></li><li class="sect1"><a href="chapter11/libcap.html">libcap-2.77 with PAM</a></li><li class="sect1"><a href="chapter11/skel.html">Configuring for Adding Users</a></li><li class="sect1"><a href="chapter11/nspr.html">NSPR-4.38.2</a></li><li class="sect1"><a href="chapter11/nss.html">NSS-3.118.1</a></li><li class="sect1"><a href="chapter11/libgpg-error.html">libgpg-error-1.56</a></li><li class="sect1"><a href="chapter11/libgcrypt.html">libgcrypt-1.11.2</a></li><li class="sect1"><a href="chapter11/libssh2.html">libssh2-1.11.1</a></li><li class="sect1"><a href="chapter11/lmdb.html">lmdb-0.9.33</a></li><li class="sect1"><a href="chapter11/cyrus-sasl.html">Cyrus SASL-2.1.28</a></li><li class="sect1"><a href="chapter11/openldap.html">OpenLDAP-2.6.10</a></li><li class="sect1"><a href="chapter11/sudo.html">Sudo-1.9.17p2</a></li><li class="sect1"><a href="chapter11/gnutls.html">GnuTLS-3.8.11</a></li><li class="sect1"><a href="chapter11/duktape.html">duktape-2.7.0</a></li><li class="sect1"><a href="chapter11/nfs-utils.html">NFS-Utils-2.8.4</a></li><li class="sect1"><a href="chapter11/npth.html">npth-1.8</a></li><li class="sect1"><a href="chapter11/libksba.html">libksba-1.6.7</a></li><li class="sect1"><a href="chapter11/libassuan.html">libassuan-3.0.2</a></li><li class="sect1"><a href="chapter11/gnupg.html">GnuPG-2.4.8</a></li><li class="sect1"><a href="chapter11/gpgme.html">gpgme-2.0.1</a></li><li class="sect1"><a href="chapter11/gpgmepp.html">gpgmepp-2.0.0</a></li><li class="sect1"><a href="chapter11/ch11s63.html">docutils-0.22.3</a></li><li class="sect1"><a href="chapter11/ch11s64.html">ply-3.11</a></li><li class="sect1"><a href="chapter11/ch11s65.html">Mako-1.3.10</a></li><li class="sect1"><a href="chapter11/libyaml.html">libyaml-0.2.5</a></li><li class="sect1"><a href="chapter11/ch11s67.html">PyYAML-6.0.3</a></li><li class="sect1"><a href="chapter11/iso-codes.html">ISO Codes-4.19.0</a></li></ul></li></ul></li><li class="part"><h3><a href="part7.html">VII. Graphical Environments and Libraries</a></h3><ul><li class="chapter"><h4><a href="chapter12/chapter12.html">12. Preparing Xorg and Support Libraries</a></h4><ul><li class="sect1"><a href="chapter12/glib2.html">GLib-2.86.2</a></li><li class="sect1"><a href="chapter12/shared-mime-info.html">shared-mime-info-2.4</a></li><li class="sect1"><a href="chapter12/desktop-file-utils.html">desktop-file-utils-0.28</a></li><li class="sect1"><a href="chapter12/pixman.html">Pixman-0.46.4</a></li><li class="sect1"><a href="chapter12/polkit.html">Polkit-126</a></li><li class="sect1"><a href="chapter12/util-macros.html">util-macros-1.20.2</a></li><li class="sect1"><a href="chapter12/xorgproto.html">xorgproto-2024.1</a></li><li class="sect1"><a href="chapter12/bdftopcf.html">bdftopcf-1.1.2</a></li><li class="sect1"><a href="chapter12/libXau.html">libXau-1.0.12</a></li><li class="sect1"><a href="chapter12/libXdmcp.html">libXdmcp-1.1.5</a></li><li class="sect1"><a href="chapter12/xcb-proto.html">xcb-proto-1.17.0</a></li><li class="sect1"><a href="chapter12/libxcb.html">libxcb-1.17.0</a></li><li class="sect1"><a href="chapter12/fontconfig.html">Fontconfig-2.17.1</a></li><li class="sect1"><a href="chapter12/xorg7-libraries.html">Xorg7 Libraries</a></li><li class="sect1"><a href="chapter12/libxcvt.html">libxcvt-0.1.3</a></li><li class="sect1"><a href="chapter12/xcb-utils.html">XCB Utility Libraries</a></li><li class="sect1"><a href="chapter12/libdrm.html">Libdrm-2.4.129</a></li><li class="sect1"><a href="chapter12/cairo.html">Cairo-1.18.4</a></li><li class="sect1"><a href="chapter12/graphene.html">Graphene-1.10.8</a></li><li class="sect1"><a href="chapter12/graphite2.html">Graphite2-1.3.14</a></li><li class="sect1"><a href="chapter12/harfbuzz.html">harfBuzz-12.2.0</a></li><li class="sect1"><a href="chapter12/graphite2-pass2.html">Graphite2-1.3.14 Pass 2</a></li><li class="sect1"><a href="chapter12/wayland.html">Wayland-1.24.0</a></li><li class="sect1"><a href="chapter12/wayland-protocols.html">Wayland-Protocols-1.45</a></li><li class="sect1"><a href="chapter12/spirv-headers.html">SPIRV-Headers-1.4.328.1</a></li><li class="sect1"><a href="chapter12/spirv-tools.html">SPIRV-Tools-1.4.328.1</a></li><li class="sect1"><a href="chapter12/spirv-llvm-translator.html">SPIRV-LLVM-Translator-21.1.2</a></li><li class="sect1"><a href="chapter12/libclc.html">libclc-21.1.2</a></li><li class="sect1"><a href="chapter12/vulkan-headers.html">Vulkan-Headers-1.4.328.1</a></li><li class="sect1"><a href="chapter12/vulkan-loader.html">Vulkan-Loader-1.4.328.1</a></li><li class="sect1"><a href="chapter12/glslang.html">glslang-16.0.0</a></li><li class="sect1"><a href="chapter12/libva.html">libva-2.22.0</a></li><li class="sect1"><a href="chapter12/libvdpau.html">libvdpau-1.5</a></li><li class="sect1"><a href="chapter12/mesa.html">Mesa-25.2.7</a></li><li class="sect1"><a href="chapter12/intel-vaapi-driver.html">intel-vaapi-driver-2.4.1</a></li><li class="sect1"><a href="chapter12/xbitmaps.html">xbitmaps-1.1.3</a></li><li class="sect1"><a href="chapter12/libvpx.html">libvpx-1.15.2</a></li><li class="sect1"><a href="chapter12/libva-pass2.html">libva-2.22.0 Pass 2</a></li><li class="sect1"><a href="chapter12/xorg7-apps.html">Xorg7 Applications</a></li><li class="sect1"><a href="chapter12/luit.html">luit-20250912</a></li><li class="sect1"><a href="chapter12/xcursor-themes.html">xcursor-themes-1.0.7</a></li><li class="sect1"><a href="chapter12/xorg7-fonts.html">Xorg7 Fonts</a></li><li class="sect1"><a href="chapter12/libxkbcommon.html">libxkbcommon-1.13.0</a></li><li class="sect1"><a href="chapter12/xkeyboard-config.html">XKeyboardConfig-2.46</a></li><li class="sect1"><a href="chapter12/libepoxy.html">libepoxy-1.5.10</a></li><li class="sect1"><a href="chapter12/xwayland.html">Xwayland-24.1.9</a></li><li class="sect1"><a href="chapter12/xorg-server.html">Xorg-Server-21.1.21</a></li><li class="sect1"><a href="chapter12/mtdev.html">mtdev-1.1.7</a></li><li class="sect1"><a href="chapter12/xorg7-input.html">Xorg7 Input Drivers</a></li><li class="sect1"><a href="chapter12/twm.html">twm-1.0.13.1</a></li><li class="sect1"><a href="chapter12/xterm.html">xterm-403</a></li><li class="sect1"><a href="chapter12/xclock.html">xclock-1.1.1</a></li><li class="sect1"><a href="chapter12/xinit.html">xinit-1.4.4</a></li><li class="sect1"><a href="chapter12/xorg7-legacy.html">Xorg7 Legacy Fonts</a></li><li class="sect1"><a href="chapter12/dbus.html">dbus-1.16.2</a></li><li class="sect1"><a href="chapter12/xdg-utils.html">xdg-utils-1.2.1</a></li><li class="sect1"><a href="chapter12/xdg-user-dirs.html">Xdg-user-dirs-0.19</a></li><li class="sect1"><a href="chapter12/glu.html">GLU-9.0.3</a></li><li class="sect1"><a href="chapter12/glew.html">GLEW-2.2.0</a></li><li class="sect1"><a href="chapter12/freeglut.html">Freeglut-3.8.0</a></li><li class="sect1"><a href="chapter12/cantarell-fonts.html">Cantarell Fonts-0.303</a></li><li class="sect1"><a href="chapter12/dejavu-fonts-ttf.html">Dejavu Fonts TTF-2.37</a></li></ul></li></ul></li><li class="part"><h3><a href="part8.html">VIII. Media and Graphical Back End</a></h3><ul><li class="chapter"><h4><a href="chapter13/chapter13.html">13. Preparing FFMpeg and Support Libraries</a></h4><ul><li class="sect1"><a href="chapter13/fribidi.html">FriBidi-1.0.16</a></li><li class="sect1"><a href="chapter13/bubblewrap.html">Bubblewrap-0.11.0</a></li><li class="sect1"><a href="chapter13/pango.html">Pango-1.57.0</a></li><li class="sect1"><a href="chapter13/graphviz.html">Graphviz-14.0.4</a></li><li class="sect1"><a href="chapter13/vala.html">Vala-0.56.18</a></li><li class="sect1"><a href="chapter13/gavl.html">gavl-1.4.0</a></li><li class="sect1"><a href="chapter13/libical.html">libical-3.0.20</a></li><li class="sect1"><a href="chapter13/bluez.html">BlueZ-5.84</a></li><li class="sect1"><a href="chapter13/oggvorbis.html">LibOgg-1.3.6 and LibVorbis-1.3.7</a></li><li class="sect1"><a href="chapter13/speex-pkg.html">Speex-1.2.1 and Speexdsp-1.2.1</a></li><li class="sect1"><a href="chapter13/opus.html">Opus-1.5.2</a></li><li class="sect1"><a href="chapter13/lame.html">LAME-3.100</a></li><li class="sect1"><a href="chapter13/flac.html">FLAC-1.5.0</a></li><li class="sect1"><a href="chapter13/fdk-aac.html">fdk-aac-2.0.3</a></li><li class="sect1"><a href="chapter13/a52dec.html">Liba52-0.8.0</a></li><li class="sect1"><a href="chapter13/libaom.html">libaom-3.13.1</a></li><li class="sect1"><a href="chapter13/libass.html">libass-0.17.4</a></li><li class="sect1"><a href="chapter13/alsa-lib.html">alsa-lib-1.2.14</a></li><li class="sect1"><a href="chapter13/alsa-utils.html">alsa-utils-1.2.14</a></li><li class="sect1"><a href="chapter13/faad2.html">faad2-2.11.2</a></li><li class="sect1"><a href="chapter13/faac.html">faac-1.31.1</a></li><li class="sect1"><a href="chapter13/mpg123.html">mpg123-1.33.3</a></li><li class="sect1"><a href="chapter13/libsndfile.html">libsndfile-1.2.2</a></li><li class="sect1"><a href="chapter13/sbc.html">SBC-2.1</a></li><li class="sect1"><a href="chapter13/pulseaudio.html">PulseAudio-17.0</a></li><li class="sect1"><a href="chapter13/x264.html">x264-20250815</a></li><li class="sect1"><a href="chapter13/x265.html">x265-4.1</a></li><li class="sect1"><a href="chapter13/libcddb.html">libcddb-1.3.2</a></li><li class="sect1"><a href="chapter13/libcdio.html">libcdio-2.1.0</a></li><li class="sect1"><a href="chapter13/cdparanoia.html">CDParanoia-III-10.2</a></li><li class="sect1"><a href="chapter13/libdvdcss.html">libdvdcss-1.5.0</a></li><li class="sect1"><a href="chapter13/libdvdread.html">libdvdread-7.0.1</a></li><li class="sect1"><a href="chapter13/libdvdnav.html">libdvdnav-7.0.0</a></li><li class="sect1"><a href="chapter13/libjpeg.html">libjpeg-turbo-3.0.1</a></li><li class="sect1"><a href="chapter13/libtiff.html">libtiff-4.7.1</a></li><li class="sect1"><a href="chapter13/giflib.html">giflib-5.2.2</a></li><li class="sect1"><a href="chapter13/lcms2.html">Little CMS-2.17</a></li><li class="sect1"><a href="chapter13/libmng.html">libmng-2.0.3</a></li><li class="sect1"><a href="chapter13/sdl3.html">SDL3-3.3.4</a></li><li class="sect1"><a href="chapter13/sdl2.html">sdl2-compat-2.32.60</a></li><li class="sect1"><a href="chapter13/libwebp.html">libwebp-1.6.0</a></li><li class="sect1"><a href="chapter13/glad.html">Glad-2.0.8</a></li><li class="sect1"><a href="chapter13/libplacebo.html">libplacebo-7.351.0</a></li><li class="sect1"><a href="chapter13/at-spi2-core.html">at-spi2-core-2.58.1</a></li><li class="sect1"><a href="chapter13/gsettings-desktop-schemas.html">gsettings-desktop-schemas-49.1</a></li><li class="sect1"><a href="chapter13/gdk-pixbuf.html">gdk-pixbuf-2.44.4</a></li><li class="sect1"><a href="chapter13/hicolor-icon-theme.html">hicolor-icon-theme-0.18</a></li><li class="sect1"><a href="chapter13/gtk3.html">GTK-3.24.51</a></li><li class="sect1"><a href="chapter13/rust.html">Rustc-1.91.0</a></li><li class="sect1"><a href="chapter13/cargo-c.html">cargo-c-0.10.18</a></li><li class="sect1"><a href="chapter13/librsvg.html">librsvg-2.61.3</a></li><li class="sect1"><a href="chapter13/ch13s52.html">PyCairo-1.28.0</a></li><li class="sect1"><a href="chapter13/ch13s53.html">PyGObject-3.54.5</a></li><li class="sect1"><a href="chapter13/glslc.html">glslc from shaderc-2025.4</a></li><li class="sect1"><a href="chapter13/gstreamer.html">gstreamer-1.26.9</a></li><li class="sect1"><a href="chapter13/libgudev.html">libgudev-238</a></li><li class="sect1"><a href="chapter13/gst-plugins-base.html">gst-plugins-base-1.26.9</a></li><li class="sect1"><a href="chapter13/glib-networking.html">glib-networking-2.80.1</a></li><li class="sect1"><a href="chapter13/libsoup.html">libsoup-3.6.5</a></li><li class="sect1"><a href="chapter13/v4l-utils.html">v4l-utils-1.32.0</a></li><li class="sect1"><a href="chapter13/gst-plugins-good.html">gst-plugins-good-1.26.9</a></li><li class="sect1"><a href="chapter13/soundtouch.html">SoundTouch-2.4.0</a></li><li class="sect1"><a href="chapter13/libexif.html">libexif-0.6.25</a></li><li class="sect1"><a href="chapter13/libqrencode.html">libqrencode-4.1.1</a></li><li class="sect1"><a href="chapter13/svt-av1.html">SVT-AV1-3.1.2</a></li><li class="sect1"><a href="chapter13/json-glib.html">JSON-GLib-1.10.8</a></li><li class="sect1"><a href="chapter13/gst-plugins-bad.html">gst-plugins-bad-1.26.9</a></li><li class="sect1"><a href="chapter13/gst-plugins-ugly.html">gst-plugins-ugly-1.26.9</a></li><li class="sect1"><a href="chapter13/libgusb.html">libgusb-0.4.9</a></li><li class="sect1"><a href="chapter13/colord.html">Colord-1.4.8</a></li><li class="sect1"><a href="chapter13/gtk4.html">GTK-4.20.3</a></li><li class="sect1"><a href="chapter13/adwaita-icon-theme.html">adwaita-icon-theme-49.0</a></li><li class="sect1"><a href="chapter13/libspiro.html">Libspiro-20220722</a></li><li class="sect1"><a href="chapter13/libcanberra.html">libcanberra-0.30</a></li><li class="sect1"><a href="chapter13/sound-theme-freedesktop.html">sound-theme-freedesktop-0.8</a></li><li class="sect1"><a href="chapter13/libvdpau-va-gl.html">libvdpau-va-gl-0.4.2</a></li><li class="sect1"><a href="chapter13/dav1d.html">dav1d-1.5.2</a></li><li class="sect1"><a href="chapter13/libavif.html">libavif-1.3.0</a></li><li class="sect1"><a href="chapter13/frei0r.html">frei0r-2.5.0</a></li><li class="sect1"><a href="chapter13/xvid.html">XviD-1.3.7</a></li><li class="sect1"><a href="chapter13/ffmpeg.html">FFmpeg-8.0.1</a></li><li class="sect1"><a href="chapter13/gst-plugins-rs.html">gst-plugins-rs-1.26.9</a></li><li class="sect1"><a href="chapter13/alsa-plugins.html">alsa-plugins-1.2.12</a></li><li class="sect1"><a href="chapter13/double-conversion.html">Double-conversion-3.3.1</a></li><li class="sect1"><a href="chapter13/jasper.html">jasper-4.2.8</a></li><li class="sect1"><a href="chapter13/libdaemon.html">libdaemon-0.14</a></li><li class="sect1"><a href="chapter13/avahi.html">Avahi-0.8</a></li><li class="sect1"><a href="chapter13/pipewire.html">Pipewire-1.4.9</a></li><li class="sect1"><a href="chapter13/lua.html">Lua-5.4.8</a></li><li class="sect1"><a href="chapter13/luajit.html">luajit-20250816</a></li><li class="sect1"><a href="chapter13/wireplumber.html">Wireplumber-0.5.12</a></li><li class="sect1"><a href="chapter13/uchardet.html">Uchardet-0.0.8</a></li><li class="sect1"><a href="chapter13/libmad.html">libmad-0.15.1b</a></li><li class="sect1"><a href="chapter13/gst-libav.html">gst-libav-1.26.9</a></li><li class="sect1"><a href="chapter13/mpv.html">mpv-0.40.0</a></li><li class="sect1"><a href="chapter13/xdg-desktop-portal.html">xdg-desktop-portal-1.20.3</a></li><li class="sect1"><a href="chapter13/gnome-desktop.html">gnome-desktop-44.3</a></li><li class="sect1"><a href="chapter13/xdg-desktop-portal-gtk.html">xdg-desktop-portal-gtk-1.15.3</a></li><li class="sect1"><a href="chapter13/imlib2.html">imlib2-1.12.5</a></li><li class="sect1"><a href="chapter13/startup-notification.html">startup-notification-0.12</a></li><li class="sect1"><a href="chapter13/xscreensaver.html">XScreenSaver-6.13</a></li></ul></li></ul></li><li class="part"><h3><a href="part9.html">IX. Build Qt6 and Support</a></h3><ul><li class="chapter"><h4><a href="chapter14/chapter14.html">14. Build Qt6 and Support</a></h4><ul><li class="sect1"><a href="chapter14/qt6.html">Qt-6.10.1</a></li><li class="sect1"><a href="chapter14/qcoro.html">qcoro-0.12.0</a></li><li class="sect1"><a href="chapter14/qca.html">Qca-2.3.10</a></li><li class="sect1"><a href="chapter14/polkit-qt.html">Polkit-Qt-0.200.0</a></li><li class="sect1"><a href="chapter14/extra-cmake-modules.html">extra-cmake-modules-6.20.0</a></li><li class="sect1"><a href="chapter14/plasma-wayland-protocols.html">plasma-wayland-protocols-1.19.0</a></li><li class="sect1"><a href="chapter14/upower.html">UPower-1.90.10</a></li><li class="sect1"><a href="chapter14/libnvme.html">libnvme-1.16.1</a></li><li class="sect1"><a href="chapter14/qt-python.html">Python Modules post Qt</a></li><li class="sect1"><a href="chapter14/libbytesize.html">libbytesize-2.11</a></li><li class="sect1"><a href="chapter14/libatasmart.html">libatasmart-0.19</a></li><li class="sect1"><a href="chapter14/keyutils.html">keyutils-1.6.3</a></li><li class="sect1"><a href="chapter14/json-c.html">JSON-C-0.18</a></li><li class="sect1"><a href="chapter14/cryptsetup.html">cryptsetup-2.8.1</a></li><li class="sect1"><a href="chapter14/libblockdev.html">libblockdev-3.4.0</a></li><li class="sect1"><a href="chapter14/udisks2.html">UDisks-2.11.0</a></li><li class="sect1"><a href="chapter14/aspell.html">Aspell-0.60.8.1</a></li><li class="sect1"><a href="chapter14/enchant.html">enchant-2.8.13</a></li><li class="sect1"><a href="chapter14/dbus-glib.html">dbus-glib-0.114</a></li><li class="sect1"><a href="chapter14/inih.html">inih-62</a></li><li class="sect1"><a href="chapter14/exiv2.html">Exiv2-0.28.7</a></li><li class="sect1"><a href="chapter14/qt-perl.html">Perl Modules post Qt</a></li><li class="sect1"><a href="chapter14/zxing-cpp.html">zxing-cpp-2.3.0</a></li><li class="sect1"><a href="chapter14/libsecret.html">libsecret-0.21.7</a></li><li class="sect1"><a href="chapter14/gcr.html">Gcr-3.41.2</a></li><li class="sect1"><a href="chapter14/gcr4.html">Gcr-4.4.0.1</a></li><li class="sect1"><a href="chapter14/gvfs.html">Gvfs-1.56.1</a></li><li class="sect1"><a href="chapter14/gnome-keyring.html">gnome-keyring-48.0</a></li><li class="sect1"><a href="chapter14/utfcpp.html">utfcpp-4.0.8</a></li><li class="sect1"><a href="chapter14/taglib.html">Taglib-2.1.1</a></li></ul></li></ul></li><li class="part"><h3><a href="part10.html">X. Build KDE Frameworks Support</a></h3><ul><li class="chapter"><h4><a href="chapter15/chapter15.html">15. Preparing KDE Frameworks Integration</a></h4><ul><li class="sect1"><a href="chapter15/frameworks6.html">Building KDE Frameworks 6.20.0 (KF6)</a></li><li class="sect1"><a href="chapter15/breeze-icons.html">Breeze-icons-6.20.0</a></li><li class="sect1"><a href="chapter15/attica.html">Attica-6.20.0</a></li><li class="sect1"><a href="chapter15/karchive.html">Karchive-6.20.0</a></li><li class="sect1"><a href="chapter15/kcodecs.html">Kcodecs-6.20.0</a></li><li class="sect1"><a href="chapter15/kwindowsystem.html">Kwindowsystem-6.20.0</a></li><li class="sect1"><a href="chapter15/kconfig.html">Kconfig-6.20.0</a></li><li class="sect1"><a href="chapter15/kcoreaddons.html">Kcoreaddons-6.20.0</a></li><li class="sect1"><a href="chapter15/kdbusaddons.html">Kdbusaddons-6.20.0</a></li><li class="sect1"><a href="chapter15/kdnssd.html">Kdnssd-6.20.0</a></li><li class="sect1"><a href="chapter15/kguiaddons.html">Kguiaddons-6.20.0</a></li><li class="sect1"><a href="chapter15/ki18n.html">Ki18n-6.20.0</a></li><li class="sect1"><a href="chapter15/kidletime.html">Kidletime-6.20.0</a></li><li class="sect1"><a href="chapter15/kimageformats.html">Kimageformats-6.20.0</a></li><li class="sect1"><a href="chapter15/kitemmodels.html">Kitemmodels-6.20.0</a></li><li class="sect1"><a href="chapter15/kitemviews.html">Kitemviews-6.20.0</a></li><li class="sect1"><a href="chapter15/kplotting.html">Kplotting-6.20.0</a></li><li class="sect1"><a href="chapter15/kwidgetsaddons.html">Kwidgetsaddons-6.20.0</a></li><li class="sect1"><a href="chapter15/solid.html">Solid-6.20.0</a></li><li class="sect1"><a href="chapter15/sonnet.html">Sonnet-6.20.0</a></li><li class="sect1"><a href="chapter15/threadweaver.html">Threadweaver-6.20.0</a></li><li class="sect1"><a href="chapter15/kauth.html">Kauth-6.20.0</a></li><li class="sect1"><a href="chapter15/kcompletion.html">Kcompletion-6.20.0</a></li><li class="sect1"><a href="chapter15/kcrash.html">KCrash-6.20.0</a></li><li class="sect1"><a href="chapter15/kdoctools.html">Kdoctools-6.20.0</a></li><li class="sect1"><a href="chapter15/kpty.html">Kpty-6.20.0</a></li><li class="sect1"><a href="chapter15/kunitconversion.html">Kunitconversion-6.20.0</a></li><li class="sect1"><a href="chapter15/kcolorscheme.html">Kcolorscheme-6.20.0</a></li><li class="sect1"><a href="chapter15/kconfigwidgets.html">Kconfigwidgets-6.20.0</a></li><li class="sect1"><a href="chapter15/kservice.html">Kservice-6.20.0</a></li><li class="sect1"><a href="chapter15/kglobalaccel.html">KGlobalAccel-6.20.0</a></li><li class="sect1"><a href="chapter15/kpackage.html">KPackage-6.20.0</a></li><li class="sect1"><a href="chapter15/kdesu.html">KDEsu-6.20.0</a></li><li class="sect1"><a href="chapter15/kiconthemes.html">KIconThemes-6.20.0</a></li><li class="sect1"><a href="chapter15/knotifications.html">KNotifications-6.20.0</a></li><li class="sect1"><a href="chapter15/kjobwidgets.html">KJobWidgets-6.20.0</a></li><li class="sect1"><a href="chapter15/ktextwidgets.html">KTextWidgets-6.20.0</a></li><li class="sect1"><a href="chapter15/kxmlgui.html">KXMLGUI-6.20.0</a></li><li class="sect1"><a href="chapter15/kbookmarks.html">KBookMarks-6.20.0</a></li><li class="sect1"><a href="chapter15/kwallet.html">Kwallet-6.20.0</a></li><li class="sect1"><a href="chapter15/kded.html">Kded-6.20.0</a></li><li class="sect1"><a href="chapter15/kio.html">Kio-6.20.0</a></li><li class="sect1"><a href="chapter15/kdeclarative.html">KDeclarative-6.20.0</a></li><li class="sect1"><a href="chapter15/kirigami.html">Kirigami-6.20.0</a></li><li class="sect1"><a href="chapter15/kcmutils.html">KCMutils-6.20.0</a></li><li class="sect1"><a href="chapter15/syndication.html">Syndication-6.20.0</a></li><li class="sect1"><a href="chapter15/knewstuff.html">Knewstuff-6.20.0</a></li><li class="sect1"><a href="chapter15/frameworkintegration.html">Frameworkintegration-6.20.0</a></li><li class="sect1"><a href="chapter15/kparts.html">Kparts-6.20.0</a></li><li class="sect1"><a href="chapter15/syntax-highlighting.html">Syntax-highlighting-6.20.0</a></li><li class="sect1"><a href="chapter15/ktexteditor.html">KTexteditor-6.20.0</a></li><li class="sect1"><a href="chapter15/kcontacts.html">Kcontacts-6.20.0</a></li><li class="sect1"><a href="chapter15/kpeople.html">KPeople-6.20.0</a></li><li class="sect1"><a href="chapter15/bluez-qt.html">BlueZ-Qt-6.20.0</a></li><li class="sect1"><a href="chapter15/kfilemetadata.html">KFileMetadata-6.20.0</a></li><li class="sect1"><a href="chapter15/baloo.html">Baloo-6.20.0</a></li><li class="sect1"><a href="chapter15/krunner.html">Krunner-6.20.0</a></li><li class="sect1"><a href="chapter15/prison.html">Prison-6.20.0</a></li><li class="sect1"><a href="chapter15/qqc2-desktop-style.html">Qqc2-desktop-style-6.20.0</a></li><li class="sect1"><a href="chapter15/kholidays.html">Kholidays-6.20.0</a></li><li class="sect1"><a href="chapter15/purpose.html">Purpose-6.20.0</a></li><li class="sect1"><a href="chapter15/kcalendarcore.html">Kcalendarcore-6.20.0</a></li><li class="sect1"><a href="chapter15/kquickcharts.html">Kquickcharts-6.20.0</a></li><li class="sect1"><a href="chapter15/knotifyconfig.html">Knotifyconfig-6.20.0</a></li><li class="sect1"><a href="chapter15/kdav.html">Kdav-6.20.0</a></li><li class="sect1"><a href="chapter15/kstatusnotifieritem.html">Kstatusnotifieritem-6.20.0</a></li><li class="sect1"><a href="chapter15/ksvg.html">Ksvg-6.20.0</a></li><li class="sect1"><a href="chapter15/ktexttemplate.html">Ktexttemplate-6.20.0</a></li><li class="sect1"><a href="chapter15/kuserfeedback.html">Kuserfeedback-6.20.0</a></li></ul></li></ul></li><li class="part"><h3><a href="part11.html">XI. Preparing LXQt Desktop</a></h3><ul><li class="chapter"><h4><a href="chapter16/chapter16.html">16. Finalizing the LXQt - KDE Desktop</a></h4><ul><li class="sect1"><a href="chapter16/kwayland.html">Kwayland-6.5.2</a></li><li class="sect1"><a href="chapter16/libkscreen.html">Libkscreen-6.5.2</a></li><li class="sect1"><a href="chapter16/layer-shell-qt.html">Layer-shell-qt-6.5.2</a></li><li class="sect1"><a href="chapter16/muparser.html">muparser-2.3.5</a></li><li class="sect1"><a href="chapter16/lxqt-build-tools.html">lxqt-build-tools-2.3.0</a></li><li class="sect1"><a href="chapter16/libdbusmenu-lxqt.html">libdbusmenu-lxqt-0.3.0</a></li><li class="sect1"><a href="chapter16/libqtxdg.html">libqtxdg-4.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-menu-data.html">lxqt-menu-data-2.3.0</a></li><li class="sect1"><a href="chapter16/liblxqt.html">liblxqt-2.3.0</a></li><li class="sect1"><a href="chapter16/libsysstat.html">libsysstat-1.1.0</a></li><li class="sect1"><a href="chapter16/qtxdg-tools.html">qtxdg-tools-4.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-globalkeys.html">lxqt-globalkeys-2.3.0</a></li><li class="sect1"><a href="chapter16/libfm.html">libfm-1.3.2</a></li><li class="sect1"><a href="chapter16/gtk-doc.html">GTK-Doc-1.35.1</a></li><li class="sect1"><a href="chapter16/menu-cache.html">menu-cache-1.1.1</a></li><li class="sect1"><a href="chapter16/libfm-qt.html">libfm-qt-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-qtplugin.html">lxqt-qtplugin-2.3.0</a></li><li class="sect1"><a href="chapter16/libstatgrab.html">libstatgrab-0.92.1</a></li><li class="sect1"><a href="chapter16/lxqt-panel.html">lxqt-panel-2.3.0</a></li><li class="sect1"><a href="chapter16/oxygen-icons.html">oxygen-icons-6.0.0</a></li><li class="sect1"><a href="chapter16/pcmanfm-qt.html">pcmanfm-qt-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-powermanagement.html">lxqt-powermanagement-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-runner.html">lxqt-runner-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-themes.html">lxqt-themes-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-admin.html">lxqt-admin-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-about.html">lxqt-about-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-config.html">lxqt-config-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-policykit.html">lxqt-policykit-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-sudo.html">lxqt-sudo-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-openssh-askpass.html">lxqt-openssh-askpass-2.3.0</a></li><li class="sect1"><a href="chapter16/libdisplay-info.html">libdisplay-info-0.3.0</a></li><li class="sect1"><a href="chapter16/kdecoration.html">Kdecoration-6.5.2</a></li><li class="sect1"><a href="chapter16/lxqt-session.html">lxqt-session-2.3.0</a></li><li class="sect1"><a href="chapter16/libsass.html">libsass-3.6.6</a></li><li class="sect1"><a href="chapter16/sassc.html">sassc-3.6.2</a></li><li class="sect1"><a href="chapter16/libksysguard.html">Libksysguard-6.5.2</a></li><li class="sect1"><a href="chapter16/breeze.html">Breeze-6.5.2</a></li><li class="sect1"><a href="chapter16/breeze-gtk.html">Breeze-gtk-6.5.2</a></li><li class="sect1"><a href="chapter16/plasma-activities.html">Plasma-activities-6.5.2</a></li><li class="sect1"><a href="chapter16/libplasma.html">Libplasma-6.5.2</a></li><li class="sect1"><a href="chapter16/kscreenlocker.html">Kscreenlocker-6.5.2</a></li><li class="sect1"><a href="chapter16/kinfocenter.html">Kinfocenter-6.5.2</a></li><li class="sect1"><a href="chapter16/kglobalacceld.html">Kglobalacceld-6.5.2</a></li><li class="sect1"><a href="chapter16/aurorae.html">Aurorae-6.5.2</a></li><li class="sect1"><a href="chapter16/knighttime.html">Knighttime-6.5.2</a></li><li class="sect1"><a href="chapter16/kwin-x11.html">Kwin-x11-6.5.2</a></li><li class="sect1"><a href="chapter16/kwin.html">Kwin-6.5.2</a></li><li class="sect1"><a href="chapter16/xdg-desktop-portal-lxqt.html">xdg-desktop-portal-lxqt-1.3.0</a></li><li class="sect1"><a href="chapter16/sddm.html">sddm-0.21.0</a></li><li class="sect1"><a href="chapter16/konsole.html">Konsole-25.08.3</a></li><li class="sect1"><a href="chapter16/kate.html">kate-25.08.3</a></li><li class="sect1"><a href="chapter16/lximage-qt.html">lximage-qt-2.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-archiver.html">lxqt-archiver-1.3.0</a></li><li class="sect1"><a href="chapter16/lxqt-notificationd.html">lxqt-notificationd-2.3.0</a></li><li class="sect1"><a href="chapter16/pavucontrol-qt.html">pavucontrol-qt-2.3.0</a></li><li class="sect1"><a href="chapter16/qps.html">qps-2.12.0</a></li><li class="sect1"><a href="chapter16/screengrab.html">screengrab-3.1.0</a></li></ul></li></ul></li><li class="part"><h3><a href="part12.html">XII. Appendices</a></h3><ul><li class="appendix"><h3><a href="appendices/acknowledgments.html">A. Acknowledgments</a></h3></li><li class="appendix"><h3><a href="appendices/licenses.html">B. LFS Licenses</a></h3><ul><li class="sect1"><a href="appendices/creat-comm.html">Creative Commons License</a></li><li class="sect1"><a href="appendices/mit.html">The MIT License</a></li></ul></li></ul></li><li class="index"><h3><a href="longindex.html">Index</a></h3></li></ul></div></div><div class="navfooter"><ul><li class="next"><a accesskey="n" href="prologue/preface.html" title="Preface">Next</a><p>Preface</p></li><li class="up">.</li><li class="home">.</li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      Zirconium Linux From Scratch
+    </title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="book">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title">
+              <a id="id1337" name="id1337"></a>Zirconium Linux From Scratch
+            </h1>
+          </div>
+          <div>
+            <h2 class="subtitle">
+              Version r13-1-systemd
+            </h2>
+          </div>
+          <div>
+            <h2 class="subtitle">
+              Published May 18th, 2026
+            </h2>
+          </div>
+          <div>
+            <div class="authorgroup">
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">Created by Gerard</span>
+                  <span class="surname">Beekmans</span>
+                </h3>
+              </div>
+              <div class="author">
+                <h3 class="author">
+                  <span class="firstname">Editor: Zed</span> <span class=
+                  "surname">Matrix</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="copyright">
+              <a href="legalnotice.html">Copyright</a> © 1999-2026 Gerard
+              Beekmans
+            </p>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="preface">
+            <h4>
+              <a href="prologue/preface.html">Preface</a>
+            </h4>
+            <ul>
+              <li class="sect1">
+                <a href="prologue/foreword.html">Foreword</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/audience.html">Audience</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/architecture.html">LFS Target
+                Architectures</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/prerequisites.html">Prerequisites</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/standards.html">LFS and Standards</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/package-choices.html">Rationale for
+                Packages in the Book</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/typography.html">Typography</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/organization.html">Structure</a>
+              </li>
+              <li class="sect1">
+                <a href="prologue/errata.html">Errata and Security
+                Advisories</a>
+              </li>
+            </ul>
+          </li>
+          <li class="part">
+            <h3>
+              <a href="part1.html">I. Introduction</a>
+            </h3>
+            <ul>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter01/chapter01.html">1. Introduction</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter01/how.html">How to Build a Zirconium LFS
+                    System</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter01/whatsnew.html">What's new since the
+                    last release</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter01/changelog.html">Changelog</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter01/resources.html">Resources</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter01/askforhelp.html">Help</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="part">
+            <h3>
+              <a href="part2.html">II. Preparing for the Build</a>
+            </h3>
+            <ul>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter02/chapter02.html">2. Preparing the Host
+                  System</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter02/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter02/hostreqs.html">Host System
+                    Requirements</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter02/stages.html">Building LFS in
+                    Stages</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter02/creatingpartition.html">Creating a New
+                    Partition</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter02/creatingfilesystem.html">Creating a
+                    File System on the Partition</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter02/aboutlfs.html">Setting the $LFS
+                    Variable and the Umask</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter02/mounting.html">Mounting the New
+                    Partition</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter03/chapter03.html">3. Packages and
+                  Patches</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter03/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter03/packages.html">All Packages</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter03/patches.html">Needed Patches</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter04/chapter04.html">4. Final
+                  Preparations</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter04/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter04/creatingminlayout.html">Creating a
+                    Limited Directory Layout in the LFS Filesystem</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter04/addinguser.html">Adding the LFS
+                    User</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter04/settingenvironment.html">Setting Up
+                    the Environment</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter04/aboutsbus.html">About SBUs</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter04/abouttestsuites.html">About the Test
+                    Suites</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="part">
+            <h3>
+              <a href="part3.html">III. Building the LFS Cross Toolchain and
+              Temporary Tools</a>
+            </h3>
+            <ul>
+              <li class="preface">
+                <h4>
+                  <a href="partintro/partintro.html">Important Preliminary
+                  Material</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="partintro/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="partintro/toolchaintechnotes.html">Toolchain
+                    Technical Notes</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="partintro/generalinstructions.html">General
+                    Compilation Instructions</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter05/chapter05.html">5. Compiling a
+                  Cross-Toolchain</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter05/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter05/binutils-pass1.html">Binutils-2.46.0 -
+                    Pass 1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter05/gcc-pass1.html">GCC-16.1.0 - Pass
+                    1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter05/linux-headers.html">Linux-7.0.8 API
+                    Headers</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter05/glibc.html">Glibc-2.43</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter05/gcc-libstdc++.html">Libstdc++ from
+                    GCC-16.1.0</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter06/chapter06.html">6. Cross Compiling
+                  Temporary Tools</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter06/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/m4.html">M4-1.4.21</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/ncurses.html">Ncurses-6.6</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/bash.html">Bash-5.3.9</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/coreutils.html">Coreutils-9.11</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/diffutils.html">Diffutils-3.12</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/file.html">File-5.47</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/findutils.html">Findutils-4.10.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/gawk.html">Gawk-5.4.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/grep.html">Grep-3.12</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/gzip.html">Gzip-1.14</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/make.html">Make-4.4.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/patch.html">Patch-2.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/sed.html">Sed-4.10</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/tar.html">Tar-1.35</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/xz.html">Xz-5.8.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/binutils-pass2.html">Binutils-2.46.0 -
+                    Pass 2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter06/gcc-pass2.html">GCC-16.1.0 - Pass
+                    2</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter07/chapter07.html">7. Entering Chroot and
+                  Building Additional Temporary Tools</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter07/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/changingowner.html">Changing
+                    Ownership</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/zlfs-chroot.html">Zlfs-chroot
+                    script</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/kernfs.html">Preparing Virtual Kernel
+                    File Systems</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/chroot.html">Entering the Chroot
+                    Environment</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/creatingdirs.html">Creating
+                    Directories</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/createfiles.html">Creating Essential
+                    Files and Symlinks</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/gettext.html">Gettext-1.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/nano.html">Nano-9.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/bison.html">Bison-3.8.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/perl.html">Perl-5.42.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/Python.html">Python-3.14.5</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/texinfo.html">Texinfo-7.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/util-linux.html">Util-linux-2.42</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter07/cleanup.html">Cleaning up and Saving
+                    the Temporary System</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="part">
+            <h3>
+              <a href="part4.html">IV. Building the LFS System</a>
+            </h3>
+            <ul>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter08/chapter08.html">8. Installing Basic
+                  System Software</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter08/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/pkgmgt.html">Package Management</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/iana-etc.html">Iana-Etc-20260504</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/glibc.html">Glibc-2.43</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/zlib.html">Zlib-1.3.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/bzip2.html">Bzip2-1.0.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/xz.html">Xz-5.8.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/lz4.html">Lz4-1.10.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/zstd.html">Zstd-1.5.7</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/file.html">File-5.47</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/readline.html">Readline-8.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/pcre2.html">Pcre2-10.47</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/m4.html">M4-1.4.21</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/bc.html">Bc-7.0.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/flex.html">Flex-2.6.4</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/tcl.html">Tcl-8.6.18</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/expect.html">Expect-5.45.4</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/dejagnu.html">DejaGNU-1.6.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/pkgconf.html">Pkgconf-2.5.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/binutils.html">Binutils-2.46.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gmp.html">GMP-6.3.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/mpfr.html">MPFR-4.2.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/mpc.html">MPC-1.4.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/attr.html">Attr-2.5.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/acl.html">Acl-2.3.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/libcap.html">Libcap-2.78</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/libxcrypt.html">Libxcrypt-4.5.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/shadow.html">Shadow-4.19.4</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gcc.html">GCC-16.1.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/ncurses.html">Ncurses-6.6</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/sed.html">Sed-4.10</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/psmisc.html">Psmisc-23.7</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gettext.html">Gettext-1.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/bison.html">Bison-3.8.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/grep.html">Grep-3.12</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/bash.html">Bash-5.3.9</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/libtool.html">Libtool-2.5.4</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gdbm.html">GDBM-1.26</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gperf.html">Gperf-3.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/expat.html">Expat-2.8.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/inetutils.html">Inetutils-2.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/less.html">Less-692</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/perl.html">Perl-5.42.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter08/class-inspector.html">Class::Inspector-1.36</a>
+                  </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter08/file-sharedir-install.html">File::ShareDir::Install-0.14</a>
+                  </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter08/file-sharedir.html">File::ShareDir-1.118</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/xml-parser.html">XML::Parser-2.58</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/intltool.html">Intltool-0.51.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/autoconf.html">Autoconf-2.73</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/automake.html">Automake-1.18.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/openssl.html">OpenSSL-4.0.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/libelf.html">Libelf from
+                    Elfutils-0.195</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/libffi.html">Libffi-3.5.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/sqlite.html">Sqlite-3530100</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/Python.html">Python-3.14.5</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/flit-core.html">Flit-Core-3.12.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/packaging.html">Packaging-26.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/wheel.html">Wheel-0.47.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/setuptools.html">Setuptools-82.0.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/ninja.html">Ninja-1.13.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/meson.html">Meson-1.11.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/kmod.html">Kmod-34.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/coreutils.html">Coreutils-9.11</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/diffutils.html">Diffutils-3.12</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gawk.html">Gawk-5.4.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/findutils.html">Findutils-4.10.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/groff.html">Groff-1.24.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/gzip.html">Gzip-1.14</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/iproute2.html">IPRoute2-7.0.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/kbd.html">Kbd-2.9.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter08/libpipeline.html">Libpipeline-1.5.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/make.html">Make-4.4.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/patch.html">Patch-2.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/tar.html">Tar-1.35</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/texinfo.html">Texinfo-7.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/nano.html">Nano-9.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/vim.html">Vim-9.2.0481</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/markupsafe.html">MarkupSafe-3.0.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/jinja2.html">Jinja2-3.1.6</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/pyelftools.html">Pyelftools-0.32</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/systemd.html">Systemd-260.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/dbus.html">D-Bus-1.16.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/man-pages.html">Man-pages-6.18</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/man-db.html">Man-DB-2.13.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/procps-ng.html">Procps-ng-4.0.6</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/util-linux.html">Util-linux-2.42</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/e2fsprogs.html">E2fsprogs-1.47.4</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/which.html">Which-2.23 and
+                    Alternatives</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/openssh.html">OpenSSH-10.3p1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/cleanup.html">Cleaning Up</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/aboutdebug.html">About Debugging
+                    Symbols</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter08/stripping.html">Stripping</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter09/chapter09.html">9. System
+                  Configuration</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter09/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/network.html">General Network
+                    Configuration</a>
+                  </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter09/zlfs-scripts.html">zlfs-scripts-20260506T1015Z</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/udev.html">Overview of Device and
+                    Module Handling</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/symlinks.html">Managing Devices</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/clock.html">Configuring the System
+                    Clock</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/console.html">Configuring the Linux
+                    Console</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/locale.html">Configuring the System
+                    Locale</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/inputrc.html">Creating the
+                    /etc/inputrc File</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/etcshells.html">Creating the
+                    /etc/shells File</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/systemd-custom.html">Systemd Usage and
+                    Configuration</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libaio.html">libaio-0.3.113</a>
+                  </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter09/libunistring.html">libunistring-1.4.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libidn2.html">libidn2-2.3.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libtasn1.html">libtasn1-4.21.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libpsl.html">libpsl-0.21.5</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libusb.html">libusb-1.0.29</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libpng.html">Libpng-1.6.58</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/hwdata.html">Hwdata-0.407</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/popt.html">Popt-1.19</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/p11-kit.html">p11-kit-0.26.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/make-ca.html">make-ca-1.16.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/pciutils.html">pciutils-3.15.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/usbutils.html">usbutils-019</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/wget.html">Wget-1.25.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/curl.html">cURL-8.20.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/dosfstools.html">dosfstools-4.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/efivar.html">efivar-39</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/efibootmgr.html">efibootmgr-18</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/lvm2.html">LVM2-2.03.40</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/fuse.html">Fuse-3.18.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/freetype2.html">FreeType-2.14.3</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/grub.html">GRUB-2.14</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter10/chapter10.html">10. Making the LFS
+                  System Bootable</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter10/introduction.html">Introduction</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/fstab.html">Creating the /etc/fstab
+                    File</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/kernel.html">Linux-7.0.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/grub.html">Using GRUB to Set Up the
+                    Boot Process</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/systemd.html">Using Systemd-boot to
+                    Set Up the Boot Process</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="chapter">
+                <h4>
+                  <a href="chapter11/chapter11.html">11. The End</a>
+                </h4>
+                <ul>
+                  <li class="sect1">
+                    <a href="chapter11/theend.html">The End</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/getcounted.html">Get Counted</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/reboot.html">Rebooting the System</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/whatnow.html">Additional Resources</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/afterlfs.html">Getting Started After
+                    LFS</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="part">
+            <h3>
+              <a href="part5.html">V. Appendices</a>
+            </h3>
+            <ul>
+              <li class="appendix">
+                <h3>
+                  <a href="appendices/acronymlist.html">A. Acronyms and
+                  Terms</a>
+                </h3>
+              </li>
+              <li class="appendix">
+                <h3>
+                  <a href="appendices/acknowledgments.html">B.
+                  Acknowledgments</a>
+                </h3>
+              </li>
+              <li class="appendix">
+                <h3>
+                  <a href="appendices/dependencies.html">C. Dependencies</a>
+                </h3>
+              </li>
+              <li class="appendix">
+                <h3>
+                  <a href="appendices/licenses.html">D. LFS Licenses</a>
+                </h3>
+                <ul>
+                  <li class="sect1">
+                    <a href="appendices/creat-comm.html">Creative Commons
+                    License</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="appendices/mit.html">The MIT License</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="index">
+            <h3>
+              <a href="longindex.html">Index</a>
+            </h3>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="next">
+          <a accesskey="n" href="prologue/preface.html" title=
+          "Preface">Next</a>
+          <p>
+            Preface
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

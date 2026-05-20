@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.25.&nbsp;Wget-1.25.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="usbutils.html" title="usbutils-019">Prev</a>
+          <p>
+            usbutils-019
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="curl.html" title="cURL-8.20.0">Next</a>
+          <p>
+            cURL-8.20.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-wget" name="ch-system-wget"></a>9.25. Wget-1.25.0
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The <span class="application">Wget</span> package contains a
+          utility useful for non-interactive downloading of files from the
+          Web.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.3 SBU (add 0.4 SBU for tests)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">33.7 MB (add 27 MB for tests)</span>
+            </div>
+          </div>
+        </div>
+        <h3>
+          Wget Dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="libpsl.html" title=
+          "9.16.&nbsp;libpsl-0.21.5">Section&nbsp;9.16, “libpsl-0.21.5”</a>
+        </p>
+        <h4>
+          Recommended at runtime
+        </h4>
+        <p class="recommended (runtime)">
+          <a class="xref" href="make-ca.html" title=
+          "9.22.&nbsp;make-ca-1.16.1">Section&nbsp;9.22, “make-ca-1.16.1”</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="libidn2.html" title=
+          "9.14.&nbsp;libidn2-2.3.8">Section&nbsp;9.14, “libidn2-2.3.8”</a>,
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.25.1. Installation of Wget
+        </h2>
+        <p>
+          Prepare <span class="application">Wget</span> by running the
+          following commands:
+        </p>
+        <p>
+          First, make a fix to make the package compatible with OpenSSL 4:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">NEW_LINE='#if !defined OPENSSL_NO_SSL3_METHOD &amp;&amp; OPENSSL_VERSION_NUMBER &lt; 0x40000000L'
+sed -i "/SSL3/c $NEW_LINE" src/openssl.c
+</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr      \
+            --sysconfdir=/etc  \
+            --with-ssl=openssl</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.25.2. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--sysconfdir=/etc</code></em>: This
+          relocates the configuration file from <code class=
+          "filename">/usr/etc</code> to <code class="filename">/etc</code>.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-ssl=openssl</code></em>: This
+          allows the program to use openssl instead of <span class=
+          "application">"gnutls"</span>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.25.3. Configuring Wget
+        </h2>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="wget-config" name="wget-config"></a>9.25.3.1. Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/wgetrc</code> and <code class=
+            "filename">~/.wgetrc</code>
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.25.4. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">wget</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="wget-prog" name="wget-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>wget</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    retrieves files from the Web using the HTTP, HTTPS and
+                    FTP protocols. It is designed to be non-interactive, for
+                    background or unattended operations
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="usbutils.html" title="usbutils-019">Prev</a>
+          <p>
+            usbutils-019
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="curl.html" title="cURL-8.20.0">Next</a>
+          <p>
+            cURL-8.20.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,1 +1,140 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Chapter 7. System Utilities</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Part IV. Finalizing the LFS System</h3><ul><li class="prev"><a accesskey="p" href="../chapter06/kernel.html" title="Linux-6.12.58">Prev</a><p>Linux-6.12.58</p></li><li class="next"><a accesskey="n" href="which.html" title="Which-2.23 and Alternatives">Next</a><p>Which-2.23 and Alternatives</p></li><li class="up"><a accesskey="u" href="../part4.html" title="Part IV. Finalizing the LFS System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="chapter"><a id="chapter-system-utils" name="chapter-system-utils"></a>System Utilities</h1><div class="chapter" lang="en" xml:lang="en"><div class="toc"><h3>Table of Contents</h3><ul><li class="sect1"><a href="which.html">Which-2.23 and Alternatives</a></li><li class="sect1"><a href="hwdata.html">hwdata-0.401</a></li><li class="sect1"><a href="pciutils.html">pciutils-3.14.0</a></li><li class="sect1"><a href="libusb.html">libusb-1.0.29</a></li><li class="sect1"><a href="usbutils.html">usbutils-019</a></li><li class="sect1"><a href="libtasn1.html">libtasn1-4.20.0</a></li><li class="sect1"><a href="p11-kit.html">p11-kit-0.25.10</a></li><li class="sect1"><a href="make-ca.html">make-ca-1.16.1</a></li></ul></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="../chapter06/kernel.html" title="Linux-6.12.58">Prev</a><p>Linux-6.12.58</p></li><li class="next"><a accesskey="n" href="which.html" title="Which-2.23 and Alternatives">Next</a><p>Which-2.23 and Alternatives</p></li><li class="up"><a accesskey="u" href="../part4.html" title="Part IV. Finalizing the LFS System">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional Temporary
+      Tools
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Part&nbsp;III.&nbsp;Building the LFS Cross Toolchain and Temporary
+        Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter06/gcc-pass2.html" title=
+          "GCC-16.1.0 - Pass 2">Prev</a>
+          <p>
+            GCC-16.1.0 - Pass 2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="introduction.html" title=
+          "Introduction">Next</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part3.html" title=
+          "Part&nbsp;III.&nbsp;Building the LFS Cross Toolchain and Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="chapter">
+      <a id="chapter-chroot-temporary-tools" name=
+      "chapter-chroot-temporary-tools"></a>7. Entering Chroot and Building
+      Additional Temporary Tools
+    </h1>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="sect1">
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li class="sect1">
+            <a href="changingowner.html">Changing Ownership</a>
+          </li>
+          <li class="sect1">
+            <a href="zlfs-chroot.html">Zlfs-chroot script</a>
+          </li>
+          <li class="sect1">
+            <a href="kernfs.html">Preparing Virtual Kernel File Systems</a>
+          </li>
+          <li class="sect1">
+            <a href="chroot.html">Entering the Chroot Environment</a>
+          </li>
+          <li class="sect1">
+            <a href="creatingdirs.html">Creating Directories</a>
+          </li>
+          <li class="sect1">
+            <a href="createfiles.html">Creating Essential Files and
+            Symlinks</a>
+          </li>
+          <li class="sect1">
+            <a href="gettext.html">Gettext-1.0</a>
+          </li>
+          <li class="sect1">
+            <a href="nano.html">Nano-9.0</a>
+          </li>
+          <li class="sect1">
+            <a href="bison.html">Bison-3.8.2</a>
+          </li>
+          <li class="sect1">
+            <a href="perl.html">Perl-5.42.2</a>
+          </li>
+          <li class="sect1">
+            <a href="Python.html">Python-3.14.5</a>
+          </li>
+          <li class="sect1">
+            <a href="texinfo.html">Texinfo-7.3</a>
+          </li>
+          <li class="sect1">
+            <a href="util-linux.html">Util-linux-2.42</a>
+          </li>
+          <li class="sect1">
+            <a href="cleanup.html">Cleaning up and Saving the Temporary
+            System</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter06/gcc-pass2.html" title=
+          "GCC-16.1.0 - Pass 2">Prev</a>
+          <p>
+            GCC-16.1.0 - Pass 2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="introduction.html" title=
+          "Introduction">Next</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part3.html" title=
+          "Part&nbsp;III.&nbsp;Building the LFS Cross Toolchain and Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

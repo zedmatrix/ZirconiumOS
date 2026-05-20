@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      8.88.&nbsp;Which-2.23 and Alternatives
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="e2fsprogs.html" title=
+          "E2fsprogs-1.47.4">Prev</a>
+          <p>
+            E2fsprogs-1.47.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openssh.html" title=
+          "OpenSSH-10.3p1">Next</a>
+          <p>
+            OpenSSH-10.3p1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-which" name="ch-system-which"></a>8.88. Which-2.23 and
+      Alternatives
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          <span class="command"><strong>Which</strong></span> takes one or
+          more arguments. For each of its arguments it prints to stdout the
+          full path of the executables that would have been executed when
+          this argument had been entered at the shell prompt. It does this by
+          searching for an executable or script in the directories listed in
+          the environment variable <span class=
+          "command"><strong>PATH</strong></span> using the same algorithm as
+          bash.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">1.1 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.88.1. Prepare Which for compilation:
+        </h2>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.88.2. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">which</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="which-prog" name="which-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>which</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    shows the full path of (shell) commands installed in your
+                    <code class="envar">PATH</code>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.88.3. The 'which' Script
+        </h2>
+        <p>
+          The second option (for those who don't want to install the package)
+          is to create a simple script:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /usr/bin/which &lt;&lt; "EOF"
+<code class="literal">#!/bin/bash
+type -pa "$@" | head -n 1 ; exit ${PIPESTATUS[0]}</code>
+EOF
+chmod -v 755 /usr/bin/which
+chown -v root:root /usr/bin/which</kbd></pre>
+        <p>
+          This should work OK and is probably the easiest solution for most
+          cases, but is not the most comprehensive implementation.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="e2fsprogs.html" title=
+          "E2fsprogs-1.47.4">Prev</a>
+          <p>
+            E2fsprogs-1.47.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openssh.html" title=
+          "OpenSSH-10.3p1">Next</a>
+          <p>
+            OpenSSH-10.3p1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

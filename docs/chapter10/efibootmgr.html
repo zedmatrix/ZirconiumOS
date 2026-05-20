@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      10.8.&nbsp;efibootmgr-18
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r12.4-78-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r12.4-78-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;10.&nbsp;Making the LFS System Bootable
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="efivar.html" title="efivar-39">Prev</a>
+          <p>
+            efivar-39
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="systemd.html" title=
+          "Using Systemd-boot to Set Up the Boot Process">Next</a>
+          <p>
+            Using Systemd-boot to Set Up the Boot Process
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter10.html" title=
+          "Chapter&nbsp;10.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r12.4-78-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-efibootmgr" name="ch-system-efibootmgr"></a>10.8.
+      efibootmgr-18
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.8.1. Introduction to efibootmgr
+        </h2>
+        <p>
+          The <span class="application">efibootmgr</span> package provides
+          tools and libraries to manipulate EFI variables.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">1.1 MB</span>
+            </div>
+          </div>
+        </div>
+        <h3>
+          efibootmgr Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="efivar.html" title=
+          "10.7.&nbsp;efivar-39">Section&nbsp;10.7, “efivar-39”</a> and
+          <a class="xref" href="popt.html" title=
+          "10.5.&nbsp;Popt-1.19">Section&nbsp;10.5, “Popt-1.19”</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.8.2. Installation of efibootmgr
+        </h2>
+        <p>
+          Build <span class="application">efibootmgr</span> with the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make EFIDIR=LFS EFI_LOADER=grubx64.efi</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            For Systemd-boot use the following build line:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">make EFIDIR=LFS EFI_LOADER=systemd-bootx64.efi</kbd></pre>
+        </div>
+        <p>
+          Now, Install the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make install EFIDIR=LFS</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.8.3. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>EFIDIR=LFS</code></em>: This option
+          specifies the distro's subdirectory name under <code class=
+          "filename">/boot/efi/EFI</code>. The building system of this
+          package needs it to be set explicitly.
+        </p>
+        <p>
+          <em class="parameter"><code>EFI_LOADER=grubx64.efi</code></em>:
+          This option specifies the name of the default EFI boot loader. It
+          is set to match the EFI boot loader provided by GRUB.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.8.4. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">efibootdump and efibootmgr</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="efibootdump" name="efibootdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>efibootdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to display individual UEFI boot options, from a
+                    file or an UEFI variable
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="efibootmgr-prog" name=
+                    "efibootmgr-prog"></a><span class="term"><span class=
+                    "command"><strong>efibootmgr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to manipulate the UEFI Boot Manager
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="efivar.html" title="efivar-39">Prev</a>
+          <p>
+            efivar-39
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="systemd.html" title=
+          "Using Systemd-boot to Set Up the Boot Process">Next</a>
+          <p>
+            Using Systemd-boot to Set Up the Boot Process
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter10.html" title=
+          "Chapter&nbsp;10.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r12.4-78-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

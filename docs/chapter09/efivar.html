@@ -1,64 +1,270 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>efivar-39</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 9. Grub Uefi Programs</h3><ul><li class="prev"><a accesskey="p" href="freetype2.html" title="FreeType-2.14.1">Prev</a><p>FreeType-2.14.1</p></li><li class="next"><a accesskey="n" href="efibootmgr.html" title="efibootmgr-18">Next</a><p>efibootmgr-18</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="efivar" name="efivar"></a>efivar-39</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><h2 class="sect2">Introduction to efivar</h2><p>
-      The <span class="application">efivar</span> package provides tools and
-      libraries to manipulate EFI variables.
-    </p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>
-          Download (HTTP): <a class="ulink" href="https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz">https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz</a>
-        </p></li><li class="listitem"><p>
-          Download SHA256 Sum: c9edd15f2eeeea63232f3e669a48e992c7be9aff57ee22672ac31f5eca1609a6
-        </p></li><li class="listitem"><p>
-          Download MD5 sum: a8fc3e79336cd6e738ab44f9bc96a5aa
-        </p></li><li class="listitem"><p>
-          Download size: 456 KB
-        </p></li><li class="listitem"><p>
-          Estimated disk space required: 21 MB
-        </p></li><li class="listitem"><p>
-          Estimated build time: less than 0.1 SBU
-        </p></li></ul></div><h3>efivar Dependencies</h3><h4>Optional</h4><p class="optional">
-      <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a> (for the man page of
-      <span class="command"><strong>efisecdb</strong></span>)
-    </p></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">Installation of efivar</h2><div class="admon note"><img alt="[Note]" src="../images/note.png" /><h3>Note</h3><p>
-        This package cannot function properly on a 32-bit system with a
-        64-bit UEFI implementation.  Don't install this package (or
-        efibootmgr) on 32-bit system unless you are absolutely sure you have
-        a 32-bit UEFI implementation, which is very rare in practice.
-      </p></div><p>
-      Build <span class="application">efivar</span> with the following commands:
-    </p><pre class="make"><kbd class="command">make ENABLE_DOCS=0</kbd></pre><p>
-      The test suite of this package is dangerous.  Running it may trigger
-      firmware bugs and make your system unusable without using some special
-      hardware to reprogram the firmware.
-    </p><p>
-      Now, Install by running this command:
-    </p><pre class="install"><kbd class="command">make install ENABLE_DOCS=0 LIBDIR=/usr/lib</kbd></pre><p>
-      To avoid a hard dependency on <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a> we used
-      <em class="parameter"><code>ENABLE_DOCS=0</code></em>, but it causes all the man pages
-      skipped from the installation even though most of them actually
-      do not need <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a>.  Still as the <code class="systemitem">root</code> user,
-      install these man pages:
-    </p><pre class="install"><kbd class="command">install -vm644 docs/efivar.1 /usr/share/man/man1
-install -vm644 docs/*.3      /usr/share/man/man3</kbd></pre></div><div class="commands" lang="en" xml:lang="en"><h2 class="sect2">Command Explanations</h2><p>
-      <em class="parameter"><code>ENABLE_DOCS=0</code></em>: Disable the generation of man
-      pages, in order to allow building this package without
-      <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a> installed.
-    </p><p>
-      <em class="parameter"><code>LIBDIR=/usr/lib</code></em>:
-      This option overrides the default library directory of the package
-      (<code class="filename">/usr/lib64</code>, which is not used
-      by LFS).
-    </p></div><div class="content" lang="en" xml:lang="en"><h2 class="sect2">Contents</h2><div class="segmentedlist"><div class="seglistitem"><div class="seg"><strong class="segtitle">Installed Programs: </strong><span class="segbody">
-          efisecdb and efivar
-        </span></div><div class="seg"><strong class="segtitle">Installed Libraries: </strong><span class="segbody">
-          libefiboot.so, libefisec.so, and libefivar.so
-        </span></div><div class="seg"><strong class="segtitle">Installed Directories: </strong><span class="segbody">
-          /usr/include/efivar
-        </span></div></div></div><div class="variablelist"><h3>Short Descriptions</h3><table border="0" class="variablelist"><colgroup><col align="left" valign="top" /><col /></colgroup><tbody><tr><td><p><a id="efisecdb"></a><span class="term"><span class="command"><strong>efisecdb</strong></span></span></p></td><td><p>
-            is a utility for managing UEFI signature lists
-          </p></td></tr><tr><td><p><a id="efivar-prog"></a><span class="term"><span class="command"><strong>efivar</strong></span></span></p></td><td><p>
-            is a tool to manipulate UEFI variables
-          </p></td></tr><tr><td><p><a id="libefiboot"></a><span class="term"><code class="filename">libefiboot.so</code></span></p></td><td><p>
-            is a library used by <span class="command"><strong>efibootmgr</strong></span>
-          </p></td></tr><tr><td><p><a id="libefisec"></a><span class="term"><code class="filename">libefisec.so</code></span></p></td><td><p>
-            is a library for managing UEFI signature lists
-          </p></td></tr><tr><td><p><a id="libefivar"></a><span class="term"><code class="filename">libefivar.so</code></span></p></td><td><p>
-            is a library for the manipulation of EFI variables
-          </p></td></tr></tbody></table></div></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="freetype2.html" title="FreeType-2.14.1">Prev</a><p>FreeType-2.14.1</p></li><li class="next"><a accesskey="n" href="efibootmgr.html" title="efibootmgr-18">Next</a><p>efibootmgr-18</p></li><li class="up"><a accesskey="u" href="chapter09.html" title="Chapter 9. Grub Uefi Programs">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.28.&nbsp;efivar-39
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dosfstools.html" title=
+          "dosfstools-4.2">Prev</a>
+          <p>
+            dosfstools-4.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="efibootmgr.html" title=
+          "efibootmgr-18">Next</a>
+          <p>
+            efibootmgr-18
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-efivar" name="ch-system-efivar"></a>9.28. efivar-39
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.28.1. Introduction to efivar
+        </h2>
+        <p>
+          The <span class="application">efivar</span> package provides tools
+          and libraries to manipulate EFI variables.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">16.6 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.28.2. Installation of efivar
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            This package cannot function properly on a 32-bit system with a
+            64-bit UEFI implementation. Don't install this package (or
+            efibootmgr) on 32-bit system unless you are absolutely sure you
+            have a 32-bit UEFI implementation, which is very rare in
+            practice.
+          </p>
+        </div>
+        <p>
+          First, apply a patch to make this package compatible with
+          glibc-2.43 and later:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../efivar-39-upstream_fixes-1.patch</kbd></pre>
+        <p>
+          Build <span class="application">efivar</span> with the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make ENABLE_DOCS=0</kbd></pre>
+        <p>
+          The test suite of this package is dangerous. Running it may trigger
+          firmware bugs and make your system unusable without using some
+          special hardware to reprogram the firmware.
+        </p>
+        <p>
+          Now Install the package and manpages, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make install ENABLE_DOCS=0 LIBDIR=/usr/lib
+
+install -vm644 docs/efivar.1 /usr/share/man/man1
+install -vm644 docs/*.3      /usr/share/man/man3</kbd></pre>
+        <p>
+          To avoid a hard dependency on mandoc we used <em class=
+          "parameter"><code>ENABLE_DOCS=0</code></em>, but it causes all the
+          man pages skipped from the installation even though most of them
+          actually do not need mandoc.
+        </p>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.28.3. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>ENABLE_DOCS=0</code></em>: Disable the
+          generation of man pages, in order to allow building this package
+          without <a class="ulink" href="https://mandoc.bsd.lv/">mandoc</a>
+          installed.
+        </p>
+        <p>
+          <em class="parameter"><code>LIBDIR=/usr/lib</code></em>: This
+          option overrides the default library directory of the package
+          (<code class="filename">/usr/lib64</code>, which is not used by
+          LFS).
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.28.4. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">efisecdb and efivar</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libefiboot.so, libefisec.so, and
+              libefivar.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/efivar</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="efisecdb" name="efisecdb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>efisecdb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility for managing UEFI signature lists
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="efivar-prog" name="efivar-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>efivar</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to manipulate UEFI variables
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libefiboot" name="libefiboot"></a><span class=
+                    "term"><code class="filename">libefiboot.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a library used by <span class=
+                    "command"><strong>efibootmgr</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libefisec" name="libefisec"></a><span class=
+                    "term"><code class="filename">libefisec.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a library for managing UEFI signature lists
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libefivar" name="libefivar"></a><span class=
+                    "term"><code class="filename">libefivar.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a library for the manipulation of EFI variables
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dosfstools.html" title=
+          "dosfstools-4.2">Prev</a>
+          <p>
+            dosfstools-4.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="efibootmgr.html" title=
+          "efibootmgr-18">Next</a>
+          <p>
+            efibootmgr-18
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

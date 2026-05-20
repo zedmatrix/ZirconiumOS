@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.15.&nbsp;libtasn1-4.21.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libidn2.html" title="libidn2-2.3.8">Prev</a>
+          <p>
+            libidn2-2.3.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libpsl.html" title="libpsl-0.21.5">Next</a>
+          <p>
+            libpsl-0.21.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-libtasn1" name="ch-system-libtasn1"></a>9.15.
+      libtasn1-4.21.0
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          <span class="application">libtasn1</span> is a highly portable C
+          library that encodes and decodes DER/BER data following an ASN.1
+          schema.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.5 SBU (with tests)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">11.8 MB (with tests)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.15.1. Installation of libtasn1
+        </h2>
+        <p>
+          Prepare <span class="application">libtasn1</span> for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.15.2. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--disable-static</code></em>: This
+          switch prevents installation of static versions of the libraries.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.15.3. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">asn1Coding, asn1Decoding and
+              asn1Parser</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libtasn1.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/share/gtk-doc/html/libtasn1</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asn1Coding" name="asn1Coding"></a><span class=
+                    "term"><span class=
+                    "command"><strong>asn1Coding</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an ASN.1 DER encoder
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asn1Decoding" name="asn1Decoding"></a><span class=
+                    "term"><span class=
+                    "command"><strong>asn1Decoding</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an ASN.1 DER decoder
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asn1Parser" name="asn1Parser"></a><span class=
+                    "term"><span class=
+                    "command"><strong>asn1Parser</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an ASN.1 syntax tree generator for <span class=
+                    "application">libtasn1</span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libtasn1-lib" name="libtasn1-lib"></a><span class=
+                    "term"><code class="filename">libtasn1.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a library for Abstract Syntax Notation One (ASN.1) and
+                    Distinguish Encoding Rules (DER) manipulation
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libidn2.html" title="libidn2-2.3.8">Prev</a>
+          <p>
+            libidn2-2.3.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libpsl.html" title="libpsl-0.21.5">Next</a>
+          <p>
+            libpsl-0.21.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

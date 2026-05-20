@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      10.5.&nbsp;Using Systemd-boot to Set Up the Boot Process
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;10.&nbsp;Making the LFS System Bootable
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grub.html" title=
+          "Using GRUB to Set Up the Boot Process">Prev</a>
+          <p>
+            Using GRUB to Set Up the Boot Process
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter11/chapter11.html" title=
+          "The End">Next</a>
+          <p>
+            The End
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter10.html" title=
+          "Chapter&nbsp;10.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-bootable-systemd" name="ch-bootable-systemd"></a>10.5. Using
+      Systemd-boot to Set Up the Boot Process
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          If your system has UEFI support and you wish to boot LFS with UEFI,
+          you need to prepare 4 additional packages from the BLFS Book
+          <a class="ulink" href=
+          "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/dosfstools.html">
+          https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/dosfstools.html</a>
+          , <a class="ulink" href=
+          "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/popt.html">
+          https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/popt.html</a>
+          , <a class="ulink" href=
+          "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/efivars.html">
+          https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/efivars.html</a>
+          and <a class="ulink" href=
+          "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/efibootmgr.html">
+          https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/efibootmgr.html</a>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.5.1. Installing Systemd-boot
+        </h2>
+        <p>
+          Setup some helpful bash variables
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ROOT=$(blkid -o value -s UUID /dev/sda3)
+ROOTPART=$(blkid -o value -s PARTUUID /dev/sda3)</kbd></pre>
+        <p>
+          Mount the EFI System Partition (esp) and system firmware, by
+          issuing the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mountpoint /sys/firmware/efi/efivars || mount -v -t efivarfs efivarfs /sys/firmware/efi/efivars
+mount --mkdir -v -t vfat /dev/sda1 -o codepage=437,iocharset=iso8859-1 /boot/efi</kbd></pre>
+        <p>
+          Install the Systemd-boot files into <code class=
+          "filename">/boot/efi</code> and set up the boot track:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">bootctl install</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">cp -iv /boot/vmlinuz-7.0.8-lfs-r13-1-systemd /boot/efi/vmlinuz-7.0.8</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="systemd-boot-cfg" name="systemd-boot-cfg"></a>10.5.2.
+          Creating the Systemd-boot Configuration File
+        </h2>
+        <p>
+          Generate <code class=
+          "filename">/boot/efi/loader/entries/lfs.conf</code>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mkdir -pv /boot/efi/loader/entries
+cat &gt; /boot/efi/loader/entries/lfs.conf &lt;&lt; EOF
+<code class="literal">title Zirconium Linux From Scratch
+linux   /vmlinuz-7.0.8
+options root=PARTUUID=$ROOTPART rw</code>
+EOF</kbd></pre>
+        <p>
+          Checking the configuration setup:
+        </p>
+        <pre class="userinput"><kbd class="command">bootctl status
+
+efibootmgr | cut -f 1</kbd></pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grub.html" title=
+          "Using GRUB to Set Up the Boot Process">Prev</a>
+          <p>
+            Using GRUB to Set Up the Boot Process
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter11/chapter11.html" title=
+          "The End">Next</a>
+          <p>
+            The End
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter10.html" title=
+          "Chapter&nbsp;10.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

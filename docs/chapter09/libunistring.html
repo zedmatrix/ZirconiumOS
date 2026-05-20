@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.13.&nbsp;libunistring-1.4.2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libaio.html" title="libaio-0.3.113">Prev</a>
+          <p>
+            libaio-0.3.113
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libidn2.html" title="libidn2-2.3.8">Next</a>
+          <p>
+            libidn2-2.3.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-libunistring" name="ch-system-libunistring"></a>9.13.
+      libunistring-1.4.2
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          <span class="application">libunistring</span> is a library that
+          provides functions for manipulating Unicode strings and for
+          manipulating C strings according to the Unicode standard.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.6 SBU (add 0.3 SBU for tests</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">58 MB (add 46 MB for tests)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.13.1. Prepare libunistring for compilation:
+        </h2>
+        <p>
+          Now Configure libunistring for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/libunistring-1.4.2</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.13.2. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--disable-static</code></em>: This
+          switch prevents installation of static versions of the libraries.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.13.3. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libunistring.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/include/unistring and
+              /usr/share/doc/libunistring-1.4.2</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libunistring-lib" name=
+                    "libunistring-lib"></a><span class="term"><span class=
+                    "command"><strong>libunistring.so</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the unicode string library API
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libaio.html" title="libaio-0.3.113">Prev</a>
+          <p>
+            libaio-0.3.113
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libidn2.html" title="libidn2-2.3.8">Next</a>
+          <p>
+            libidn2-2.3.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

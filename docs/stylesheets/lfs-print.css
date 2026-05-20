@@ -3,3 +3,12 @@
 .navfooter, .headerlinks {
    display: none;
 }
+
+div.navheader {
+  position: absolute;
+}
+
+div.navheader ul,
+div.navheader ul{
+  display: none;
+}

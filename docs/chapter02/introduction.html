@@ -1,7 +1,87 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Introduction</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="blfs" id="blfs-r12.4-45-systemd"><div class="navheader"><h4>Zirconium Linux From Scratch - Version r12.4-45-systemd</h4><h3>Chapter 2. Compiling a Cross-Toolchain</h3><ul><li class="prev"><a accesskey="p" href="chapter02.html" title="Compiling a Cross-Toolchain">Prev</a><p>Compiling a Cross-Toolchain</p></li><li class="next"><a accesskey="n" href="binutils-pass1.html" title="Binutils-2.45.1 - Pass 1">Next</a><p>Binutils-2.45.1 - Pass 1</p></li><li class="up"><a accesskey="u" href="chapter02.html" title="Chapter 2. Compiling a Cross-Toolchain">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div><h1 class="sect1"><a id="ch-tools-introduction" name="ch-tools-introduction"></a>Introduction</h1><div class="sect1" lang="en" xml:lang="en"><p>This chapter shows how to build a cross-compiler and its associated
-  tools. Although here cross-compilation is faked, the principles are
-  the same as for a real cross-toolchain.</p><p>The programs compiled in this chapter will be installed under the
-  <code class="filename">$LFS/tools</code> directory to keep them
-  separate from the files installed in the following chapters. The libraries,
-  on the other hand, are installed into their final place, since they pertain
-  to the system we want to build.</p></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="chapter02.html" title="Compiling a Cross-Toolchain">Prev</a><p>Compiling a Cross-Toolchain</p></li><li class="next"><a accesskey="n" href="binutils-pass1.html" title="Binutils-2.45.1 - Pass 1">Next</a><p>Binutils-2.45.1 - Pass 1</p></li><li class="up"><a accesskey="u" href="chapter02.html" title="Chapter 2. Compiling a Cross-Toolchain">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Zirconium Linux From Scratch - Version r12.4-45-systemd">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      2.1.&nbsp;Introduction
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Preparing the Host System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter02.html" title=
+          "Preparing the Host System">Prev</a>
+          <p>
+            Preparing the Host System
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="hostreqs.html" title=
+          "Host System Requirements">Next</a>
+          <p>
+            Host System Requirements
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-partitioning-introduction" name=
+      "ch-partitioning-introduction"></a>2.1. Introduction
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <p>
+        In this chapter, the host tools needed for building LFS are checked
+        and, if necessary, installed. Then a partition which will host the
+        LFS system is prepared. We will create the partition itself, create a
+        file system on it, and mount it.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter02.html" title=
+          "Preparing the Host System">Prev</a>
+          <p>
+            Preparing the Host System
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="hostreqs.html" title=
+          "Host System Requirements">Next</a>
+          <p>
+            Host System Requirements
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

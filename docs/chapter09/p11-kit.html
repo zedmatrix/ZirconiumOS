@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.21.&nbsp;p11-kit-0.26.2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-r13-1-systemd">
+    <div class="navheader">
+      <h4>
+        Zirconium Linux From Scratch - Version r13-1-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="popt.html" title="Popt-1.19">Prev</a>
+          <p>
+            Popt-1.19
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="make-ca.html" title=
+          "make-ca-1.16.1">Next</a>
+          <p>
+            make-ca-1.16.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-p11-kit" name="ch-system-p11-kit"></a>9.21.
+      p11-kit-0.26.2
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The <span class="application">p11-kit</span> package provides a way
+          to load and enumerate PKCS #11 (a Cryptographic Token Interface
+          Standard) modules.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.6 SBU (with tests)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">101.5 MB (with tests)</span>
+            </div>
+          </div>
+        </div>
+        <h3>
+          p11-kit Dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="libtasn1.html" title=
+          "9.15.&nbsp;libtasn1-4.21.0">Section&nbsp;9.15,
+          “libtasn1-4.21.0”</a>
+        </p>
+        <h4>
+          Recommended (runtime)
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="make-ca.html" title=
+          "9.22.&nbsp;make-ca-1.16.1">Section&nbsp;9.22, “make-ca-1.16.1”</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.21.1. Installation of p11-kit
+        </h2>
+        <p>
+          Prepare the distribution specific anchor hook:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed '20,$ d' -i trust/trust-extract-compat
+
+cat &gt;&gt; trust/trust-extract-compat &lt;&lt; "EOF"
+<code class="literal"># Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Update trust stores
+/usr/sbin/make-ca -r</code>
+EOF</kbd></pre>
+        <p>
+          Prepare <span class="application">p11-kit</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">meson setup p11-build     \
+      --prefix=/usr       \
+      --buildtype=release \
+      -D trust_paths=/etc/pki/anchors</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C p11-build</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C p11-build test</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C p11-build install
+ln -sfv /usr/libexec/p11-kit/trust-extract-compat \
+        /usr/bin/update-ca-certificates</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.21.2. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--buildtype=release</code></em>:
+          Specify a buildtype suitable for stable releases of the package, as
+          the default may produce unoptimized binaries.
+        </p>
+        <p>
+          <em class="parameter"><code>-D
+          trust_paths=/etc/pki/anchors</code></em>: this switch sets the
+          location of trusted certificates used by libp11-kit.so.
+        </p>
+        <p>
+          <code class="option">-D hash_impl=freebl</code>: Use this switch if
+          you want to use the Freebl library from <span class=
+          "application">NSS</span> for SHA1 and MD5 hashing.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.21.3. Configuring p11-kit
+        </h2>
+        <p>
+          The <span class="application">p11-kit</span> trust module
+          (<code class="filename">/usr/lib/pkcs11/p11-kit-trust.so</code>)
+          can be used as a drop-in replacement for <code class=
+          "filename">/usr/lib/libnssckbi.so</code> to transparently make the
+          system CAs available to <span class="application">NSS</span> aware
+          applications, rather than the static list provided by <code class=
+          "filename">/usr/lib/libnssckbi.so</code>. As the <code class=
+          "systemitem">root</code> user, execute the following commands:
+        </p>
+        <pre class="root"><kbd class=
+        "command">ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.21.4. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">p11-kit, trust, and
+              update-ca-certificates</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libp11-kit.so and p11-kit-proxy.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/pkcs11, /usr/include/p11-kit-1,
+              /usr/lib/pkcs11, /usr/libexec/p11-kit,
+              /usr/share/gtk-doc/html/p11-kit, and /usr/share/p11-kit</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="p11-kit-prog" name="p11-kit-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>p11-kit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line tool that can be used to perform
+                    operations on PKCS#11 modules configured on the system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="trust" name="trust"></a><span class=
+                    "term"><span class=
+                    "command"><strong>trust</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line tool to examine and modify the shared
+                    trust policy store
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="update-ca-certificates" name=
+                    "update-ca-certificates"></a><span class=
+                    "term"><span class=
+                    "command"><strong>update-ca-certificates</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line tool to both extract local certificates
+                    from an updated anchor store, and regenerate all anchors
+                    and certificate stores on the system. This is done
+                    unconditionally on BLFS using the <em class=
+                    "parameter"><code>--force</code></em> and <em class=
+                    "parameter"><code>--get</code></em> flags to <span class=
+                    "command"><strong>make-ca</strong></span> and should
+                    likely not be used for automated updates
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libp11-kit" name="libp11-kit"></a><span class=
+                    "term"><code class="filename">libp11-kit.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions used to coordinate initialization and
+                    finalization of any PKCS#11 module
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="p11-kit-proxy" name=
+                    "p11-kit-proxy"></a><span class="term"><code class=
+                    "filename">p11-kit-proxy.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the PKCS#11 proxy module
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="popt.html" title="Popt-1.19">Prev</a>
+          <p>
+            Popt-1.19
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="make-ca.html" title=
+          "make-ca-1.16.1">Next</a>
+          <p>
+            make-ca-1.16.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Zirconium Linux From Scratch - Version r13-1-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
