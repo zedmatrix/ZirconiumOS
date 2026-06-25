@@ -1,0 +1,113 @@
+description: "A web browser built for speed, simplicity, and security"
+note: 'export DESTDIR="/ybuild/image/chromium-149.0.7827.155"'
+memory: '8Gb RAM - 2Gb Swap - swapfile 8Gb'
+
+package:
+  name: chromium
+  version: 149.0.7827.155
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-149.0.7827.155-lite.tar.xz
+    sha256: 4e39fd0ae3ad64fd4bff6a523d94fe5e2917ad51a7f46a73c84a5736d9dda862
+    md5: 8fe97cb63c2efa9d311735f2be81eb9f
+    size: "1.5 GB"
+  - url: https://github.com/foutrelis/chromium-launcher/archive/v8/chromium-launcher-8.tar.gz
+    sha256: 213e50f48b67feb4441078d50b0fd431df34323be15be97c55302d3fdac4483a
+    md5: 3cfa512310d919b72bce30dd547d585b
+
+patches:
+  - url: chromium-145-fix-SYS_SECCOMP.patch
+    sha256: 4fc040a0656a0a524dd8ad090cd129fc5b6cb21adcc66be82080165789e8c13e
+    md5: 065415c9d8e19b349682608e88bcb852
+  - url: chromium-147-rust-1.95-bytemuck.patch
+    sha256: b9e6339221efe03540ffb360c161d93604a1fc93a5a1c53e5e9849066f987d05
+    md5: 952d2907f3cd468cfe6a9e78ecd3db4d
+  - url: chromium-149-drop-unknown-clang-flag.patch
+    sha256: 5ade4cdba7afebfcc09fa969f15bf27404579beac5b7bafb59a0214d407e4ad2
+    md5: 1d99463e12dafa4231f956cb518ff0ff
+  - url: chromium-149-unbundle-minizip-undo-unicode.patch
+    sha256: c22338d13f12772cdbcb5cfc1ace94438b9f9c72353cdb165a3ff3ef3d677c78
+    md5: a00c3c28ebaec68143a1ce772f26d112
+  - url: chromium-149-use-of-undeclared-identifier-ERROR.patch
+    sha256: 951514535be65f0e2f84e82305d96292be1da353c1427ba1048ea24be70003c4
+    md5: 67ae3e1c82eb6ef138295a4a776d3e4f
+  - url: chromium-nodejs-version.patch
+    sha256: 11a96ffa21448ec4c63dd5c8d6795a1998d8e5cd5a689d91aea4d2bdd13fb06e
+    md5: 883f63f2765d2eea97565e7ddf5c1834
+  - url: use-oauth2-client-switches-as-default.patch
+    sha256: 9343afa1a4308a7cfb3317229f5aff7778688debcc03c4a74a85908aa1d0cc3a
+    md5: 2acfad339649ffd410df9cfeaa31a79f
+
+apply_patches: |
+  patch -Np1 -i ../chromium-145-fix-SYS_SECCOMP.patch
+  patch -Np1 -i ../chromium-147-rust-1.95-bytemuck.patch
+  patch -Np1 -i ../chromium-149-drop-unknown-clang-flag.patch
+  patch -Np1 -i ../chromium-149-unbundle-minizip-undo-unicode.patch
+  patch -Np1 -i ../chromium-149-use-of-undeclared-identifier-ERROR.patch
+  patch -Np1 -i ../chromium-nodejs-version.patch
+  patch -Np1 -i ../use-oauth2-client-switches-as-default.patch
+  patch -Np1 -i ../chromium-149-build-with-wasm-rollup.patch
+
+prepare: |
+  ./chromium-prepare.sh
+
+build: |
+  ./chromium-localflags.sh
+  gn gen out/Release --args="${_flags[*]}"
+  ninja -j1 -C out/Release chrome chrome_sandbox chromedriver.unstripped
+
+install: |
+  cd chromium-launcher-8
+  make PREFIX=/usr DESTDIR=${DESTDIR} install
+  cd ../
+  ./chromium-install.sh
+
+final: |
+  /ybuild/ydest-strip-x64.sh;
+  unset CC CXX AR NM _flags _system_libs _unwanted_bundled_libs _google_api_key
+
+required:
+  - alsa-lib
+  - at-spi2-core
+  - cairo
+  - dbus
+  - desktop-file-utils
+  - expat
+  - glib2
+  - glibc
+  - gtk3'
+  - hicolor-icon-theme
+  - libcups
+  - libffi
+  - libgcrypt
+  - pulseaudio
+  - libva
+  - libX11
+  - libxcb
+  - libXcomposite
+  - libXdamage
+  - libXext
+  - libXfixes
+  - libxkbcommon
+  - libXrandr
+  - mesa
+  - nspr
+  - nss
+  - pango
+  - pciutils
+  - systemd
+  - liberation-fonts
+  - xdg-utils
+  - zlib
+
+recommended:
+  - minizip
+  - openh264
+
+optional:
+  - gn

@@ -1,0 +1,47 @@
+description: "Meta-build system that generates build files for Ninja"
+
+package:
+  name: gn
+  version: 0.2425.d31e0200
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: git+https://gn.googlesource.com/gn
+    version: echo 0.$(git rev-list --count initial-commit..).$(git rev-parse --short=8 HEAD)
+    sha256:
+    md5:
+
+prepare: |
+  git clone https://gn.googlesource.com/gn
+
+build: |
+  ./build/gen.py
+  ninja -C out
+
+check: |
+  ./out/gn_unittests
+
+install: |
+  install -vD out/gn "/usr/local/bin/gn"
+  install -vDm644 -t "/usr/local/share/doc/gn-0.2425" docs/*
+  install -vDm644 -t "/usr/local/share/licenses/gn-0.2425" LICENSE
+
+  #mkdir -vp "/usr/local/share/vim/vimfiles"
+  #cp -r misc/vim/{autoload,ftdetect,ftplugin,syntax} "/usr/local/share/vim/vimfiles/"
+  #install -vDm644 -t "/usr/local/share/emacs/site-lisp" misc/emacs/gn-mode.el
+
+required:
+  - llvm
+  - ninja
+  - python
+  - git
+
+recommended:
+
+optional:
+
+runtime:
