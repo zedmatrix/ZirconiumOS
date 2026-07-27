@@ -1,0 +1,31 @@
+description: "The Acl package contains utilities to administer Access Control Lists for files and directories."
+
+package:
+  name: acl
+  version: 2.3.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://download.savannah.gnu.org/releases/acl/acl-2.3.2.tar.xz
+    sha256: 97203a72cae99ab89a067fe2210c1cbf052bc492b479eca7d226d9830883b0bd
+    md5: 590765dee95907dbc3c856f7255bd669
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/acl-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - attr
+  - glibc

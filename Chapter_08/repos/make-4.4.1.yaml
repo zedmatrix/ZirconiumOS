@@ -1,0 +1,40 @@
+description: "Contains a program for controlling the generation of executables and other non-source files of a package from source files."
+
+package:
+  name: make
+  version: 4.4.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/make/make-4.4.1.tar.gz
+    sha256: dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3
+    md5: c8469a3713cbbe04d955d4ae4be23eeb
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  chown -R tester .;
+  su tester -c "PATH=$PATH make check"
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - gcc
+  - gettext
+  - glibc
+  - grep
+  - make-tmp
+  - sed
+  - texinfo-tmp

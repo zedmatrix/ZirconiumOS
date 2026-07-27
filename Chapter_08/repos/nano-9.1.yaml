@@ -1,0 +1,34 @@
+description: "The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package."
+
+package:
+  name: nano
+  version: 9.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.nano-editor.org/dist/v9/nano-9.1.tar.xz
+    sha256: 5f47764274cb7532349ce0aa20ec10f1e8e851a6e9fa3eb66812c43d196db042
+    md5: c62f6cd5adf15b8a3d1a5fd051143721
+
+prepare: |
+  ./configure --prefix=/usr --sysconfdir=/etc \
+    --enable-utf8 --docdir=/usr/share/doc/nano-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make install
+
+final: |
+  install -v -m644 doc/{nano.html,sample.nanorc} /usr/share/doc/nano-${PKGVER};
+  cp -v ${YPKG}/nanorc /etc/nanorc
+
+required:
+  - file
+  - glibc
+  - ncurses

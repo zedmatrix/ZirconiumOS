@@ -1,0 +1,45 @@
+description: "The Kmod package contains libraries and utilities for loading kernel modules"
+
+package:
+  name: kmod
+  version: 34.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-34.2.tar.xz
+    sha256: 5a5d5073070cc7e0c7a7a3c6ec2a0e1780850c8b47b3e3892226b93ffcb9cb54
+    md5: 36f2cc483745e81ede3406fa55e1065a
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release -D manpages=false
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+required:
+  - bash
+  - binutils
+  - bison
+  - coreutils-tmp
+  - flex
+  - gcc
+  - gettext
+  - glibc
+  - gzip-tmp
+  - make-tmp
+  - openssl
+  - pkgconf
+  - sed
+  - xz
+  - zlib
+
+recommended:
+  - meson
+  - ninja

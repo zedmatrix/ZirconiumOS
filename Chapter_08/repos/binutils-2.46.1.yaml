@@ -1,0 +1,41 @@
+description: "The Binutils package contains a linker, an assembler, and other tools for handling object files."
+
+package:
+  name: binutils
+  version: 2.46.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://sourceware.org/pub/binutils/releases/binutils-2.46.1.tar.xz
+    sha256: e127a709cba24c76de8936cb7083dd768f28cd37eb010492e2f19b71eb1294e4
+    md5: 9b9b73791519bf6fc8d76c7fc9fd32fe
+
+prepare: |
+  mkdir -v build && cd build &&
+  ../configure --prefix=/usr --sysconfdir=/etc --enable-ld=default \
+    --enable-plugins --enable-shared --disable-werror --enable-64-bit-bfd \
+    --enable-new-dtags --with-system-zlib --enable-default-hash-style=gnu \
+    --with-pkgversion="Zirconium ${PKGVER}"
+
+build: |
+  cd build && make tooldir=/usr
+
+check: |
+  cd build && make -k check;
+  grep '^FAIL:' $(find -name '*.log') || true
+
+install: |
+  cd build && make tooldir=/usr install;
+  rm -rfv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a \
+          /usr/share/doc/gprofng/
+
+required:
+  - zlib
+  - zstd
+  - bc
+  - perl-tmp
+  - glibc

@@ -1,12 +1,14 @@
 #!/bin/bash
 set -e
-pushd /ybuild
+YBLD=${YBLD:-"/ybuild"}
+yinstall="${YBLD}/pkg-install.sh"
 
-./7-5-creating-dirs.sh
-./7-6-create-files_systemd.sh
+${YBLD}/7-5-creating-dirs.sh
+${YBLD}/7-6-create-files_sysv-and-systemd.sh
 
-yinstall="/ybuild/yaml-install.sh"
-package_list=(gettext-temp bison-temp perl-temp python-temp texinfo-temp util-linux-temp)
+pushd ${YBLD}
+
+package_list=(gettext-1.0-tmp bison-3.8.2-tmp perl-5.42.2-tmp python-3.14.6-tmp texinfo-7.3-tmp util-linux-2.42.2-tmp)
 
 for pkg in ${package_list[@]}; do
     if ! "${yinstall}" "$pkg"; then
@@ -15,6 +17,6 @@ for pkg in ${package_list[@]}; do
     fi
 done
 
-./7-z-cleanup.sh
+${YBLD}/7-z-cleanup.sh
 
 popd

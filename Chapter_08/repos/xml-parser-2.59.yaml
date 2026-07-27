@@ -1,0 +1,32 @@
+description: "The XML::Parser module is a Perl interface to James Clarks XML parser, Expat."
+homepage: "https://metacpan.org/pod/XML::Parser"
+
+package:
+  name: xml-parser
+  version: 2.59
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.59.tar.gz
+    sha256: a358fd7c49f5e27717a644a9102bd21dc7fc25a415983279c59b1580e2b62a58
+    md5: f483e6b8541d60a84e4bf50803e476bc
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - perl
+  - file-sharedir

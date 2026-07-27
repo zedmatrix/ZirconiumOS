@@ -1,0 +1,26 @@
+description: "Wheel is a Python library that is the reference implementation of the Python wheel packaging standard."
+
+package:
+  name: wheel
+  version: 0.47.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://pypi.org/packages/source/w/wheel/wheel-0.47.0.tar.gz
+    sha256: cc72bd1009ba0cf63922e28f94d9d83b920aa2bb28f798a31d0691b02fa3c9b3
+    md5: 3e73dfac6b3b47a7d1cd52e81885618f
+
+build: |
+  pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+
+install: |
+  pip3 install --no-index --find-links dist wheel
+
+required:
+  - python
+  - flit-core
+  - packaging

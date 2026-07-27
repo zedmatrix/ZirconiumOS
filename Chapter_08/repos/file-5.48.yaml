@@ -1,0 +1,42 @@
+description: "The File package contains a utility for determining the type of a given file or files."
+
+package:
+  name: file
+  version: 5.48
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://astron.com/pub/file/file-5.48.tar.gz
+    sha256: ed14656883b23a364b4057c05595d93252da9bc473d30106519519d0da141283
+    md5: 423686e97f731d8c24e9cd1a22b03dec
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+required:
+  - bash-tmp
+  - binutils-p2
+  - bzip2
+  - coreutils-tmp
+  - diffutils-tmp
+  - gawk-tmp
+  - gcc-p2
+  - glibc
+  - grep-tmp
+  - make-tmp
+  - sed-tmp
+  - xz
+  - zlib

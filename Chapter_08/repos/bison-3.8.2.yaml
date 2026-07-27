@@ -1,0 +1,33 @@
+description: "The Bison package contains a parser generator."
+
+package:
+  name: bison
+  version: 3.8.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/bison/bison-3.8.2.tar.xz
+    sha256: 9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2
+    md5: c28f119f405a2304ff0a7ccdcc629713
+
+prepare: |
+  ./configure --prefix=/usr --docdir=/usr/share/doc/bison-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - m4
+  - gettext
+  - bash-tmp
+  - glibc

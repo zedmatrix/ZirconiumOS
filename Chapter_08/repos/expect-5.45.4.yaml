@@ -1,0 +1,38 @@
+description: "Expect is a tool for automating interactive applications such as telnet, ftp, passwd, fsck, rlogin, tip, etc."
+
+package:
+  name: expect
+  version: 5.45.4
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
+    sha256: 49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34
+    md5: 00fce8de158422f5ccd2666512329bd2
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/expect/expect-5.45.4-gcc15-1.patch
+    sha256: ab5fc0af9e2e0f80d7623c1a3a3dbeb1da3d8c9134276792199df401f9eb2cec
+    md5: 0ca4d6bb8d572fbcdb13cb36cd34833e
+
+prepare: |
+  ./configure --prefix=/usr --enable-shared --disable-rpath \
+    --mandir=/usr/share/man --with-tcl=/usr/lib --with-tclinclude=/usr/include
+
+build: |
+  make
+
+check: |
+  python3 -c 'from pty import spawn; spawn(["echo", "ok"])';
+  make test || true
+
+install: |
+  make install &&
+  ln -svf expect5.45.4/libexpect5.45.4.so /usr/lib
+
+required:
+  - tcl
+  - glibc

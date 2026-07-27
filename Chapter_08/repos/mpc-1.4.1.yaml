@@ -1,0 +1,35 @@
+description: "The MPC package contains a library for the arithmetic of complex numbers with arbitrarily high precision and correct rounding of the result."
+
+package:
+  name: mpc
+  version: 1.4.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: true
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.4.1.tar.xz
+    sha256: 91204cd32f164bd3b7c992d4a6a8ce6519511aadab30f78b6982d0bf8d73e931
+    md5: 40c5fba305125279ea46041160e81daf
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/mpc-${PKGVER}
+
+build: |
+  make;
+  make html
+
+check: |
+  make check 2>&1 | tee mpc-check-log;
+
+install: |
+  make install;
+  make install-html;
+  awk '/# PASS:/{total+=$3} ; END{print total}' mpc-check-log || true
+
+required:
+  - gmp
+  - mpfr
+  - glibc

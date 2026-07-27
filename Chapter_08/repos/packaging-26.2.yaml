@@ -1,0 +1,25 @@
+description: "Provides utilities that implement the interoperability specifications which have clearly one correct behaviour."
+
+package:
+  name: packaging
+  version: 26.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/p/packaging/packaging-26.2.tar.gz
+    sha256: ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661
+    md5: edae3d061c39a2ff713a97e133dbc50c
+
+build: |
+  pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+
+install: |
+  pip3 install --no-index --find-links dist packaging
+
+required:
+  - flit-core
+  - python

@@ -1,0 +1,35 @@
+description: "The pcre2 package contains a new generation of the Perl Compatible Regular Expression libraries."
+
+package:
+  name: pcre2
+  version: 10.47
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.bz2
+    sha256: 47fe8c99461250d42f89e6e8fdaeba9da057855d06eb7fc08d9ca03fd08d7bc7
+    md5: aded5840ab5a7d772dd4e16fc294b665
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/pcre2-${PKGVER} \
+    --enable-jit --enable-unicode --enable-pcre2-16 --enable-pcre2-32 --enable-pcre2grep-libz \
+    --enable-pcre2grep-libbz2 --enable-pcre2test-libreadline
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - zlib
+  - bzip2
+  - readline
+  - glibc

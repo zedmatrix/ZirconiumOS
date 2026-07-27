@@ -1,0 +1,38 @@
+description: "A program for modifying or creating files by applying a patch file typically created by the diff program."
+
+package:
+  name: patch
+  version: 2.8
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/patch/patch-2.8.tar.xz
+    sha256: f87cee69eec2b4fcbf60a396b030ad6aa3415f192aa5f7ee84cad5e11f7f5ae3
+    md5: 149327a021d41c8f88d034eab41c039f
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - attr
+  - bash
+  - binutils
+  - coreutils
+  - gcc
+  - glibc
+  - grep
+  - make
+  - sed

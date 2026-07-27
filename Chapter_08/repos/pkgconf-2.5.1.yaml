@@ -1,0 +1,29 @@
+description: "A program which helps to configure compiler and linker flags for development libraries."
+
+package:
+  name: pkgconf
+  version: 2.5.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://distfiles.ariadne.space/pkgconf/pkgconf-2.5.1.tar.xz
+    sha256: cd05c9589b9f86ecf044c10a2269822bc9eb001eced2582cfffd658b0a50c243
+    md5: 3291128c917fdb8fccd8c9e7784b643b
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/pkgconf-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make install;
+  ln -sv pkgconf   /usr/bin/pkg-config;
+  ln -sv pkgconf.1 /usr/share/man/man1/pkg-config.1
+
+required:
+  - glibc

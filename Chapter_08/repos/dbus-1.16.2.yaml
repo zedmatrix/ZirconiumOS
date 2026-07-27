@@ -1,0 +1,43 @@
+description: "D-Bus is a message bus system, a simple way for applications to talk to one another."
+
+package:
+  name: dbus
+  version: 1.16.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://dbus.freedesktop.org/releases/dbus/dbus-1.16.2.tar.xz
+    sha256: 0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2
+    md5: 97832e6f0a260936d28536e5349c22e5
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release --wrap-mode=nofallback
+
+build: |
+  ninja -C build
+
+check: |
+  ninja -C build test || true
+
+install: |
+  ninja -C build install;
+  ln -sfv /etc/machine-id /var/lib/dbus
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - diffutils
+  - gawk
+  - gcc
+  - glibc
+  - grep
+  - make
+  - pkgconf
+  - sed
+  - systemd
+  - util-linux-tmp

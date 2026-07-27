@@ -1,0 +1,42 @@
+description: "Libelf is a library for handling ELF (Executable and Linkable Format) files."
+
+package:
+  name: libelf
+  version: 0.195
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://sourceware.org/ftp/elfutils/0.195/elfutils-0.195.tar.bz2
+    sha256: 37629fdf7f1f3dc2818e138fca2b8094177d6c2d0f701d3bb650a561218dc026
+    md5: 3e8ef51c43beceddbbb74879549cf72c
+
+prepare: |
+  ./configure --prefix=/usr --disable-debuginfod --enable-libdebuginfod=dummy
+
+build: |
+  make -C lib;
+  make -C libelf
+
+check: |
+  make -k check || true
+
+install: |
+  make -C libelf install &&
+  install -vm644 config/libelf.pc /usr/lib/pkgconfig
+  rm -v /usr/lib/libelf.a
+
+required:
+  - bash
+  - binutils
+  - bzip2
+  - coreutils-tmp
+  - gcc
+  - glibc
+  - make-tmp
+  - xz
+  - zlib
+  - zstd

@@ -1,0 +1,21 @@
+description: "The Iana-Etc package provides data for network services and protocols."
+
+package:
+  name: iana-etc
+  version: 20260617
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/Mic92/iana-etc/releases/download/20260617/iana-etc-20260617.tar.gz
+    sha256: 236bf9bf41e7d576f7343284d1ad7e37a7570b05cea58c5490fa56ad237a6497
+    md5:
+
+install: |
+  cp -v services protocols /etc
+
+required:
+  - coreutils-tmp

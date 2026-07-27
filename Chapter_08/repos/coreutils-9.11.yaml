@@ -1,0 +1,63 @@
+description: "The Coreutils package contains the basic utility programs needed by every operating system."
+
+package:
+  name: coreutils
+  version: 9.11
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.11.tar.xz
+    sha256: 394024eda0a5955217ceda9cd1201e65dc8fa3aa29c2951135a49521d57c3cc3
+    md5: e52e9857e4aa9ae38ef32f8ed6a27604
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.11-i18n-1.patch
+    sha256: 7c2aecf9ae24b87b019595e382b9f41d2c96de7f95abe95ad8cacc7e2ce1bbcc
+    md5: 900d64d9936516b68613271c9ebc0059
+
+prepare: |
+  autoreconf -fv;
+  automake -af &&
+  FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr \
+    --enable-no-install-program=kill,uptime
+
+build: |
+  make
+
+check: |
+  make NON_ROOT_USERNAME=tester check-root || true;
+  groupadd -g 102 dummy -U tester;
+  chown -R tester . ;
+  su tester -c "PATH=$PATH make -k RUN_EXPENSIVE_TESTS=yes check" < /dev/null;
+  groupdel dummy
+
+install: |
+  make install
+
+final: |
+  mv -v /usr/bin/chroot /usr/sbin;
+  mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8;
+  sed -i 's/"1"/"8"/' /usr/share/man/man8/chroot.8
+
+required:
+  - autoconf
+  - automake
+  - bash
+  - binutils
+  - coreutils-tmp
+  - gcc
+  - gettext
+  - glibc
+  - gmp
+  - grep
+  - libcap
+  - make-tmp
+  - openssl
+  - patch-tmp
+  - perl
+  - sed
+  - texinfo-tmp

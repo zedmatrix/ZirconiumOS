@@ -1,0 +1,41 @@
+description: "The Ncurses package contains libraries for terminal-independent handling of character screens."
+
+package:
+  name: ncurses
+  version: 6.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/ncurses/ncurses-6.6.tar.gz
+    sha256: 355b4cbbed880b0381a04c46617b7656e362585d52e9cf84a67e2009b749ff11
+    md5: dd45bf6854430af403452a7a6a40652c
+
+prepare: |
+  ./configure --prefix=/usr --mandir=/usr/share/man --with-shared --without-debug --without-normal \
+    --with-cxx-shared --enable-pc-files --with-pkg-config-libdir=/usr/lib/pkgconfig
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$PWD/dest install &&
+  sed -e 's/^#if.*XOPEN.*$/#if 1/' -i dest/usr/include/curses.h &&
+  cp --remove-destination -av dest/* /
+
+final: |
+  for lib in ncurses form panel menu ; do
+      ln -sfv lib${lib}w.so /usr/lib/lib${lib}.so;
+      ln -sfv ${lib}w.pc    /usr/lib/pkgconfig/${lib}.pc;
+  done;
+  ln -sfv libncursesw.so /usr/lib/libcurses.so;
+  cp -v -R doc -T /usr/share/doc/ncurses-${PKGVER}
+
+required:
+  - libstdcpp
+  - bash-tmp
+  - gcc
+  - glibc

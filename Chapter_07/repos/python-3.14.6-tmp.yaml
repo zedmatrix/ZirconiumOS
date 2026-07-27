@@ -1,0 +1,24 @@
+description: "Package contains the Python development environment useful for object-oriented programming, writing scripts, prototyping large programs, and developing entire applications."
+
+package:
+  name: python-tmp
+  version: 3.14.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.python.org/ftp/python/3.14.6/Python-3.14.6.tar.xz
+    sha256: 143b1dddefaec3bd2e21e3b839b34a2b7fb9842272883c576420d605e9f30c63
+    md5: d28d7fb81a61d3bff5a6bedceb969366
+
+prepare: |
+  ./configure --prefix=/usr --enable-shared --without-ensurepip --without-static-libpython
+
+build: |
+  make
+
+install: |
+  make install

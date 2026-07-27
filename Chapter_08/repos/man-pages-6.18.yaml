@@ -1,0 +1,27 @@
+description: "The Man-pages package contains over 2,400 man pages."
+
+package:
+  name: man-pages
+  version: 6.18
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/docs/man-pages/man-pages-6.18.tar.xz
+    sha256: c934fadc8b59748c68227a34f6581d2ddf8282b73cdcd52546c8cd88b74b24d1
+    md5: 44915a91e4a28161dc421636a193fb3a
+
+prepare: |
+  rm -v man3/crypt*
+
+install: |
+  make -R GIT=false prefix=/usr install
+
+required:
+  - bash
+  - coreutils
+  - make
+  - sed

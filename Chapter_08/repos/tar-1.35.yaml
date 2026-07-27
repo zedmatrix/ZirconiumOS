@@ -1,0 +1,48 @@
+description: "Provides the ability to create archives as well as perform various other kinds of archive manipulation."
+
+package:
+  name: tar
+  version: 1.35
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/tar/tar-1.35.tar.xz
+    sha256: 4d62ff37342ec7aed748535323930c7cf94acf71c3591882b26a7ea50f3edc16
+    md5: a2d8042658cfd8ea939e6d911eaf4152
+patches:
+  - url: https://www.linuxfromscratch.org/patches/lfs/development/tar-1.35-acl_fix-1.patch
+    sha256: 51cadccfcb2f29cfdb4ec18015360100aa167179a72ece040a6a8612aeec5081
+    md5: dbab49e317105539611866dac5dd54f6
+
+prepare: |
+  FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install;
+  make -C doc install-html docdir=/usr/share/doc/tar-${PKGVER}
+
+required:
+  - acl
+  - attr
+  - bash
+  - binutils
+  - bison
+  - coreutils
+  - gcc
+  - gettext
+  - glibc
+  - grep
+  - inetutils
+  - make
+  - sed
+  - texinfo-tmp

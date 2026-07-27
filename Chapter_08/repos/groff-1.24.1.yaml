@@ -1,0 +1,41 @@
+description: "The Groff package contains programs for processing and formatting text and images."
+
+package:
+  name: groff
+  version: 1.24.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/groff/groff-1.24.1.tar.gz
+    sha256: 74e2819795b6aff431aeac983d63a9c8968eeaba2a2eba7df8ba4c7b41e7cfd8
+    md5: d9d996af3d05ebab934380be708ea584
+
+prepare: |
+  PAGE=A4 ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - bison
+  - coreutils
+  - gawk
+  - gcc
+  - glibc
+  - grep
+  - make-tmp
+  - patch-tmp
+  - sed
+  - texinfo-tmp

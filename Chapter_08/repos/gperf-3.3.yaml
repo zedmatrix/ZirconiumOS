@@ -1,0 +1,31 @@
+description: "Gperf generates a perfect hash function from a key set."
+
+package:
+  name: gperf
+  version: 3.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gperf/gperf-3.3.tar.gz
+    sha256: fd87e0aba7e43ae054837afd6cd4db03a3f2693deb3619085e6ed9d8d9604ad8
+    md5: 31753b021ea78a21f154bf9eecb8b079
+
+prepare: |
+  ./configure --prefix=/usr --docdir=/usr/share/doc/gperf-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+required:
+  - gcc
+  - glibc

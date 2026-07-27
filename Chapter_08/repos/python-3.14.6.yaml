@@ -1,0 +1,57 @@
+description: "The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, and developing entire applications."
+
+package:
+  name: python
+  version: 3.14.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.python.org/ftp/python/3.14.6/Python-3.14.6.tar.xz
+    sha256: 143b1dddefaec3bd2e21e3b839b34a2b7fb9842272883c576420d605e9f30c63
+    md5: d28d7fb81a61d3bff5a6bedceb969366
+  - url: https://www.python.org/ftp/python/doc/3.14.6/python-3.14.6-docs-html.tar.bz2
+    sha256: 304b300fe9831bd4cb1458be5a9365dfe92bb89e061741909afd9bd88a4fa442
+    md5: 95c7483f256f6f0596c9e644756dc556
+
+prepare: |
+  ./configure --prefix=/usr --enable-shared --with-system-expat \
+    --enable-optimizations --without-static-libpython
+
+build: |
+  make
+
+check: |
+  make test TESTOPTS="--timeout 120" || true
+
+install: |
+  make install;
+  install -vm644 ${YPKG}/python-pip.conf /etc/pip.conf;
+  install -v -dm755 /usr/share/doc/python-${PKGVER}/html
+
+final: |
+  tar --strip-components=1 --no-same-owner --no-same-permissions \
+      -C /usr/share/doc/python-${PKGVER}/html \
+      -xf ${YSRC}/python-${PKGVER}-docs-html.tar.bz2
+
+required:
+  - bash
+  - binutils
+  - coreutils-tmp
+  - expat
+  - gcc
+  - gdbm
+  - gettext
+  - glibc
+  - grep
+  - libffi
+  - libxcrypt
+  - make-tmp
+  - ncurses
+  - openssl
+  - pkgconf
+  - sed
+  - util-linux-tmp

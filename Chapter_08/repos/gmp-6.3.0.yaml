@@ -1,0 +1,35 @@
+description: "The GMP package contains math libraries. These have useful functions for arbitrary precision arithmetic."
+
+package:
+  name: gmp
+  version: 6.3.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: true
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz
+    sha256: a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898
+    md5: 956dc04e864001a9c22429f761f2c283
+
+prepare: |
+  sed -i '/long long t1;/,+1s/()/(...)/' configure;
+  ./configure --prefix=/usr --enable-cxx --disable-static --docdir=/usr/share/doc/gmp-${PKGVER}
+
+build: |
+  make;
+  make html
+
+check: |
+  make check 2>&1 | tee gmp-check-log
+
+install: |
+  make install &&
+  make install-html;
+  awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log || true
+
+required:
+  - libstdcpp
+  - glibc

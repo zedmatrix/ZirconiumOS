@@ -1,0 +1,48 @@
+description: "The Gawk package contains programs for manipulating text files."
+
+package:
+  name: gawk
+  version: 5.4.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gawk/gawk-5.4.0.tar.xz
+    sha256: 3dd430f0cd3b4428c6c3f6afc021b9cd3c1f8c93f7a688dc268ca428a90b4ac1
+    md5: c07cc9beb6c3bf83274741d0c9489357
+
+prepare: |
+  sed -i 's/extras//' Makefile.in;
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  chown -R tester .;
+  su tester -c "PATH=$PATH make check"
+
+install: |
+  rm -f /usr/bin/gawk-${PKGVER} &&
+  make install;
+  ln -sv gawk.1 /usr/share/man/man1/awk.1;
+  install -vDm644 doc/{awkforai.txt,*.{eps,pdf,jpg}} -t /usr/share/doc/gawk-${PKGVER}
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - gcc
+  - gettext
+  - glibc
+  - gmp
+  - grep
+  - make-tmp
+  - mpfr
+  - patch-tmp
+  - readline
+  - sed
+  - texinfo-tmp

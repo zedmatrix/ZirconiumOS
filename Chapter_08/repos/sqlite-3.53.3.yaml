@@ -1,0 +1,41 @@
+description: "The Sqlite package is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine."
+
+package:
+  name: sqlite
+  version: 3.53.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://sqlite.org/2026/sqlite-autoconf-3530300.tar.gz
+    sha256: c917d7db16648ec95f714974ace5e5dcf46b7dc70e26600a0a102a3141125db0
+    md5: 6629d5b2597aeb2233ba50dbcca9cc1a
+  - url: https://anduin.linuxfromscratch.org/LFS/sqlite-doc-3530300.tar.xz
+    sha256: eacc387bcc4f1812aded36ba4cef77d0241c4cbd905e27b1a3a8ba341277dff3
+    md5: b24922dba38ab10cbf1c805c00539f27
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --enable-fts{4,5} \
+    CPPFLAGS="-D SQLITE_ENABLE_COLUMN_METADATA=1 -D SQLITE_ENABLE_UNLOCK_NOTIFY=1 \
+              -D SQLITE_ENABLE_DBSTAT_VTAB=1 -D SQLITE_SECURE_DELETE=1"
+
+build: |
+  make LDFLAGS.rpath=""
+
+install: |
+  make install
+
+final: |
+  tar -xf ${YSRC}/sqlite-doc-3530300.tar.xz;
+  install -vdm755 /usr/share/doc/sqlite-${PKGVER};
+  cp -R sqlite-doc-3530300/* /usr/share/doc/sqlite-${PKGVER}
+
+required:
+  - glibc
+  - readline
+  - zlib
+  - tcl
+  - ncurses

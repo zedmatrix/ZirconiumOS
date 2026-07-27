@@ -1,0 +1,38 @@
+description: "Package contains programs for producing shell scripts that can automatically configure source code."
+
+package:
+  name: autoconf
+  version: 2.73
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/autoconf/autoconf-2.73.tar.xz
+    sha256: 9fd672b1c8425fac2fa67fa0477b990987268b90ff36d5f016dae57be0d6b52e
+    md5: 9cbad9a116ef845bafeed8e7bc771bf4
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - coreutils-tmp
+  - gawk-tmp
+  - grep
+  - m4
+  - make-tmp
+  - perl
+  - sed-tmp
+  - texinfo-tmp

@@ -1,0 +1,27 @@
+description: "Setuptools is a tool used to download, build, install, upgrade, and uninstall Python packages."
+
+package:
+  name: setuptools
+  version: 82.0.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://pypi.org/packages/source/s/setuptools/setuptools-82.0.1.tar.gz
+    sha256: 7d872682c5d01cfde07da7bccc7b65469d3dca203318515ada1de5eda35efbf9
+    md5: 2d7f1881d7a06abe7fa69412de30cda5
+
+build: |
+  pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+
+install: |
+  pip3 install --no-index --find-links dist setuptools
+
+required:
+  - python
+  - flit-core
+  - packaging
+  - wheel

@@ -1,0 +1,32 @@
+description: "The GNU Database Manager is a library of database functions that uses extensible hashing and works like the standard UNIX dbm."
+
+package:
+  name: gdbm
+  version: 1.26
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gdbm/gdbm-1.26.tar.gz
+    sha256: 6a24504a14de4a744103dcb936be976df6fbe88ccff26065e54c1c47946f4a5e
+    md5: aaa600665bc89e2febb3c7bd90679115
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --enable-libgdbm-compat
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+required:
+  - readline
+  - bash
+  - glibc

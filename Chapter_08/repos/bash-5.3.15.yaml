@@ -1,0 +1,40 @@
+description: "The Bash package contains the Bourne-Again Shell."
+
+package:
+  name: bash
+  version: 5.3.15
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/bash-5.3.15.tar.xz
+    sha256: cd69848da9973ae917e7e2257138cc8f1fe611e262f41039e8422ecca67c4e7e
+    md5: 818472c0595f6af9fc4b26622914ac2f
+
+prepare: |
+  ./configure --prefix=/usr --with-curses --without-bash-malloc \
+    --with-installed-readline --docdir=/usr/share/doc/bash-${PKGVER}
+
+build: |
+  make
+
+check: |
+  chown -R tester .;
+  LC_ALL=C.UTF-8 su -s /usr/bin/expect tester << "EOF";
+  set timeout -1;
+  spawn make tests;
+  expect eof;
+  lassign [wait] _ _ _ value;
+  exit $value;
+  EOF
+
+install: |
+  make install
+
+required:
+  - ncurses
+  - readline
+  - glibc

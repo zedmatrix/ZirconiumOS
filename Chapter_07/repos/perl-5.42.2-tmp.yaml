@@ -1,0 +1,27 @@
+description: "The Perl package contains the Practical Extraction and Report Language."
+
+package:
+  name: perl-tmp
+  version: 5.42.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz
+    sha256: 0a585eeb9e363c0f80482ddb3571625250c2c86aeb408853e8ea50805cfb14bb
+    md5: be6e70b71ec6589fc090f7303c5b3056
+
+prepare: |
+  sh Configure -des -D prefix=/usr -D vendorprefix=/usr -D useshrplib \
+    -D privlib=/usr/lib/perl5/5.42/core_perl -D archlib=/usr/lib/perl5/5.42/core_perl \
+    -D sitelib=/usr/lib/perl5/5.42/site_perl -D sitearch=/usr/lib/perl5/5.42/site_perl \
+    -D vendorlib=/usr/lib/perl5/5.42/vendor_perl -D vendorarch=/usr/lib/perl5/5.42/vendor_perl
+
+build: |
+  make
+
+install: |
+  make install

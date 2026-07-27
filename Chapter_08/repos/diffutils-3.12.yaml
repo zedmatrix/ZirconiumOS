@@ -1,0 +1,40 @@
+description: "The Diffutils package contains programs that show the differences between files or directories."
+
+package:
+  name: diffutils
+  version: 3.12
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/diffutils/diffutils-3.12.tar.xz
+    sha256: 7c8b7f9fc8609141fdea9cece85249d308624391ff61dedaf528fcb337727dfd
+    md5: d1b18b20868fb561f77861cd90b05de4
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - gawk-tmp
+  - gcc
+  - gettext
+  - glibc
+  - grep
+  - make-tmp
+  - sed
+  - texinfo-tmp

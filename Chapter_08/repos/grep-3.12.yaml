@@ -1,0 +1,35 @@
+description: "The Grep package contains programs for searching through the contents of files."
+
+package:
+  name: grep
+  version: 3.12
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/grep/grep-3.12.tar.xz
+    sha256: 2649b27c0e90e632eadcd757be06c6e9a4f48d941de51e7c0f83ff76408a07b9
+    md5: 5d9301ed9d209c4a88c8d3a6fd08b9ac
+
+prepare: |
+  sed -i "s/echo/#echo/" src/egrep.sh;
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+required:
+  - texinfo-tmp
+  - python-tmp
+  - gperf
+  - pcre2
+  - glibc

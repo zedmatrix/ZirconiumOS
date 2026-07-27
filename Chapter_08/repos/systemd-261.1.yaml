@@ -1,0 +1,68 @@
+description: "The systemd package contains programs for controlling the startup, running, and shutdown of the system."
+note: "for systemd-boot create /etc/os-release file"
+
+package:
+  name: systemd
+  version: 261.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/systemd/systemd/archive/v261.1/systemd-261.1.tar.gz
+    sha256: f9b9da1103d1714703503d1746971ccbeeae945663ef3ede3b7348169b5df064
+    md5: e8c18dba4d0b12dfbffa1ec2a75ae83b
+  - url: https://anduin.linuxfromscratch.org/LFS/systemd-man-pages-261.1.tar.xz
+    sha256: 30777e8534c68f1e70f0565eb5038b74053175e13f5288f0eb3df44e5b47702a
+    md5: 28f09e8ea44375bf6d598f9ca33b0d40
+
+prepare: |
+  echo 'NAME="Zirconium Linux From Scratch"' > /etc/os-release;
+  sed -e 's/GROUP="render"/GROUP="video"/' -e 's/GROUP="sgx", //' -i rules.d/50-udev-default.rules.in;
+  meson setup build --prefix=/usr --buildtype=release -D default-dnssec=no -D firstboot=false \
+        -D install-tests=false -D ldconfig=false -D sysusers=false -D rpmmacrosdir=no -D homed=disabled \
+        -D man=disabled -D mode=release -D pamconfdir=no -D dev-kvm-mode=0660 -D nobody-group=nogroup \
+        -D sysupdate=disabled -D ukify=disabled -D docdir=/usr/share/doc/systemd-${PKGVER} \
+        -D efi=true -D bootloader=enabled -D sbat-distro="zlfs" \
+        -D sbat-distro-url="https://zedmatrix.github.io/ZirconiumOS/"
+
+build: |
+  ninja -C build
+
+check: |
+  echo 'NAME="Zirconium Linux From Scratch"' > /etc/os-release;
+  ninja -C build test || true
+
+install: |
+  ninja -C build install;
+  systemd-machine-id-setup;
+  systemctl preset-all
+
+final: |
+  tar -xf ${YSRC}/systemd-man-pages-${PKGVER}.tar.xz \
+      --no-same-owner --strip-components=1 -C /usr/share/man
+
+required:
+  - acl
+  - bash
+  - binutils
+  - coreutils
+  - diffutils
+  - gawk
+  - gcc
+  - glibc
+  - gperf
+  - grep
+  - jinja2
+  - libxcrypt
+  - lz4
+  - meson
+  - openssl
+  - pcre2
+  - pkgconf
+  - sed
+  - util-linux-tmp
+  - zstd
+  - pyelftools

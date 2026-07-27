@@ -1,0 +1,24 @@
+description: "The Texinfo package contains programs for reading, writing, and converting info pages."
+
+package:
+  name: texinfo-tmp
+  version: 7.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/texinfo/texinfo-7.3.tar.xz
+    sha256: 51f74eb0f51cfa9873b85264dfdd5d46e8957ec95b88f0fb762f63d9e164c72e
+    md5: 915a09fcdfc2bf0f5ecf9e556d5698ff
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make install

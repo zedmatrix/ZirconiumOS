@@ -1,0 +1,51 @@
+description: "Package contains utilities for handling file systems, consoles, partitions, and messages."
+
+package:
+  name: util-linux
+  version: 2.42.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.2.tar.xz
+    sha256: 03a05d3adf9602ef128f2da05b84b3205ce60c351e5737c0370f74000679ce8a
+    md5: 1d70131b70abda3dec3b37e282a20c96
+
+prepare: |
+  ./configure --bindir=/usr/bin --libdir=/usr/lib --runstatedir=/run --sbindir=/usr/sbin \
+    --disable-chfn-chsh --disable-login --disable-nologin --disable-su --disable-setpriv \
+    --disable-runuser --disable-pylibmount --disable-liblastlog2 --disable-static --without-python \
+    ADJTIME_PATH=/var/lib/hwclock/adjtime --docdir=/usr/share/doc/util-linux-${PKGVER}
+
+build: |
+  make
+
+check: |
+  touch /etc/fstab;
+  chown -R tester .;
+  su tester -c "make -k check" || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - diffutils
+  - file
+  - findutils
+  - gawk
+  - gcc
+  - gettext
+  - glibc
+  - grep
+  - make
+  - ncurses
+  - pkgconf
+  - sed
+  - systemd
+  - zlib

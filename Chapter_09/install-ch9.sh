@@ -1,32 +1,31 @@
 #!/bin/bash
-yinstall="/ybuild/yaml-install.sh"
+YBLD=${YBLD:-"/ybuild"}
+yinstall="${YBLD}/pkg-install.sh"
+
 [ $1 == "uefi" ] && let UEFI=1
 
-ybuild_scripts=(ybuild-environment.sh ynetwork-files.sh yclock-locale.sh ysystem-config.sh
-ybash-startup.sh yskel-files.sh)
-
-for script in ${ybuild_scripts[@]}; do
-    /ybuild/Chapter_09/${script} || { echo "Error in ${script}. Exiting."; break; }
-done
-
-package_list=(which libarchive libtasn1 p11-kit make-ca libunistring libidn2 libpsl wget curl openssh
- hwdata pciutils libusb usbutils)
+package_list=(libaio-0.3.113 libunistring-1.4.2 libidn2-2.3.8 libtasn1-4.21.0 libpsl-0.21.5 libusb-1.0.30
+  libpng-1.6.58 hwdata-0.408 popt-1.19 p11-kit-0.26.2 make-ca-1.16.1 pciutils-3.15.0 usbutils-019
+  wget-1.25.0 curl-8.20.0 dosfstools-4.2 )
 
 for pkg in ${package_list[@]}; do
     ${yinstall} ${pkg} || { echo "Error in ${pkg}. Exiting."; break; }
 done
 
-
 if [[ $UEFI -eq 1 ]]; then
     echo "Installing Grub-UEFI Packages"
 
-    package_list=(popt libpng libaio dosfstools lvm2 fuse freetype2-pass1 efivar efibootmgr grub-uefi)
+    package_list=(efivar-39 efibootmgr-18 lvm2-2.03.41 fuse3-3.18.2 freetype2-2.14.3
+     grub-2.14-efi libdisplay-info-0.3.0 lzo-2.10 btrfs-progs-7.0)
 
     for pkg in ${package_list[@]}; do
         ${yinstall} ${pkg} || { echo "Error in ${pkg}. Exiting."; break; }
     done
 fi
 
+if [[ ${YBUILD_RELEASE} == systemd ]]; then
+    ${yinstall} zlfs-scripts-20260710T0847Z
+fi
 # This Should Not Be Necessary
 # if [[ -d "/ybuild/tmp" && $keep -eq 0 ]]; then
 #     echo "Cleaning Up /ybuild/tmp/"

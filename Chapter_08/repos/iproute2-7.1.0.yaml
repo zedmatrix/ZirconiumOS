@@ -1,0 +1,40 @@
+description: "The IPRoute2 package contains programs for basic and advanced IPV4-based networking."
+
+package:
+  name: iproute2
+  version: 7.1.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-7.1.0.tar.xz
+    sha256: fd9fa1b95809417157ca83dd72957e3261bdbce896353cb936f80af0b33a4b5c
+    md5: 4f322144fb9a0877c5f9ef71b2f11180
+
+prepare: |
+  sed -i /ARPD/d Makefile;
+  rm -fv man/man8/arpd.8
+
+build: |
+  make NETNS_RUN_DIR=/run/netns
+
+install: |
+  make SBINDIR=/usr/sbin install;
+  install -vDm644 COPYING README* -t /usr/share/doc/iproute2-${PKGVER}
+
+required:
+  - bash
+  - bison
+  - coreutils
+  - flex
+  - gcc
+  - glibc
+  - make-tmp
+  - libcap
+  - libelf
+  - linux-headers
+  - pkgconf
+  - zlib

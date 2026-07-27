@@ -1,0 +1,32 @@
+description: "Lz4 is a lossless compression algorithm, providing compression speed greater than 500 MB/s per core. It features an extremely fast decoder, with speed in multiple GB/s per core. Lz4 can work with Zstandard to allow both algorithms to compress data faster."
+
+package:
+  name: lz4
+  version: 1.10.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz
+    sha256: 537512904744b35e232912055ccf8ec66d768639ff3abe5788d90d792ec5f48b
+    md5: dead9f5f1966d9ae56e1e32761e4e675
+
+build: |
+  make BUILD_STATIC=no PREFIX=/usr
+
+check: |
+  make -j1 check || true
+
+install: |
+  make BUILD_STATIC=no PREFIX=/usr install
+
+required:
+  - bash-tmp
+  - binutils-p2
+  - coreutils-tmp
+  - gcc-p2
+  - glibc
+  - make-tmp

@@ -1,0 +1,32 @@
+description: "The Attr package contains utilities to administer the extended attributes of filesystem objects."
+
+package:
+  name: attr
+  version: 2.6.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://download.savannah.gnu.org/releases/attr/attr-2.6.0.tar.gz
+    sha256: d42fa374513180bb48cb11a46696f488240e5124ff1e6ad88b0abff706985612
+    md5: 910a09c3ae0a211569d180586371cf7e
+
+prepare: |
+  ./configure --prefix=/usr --disable-static  \
+    --sysconfdir=/etc --docdir=/usr/share/doc/attr-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+required:
+  - gettext-tmp
+  - glibc

@@ -1,0 +1,29 @@
+description: "Meson is an open source build system designed to be both extremely fast and as user friendly as possible."
+
+package:
+  name: meson
+  version: 1.11.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/mesonbuild/meson/releases/download/1.11.1/meson-1.11.1.tar.gz
+    sha256: 6788ae299979643f8d841bcaf64352558436cae45a0355148a3aeeccf7913866
+    md5: 835e1615ae5d88b12caaa8cd0e431556
+
+build: |
+  pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+
+install: |
+  pip3 install --no-index --find-links dist meson;
+  install -vDm644 data/shell-completions/bash/meson /usr/share/bash-completion/completions/meson;
+  install -vDm644 data/shell-completions/zsh/_meson /usr/share/zsh/site-functions/_meson
+
+required:
+  - ninja
+  - python
+  - setuptools
+  - wheel

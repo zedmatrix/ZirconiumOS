@@ -1,0 +1,48 @@
+description: "The Readline package is a set of libraries that offer command-line editing and history capabilities."
+
+package:
+  name: readline
+  version: 8.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/readline/readline-8.3.tar.gz
+    sha256: fe5383204467828cd495ee8d1d3c037a7eba1389c22bc6a041f627976f9061cc
+    md5: 25a73bfb2a3ad7146c5e9d4408d9f6cd
+
+prepare: |
+  sed -i '/MV.*old/d' Makefile.in;
+  sed -i '/{OLDSUFF}/c:' support/shlib-install;
+  sed -i 's/-Wl,-rpath,[^ ]*//' support/shobj-conf;
+  sed -e '270a\
+     else\
+       chars_avail = 1;'      \
+    -e '288i\   result = -1;' \
+    -i.orig input.c
+
+build: |
+  ./configure --prefix=/usr --disable-static \
+    --with-curses --docdir=/usr/share/doc/readline-${PKGVER} &&
+  make SHLIB_LIBS="-lncursesw"
+
+install: |
+  make install;
+  install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-${PKGVER}
+
+required:
+  - bash-tmp
+  - binutils-p2
+  - coreutils-tmp
+  - gawk-tmp
+  - gcc-p2
+  - glibc
+  - grep-tmp
+  - make-tmp
+  - ncurses-tmp
+  - patch-tmp
+  - sed-tmp
+  - texinfo-tmp

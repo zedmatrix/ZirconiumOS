@@ -1,0 +1,32 @@
+description: "The Binutils package contains a linker, an assembler, and other tools for handling object files."
+
+package:
+  name: binutils
+  version: 2.45.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://sourceware.org/pub/binutils/releases/binutils-2.45.1.tar.xz
+    sha256: 5fe101e6fe9d18fdec95962d81ed670fdee5f37e3f48f0bef87bddf862513aa5
+    md5: ff59f8dc1431edfa54a257851bea74e7
+
+prepare: |
+  sed -i 's/__collector_util_funcs.x/(&)/' gprofng/src/collector_module.h;
+  mkdir -v build && cd build &&
+  ../configure --prefix=/usr --sysconfdir=/etc --enable-ld=default \
+    --enable-plugins --enable-shared --disable-werror --enable-64-bit-bfd \
+    --enable-new-dtags --with-system-zlib --enable-default-hash-style=gnu
+
+build: |
+  cd build && make tooldir=/usr
+
+check: |
+  cd build && make -k check;
+  grep '^FAIL:' $(find -name '*.log') || true
+
+install: |
+  cd build && make tooldir=/usr install;
+  rm -rfv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a \
+          /usr/share/doc/gprofng/

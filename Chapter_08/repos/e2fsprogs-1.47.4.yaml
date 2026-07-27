@@ -1,0 +1,54 @@
+description: "Package contains the utilities for handling the ext2, ext3 and ext4 journaling file systems."
+
+package:
+  name: e2fsprogs
+  version: 1.47.4
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v1.47.4/e2fsprogs-1.47.4.tar.gz
+    sha256: 2cec05f39c20ee621f14926195664e66e6017190ac8e4bbdb16d86082e43c5da
+    md5: 733a93bc688314834ff2d10530ff4dc4
+
+prepare: |
+  mkdir -v build && cd build &&
+  ../configure --prefix=/usr --sysconfdir=/etc --enable-elf-shlibs \
+    --disable-libblkid --disable-libuuid --disable-uuidd --disable-fsck
+
+build: |
+  cd build && make
+
+check: |
+  cd build && make check || true
+
+install: |
+  cd build && make install;
+  rm -fv /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+
+final: |
+  cd build &&
+  gunzip -v /usr/share/info/libext2fs.info.gz;
+  install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info;
+  makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo;
+  install -vm644 doc/com_err.info /usr/share/info;
+  install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - diffutils
+  - gawk
+  - gcc
+  - glibc
+  - grep
+  - gzip
+  - make
+  - pkgconf
+  - sed
+  - texinfo
+  - util-linux

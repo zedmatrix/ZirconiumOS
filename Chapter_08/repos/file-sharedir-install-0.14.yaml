@@ -1,0 +1,32 @@
+description: "File::ShareDir::Install allows you to install read-only data files from a distribution."
+homepage: "https://metacpan.org/pod/File::ShareDir::Install"
+
+package:
+  name: file-sharedir-install
+  version: 0.14
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz
+    sha256: 8f9533b198f2d4a9a5288cbc7d224f7679ad05a7a8573745599789428bc5aea0
+    md5: bac4d924f3d863b00648ab56ec0dcbdc
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - perl
+  - class-inspector

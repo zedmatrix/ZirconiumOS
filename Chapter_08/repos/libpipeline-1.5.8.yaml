@@ -1,0 +1,37 @@
+description: "The Libpipeline package contains a library for manipulating pipelines of subprocesses in a flexible and convenient way."
+
+package:
+  name: libpipeline
+  version: 1.5.8
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.8.tar.gz
+    sha256: 1b1203ca152ccd63983c3f2112f7fe6fa5afd453218ede5153d1b31e11bb8405
+    md5: 17ac6969b2015386bcb5d278a08a40b5
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - diffutils
+  - gawk
+  - gcc
+  - glibc
+  - grep
+  - make-tmp
+  - sed
+  - texinfo-tmp

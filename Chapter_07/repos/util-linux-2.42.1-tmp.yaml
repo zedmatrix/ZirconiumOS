@@ -1,0 +1,28 @@
+description: "The Util-linux package contains miscellaneous utility programs."
+
+package:
+  name: util-linux-tmp
+  version: 2.42.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.1.tar.xz
+    sha256: 82e9158eb12a9b0b569d84e1687fed9dd18fe89ccd8ef5ac3427218a7c0d7f7f
+    md5: 575bf65577d9bd0e65aeb073e8f61343
+
+prepare: |
+  mkdir -pv /var/lib/hwclock
+  ./configure --libdir=/usr/lib --runstatedir=/run --disable-chfn-chsh --disable-login \
+    --disable-nologin --disable-su --disable-setpriv --disable-runuser --disable-pylibmount \
+    --disable-static --disable-liblastlog2 --without-python \
+    ADJTIME_PATH=/var/lib/hwclock/adjtime --docdir=/usr/share/doc/util-linux-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make install

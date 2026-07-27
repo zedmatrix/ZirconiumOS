@@ -1,0 +1,37 @@
+description: "The Bc package contains an arbitrary precision numeric processing language."
+
+package:
+  name: bc
+  version: 7.0.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/gavinhoward/bc/releases/download/7.0.3/bc-7.0.3.tar.xz
+    sha256: 91eb74caed0ee6655b669711a4f350c25579778694df248e28363318e03c7fc4
+    md5: ad4db5a0eb4fdbb3f6813be4b6b3da74
+
+prepare: |
+  CC='gcc -std=c99' ./configure --prefix=/usr -G -O3 -r
+
+build: |
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install
+
+required:
+  - bash-tmp
+  - binutils-p2
+  - coreutils-tmp
+  - gcc-p2
+  - glibc
+  - grep-tmp
+  - make-tmp
+  - readline

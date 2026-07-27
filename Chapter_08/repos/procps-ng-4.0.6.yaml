@@ -1,0 +1,40 @@
+description: "The Procps-ng package contains programs for monitoring processes."
+
+package:
+  name: procps-ng
+  version: 4.0.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-4.0.6.tar.xz
+    sha256: 67bea6fbc3a42a535a0230c9e891e5ddfb4d9d39422d46565a2990d1ace15216
+    md5: 20c23dc3dd1569a2bb1d1fa93de213ed
+
+prepare: |
+  ./configure --prefix=/usr --docdir=/usr/share/doc/procps-ng-${PKGVER} \
+    --disable-static --disable-kill --enable-watch8bit --with-systemd
+
+build: |
+  make
+
+check: |
+  chown -R tester .;
+  su tester -c "PATH=$PATH make check" || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - gcc
+  - glibc
+  - make
+  - ncurses
+  - pkgconf
+  - systemd

@@ -1,0 +1,27 @@
+description: "Library for analyzing ELF files and DWARF debugging information."
+
+package:
+  name: pyelftools
+  version: 0.33
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://pypi.org/packages/source/P/Pyelftools/pyelftools-0.33.tar.gz
+    sha256: 660d82dcbeb8e83d1702bd97f223f761625da06111c0cc988eac6b8ab0c1b61f
+    md5: fe803bd1cf061e5330660a103d9c82bb
+
+build: |
+  pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+
+install: |
+  pip3 install --no-index --find-links dist pyelftools
+
+required:
+  - markupsafe
+  - python
+  - setuptools
+  - wheel

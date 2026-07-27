@@ -1,0 +1,24 @@
+description: "A utility to show the full path of commands"
+
+package:
+  name: which
+  version: 2.25
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/which/which-2.25.tar.gz
+    sha256: 1cb83e4f702e60b8211ab5ec4c2afbab1b1dec80209456a7d2faf7584ed225ea
+    md5: 60140cb2637634e4f4e68c2e98c6a07b
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make install

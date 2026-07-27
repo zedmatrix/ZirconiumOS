@@ -1,0 +1,58 @@
+description: "The GCC package contains the GNU compiler collection which includes the C and C++ compilers."
+
+package:
+  name: gcc
+  version: 16.1.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz
+    sha256: 50efb4d94c3397aff3b0d61a5abd748b4dd31d9d3f2ab7be05b171d36a510f79
+    md5: 9b016416f8e2dce4a0ef8759d1936446
+
+prepare: |
+  sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64;
+  mkdir -v build && cd build &&
+  ../configure --prefix=/usr LD=ld --enable-languages=c,c++ \
+    --enable-default-pie --enable-default-ssp --enable-host-pie \
+    --disable-multilib --disable-bootstrap --disable-fixincludes \
+    --with-system-zlib --with-pkgversion="Zirconium ${PKGVER}"
+
+build: |
+  cd build && make
+
+check: |
+  cd build &&
+  ulimit -s -H unlimited;
+  sed -e '/cpython/d' -i ../gcc/testsuite/gcc.dg/plugin/plugin.exp;
+  chown -R tester .;
+  su tester -c "PATH=$PATH make -k check";
+  ../contrib/test_summary;
+  chown -v -R root:root $(gcc -print-file-name=include){,-fixed}
+
+install: |
+  cd build && make install;
+  ${YPKG}/gcc-testsuite.sh
+
+final: |
+  cd build &&
+  ln -svr /usr/bin/cpp /usr/lib;
+  ln -sv gcc.1 /usr/share/man/man1/cc.1;
+  ln -sfvr $(gcc -print-prog-name=liblto_plugin.so) /usr/lib/bfd-plugins/;
+  mkdir -pv /usr/share/gdb/auto-load/usr/lib;
+  mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
+
+required:
+  - binutils
+  - gmp
+  - mpfr
+  - mpc
+  - acl
+  - attr
+  - zlib
+  - zstd
+  - glibc

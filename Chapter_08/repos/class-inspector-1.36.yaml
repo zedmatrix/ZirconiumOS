@@ -1,0 +1,30 @@
+description: "Class::Inspector allows you to get information about a loaded class."
+homepage: "https://metacpan.org/pod/Class::Inspector"
+package:
+  name: class-inspector
+  version: 1.36
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Class-Inspector-1.36.tar.gz
+    sha256: cc295d23a472687c24489d58226ead23b9fdc2588e522f0b5f0747741700694e
+    md5: 084c3aeec023639d21ecbaf7d4460b21
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - perl

@@ -1,0 +1,49 @@
+description: "The Man-DB package contains programs for finding and viewing man pages."
+
+package:
+  name: man-db
+  version: 2.13.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://download.savannah.gnu.org/releases/man-db/man-db-2.13.1.tar.xz
+    sha256: 8afebb6f7eb6bb8542929458841f5c7e6f240e30c86358c1fbcefbea076c87d9
+    md5: b6335533cbeac3b24cd7be31fdee8c83
+
+prepare: |
+  ./configure --prefix=/usr --docdir=/usr/share/doc/man-db-${PKGVER} --sysconfdir=/etc \
+    --disable-setuid --enable-cache-owner=bin --with-browser=/usr/bin/lynx \
+    --with-vgrind=/usr/bin/vgrind --with-grap=/usr/bin/grap
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - bzip2
+  - coreutils
+  - flex
+  - gcc
+  - gdbm
+  - gettext
+  - glibc
+  - grep
+  - groff
+  - gzip
+  - less
+  - libpipeline
+  - make
+  - pkgconf
+  - sed
+  - xz

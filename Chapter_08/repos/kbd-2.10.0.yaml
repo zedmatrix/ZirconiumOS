@@ -1,0 +1,46 @@
+description: "The Kbd package contains key-table files, console fonts, and keyboard utilities."
+
+package:
+  name: kbd
+  version: 2.10.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/kbd/kbd-2.10.0.tar.xz
+    sha256: 6e5ca4f8d76ee9e3a8db700b667f13e12aac9933828a64e1aaad93d26be9b479
+    md5: 77ff950dfa4c34fdf41125547bfa831a
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/kbd/kbd-2.10.0-backspace-1.patch
+    sha256: 8be28dcb11420624a500f2ea4fe975f771174bffee50e54ec8cd295a2dec104e
+    md5: f75cca16a38da6caa7d52151f7136895
+
+prepare: |
+  sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure;
+  sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in;
+  ./configure --prefix=/usr --disable-vlock
+
+build: |
+  make
+
+install: |
+  make install;
+  cp -R docs/doc -T /usr/share/doc/kbd-${PKGVER}
+
+required:
+  - bash
+  - binutils
+  - bison
+  - coreutils
+  - flex
+  - gcc
+  - gettext
+  - glibc
+  - gzip
+  - make-tmp
+  - patch-tmp
+  - sed

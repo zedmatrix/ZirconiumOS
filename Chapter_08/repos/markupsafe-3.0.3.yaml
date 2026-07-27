@@ -1,0 +1,26 @@
+description: "MarkupSafe is a Python module that implements an XML/HTML/XHTML Markupsafe string."
+
+package:
+  name: markupsafe
+  version: 3.0.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://pypi.org/packages/source/M/MarkupSafe/markupsafe-3.0.3.tar.gz
+    sha256: 722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698
+    md5: 13a73126d25afa72a1ff0daed072f5fe
+
+build: |
+  pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+
+install: |
+  pip3 install --no-index --find-links dist Markupsafe
+
+required:
+  - python
+  - setuptools
+  - wheel

@@ -1,0 +1,32 @@
+description: "The Less package contains a text file viewer."
+
+package:
+  name: less
+  version: 702
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.greenwoodsoftware.com/less/less-702.tar.gz
+    sha256: 242a64c00f02d96f8ee208cf638ae1728b727c7f5fdf82a7d4f4cae32fb084e2
+    md5: 6357604422b12b71c534d0e34f41d4c5
+
+prepare: |
+  ./configure --prefix=/usr --sysconfdir=/etc
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+required:
+  - ncurses
+  - pcre2
+  - glibc

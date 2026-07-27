@@ -1,18 +1,5 @@
 #!/bin/bash
-zprint() { echo -e "\033[1;32m *** $1 *** \033[0m"; }
-stars() { printf '%.0s*' {1..100}; printf '\n'; }
 YLFS=${YLFS:-/mnt/ylfs}
-COMMAND="$1"
-
-if [ -z "${COMMAND}" ]; then
-    zprint "Error in Makefile Command Processing"
-    exit 1
-fi
-
-if [ ! -f "${YLFS}/ybuild/${COMMAND}" ]; then
-    zprint "Script ${COMMAND} not found in ${YLFS}/ybuild/"
-    exit 1
-fi
 
 # Variables to pass to chroot
 YBLD="/ybuild"
@@ -23,33 +10,52 @@ YBUILD="${YBLD}/Ybuild"
 YBUILD_RELEASE=${YBUILD_RELEASE:-systemd}
 XML_PRINT=${XML_PRINT:-FILE}
 
+rows="$(stty size | cut -d ' ' -f 1)"
+cols=$(expr "$(stty size | cut -d ' ' -f 2)" - 2)
+zzreset="\033[0m"
+zzred="\033[1;31m"
+zzgreen="\033[1;32m"
+zzyellow="\033[1;33m"
+zzblue="\033[1;34m"
+zzpurple="\033[1;35m"
+zzcyan="\033[1;36m"
+zzwhite="\033[1;37m"
+
+zprint() { echo -e "${zzwhite} *** $* *** ${zzreset}"; }
+zstars() { echo -e "${zzblue} $(eval printf "%${cols}s" | tr ' ' '*') ${zzreset}"; }
+
 chroot_pre() {
-    stars
+    zstars
     zprint " === Mounting Virtual Kernel Filesystems === "
     mkdir -pv $YLFS/{dev,proc,sys,run}
-    mount -v --bind /dev $YLFS/dev
-    mount -vt devpts devpts -o gid=5,mode=0620 $YLFS/dev/pts
-    mount -vt proc proc $YLFS/proc
-    mount -vt sysfs sysfs $YLFS/sys
-    mount -vt tmpfs tmpfs $YLFS/run
+    mount --types proc /proc $YLFS/proc
+    mount --rbind /sys $YLFS/sys
+    mount --make-rslave $YLFS/sys
+    mount --rbind /dev $YLFS/dev
+    mount --make-rslave $YLFS/dev
+    mount --rbind /run $YLFS/run
+    mount --make-slave $YLFS/run
+
     if [ -h $YLFS/dev/shm ]; then
-        install -v -d -m 1777 $YLFS$(realpath /dev/shm)
+        install -v -d -m 1777 ${YLFS}$(realpath /dev/shm)
     else
         mount -vt tmpfs -o nosuid,nodev tmpfs $YLFS/dev/shm
     fi
     if [ ! -f $YLFS/etc/resolv.conf ]; then
         printf "nameserver 1.1.1.1\nnameserver 8.8.8.8\n" > $YLFS/etc/resolv.conf
     fi
-    stars
+    zstars
 }
 
 chroot_exec() {
-    stars
+    zstars
     zprint " === Entering Chroot $YLFS === "
     /usr/sbin/chroot "$YLFS" \
-    /usr/bin/env -i HOME=/ybuild TERM="$TERM" \
-    PS1='($?)(Zirconium chroot) \u:\w\$ ' \
+    /usr/bin/env -i HOME=/root TERM="$TERM" \
+    PS1='($?)(Zirconium-chroot) \u:\w\$ ' \
     PATH=/usr/bin:/usr/sbin \
+    MAKEFLAGS="-j$(nproc)" \
+    TESTSUITEFLAGS="-j$(nproc)" \
     YBLD=${YBLD} \
     YSRC=${YSRC} \
     YHEAD=${YHEAD} \
@@ -57,25 +63,24 @@ chroot_exec() {
     YBUILD=${YBUILD} \
     XML_PRINT=${XML_PRINT} \
     YBUILD_RELEASE=${YBUILD_RELEASE} \
-    MAKEFLAGS="-j$(nproc)" \
-    TESTSUITEFLAGS="-j$(nproc)" \
-    /bin/bash --login -c "/ybuild/${COMMAND}"
+    /bin/bash --login
     zprint " === Welcome Back === "
-    stars
+    zstars
 }
 check_unmount() { mountpoint -q "$1" && umount -v -l "$1"; }
 
 chroot_post() {
-    stars
+    zstars
     zprint " === Un-Mounting Virtual Kernel Filesystems === "
     check_unmount $YLFS/sys/firmware/efi/efivars
     check_unmount $YLFS/dev
     check_unmount $YLFS/run
     check_unmount $YLFS/proc
     check_unmount $YLFS/sys
-    stars
+    zstars
 }
-stars
+
+zstars
 # checks if directory exists
 [ ! -d $YLFS ] && { zprint "Error $YLFS is not a mountpoint"; exit 1; }
 
@@ -88,4 +93,4 @@ chroot_exec
 # cleans up the virtual kernel filesystems
 chroot_post
 
-stars
+zstars

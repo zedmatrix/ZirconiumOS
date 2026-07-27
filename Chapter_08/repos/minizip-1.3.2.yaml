@@ -1,0 +1,42 @@
+description: "Mini zip and unzip based on zlib"
+
+package:
+  name: minizip
+  version: 1.3.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/madler/zlib/releases/download/v1.3.2/zlib-1.3.2.tar.xz
+    sha256: d7a0654783a4da529d1bb793b7ad9c3318020af77667bcae35f95d0e42a792f3
+    md5: be8a129ec5d60c5084911fd7ea16d84e
+
+patches:
+  - url: sources/minizip-missing-header.patch
+    sha256: 0774e1368851504115f732f66230ca4a8a9cd60d4ba014502f65cc19b0b4d8bc
+    md5: 5f8477f366f90f8a09e297703911f823
+
+prepare: |
+  cd contrib/minizip
+  cp -v Makefile Makefile.orig;
+  cp ../README.contrib readme.txt;
+  autoreconf -fiv;
+  ./configure --prefix=/usr --enable-static=no
+
+build: |
+  cd contrib/minizip
+  make
+
+install: |
+  cd contrib/minizip
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - glibc
+  - zlib

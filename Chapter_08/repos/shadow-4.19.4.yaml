@@ -1,0 +1,46 @@
+description: "The Shadow package contains programs for handling passwords in a secure way."
+
+package:
+  name: shadow
+  version: 4.19.4
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/shadow-maint/shadow/releases/download/4.19.4/shadow-4.19.4.tar.xz
+    sha256: ce57a313e315a0a7cb04a8f50cc20753e994e487bbe9b78a2a824ca75cb486c0
+    md5: ed0f3ff4940822ba75a3b0687a9ce93b
+
+prepare: |
+  find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
+  find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
+  sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD YESCRYPT:' \
+      -e 's:/var/spool/mail:/var/mail:' -e '/PATH=/{s@/sbin:@@;s@/bin:@@}' -i etc/login.defs;
+  touch /usr/bin/passwd
+
+build: |
+  ./configure --sysconfdir=/etc --disable-static --with-{b,yes}crypt \
+    --without-libbsd --disable-logind --with-group-name-max-length=32 &&
+  make
+
+install: |
+  make exec_prefix=/usr install;
+  make -C man install-man
+
+final: |
+  pwconv;
+  grpconv;
+  mkdir -p /etc/default;
+  useradd -D --gid 999;
+  sed -i '/MAIL/s/yes/no/' /etc/default/useradd;
+  echo "lfsroot" | passwd --stdin root
+
+required:
+  - acl
+  - attr
+  - libcap
+  - libxcrypt
+  - glibc

@@ -1,0 +1,40 @@
+description: "The OpenSSL package contains management tools and libraries relating to cryptography."
+
+package:
+  name: openssl
+  version: 3.6.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/openssl/openssl/releases/download/openssl-3.6.3/openssl-3.6.3.tar.gz
+    sha256: 243a86649cf6f23eeb6a2ff2456e09e5d77dd9018a54d3d96b0c6bdd6ba6c7f1
+    md5: f388d6144fe20b9b2c6bf208280d6ec3
+
+prepare: |
+  ./config --prefix=/usr shared zlib-dynamic --openssldir=/etc/ssl --libdir=lib
+
+build: |
+  make
+
+check: |
+  HARNESS_JOBS=$(nproc) make test || true
+
+install: |
+  sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile &&
+  make MANSUFFIX=ssl install;
+  mv -v /usr/share/doc/openssl /usr/share/doc/openssl-${PKGVER};
+  cp -vfr doc/* /usr/share/doc/openssl-${PKGVER}
+
+required:
+  - binutils
+  - coreutils-tmp
+  - gcc
+  - glibc
+  - make-tmp
+  - perl
+  - zlib
+  - zstd

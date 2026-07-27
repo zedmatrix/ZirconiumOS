@@ -1,0 +1,38 @@
+description: "The Intltool is an internationalization tool used for extracting translatable strings from source files."
+
+package:
+  name: intltool
+  version: 0.51.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
+    sha256: 67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd
+    md5: 12e517cac2b57a0121cda351570f1e63
+
+prepare: |
+  sed -i 's:\\\${:\\\$\\{:' intltool-update.in;
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install &&
+  install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-${PKGVER}/I18N-HOWTO
+
+required:
+  - bash
+  - gawk-tmp
+  - make-tmp
+  - perl
+  - sed
+  - xml-parser
+  - glibc

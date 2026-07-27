@@ -1,0 +1,32 @@
+description: "The Libcap package implements the userspace interface to the POSIX 1003.1e capabilities available in Linux kernels."
+note: "06-Apr-2026 13:38"
+
+package:
+  name: libcap
+  version: 2.78
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.78.tar.xz
+    sha256: 0d621e562fd932ccf67b9660fb018e468a683d7b827541df27813228c996bb11
+    md5: 0ff11419aa4813c0a0f84fe67bf3b39e
+
+prepare: |
+  sed -i '/install -m.*STA/d' libcap/Makefile
+
+build: |
+  make prefix=/usr lib=lib
+
+check: |
+  make test || true
+
+install: |
+  make prefix=/usr lib=lib install
+
+required:
+  - linux-headers
+  - glibc

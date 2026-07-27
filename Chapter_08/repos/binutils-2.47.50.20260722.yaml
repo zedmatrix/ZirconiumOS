@@ -1,0 +1,50 @@
+description: "The Binutils package contains a linker, an assembler, and other tools for handling object files."
+note: "Wed Jul 22 11:43:08 PDT 2026"
+
+package:
+  name: binutils
+  version: 2.47.50.20260722
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: sources/binutils-2.46.1-git.tar.gz
+    sha256: 63e1d592347b9a12d5124f9103078e34378935cc4a6e1821785421cc1fdaff1f
+    md5: 186fa36ada22b23940b687151711d52f
+
+prepare: |
+  mkdir -v build && cd build &&
+  ../configure --prefix=/usr --sysconfdir=/etc --enable-ld=default \
+    --enable-plugins --enable-shared --disable-werror --enable-64-bit-bfd \
+    --enable-new-dtags --with-system-zlib --enable-default-hash-style=gnu
+
+build: |
+  cd build && make tooldir=/usr
+
+check: |
+  cd build && make -k check;
+  grep '^FAIL:' $(find -name '*.log') || true
+
+install: |
+  cd build && make tooldir=/usr install;
+  rm -rfv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a \
+          /usr/share/doc/gprofng/
+
+required:
+  - zlib
+  - zstd
+  - bc
+  - perl-tmp
+  - glibc
+  - gmp
+  - mpfr
+  - mpc
+
+strip_note: |
+  libbfd-2.47.50.20260722.so
+  libopcodes-2.47.50.20260722.so
+  libsframe.so.3.0.0
+

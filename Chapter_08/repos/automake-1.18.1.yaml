@@ -1,0 +1,44 @@
+description: "The Automake package contains programs for generating Makefiles for use with Autoconf."
+
+package:
+  name: automake
+  version: 1.18.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/automake/automake-1.18.1.tar.xz
+    sha256: 168aa363278351b89af56684448f525a5bce5079d0b6842bd910fdd3f1646887
+    md5: cea31dbf1120f890cbf2a3032cfb9a68
+
+prepare: |
+  ./configure --prefix=/usr --docdir=/usr/share/doc/automake-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make -j$(($(nproc)>4?$(nproc):4)) check || true
+
+install: |
+  make install
+
+required:
+  - autoconf
+  - bash
+  - coreutils-tmp
+  - grep
+  - m4
+  - make-tmp
+  - perl
+  - sed
+  - texinfo-tmp
+
+optional:
+  - dejagnu
+  - expect
+  - gettext
+  - python-tmp
