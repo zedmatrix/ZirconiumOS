@@ -1,0 +1,33 @@
+description: "provides a set of high-level and low-level functions to access detailed Extended Display Identification Data (EDID) information."
+
+package:
+  name: libdisplay-info
+  version: 0.3.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.3.0/downloads/libdisplay-info-0.3.0.tar.xz
+    sha256: 6ae77cd937f9cf7d1321d35c116062c4911e8447010a6a713ac4286f7a9d5987
+    md5: f2a15697f6e8c66722b7760ceccbed60
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release
+
+build: |
+  ninja -C build
+
+check: |
+  ninja -C build test || true
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - hwdata

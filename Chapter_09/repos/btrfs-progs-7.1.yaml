@@ -1,0 +1,51 @@
+description: "administration and debugging tools for the B-tree file system (btrfs)."
+note: "14-Jul-2026 22:42"
+
+package:
+  name: btrfs-progs
+  version: 7.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v7.1.tar.xz
+    sha256: d1f55cc2971398c9142eaa79d203e63d586a3b4b867f956664a1d68322cd4e34
+    md5: 5dbaaf17567022405d6fc9d0d185e812
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --disable-documentation
+
+build: |
+  make
+
+check: |
+  make fssum;
+  rm -rf tests/fuzz-tests/010-simple-sb;
+  pushd tests
+   ./fsck-tests.sh
+   ./mkfs-tests.sh
+   ./cli-tests.sh
+   ./convert-tests.sh
+   ./misc-tests.sh
+   ./fuzz-tests.sh
+  popd
+
+install: |
+  make DESTDIR=${DESTDIR} install;
+  mkdir -pv ${DESTDIR}/usr/share/man/man{5,8};
+  install -v Documentation/*.5 ${DESTDIR}/usr/share/man/man5;
+  install -v Documentation/*.8 ${DESTDIR}/usr/share/man/man8
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - lzo
+
+optional:
+  - lvm2
+  - sphinx
+  - sphinx_rtd_theme

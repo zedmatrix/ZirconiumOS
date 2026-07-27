@@ -1,0 +1,37 @@
+description: "The libpng package contains libraries used by other programs for reading and writing PNG files."
+
+package:
+  name: libpng
+  version: 1.6.58
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://downloads.sourceforge.net/libpng/libpng-1.6.58.tar.xz
+    sha256: 28eb403f51f0f7405249132cecfe82ea5c0ef97f1b32c5a65828814ae0d34775
+    md5: c6c372a9d7754c66e0b77a8d34987a3b
+  - url: https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-1.6.58-apng.patch.gz
+    sha256: eee7dea22ed502868017971c86c63c4ed1e6085de0baebfdcc3d3322f00f3eb0
+    md5: 1eef1ddd6def88814d1a65ce1f4dceb9
+
+prepare: |
+  zcat -cd ${YSRC}/libpng-1.6.58-apng.patch.gz | patch -p1
+
+build: |
+  ./configure --prefix=/usr --disable-static &&
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install;
+  mkdir -pv ${DESTDIR}/usr/share/doc/libpng-${PKGVER};
+  cp -v README libpng-manual.txt ${DESTDIR}/usr/share/doc/libpng-${PKGVER}
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - bash
+  - zlib

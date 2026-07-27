@@ -1,0 +1,45 @@
+description: "FUSE (Filesystem in Userspace),Simple interface to export a virtual filesystem to the Linux kernel."
+note: "Mar 18-2026 2:32pm"
+
+package:
+  name: fuse3
+  version: 3.18.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/libfuse/libfuse/releases/download/fuse-3.18.2/fuse-3.18.2.tar.gz
+    sha256: f01de85717e20adf5f98aff324acd85dd73d61a5ca3834d573dcf0bd6e54a298
+    md5: 43c6f6cd2c1368d916f6fb080eb39cbb
+
+prepare: |
+  sed -i '/^udev/,$ s/^/#/' util/meson.build &&
+  meson setup build --prefix=/usr --buildtype=release
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install;
+  chmod u+s ${DESTDIR}/usr/bin/fusermount3;
+  mkdir -pv ${DESTDIR}/usr/share/doc/fuse-${PKGVER};
+  cp -R doc/html -T ${DESTDIR}/usr/share/doc/fuse-${PKGVER};
+  install -m644 doc/{README.NFS,kernel.txt} ${DESTDIR}/usr/share/doc/fuse-${PKGVER}
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh;
+  cp ${YPKG}/etc-fuse.conf /etc/fuse.conf
+
+required:
+  - glibc
+  - systemd
+  - meson
+  - ninja
+  - pkgconf
+
+optional:
+  - doxygen
+  - pytest

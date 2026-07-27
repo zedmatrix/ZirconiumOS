@@ -1,0 +1,43 @@
+description: "Linux Firmware to aid in support for drivers."
+
+package:
+  name: linux-firmware
+  version: 20260622
+  rel: 1
+  archive: false
+  delete: false
+
+sources:
+  - url: sources/linux-firmware-20260309.tar.xz
+    sha256: 4d47079bdb69f4de053dbb6445ddd807fecf934f08ceb8276fd8293c2c35e760
+    md5: 569bd5e704321df4b87a3e803c754a68
+    size: "1,389,832 KB"
+
+sources:
+  - url: git+https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+    branch: 20260622
+    depth: 1
+    commit: c822cbbb14ce5b8ee1f27346220640ac350bbf34
+
+prepare: |
+  mkdir -pv /usr/lib/firmware
+
+install: |
+  ./copy-firmware.sh /usr/lib/firmware
+
+required:
+  - git
+
+
+clone: |
+
+  git clone --depth=1 --branch 20260622 https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git linux-firmware-20260622
+
+  git clone --depth=1 https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git linux-firmware-20260309
+  cd linux-firmware-20260309
+  git fetch --depth=1 origin c822cbbb14ce5b8ee1f27346220640ac350bbf34
+  git checkout FETCH_HEAD
+
+  git config pull.rebase false  # merge
+  git config pull.rebase true   # rebase
+  git config pull.ff only       # fast-forward only

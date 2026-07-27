@@ -1,0 +1,41 @@
+description: "The LVM2 package is a set of tools that manage logical partitions."
+
+package:
+  name: lvm2
+  version: 2.03.38
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://sourceware.org/ftp/lvm2/LVM2.2.03.38.tgz
+    sha256: 322d44bf40de318e6e6b52c56999aaeb86b16c8267187ac2e01a44d4dc526960
+    md5: a661c55b5a1fcaa068b9e4a561c35f36
+
+prepare: |
+  ./configure --prefix=/usr --enable-cmdlib --enable-pkgconfig --enable-udev_sync \
+    --with-thin-check= --with-thin-dump= --with-thin-repair= --with-thin-restore= \
+    --with-cache-check= --with-cache-dump= --with-cache-repair= --with-cache-restore=
+
+build: |
+  make
+
+check: |
+  make -C tools install_tools_dynamic;
+  make -C udev install;
+  make -C libdm install;
+  LC_ALL=en_US.UTF-8 make check_local
+
+install: |
+  make install &&
+  rm -fv /usr/lib/udev/rules.d/69-dm-lvm.rules
+
+required:
+  - libaio
+  - which
+
+optional:
+  - libnvme
+  - mdadm
+  - valgrind
+  - xfsprogs

@@ -1,0 +1,47 @@
+description: "FreeType2 package contains a library which allows applications to properly render TrueType fonts."
+note: "2026-03-22"
+
+package:
+  name: freetype2
+  version: 2.14.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz
+    sha256: 36bc4f1cc413335368ee656c42afca65c5a3987e8768cc28cf11ba775e785a5f
+    md5: 5e78e6fdce5a61d3075e4c25e9852f84
+  - url: https://downloads.sourceforge.net/freetype/freetype-doc-2.14.3.tar.xz
+    sha256: 66a988d8bbb58f83efafe555678ac172f70f0b060cf61424fe5460157470fd21
+    md5: a9a92aa403d7c1b4eed6ee452dc23305
+
+prepare: |
+  sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg;
+  sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" -i include/freetype/config/ftoption.h;
+  ./configure --prefix=/usr --with-harfbuzz=dynamic \
+    --enable-freetype-config --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install;
+  tar -xf ${YSRC}/freetype-doc-${PKGVER}.tar.xz --strip-components=2 -C docs;
+  mkdir -pv ${DESTDIR}/usr/share/doc/freetype-${PKGVER};
+  cp -R docs -T ${DESTDIR}/usr/share/doc/freetype-${PKGVER};
+  rm -v ${DESTDIR}/usr/share/doc/freetype-${PKGVER}/freetype-config.1
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libpng
+  - which
+
+optional:
+  - harfbuzz
+  - brotli
+  - librsvg

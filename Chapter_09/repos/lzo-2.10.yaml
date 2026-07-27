@@ -1,0 +1,32 @@
+description: "A data compression library which is suitable for data decompression and compression in real-time."
+
+package:
+  name: lzo
+  version: 2.10
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.oberhumer.com/opensource/lzo/download/lzo-2.10.tar.gz
+    sha256: c0f892943208266f9b6543b3ae308fab6284c5c90e627931446fb49b4221a072
+    md5: 39d3f3f9c55c87b1e5d6888e1420f4b5
+
+prepare: |
+  ./configure --prefix=/usr --enable-shared --disable-static \
+    --docdir=/usr/share/doc/lzo-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check || true;
+  make test || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh

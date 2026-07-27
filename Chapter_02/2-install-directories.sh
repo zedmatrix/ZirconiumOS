@@ -1,8 +1,8 @@
 #!/bin/bash
-bad_drive() {
-    echo "Invalid Drive Options. Exiting."
-    exit 1
-}
+# source ylfs-environment.sh first
+[ -z $YLFS_ENVIRONMENT ] && { echo "Source the YLFS Environment"; exit 1; }
+source ${PWD}/ybase_header.sh || { echo "Can Not Base Header"; exit 1; }
+
 DRIVE=""
 case $1 in
     sd[a-z]|vd[a-z]|hd[a-z]|nvme[0-9]n[0-9])
@@ -10,13 +10,12 @@ case $1 in
         [ -b $DRIVE ] || bad_drive
         ;;
     [?])
-        echo "Usage: $0 [sda | vda | hda | nvme ] [uefi] [force]" >&2
+        echo "Usage: $0 [sda | vda | hda | nvme ]" >&2
         exit 1
         ;;
 esac
 
 [ -b $DRIVE ] && echo "Install Drive: $DRIVE " || bad_drive
-LFS=${LFS:-"/mnt/lfs"}
 
 ROOTPATH="/usr/sbin"
 PATH=${ROOTPATH}:${PATH}
@@ -24,6 +23,7 @@ PATH=${ROOTPATH}:${PATH}
 # Check Drive
 pttype=$(lsblk -n -o PTTYPE $DRIVE | head -1)
 printf "\n\t Drive: %s Partition Type: %s \n" $DRIVE $pttype
+
 [[ $DRIVE =~ 'nvme' ]] && P=p || P=
 
 if [[ $pttype == "dos" ]]; then
@@ -38,30 +38,30 @@ else
 fi
 
 # Mount ROOT partition if not already mounted
-if ! mountpoint -q "$LFS"; then
-    echo "Mounting $ROOT to $LFS"
-    mount -v --mkdir "$ROOT" "$LFS" || {
-        echo "Failed to mount $ROOT to $LFS"
+if ! mountpoint -q "$YLFS"; then
+    echo "Mounting $ROOT to $YLFS"
+    mount -v --mkdir "$ROOT" "$YLFS" || {
+        echo "Failed to mount $ROOT to $YLFS"
         exit 1
     }
-    chown -v root:root $LFS
-    chmod -v 755 $LFS
+    chown -v root:root $YLFS
+    chmod -v 755 $YLFS
 else
-    echo "$LFS is already mounted."
+    echo "$YLFS is already mounted."
 fi
 
-[[ -n $SWAP ]] && /sbin/swapon $SWAP || { echo "Failed to Activate Swap"; exit 1; }
+[ ! -z $SWAP ] && /sbin/swapon -e --show $SWAP
 
 # Setup yaml-builder paths
-mkdir -pv $LFS/ybuild/{tmp,log,repos}
+mkdir -pv $YLFS/ybuild/{xml,tmp,log,repos,image,prepare,sources}
 
 # Setup LFS Limited directories
-mkdir -pv $LFS/{etc,var,tools} $LFS/usr/{bin,lib,sbin}
+mkdir -pv $YLFS/{etc,var,tools} $YLFS/usr/{bin,lib,sbin}
 
 for i in bin lib sbin; do
-  [ ! -e "$LFS/$i" ] && ln -sv usr/$i $LFS/$i
+  [ ! -e "$YLFS/$i" ] && ln -sv usr/$i $YLFS/$i
 done
 
 case $(uname -m) in
-  x86_64) mkdir -pv $LFS/lib64 ;;
+  x86_64) mkdir -pv $YLFS/lib64 ;;
 esac

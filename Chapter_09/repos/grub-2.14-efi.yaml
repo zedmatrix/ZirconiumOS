@@ -1,0 +1,47 @@
+description: "GRand Unified Bootloader built with UEFI support."
+note: "Grub(14-Jan-2026 20:30) Unifont(2026-06-28 14:44) - No Stripping - Causes Faults"
+
+package:
+  name: grub-efi
+  version: 2.14
+  rel: 1
+  archive: false
+  delete: true
+  cflags: " "
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/grub/grub-2.14.tar.xz
+    sha256: bc8d3c73535b8838d8c8e2654d73edc4e6ae8c8acdb45d5df5dc9a1547446d43
+    md5: 383f9effad01c235d2535357ff717543
+  - url: https://unifoundry.com/pub/unifont/unifont-17.0.05/font-builds/unifont-17.0.05.pcf.gz
+    sha256: 92577d819fd03e1b2eec872ab45821078a9e77807af86a7d21b6da38fef61cdc
+    md5: 1cd152833fc894aed91bf499ccd0f9ba
+  - url: https://downloads.sourceforge.net/project/dejavu/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+    sha256: fa9ca4d13871dd122f61258a80d01751d603b4d3ee14095d65453b4e846e17d7
+    md5: d0efec10b9f110a32e9b8f796e21782c
+
+prepare: |
+  gunzip -c ${YSRC}/unifont-17.0.05.pcf.gz > unifont.pcf;
+  tar xf ${YSRC}/dejavu-fonts-ttf-2.37.tar.bz2 --strip-components=2 --wildcards *.ttf;
+  sed 's/--image-base/--nonexist-linker-option/' -i configure;
+  echo depends bli part_gpt > grub-core/extra_deps.lst
+
+build: |
+  ./configure --prefix=/usr --sysconfdir=/etc --enable-grub-themes \
+    --disable-efiemu --with-platform=efi --target=x86_64 --disable-werror &&
+  make
+
+install: |
+  make install;
+  mkdir -pv /usr/{bin,share/grub}
+  install -m755 grub-mkfont /usr/bin/;
+  install -m644 ascii.h widthspec.h *.pf2 /usr/share/grub/;
+  install -m755 grub-mount /usr/bin/
+
+required:
+  - freetype2
+  - fuse3
+  - lvm2
+  - efibootmgr

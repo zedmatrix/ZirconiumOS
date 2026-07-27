@@ -1,0 +1,31 @@
+description: "libunistring is a library that provides functions for manipulating C and Unicode strings."
+
+package:
+  name: libunistring
+  version: 1.4.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/libunistring/libunistring-1.4.2.tar.xz
+    sha256: 5b46e74377ed7409c5b75e7a96f95377b095623b689d8522620927964a41499c
+    md5: e033195d90d0803063f3fecc77148124
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/libunistring-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - texlive
+  - install-tl-unx

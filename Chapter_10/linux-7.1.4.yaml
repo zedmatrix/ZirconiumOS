@@ -1,0 +1,27 @@
+description: "The Linux Kernel"
+
+package:
+  name: linux
+  version: 7.1.4
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.4.tar.xz
+    sha256: 1c63922a119675d38e3ae0f8f6ee07f15c41a786ab9ed66563749bb8c9a08e2e
+    md5: 6e64809992db64199fce270798c28943
+
+prepare: |
+  make mrproper;
+  zcat /proc/config.gz > .config &&
+  make olddefconfig
+
+build: |
+  make;
+  make modules_install
+
+install: |
+  cp -iv arch/x86/boot/bzImage /boot/vmlinuz-${PKGVER}-zlfs;
+  cp -iv System.map /boot/System.map-${PKGVER};
+  cp -iv .config /boot/config-${PKGVER}

@@ -1,0 +1,29 @@
+description: "Library provides a single interface for reading/writing various compression formats."
+
+package:
+  name: libarchive
+  version: 3.8.8
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/libarchive/libarchive/releases/download/v3.8.8/libarchive-3.8.8.tar.xz
+    sha256: 3873a88801da067d0528a989af06877710529d50ee8fe6f3970cbb4302efb918
+    md5: 81a6d70daf20671ea2c5cd4bb1d371ae
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  /ybuild/ydest-strip-x64.sh;
+  ln -sfv bsdunzip /usr/bin/unzip;
+  ln -sfv bsdcpio /usr/bin/cpio

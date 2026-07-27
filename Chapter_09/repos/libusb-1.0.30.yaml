@@ -1,0 +1,30 @@
+description: "The libusb package contains a library used by some applications for USB device access."
+
+package:
+  name: libusb
+  version: 1.0.30
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/libusb/libusb/releases/download/v1.0.30/libusb-1.0.30.tar.bz2
+    sha256: fea36f34f9156400209595e300840767ab1a385ede1dc7ee893015aea9c6dbaf
+    md5: b0b0bacc2c6919515db8e863f0517db8
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - doxygen

@@ -1,0 +1,37 @@
+description: "The libpsl package provides a library for accessing and resolving information from the Public Suffix List (PSL)."
+
+package:
+  name: libpsl
+  version: 0.23.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/rockdaboot/libpsl/releases/download/0.23.0/libpsl-0.23.0.tar.gz
+    sha256: f39b9631b3d369a21259ea4654f8875c0ec6995ce9551c0eb5d423e4c011f911
+    md5: 01d6c6252b51554812103b64cbd90002
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libidn2
+  - libunistring
+
+optional:
+  - icu
+  - libidn
+  - valgrind
+  - gtk-doc

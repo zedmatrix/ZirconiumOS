@@ -1,0 +1,19 @@
+description: "Central Regulatory Domain Database"
+note: "30-May-2026 15:46"
+homepage: "https://wireless.docs.kernel.org/en/latest/en/developers/regulatory/wireless-regdb.html"
+
+package:
+  name: wireless-regdb
+  version: 20260530
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://mirrors.edge.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2026.05.30.tar.xz
+    sha256: 8a27bfc081bafed8c24dd70fab0d96f098e5a0bfcd08d3da672595f225ab8993
+    md5: c6149544be7369a01d3d4d60252a6a61
+
+install: |
+  mkdir -p /usr/lib/firmware
+  cp -v regulatory.db regulatory.db.p7s /usr/lib/firmware

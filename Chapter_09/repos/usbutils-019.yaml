@@ -1,0 +1,32 @@
+description: "Utilities used to display information about USB buses in the system and the devices connected to them."
+note: "22-Oct-2025 12:08"
+
+package:
+  name: usbutils
+  version: 019
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://kernel.org/pub/linux/utils/usb/usbutils/usbutils-019.tar.xz
+    sha256: 659f40c440e31ba865c52c818a33d3ba6a97349e3353f8b1985179cb2aa71ec5
+    md5: 67a8eb4782540058d0648f83ecabdf6c
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libusb
+  - hwdata

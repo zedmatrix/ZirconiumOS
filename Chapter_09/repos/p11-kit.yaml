@@ -1,0 +1,33 @@
+description: "Provides a way to load and enumerate PKCS #11 (a Cryptographic Token Interface Standard) modules."
+
+package:
+  name: p11-kit
+  version: 0.26.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/p11-glue/p11-kit/releases/download/0.26.1/p11-kit-0.26.1.tar.xz
+    sha256: 4769f81483a28040cce1dac09a99599f787a8e0dc239a3089d4b0f676b7c4561
+    md5: c5ef8b487869233ba58973a91dcfdf26
+
+prepare: |
+  ${YPKG}/p11-kit-trust-patch.sh;
+  meson setup p11-build --prefix=/usr --buildtype=release -D trust_paths=/etc/pki/anchors
+
+build: |
+  ninja -C p11-build
+
+install: |
+  ninja -C p11-build install &&
+  ln -sfv /usr/libexec/p11-kit/trust-extract-compat /usr/bin/update-ca-certificates;
+  ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
+
+required:
+  - libtasn1
+
+optional:
+  - gtk-doc
+  - libxslt
+  - nss

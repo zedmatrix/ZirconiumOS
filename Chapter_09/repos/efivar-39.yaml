@@ -1,0 +1,34 @@
+description: "efivar package provides tools and libraries to manipulate EFI variables."
+
+package:
+  name: efivar
+  version: 39
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz
+    sha256: c9edd15f2eeeea63232f3e669a48e992c7be9aff57ee22672ac31f5eca1609a6
+    md5: a8fc3e79336cd6e738ab44f9bc96a5aa
+patches:
+  - url: https://www.linuxfromscratch.org/patches/blfs/svn/efivar-39-upstream_fixes-1.patch
+    sha256: 5b53b8f151fbdb14a75b4b6548b6736f8bac01e1391bfa69b8247f31a12b0127
+    md5: 231bf2f0502aa256de91cae7d921c2a5
+
+build: |
+  make ENABLE_DOCS=0
+
+install: |
+  make DESTDIR=${DESTDIR} ENABLE_DOCS=0 LIBDIR=/usr/lib install;
+  mkdir -pv ${DESTDIR}/usr/share/man/man{1,3};
+  install -m644 docs/efivar.1 ${DESTDIR}/usr/share/man/man1;
+  install -m644 docs/*.3 ${DESTDIR}/usr/share/man/man3
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - mandoc

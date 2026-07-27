@@ -1,0 +1,43 @@
+description: ""
+homepage: ""
+note: ""
+
+package:
+  name:
+  version:
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+  cflags: ""
+
+sources:
+  - url:
+    sha256:
+    md5:
+
+patches:
+  - url:
+    sha256:
+    md5:
+
+prepare: |
+
+
+build: |
+
+
+install: |
+
+
+final: |
+
+
+required:
+
+recommended:
+
+optional:
+
+runtime:

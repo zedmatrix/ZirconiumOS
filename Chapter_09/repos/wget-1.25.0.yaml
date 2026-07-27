@@ -1,0 +1,41 @@
+description: "Package contains a utility useful for non-interactive downloading of files from the Web."
+
+package:
+  name: wget
+  version: 1.25.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/wget/wget-1.25.0.tar.gz
+    sha256: 766e48423e79359ea31e41db9e5c289675947a7fcf2efdcedb726ac9d0da3784
+    md5: c70ba58b36f944e8ba1d655ace552881
+
+prepare: |
+  NEW_LINE='#if !defined OPENSSL_NO_SSL3_METHOD && OPENSSL_VERSION_NUMBER < 0x40000000L'
+  sed -i "/SSL3/c $NEW_LINE" src/openssl.c;
+  ./configure --prefix=/usr --sysconfdir=/etc --with-ssl=openssl
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libpsl
+  - make-ca
+
+optional:
+  - gnutls
+  - libidn2
+  - libproxy
+  - valgrind
+  - http-daemon
+  - io-socket-ssl

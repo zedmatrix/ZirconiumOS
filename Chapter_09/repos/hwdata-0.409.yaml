@@ -1,0 +1,21 @@
+description: "The hwdata package contains current PCI and vendor id data."
+
+package:
+  name: hwdata
+  version: 0.409
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/vcrhonek/hwdata/archive/v0.409/hwdata-0.409.tar.gz
+    sha256: 23006accc0f931dd5187d0307a57d0744e2b8feb85e73c37bc0f5229fb31eadd
+    md5: 546ae0006b89fb2d27903800aba28f8c
+
+build: |
+  ./configure --prefix=/usr --disable-blacklist
+
+install: |
+  make install
