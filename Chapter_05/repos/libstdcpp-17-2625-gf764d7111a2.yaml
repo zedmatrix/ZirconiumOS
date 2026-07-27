@@ -1,0 +1,37 @@
+description: "Libstdc++ is the standard C++ library needed to compile C++ code."
+note: "Wed Jul 22 11:43:08 PDT 2026"
+
+package:
+  name: libstdcpp
+  version: 17.0.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: sources/gcc-17-2625-gf764d7111a2.tar.gz
+    sha256: 70c1fae4281d83c32c943295eadeab3a325f6585319ae95d949d3beeb09353b1
+    md5: 9a2bba77a19f9f2c8eff569c760cf47a
+
+prepare: |
+  mkdir -v build && cd build
+  ../libstdc++-v3/configure --prefix=/usr --host=$YTARGET --build=$(../config.guess) \
+    --disable-nls --disable-multilib --disable-libstdcxx-pch \
+    --with-gxx-include-dir=/tools/$YTARGET/include/c++/${PKGVER}
+
+build: |
+  cd build &&
+  make
+
+install: |
+  cd build &&
+  make DESTDIR=$YLFS install
+  rm -v $YLFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
+
+required:
+  - binutils-p1
+  - gcc-p1
+  - linux-headers
+  - glibc-tmp

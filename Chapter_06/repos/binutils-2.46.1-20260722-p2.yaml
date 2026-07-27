@@ -1,0 +1,37 @@
+description: "The Binutils package contains a linker, an assembler, and other tools for handling object files."
+note: "Wed Jul 22 11:43:08 PDT 2026"
+
+package:
+  name: binutils-p2
+  version: 2.46.1-20260722
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: sources/binutils-2.46.1-git.tar.gz
+    sha256: 63e1d592347b9a12d5124f9103078e34378935cc4a6e1821785421cc1fdaff1f
+    md5: 186fa36ada22b23940b687151711d52f
+
+prepare: |
+  sed '6031s/$add_dir//' -i ltmain.sh;
+  mkdir -v build && cd build;
+  ../configure --prefix=/usr --host=$YTARGET --build=$(../config.guess) --disable-werror \
+    --disable-nls --enable-shared --enable-gprofng=no --enable-64-bit-bfd --enable-new-dtags \
+    --enable-default-hash-style=gnu --disable-gdb --disable-gdbserver
+
+build: |
+  cd build && make
+
+install: |
+  cd build && make DESTDIR=$YLFS install;
+  rm -v $YLFS/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes,sframe}.{a,la}
+
+required:
+  - xz-tmp
+  - gcc-p1
+  - binutils-p1
+  - glibc-tmp
+  - linux-headers

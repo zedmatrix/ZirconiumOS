@@ -1,0 +1,32 @@
+description: "The Coreutils package contains the basic utility programs needed by every operating system."
+
+package:
+  name: coreutils-tmp
+  version: 9.11
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.11.tar.xz
+    sha256: 394024eda0a5955217ceda9cd1201e65dc8fa3aa29c2951135a49521d57c3cc3
+    md5: e52e9857e4aa9ae38ef32f8ed6a27604
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(build-aux/config.guess) \
+    --enable-install-program=hostname --enable-no-install-program=kill,uptime
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+  mv -v $YLFS/usr/bin/chroot $YLFS/usr/sbin
+  mkdir -pv $YLFS/usr/share/man/man8
+  mv -v $YLFS/usr/share/man/man1/chroot.1 $YLFS/usr/share/man/man8/chroot.8
+  sed -i 's/"1"/"8"/' $YLFS/usr/share/man/man8/chroot.8
+
+required:
+  - bash-tmp

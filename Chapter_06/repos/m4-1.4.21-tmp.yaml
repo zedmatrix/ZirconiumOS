@@ -1,0 +1,25 @@
+description: "The M4 package contains a macro processor."
+
+package:
+  name: m4-tmp
+  version: 1.4.21
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/m4/m4-1.4.21.tar.xz
+    sha256: f25c6ab51548a73a75558742fb031e0625d6485fe5f9155949d6486a2408ab66
+    md5: 8051eef7239b2f187791f2ab0034d6b7
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(build-aux/config.guess)
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - libstdcpp

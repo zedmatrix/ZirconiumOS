@@ -1,0 +1,50 @@
+description: "The GCC package contains the GNU compiler collection, which includes the C and C++ compilers."
+note: "Wed Jul 22 11:43:08 PDT 2026"
+
+package:
+  name: gcc-p1
+  version: 17-2625-gf764d7111a2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: sources/gcc-17-2625-gf764d7111a2.tar.gz
+    sha256: 70c1fae4281d83c32c943295eadeab3a325f6585319ae95d949d3beeb09353b1
+    md5: 9a2bba77a19f9f2c8eff569c760cf47a
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz
+    sha256: b67ba0383ef7e8a8563734e2e889ef5ec3c3b898a01d00fa0a6869ad81c6ce01
+    md5:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.4.1.tar.xz
+    sha256: 91204cd32f164bd3b7c992d4a6a8ce6519511aadab30f78b6982d0bf8d73e931
+    md5:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz
+    sha256: a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898
+    md5:
+
+prepare: |
+  tar -xf ${YSRC}/mpfr-4.2.2.tar.xz && mv -v mpfr-4.2.2 mpfr &&
+  tar -xf ${YSRC}/gmp-6.3.0.tar.xz && mv -v gmp-6.3.0 gmp &&
+  tar -xf ${YSRC}/mpc-1.4.1.tar.xz && mv -v mpc-1.4.1 mpc &&
+  sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
+  mkdir -v build && cd build;
+  ../configure --target=$YTARGET --prefix=$YLFS/tools --with-glibc-version=2.43 \
+    --with-sysroot=$YLFS --with-newlib --without-headers --enable-default-pie \
+    --enable-default-ssp --disable-nls --disable-shared --disable-multilib \
+    --disable-threads --disable-libatomic --disable-libgomp --disable-libquadmath \
+    --disable-libssp --disable-libvtv --disable-libstdcxx --enable-languages=c,c++
+
+build: |
+  cd build && make
+
+install: |
+  cd build && make install
+
+final: |
+  cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+    `dirname $($YTARGET-gcc -print-libgcc-file-name)`/include/limits.h
+
+required:
+  - binutils-p1

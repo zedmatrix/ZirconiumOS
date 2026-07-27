@@ -1,0 +1,26 @@
+description: "Expose the kernels API for use by Glibc."
+note: "Wed Jul 22 11:43:08 PDT 2026"
+
+package:
+  name: linux-headers
+  version: 7.1.4
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.4.tar.xz
+    sha256: 1c63922a119675d38e3ae0f8f6ee07f15c41a786ab9ed66563749bb8c9a08e2e
+    md5: 6e64809992db64199fce270798c28943
+
+prepare: |
+  make mrproper
+
+build: |
+  make headers
+  find usr/include -type f ! -name '*.h' -delete
+
+install: |
+  cp -rv usr/include $YLFS/usr

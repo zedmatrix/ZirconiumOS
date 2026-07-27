@@ -1,0 +1,27 @@
+description: "The Grep package contains programs for searching through the contents of files."
+
+package:
+  name: grep-tmp
+  version: 3.12
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/grep/grep-3.12.tar.xz
+    sha256: 2649b27c0e90e632eadcd757be06c6e9a4f48d941de51e7c0f83ff76408a07b9
+    md5: 5d9301ed9d209c4a88c8d3a6fd08b9ac
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(./build-aux/config.guess)
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - gawk-tmp

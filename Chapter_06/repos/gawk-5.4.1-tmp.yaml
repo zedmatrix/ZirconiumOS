@@ -1,0 +1,28 @@
+description: "The Gawk package contains programs for manipulating text files."
+
+package:
+  name: gawk-tmp
+  version: 5.4.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gawk/gawk-5.4.1.tar.xz
+    sha256: 07f6f7342b7febe4313fc2c2542ad93d64fe20ad8717200109f105a826f5fd37
+    md5: d379c2110e7a3e15347dd5559a41ad64
+
+prepare: |
+  sed -i 's/extras//' Makefile.in;
+  ./configure --prefix=/usr --host=$YTARGET --build=$(build-aux/config.guess)
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - findutils-tmp

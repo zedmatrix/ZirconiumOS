@@ -1,30 +1,34 @@
 #!/bin/bash
 
-source "0-setup/ybase_header.sh" || { echo "Can Not Base Header"; exit 127; }
-# codename="Zirconium"
-# kernelversion="6.6.120"
+YBLD=${YBLD:-/ybuild}
+if [[ -z $YBASE_HEADER ]]; then
+  if [[ -f $YHEAD ]]; then
+     source "${YHEAD}"
+  else
+     echo "Can Not Base Header"
+     exit 127
+  fi
+fi
 
-codename="Pegasus"
-kernelversion="6.18.8"
-
-DRIVE="/dev/vda"
-PTTYPE="gpt"
+codename=${codename:-"Zirconium"}
+kernelversion=${kernelversion:-"7.1.4"}
+DRIVE=${DRIVE:-"/dev/sda"}
+PTTYPE=$(lsblk -dn -o PTTYPE "$DRIVE" | head -1)
 
 [[ $DRIVE =~ 'nvme' ]] && P=p || P=
 
 if [[ $PTTYPE == "gpt" ]]; then
-    UEFI=$(blkid ${DRIVE}${P}1 | awk '{print $2}' | sed 's/"//g')
-    #SWAP=$(blkid ${DRIVE}${P}2 | awk '{print $2}' | sed 's/"//g')
-    ROOT=$(blkid ${DRIVE}${P}3 | awk '{print $2}' | sed 's/"//g')
-    ROOTPART=$(blkid ${DRIVE}${P}3 | awk '{print $5}' | sed 's/"//g')
+    UEFI=$(blkid -o value -s UUID ${DRIVE}${P}1)
+    SWAP=$(blkid -o value -s UUID ${DRIVE}${P}2)
+    ROOT=$(blkid -o value -s UUID ${DRIVE}${P}3)
+    ROOTPART=$(blkid -o value -s PARTUUID ${DRIVE}${P}3)
 else
-    ROOT=$(blkid ${DRIVE}2 | awk '{print $2}' | sed 's/"//g')
-    ROOTPART=$(blkid ${DRIVE}2 | awk '{print $5}' | sed 's/"//g')
+    ROOT=$(blkid -o value -s UUID ${DRIVE}2)
+    ROOTPART=$(blkid -o value -s PARTUUID ${DRIVE}2)
 fi
 
 mkdir -pv /boot/grub
-
-cat > /boot/grub/grub.cfg <<EOF
+cat > /boot/grub/grub.cfg <<MANEOF
 # Begin /boot/grub/grub.cfg
 set default=0
 set timeout=30
@@ -37,23 +41,23 @@ insmod gfxmenu
 set menu_color_normal=cyan/black
 set menu_color_highlight=white/blue
 
-search --no-floppy --fs-uuid --set=root UUID=$ROOT
-#set gfxpayload=1280x1024x32
-set gfxpayload=1024x768x32
+search --no-floppy --fs-uuid --set=root $ROOT
+set gfxpayload=1280x1024x32
+# set gfxpayload=1024x768x32
 
 menuentry "${codename}, GNU/Linux-${kernelversion}" {
-    linux   /boot/vmlinuz-${kernelversion} root=PARTUUID=$ROOTPART ro
+    linux   /boot/vmlinuz-${kernelversion}-zlfs root=PARTUUID=$ROOTPART ro
 
 }
-EOF
+MANEOF
 
 if [[ ! -z $UEFI ]]; then
-    cat >> /boot/grub/grub.cfg <<EOF
+    cat >> /boot/grub/grub.cfg <<EFIEOF
 
 menuentry "UEFI Firmware Setup" {
     fwsetup
 }
-EOF
+EFIEOF
 fi
 
 [ -f /boot/grub/grub.cfg ] && zzok " Created: /boot/grub/grub.cfg "

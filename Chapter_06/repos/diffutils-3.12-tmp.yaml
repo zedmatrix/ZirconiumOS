@@ -1,0 +1,28 @@
+description: "Diffutils package contains programs that show the differences between files or directories."
+
+package:
+  name: diffutils-tmp
+  version: 3.12
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/diffutils/diffutils-3.12.tar.xz
+    sha256: 7c8b7f9fc8609141fdea9cece85249d308624391ff61dedaf528fcb337727dfd
+    md5: d1b18b20868fb561f77861cd90b05de4
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(./build-aux/config.guess) \
+    gl_cv_func_strcasecmp_works=y
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - coreutils-tmp

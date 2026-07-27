@@ -1,0 +1,27 @@
+description: "The Sed package contains a stream editor."
+
+package:
+  name: sed-tmp
+  version: 4.10
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/sed/sed-4.10.tar.xz
+    sha256: b8e72182b2ec96a3574e2998c47b7aaa64cc20ce000d8e9ac313cc07cecf28c7
+    md5: c70dc5372db95c816442ffedf77a0d0f
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(./build-aux/config.guess)
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - patch-tmp

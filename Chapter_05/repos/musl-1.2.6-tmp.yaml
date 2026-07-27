@@ -1,0 +1,40 @@
+description: "The Musl Package contains an alternative main C library."
+
+package:
+  name: musl-tmp
+  version: 1.2.6
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://musl.libc.org/releases/musl-1.2.6.tar.gz
+    sha256: d585fd3b613c66151fc3249e8ed44f77020cb5e6c1e635a616d3f9f82460512a
+    md5:
+
+patches:
+  - url: https://gitlab.com/zed-linuxfromscratch/patches/-/raw/main/musl-1.2.6-cve-2026-40200.patch
+    sha256: 1ee29f64f9ca8e8ad7c349779d661ff6b52126a27575d3586981357a52c406fb
+    md5:
+  - url: https://gitlab.com/zed-linuxfromscratch/patches/-/raw/main/musl-1.2.6-cve-2026-6042.patch
+    sha256: 1d0be2e72b9d5bd16546b923aa8af861d271322f01644716a81823bec4065c99
+    md5:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.5-rpmalloc.patch
+    sha256: 3240f67b6049a6eaa7a42b18d9a3d447f74649acb8defb4d369ded997fd7b11f
+    md5: 57e25622ef642b5564952cd52194e501
+
+prepare: |
+  ln -sfv ../lib/ld-musl-x86_64.so.1 $YLFS/lib64;
+  ln -sfv ../lib/ld-musl-x86_64.so.1 $YLFS/lib64/ld-lsb-x86-64.so.3;
+  ./configure --prefix=/usr --target=$YTARGET --build=x86_64-lfs-linux-musl \
+    --with-malloc=rpmalloc
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+final: |
+  echo 'int main(){}' | $YTARGET-gcc -xc - ;
+  readelf -l a.out | grep ld-musl

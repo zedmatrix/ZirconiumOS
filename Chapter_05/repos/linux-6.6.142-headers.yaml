@@ -1,0 +1,25 @@
+description: "Expose the kernels API for use by Glibc."
+
+package:
+  name: linux-headers
+  version: 6.6.142
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.6.142.tar.xz
+    sha256: b2f6607a75cd27b2e368cf2d25e1637e1e0da9dfed4cda536658879eee6f2b70
+    md5: f7e15ea578e348863661b05d4cccba29
+
+prepare: |
+  make mrproper
+
+build: |
+  make headers
+  find usr/include -type f ! -name '*.h' -delete
+
+install: |
+  cp -rv usr/include $YLFS/usr

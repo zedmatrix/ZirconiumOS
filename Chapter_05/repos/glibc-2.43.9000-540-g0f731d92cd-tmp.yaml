@@ -1,0 +1,44 @@
+description: "The main C library provides basic routines."
+note: "Wed Jul 22 11:43:08 PDT 2026"
+
+package:
+  name: glibc-tmp
+  version: 2.43.9000-540-g0f731d92cd
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: sources/glibc-2.43.9000-540-g0f731d92cd.tar.gz
+    sha256: f6fe1b131fc1c0ef4baac157ba13b76ba79ca0cd932be6e0f2779028c0b82d4c
+    md5: 0fdac3befed7d8335c6e6f879fc62324
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-fhs-1.patch
+    sha256: 643552db030e2f2d7ffde4f558e0f5f83d3fabf34a2e0e56ebdb49750ac27b0d
+    md5: 9a5997c3452909b1769918c759eff8a2
+
+prepare: |
+  ln -sfv ../lib/ld-linux-x86-64.so.2 $YLFS/lib64
+  ln -sfv ../lib/ld-linux-x86-64.so.2 $YLFS/lib64/ld-lsb-x86-64.so.3
+  mkdir -v build && cd build;
+  echo "rootsbindir=/usr/sbin" > configparms
+
+build: |
+  cd build;
+  ../configure --prefix=/usr libc_cv_slibdir=/usr/lib \
+    --build=$(../scripts/config.guess) --enable-kernel=5.10 \
+    --host=$YTARGET --disable-nscd &&
+  make
+
+install: |
+  cd build;
+  make DESTDIR=$YLFS install;
+  sed '/RTLDLIST=/s@/usr@@g' -i $YLFS/usr/bin/ldd
+
+requires:
+  - binutils-p1
+  - gcc-p1
+  - linux-headers

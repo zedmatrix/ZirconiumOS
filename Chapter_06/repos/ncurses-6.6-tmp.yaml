@@ -1,0 +1,42 @@
+description: "The Ncurses package contains libraries for terminal-independent handling of character screens."
+
+package:
+  name: ncurses-tmp
+  version: 6.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/ncurses/ncurses-6.6.tar.gz
+    sha256: 355b4cbbed880b0381a04c46617b7656e362585d52e9cf84a67e2009b749ff11
+    md5: dd45bf6854430af403452a7a6a40652c
+
+prepare: |
+  mkdir build && pushd build &&
+    ../configure --prefix=$YLFS/tools AWK=gawk &&
+    make -C include &&
+    make -C progs tic &&
+    install progs/tic $YLFS/tools/bin &&
+  popd
+
+build: |
+  ./configure AWK=gawk --prefix=/usr --host=$YTARGET --build=$(./config.guess) \
+    --mandir=/usr/share/man --with-manpage-format=normal --with-shared \
+    --without-normal --with-cxx-shared --without-debug --without-ada \
+    --disable-stripping &&
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+  ln -sv libncursesw.so $YLFS/usr/lib/libncurses.so
+  sed -e 's/^#if.*XOPEN.*$/#if 1/' -i $YLFS/usr/include/curses.h
+
+required:
+  - binutils-p1
+  - gcc-p1
+  - linux-headers
+  - glibc-tmp
+  - m4-tmp

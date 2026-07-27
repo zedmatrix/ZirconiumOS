@@ -42,7 +42,7 @@ if [[ ! /proc/1/root/. -ef / ]]; then
     YBUILD="/ybuild/Ybuild"
     YREPOS="/ybuild/repos"
 else
-    if [[ -z $LFS ]]; then
+    if [[ -z $YLFS ]]; then
         zmsg "Final - Outside chroot"
         YBUILD="/ybuild/Ybuild"
         YREPOS="/ybuild/repos"

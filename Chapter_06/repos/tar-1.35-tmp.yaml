@@ -1,0 +1,27 @@
+description: "provides the ability to create tar archives as well as perform various other kinds of archive manipulation."
+
+package:
+  name: tar-tmp
+  version: 1.35
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/tar/tar-1.35.tar.xz
+    sha256: 4d62ff37342ec7aed748535323930c7cf94acf71c3591882b26a7ea50f3edc16
+    md5: a2d8042658cfd8ea939e6d911eaf4152
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(build-aux/config.guess)
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - sed-tmp
