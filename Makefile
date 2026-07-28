@@ -26,9 +26,9 @@ filesystem: prep
 	@[ -f Chapter_02/2-install-directories.sh ] && Chapter_02/2-install-directories.sh $(DRIVE) || exit 1
 
 sources: prep
-	@[ -d "$(YLFS)/ybuild" ] || mkdir -p $(LFS)/ybuild || exit 1
-	@[ -d "$(YLFS)/ybuild/repos" ] || mkdir -p $(LFS)/ybuild/repos || exit 1
-	@[ -d "$(YLFS)/ybuild/Chapter_09" ] || mkdir -p $(LFS)/ybuild/Chapter_09 || exit 1
+	@[ -d "$(YLFS)/ybuild" ] || mkdir -p $(YLFS)/ybuild || exit 1
+	@[ -d "$(YLFS)/ybuild/repos" ] || mkdir -p $(YLFS)/ybuild/repos || exit 1
+	@[ -d "$(YLFS)/ybuild/Chapter_09" ] || mkdir -p $(YLFS)/ybuild/Chapter_09 || exit 1
 
 	@cp -av "Chapter_05/repos/"* "$(YLFS)/ybuild/repos" || exit 1
 	@cp -av "Chapter_06/repos/"* "$(YLFS)/ybuild/repos" || exit 1
