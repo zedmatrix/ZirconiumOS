@@ -51,7 +51,7 @@ https://mirror.csclub.uwaterloo.ca/gnu/which/which-2.25.tar.gz
 #https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.40.tar.xz
 #https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.98.tar.xz
 #https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.145.tar.xz
-https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.4.tar.xz
+https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.5.tar.xz
 
 #	Kernel Programs
 https://www.kernel.org/pub/software/scm/git/git-2.54.0.tar.xz
@@ -77,7 +77,8 @@ https://github.com/rhboot/efivar/archive/39/efivar-39.tar.gz
 https://sourceware.org/ftp/elfutils/0.194/elfutils-0.195.tar.bz2
 https://github.com/libexpat/libexpat/releases/download/R_2_8_2/expat-2.8.2.tar.xz
 https://prdownloads.sourceforge.net/expect/expect5.45.4.tar.gz
-https://astron.com/pub/file/file-5.47.tar.gz
+#https://astron.com/pub/file/file-5.47.tar.gz
+https://astron.com/pub/file/file-5.48.tar.gz
 https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz
 https://downloads.sourceforge.net/freetype/freetype-2.14.3.tar.xz
 https://downloads.sourceforge.net/freetype/freetype-doc-2.14.3.tar.xz
@@ -152,6 +153,7 @@ https://www.linuxfromscratch.org/patches/downloads/bzip2/bzip2-1.0.8-install_doc
 https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.11-i18n-1.patch
 #https://www.linuxfromscratch.org/patches/downloads/expect/expect-5.45.4-gcc15-1.patch
 https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-fhs-1.patch
+https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.43-linux7_fixes-1.patch
 #https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.42-fhs-1.patch
 #https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.42-upstream_fixes-1.patch
 https://www.linuxfromscratch.org/patches/downloads/kbd/kbd-2.10.0-backspace-1.patch

@@ -2,8 +2,8 @@
 
 # Using Ybuild ISO cd /ybuild/prepare
 # Source ylfs-environment.sh First
-[ -z $YLFS_ENVIRONMENT ] && { echo "Source the YLFS Environment"; exit 1; }
-source ${PWD}/ybase_header.sh || { echo "Can Not Base Header"; exit 1; }
+[ -z $YLFS_ENVIRONMENT ] && source ${PWD}/Chapter_02/ylfs-environment.sh
+source ${PWD}/Chapter_02/ybase_header.sh || { echo "Can Not Base Header"; exit 1; }
 
 # Start Of Program
 zstars

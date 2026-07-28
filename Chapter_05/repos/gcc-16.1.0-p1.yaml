@@ -29,7 +29,7 @@ prepare: |
   tar -xf ${YSRC}/mpc-1.4.1.tar.xz && mv -v mpc-1.4.1 mpc &&
   sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
   mkdir -v build && cd build;
-  ../configure --target=$YTARGET --prefix=$LFS/tools --with-glibc-version=2.43 \
+  ../configure --target=$YTARGET --prefix=$YLFS/tools --with-glibc-version=2.43 \
     --with-sysroot=$YLFS --with-newlib --without-headers --enable-default-pie \
     --enable-default-ssp --disable-nls --disable-shared --disable-multilib \
     --disable-threads --disable-libatomic --disable-libgomp --disable-libquadmath \

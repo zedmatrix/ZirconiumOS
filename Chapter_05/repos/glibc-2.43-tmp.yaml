@@ -18,7 +18,7 @@ patches:
   - url: https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-fhs-1.patch
     sha256: 643552db030e2f2d7ffde4f558e0f5f83d3fabf34a2e0e56ebdb49750ac27b0d
     md5: 9a5997c3452909b1769918c759eff8a2
-  - url: https://www.linuxfromscratch.org/patches/lfs/development/glibc-2.43-linux7_fixes-1.patch
+  - url: https://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.43-linux7_fixes-1.patch
     sha256: 2c93a09bd6d858cbf90d4e98c1818b595af42dac95bfbafb87c4fddd110c21c4
     md5: 0d438a427c16575b263b19cdb16bbf99
 

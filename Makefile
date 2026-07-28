@@ -1,15 +1,18 @@
-
+SHELL := /bin/bash
 DRIVE ?= sda
 UEFI ?= 1
 FORCE ?= 0
 YLFS ?= /mnt/ylfs
-YBUILD ?= $(YLFS)/ybuild
-
-install_ybuild := ca-bundle.crt magic.mgc pkg-install.sh yaml-get ystrip-static Ybuild ydatabase.yaml
-install_scripts := Chapter_05/install-ch5.sh Chapter_06/install-ch6.sh Chapter_08/install-ch8.sh Chapter_09/install-ch9.sh
+YBLD ?= $(YLFS)/ybuild
+YBUILD_RELEASE ?= systemd
+.NOTPARALLEL:
 
 $(foreach v,drive uefi force, \
   $(if $($(v)), $(eval $(shell echo $(v) | tr a-z A-Z) := $($(v))) ) )
+
+install_ybuild := ca-bundle.crt magic.mgc pkg-install.sh yaml-get ystrip-static Ybuild ydatabase.yaml
+install_scripts := Chapter_02/ybase_header.sh Chapter_02/ylfs-environment.sh Chapter_05/install-ch5.sh Chapter_06/install-ch6.sh \
+ Chapter_08/install-ch8.sh Chapter_09/install-ch9.sh
 
 all: prep filesystem sources crosstools basesystem extrapackages
 
@@ -25,36 +28,39 @@ filesystem: prep
 		$(if $(FORCE),force,) || exit 1
 	@[ -f Chapter_02/2-install-directories.sh ] && Chapter_02/2-install-directories.sh $(DRIVE) || exit 1
 
-sources: prep
-	@[ -d "$(YLFS)/ybuild" ] || mkdir -p $(YLFS)/ybuild || exit 1
-	@[ -d "$(YLFS)/ybuild/repos" ] || mkdir -p $(YLFS)/ybuild/repos || exit 1
-	@[ -d "$(YLFS)/ybuild/Chapter_09" ] || mkdir -p $(YLFS)/ybuild/Chapter_09 || exit 1
-
-	@cp -av "Chapter_05/repos/"* "$(YLFS)/ybuild/repos" || exit 1
-	@cp -av "Chapter_06/repos/"* "$(YLFS)/ybuild/repos" || exit 1
-	@cp -av "Chapter_07/repos/"* "$(YLFS)/ybuild/repos" || exit 1
-	@cp -av "Chapter_07/"*.sh "$(YLFS)/ybuild/" || exit 1
-	@cp -av "Chapter_08/repos/"* "$(YLFS)/ybuild/repos" || exit 1
-	@cp -av "Chapter_09/repos/"* "$(YLFS)/ybuild/repos" || exit 1
-	@cp -av "Chapter_09/"y*.sh "$(YLFS)/ybuild/Chapter_09" || exit 1
-	@cp -av "Chapter_11/repos/"* "$(YLFS)/ybuild/repos" || exit 1
+directories: prep
+	@[ -d "$(YBLD)" ] || mkdir -p $(YBLD) || exit 1
+	@[ -d "$(YBLD)/repos" ] || mkdir -p $(YBLD)/repos || exit 1
+	@[ -d "$(YBLD)/Chapter_09" ] || mkdir -p $(YBLD)/Chapter_09 || exit 1
+	@cp -av "$(PWD)/Makefile" "$(YBLD)"
+	@cp -av "Chapter_05/repos/"* "$(YBLD)/repos" || exit 1
+	@cp -av "Chapter_06/repos/"* "$(YBLD)/repos" || exit 1
+	@cp -av "Chapter_07/repos/"* "$(YBLD)/repos" || exit 1
+	@cp -av "Chapter_07/"*.sh "$(YBLD)/prepare" || exit 1
+	@cp -av "Chapter_08/repos/"* "$(YBLD)/repos" || exit 1
+	@cp -av "Chapter_09/repos/"* "$(YBLD)/repos" || exit 1
+	@cp -av "Chapter_09/"y*.sh "$(YBLD)/Chapter_09" || exit 1
+	@cp -av "Chapter_10/repos/"* "$(YBLD)/repos" || exit 1
+	@cp -av "Chapter_10/"*.sh "$(YBLD)/prepare" || exit 1
 	@for file in $(install_ybuild); do \
-		cp -av Chapter_03/$$file $(YLFS)/ybuild; \
+		cp -av Chapter_03/$$file $(YBLD); \
 	done
 
 	@for file in $(install_scripts); do \
-		install -vm755 $$file $(YLFS)/ybuild; \
+		install -vm755 $$file $(YBLD)/prepare; \
 	done
+sources: prep directories
+	cp -nv "Chapter_03/sources" $(YBLD)/sources
 
-crosstools: pre sources
-	cd $(YBUILD) && ./install-ch5.sh || exit 1
-	cd $(YBUILD) && ./install-ch6.sh || exit 1
-	cd $(YBUILD) && ./exec-lfs-chroot.sh 7-7-chapter-install.sh || exit 1
+crosstools: prep directories
+	cd $(YBLD)/prepare && $(YBLD)/prepare/install-ch5.sh
+	cd $(YBLD)/prepare && $(YBLD)/prepare/install-ch6.sh
+	cd $(YBLD) && $(YBLD)/exec-lfs-chroot.sh $(YBLD)/7-7-chapter-install.sh
 
 basesystem: prep sources
-	cd $(YBUILD) && ./exec-lfs-chroot.sh install-ch8.sh || exit 1
+	cd $(YBLD) && $(YBLD)/exec-lfs-chroot.sh $(YBLD)/prepare/install-ch8.sh
 
 extrapackages: prep sources
-	cd $(YBUILD) && ./exec-lfs-chroot.sh install-ch9.sh || exit 1
+	cd $(YBLD) && $(YBLD)/exec-lfs-chroot.sh $(YBLD)/prepare/install-ch9.sh
 
 .PHONY: all prep filesystem sources crosstools basesystem extrapackages

@@ -1,8 +1,9 @@
 description: "Expose the kernels API for use by Glibc."
+note: "Wed Jul 22 11:43:08 PDT 2026"
 
 package:
   name: linux-headers
-  version: 6.6.142
+  version: 7.1.5
   rel: 1
   archive: false
   delete: true
@@ -10,9 +11,9 @@ package:
   destdir: false
 
 sources:
-  - url: https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.6.142.tar.xz
-    sha256: b2f6607a75cd27b2e368cf2d25e1637e1e0da9dfed4cda536658879eee6f2b70
-    md5: f7e15ea578e348863661b05d4cccba29
+  - url: https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.1.5.tar.xz
+    sha256: 22a0196b3cbcdf34dc27b77561f4d040585fd3447edc9ab3531a1ac79e3041e7
+    md5: 75f719d50ea10e0bb623a95f468600cb
 
 prepare: |
   make mrproper
