@@ -4,12 +4,16 @@
 
 ### Follows the Book order as of r13
 
-`man-pages iana-etc glibc zlib bzip2 xz lz4 zstd file readline pcre2 m4 bc`<br>
-`flex tcl expect dejagnu pkgconf binutils gmp mpfr mpc attr acl libcap libxcrypt shadow gcc`<br>
-`ncurses sed psmisc gettext bison grep bash libtool gdbm gperf expat inetutils less perl xml-parser`<br>
-`intltool autoconf automake openssl libelf libffi sqlite python flit-core packaging wheel setuptools`<br>
-`ninja meson kmod coreutils diffutils gawk findutils groff grub gzip iproute2 kbd libpipeline`<br>
-`make patch tar texinfo nano markupsafe jinja2 systemd dbus man-db procps util-linux e2fsprogs`<br>
+`iana-etc-20260529 glibc-2.43 zlib-1.3.2 bzip2-1.0.8 xz-5.8.3 lz4-1.10.0 zstd-1.5.7 file-5.48 readline-8.3 pcre-10.47`<br>
+`m4-1.4.21 bc-7.0.3 flex-2.6.4 tcl-8.6.18 expect-5.45.4 dejagnu-1.6.3 pkgconf-2.5.1 binutils-2.46.0 gmp-6.3.0 mpfr-4.2.2`<br>
+`mpc-1.4.1 attr-2.6.0 acl-2.4.0 libcap-2.78 libxcrypt-4.5.2 shadow-4.19.4 gawk-5.4.1 gcc-16.1.0 ncurses-6.6 sed-4.10 psmisc-23.7`<br>
+`gettext-1.0 bison-3.8.2 gperf-3.3 grep-3.12 bash-5.3.15 libtool-2.5.4 gdbm-1.26 expat-2.8.2 inetutils-2.8 less-704`<br>
+`perl-5.42.2 class-inspector-1.36 file-sharedir-install-0.14 file-sharedir-1.118 xml-parser-2.59 intltool-0.51.0`<br>
+`autoconf-2.73 automake-1.18.1 openssl-3.6.3 libelf-0.195 libffi-3.7.1 sqlite-3.53.3 python-3.14.6 flit-core-3.12.0`<br>
+`packaging-26.2 wheel-0.47.0 setuptools-83.0.0 ninja-1.13.2 meson-1.11.2 kmod-34.2 coreutils-9.11 diffutils-3.12`<br>
+`findutils-4.10.0 groff-1.24.1 gzip-1.14 iproute2-7.1.0 kbd-2.10.0 libpipeline-1.5.8 make-4.4.1 patch-2.8`<br>
+`tar-1.35 texinfo-7.3 nano-9.1 markupsafe-3.0.3 jinja2-3.1.6 pyelftools-0.33 systemd-261.1 dbus-1.16.2 man-db-2.13.1`<br>
+`man-pages-6.18 procps-ng-4.0.6 util-linux-2.42.1 e2fsprogs-1.47.4 which-2.25 openssh-10.3p1`<br>
 
 > New changes are installation of which and openssh from the blfs book.<br>
 > Building 3 Perl modules for xml-parser and intltool<br>

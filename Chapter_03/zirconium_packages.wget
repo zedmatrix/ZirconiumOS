@@ -141,8 +141,11 @@ https://pypi.org/packages/source/s/setuptools/setuptools-83.0.0.tar.gz
 https://pypi.org/packages/source/w/wheel/wheel-0.47.0.tar.gz
 
 #	Perl
-https://www.cpan.org/src/5.0/perl-5.42.0.tar.xz
-https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.47.tar.gz
+https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz
+https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Class-Inspector-1.36.tar.gz
+https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-ShareDir-1.118.tar.gz
+https://cpan.metacpan.org/authors/id/E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz
+https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-2.59.tar.gz
 
 #	Patches
 https://www.linuxfromscratch.org/patches/downloads/bzip2/bzip2-1.0.8-install_docs-1.patch
