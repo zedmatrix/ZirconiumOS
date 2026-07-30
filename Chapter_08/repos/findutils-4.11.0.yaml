@@ -1,0 +1,40 @@
+description: "Programs are provided to search through all the files in a directory tree and to create, maintain, and search a database."
+
+package:
+  name: findutils
+  version: 4.11.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/findutils/findutils-4.11.0.tar.xz
+    sha256: bfd19cb06cc71f3352d567e90284d8cdac02ac89774bbeadf0b533b0c11432fd
+    md5: 512c6875ed84034dca240c4bc9380b96
+
+prepare: |
+  ./configure --prefix=/usr --localstatedir=/var/lib/locate
+
+build: |
+  make
+
+check: |
+  chown -R tester .;
+  su tester -c "PATH=$PATH make check"
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils
+  - gcc
+  - gettext
+  - glibc
+  - grep
+  - make-tmp
+  - sed
+  - texinfo-tmp

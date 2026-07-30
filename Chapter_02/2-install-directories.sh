@@ -50,7 +50,7 @@ else
     echo "$YLFS is already mounted."
 fi
 
-[ ! -z $SWAP ] && /sbin/swapon -e --show $SWAP
+[ -n $SWAP ] && /sbin/swapon $SWAP
 
 # Setup yaml-builder paths
 mkdir -pv $YLFS/ybuild/{xml,tmp,log,repos,image,prepare,sources}

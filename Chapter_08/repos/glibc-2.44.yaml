@@ -1,0 +1,77 @@
+description: "The Glibc package contains the main C library."
+
+package:
+  name: glibc
+  version: 2.44
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/glibc/glibc-2.44.tar.xz
+    sha256: 37f600f2bef3c5e8300147059568b2a2e40a7ad6ccc65ce942556d49429cc667
+    md5: 7677da43ef759c68e005f5d4c37986a6
+  - url: https://www.iana.org/time-zones/repository/releases/tzdata2026b.tar.gz
+    sha256: 114543d9f19a6bfeb5bca43686aea173d38755a3db1f2eec112647ae92c6f544
+    md5: 25425534443b0bdf501d6fb75442a041
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/lfs/development/glibc-fhs-1.patch
+    sha256: 643552db030e2f2d7ffde4f558e0f5f83d3fabf34a2e0e56ebdb49750ac27b0d
+    md5: 9a5997c3452909b1769918c759eff8a2
+
+prepare: |
+  mkdir -v build && cd build &&
+  echo "rootsbindir=/usr/sbin" > configparms
+  ../configure --prefix=/usr --disable-werror --disable-nscd --with-pkgversion="Zirconium ${PKGVER}" \
+    libc_cv_slibdir=/usr/lib --enable-stack-protector=strong --enable-kernel=5.10
+
+build: |
+  cd build && make
+
+check: |
+  cd build && make check;
+  grep "Timed out" $(find -name \*.out) || true
+
+install: |
+  cd build && touch /etc/ld.so.conf;
+  sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile;
+  make install;
+  make localedata/install-locales;
+  sed '/RTLDLIST=/s@/usr@@g' -i /usr/bin/ldd;
+  install -vm644 ${YPKG}/glibc-nsswitch.conf /etc/nsswitch.conf;
+  install -vm644 ${YPKG}/glibc-ldso.conf /etc/ld.so.conf;
+  mkdir -pv /etc/ld.so.conf.d
+
+final: |
+  tar -xf ${YSRC}/tzdata2026b.tar.gz &&
+  ZONEINFO=/usr/share/zoneinfo;
+  mkdir -pv $ZONEINFO/{posix,right};
+  for tz in etcetera southamerica northamerica europe africa antarctica  \
+            asia australasia backward; do
+      zic -L /dev/null   -d $ZONEINFO       ${tz};
+      zic -L /dev/null   -d $ZONEINFO/posix ${tz};
+      zic -L leapseconds -d $ZONEINFO/right ${tz};
+  done;
+  cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO;
+  zic -d $ZONEINFO -p America/New_York
+
+required:
+  - bash-tmp
+  - binutils-p2
+  - bison-tmp
+  - coreutils-tmp
+  - diffutils-tmp
+  - gawk-tmp
+  - gcc-p2
+  - gettext-tmp
+  - grep-tmp
+  - gzip-tmp
+  - linux-headers
+  - make-tmp
+  - perl-tmp
+  - python-tmp
+  - sed-tmp
+  - texinfo-tmp

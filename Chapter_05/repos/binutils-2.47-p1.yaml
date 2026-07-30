@@ -1,0 +1,27 @@
+description: "The Binutils package contains a linker, an assembler, and other tools for handling object files."
+
+package:
+  name: binutils-p1
+  version: 2.47
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://sourceware.org/pub/binutils/releases/binutils-2.47.tar.xz
+    sha256: 154ab23b60070e8f27013c22977f1129425d67d1e8acd6e13010e617811e4cff
+    md5: d772acfbd55a81644e9fe7b8189cd2a5
+
+prepare: |
+  mkdir -v build && cd build;
+  ../configure --prefix=$YLFS/tools --with-sysroot=$YLFS --target=$YTARGET \
+    --disable-nls --enable-gprofng=no --disable-werror \
+    --enable-new-dtags  --enable-default-hash-style=gnu
+
+build: |
+  cd build && make
+
+install: |
+  cd build && make install

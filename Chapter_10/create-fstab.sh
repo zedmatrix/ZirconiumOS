@@ -4,11 +4,11 @@ YBUILD_RELEASE=${YBUILD_RELEASE:-systemd}
 YBLD=${YBLD:-/ybuild}
 source "${YBLD}/prepare/ybase_header.sh" || { echo "Can Not Base Header"; exit 127; }
 
-codename="Betelgeuse"
-kernelversion="7.1.4"
+DRIVE=${1:-"/dev/sda"}
+codename=${2:-"Zirconium"}
+kernelversion=${3:-"7.1.5"}
 
-DRIVE="/dev/sda"
-PTTYPE="gpt"
+PTTYPE=$(lsblk -dn -o PTTYPE "$DRIVE" | head -1)
 
 [[ $DRIVE =~ 'nvme' ]] && P=p || P=
 
@@ -24,12 +24,6 @@ else
     ROOTPART=$(blkid -o value -s PARTUUID ${DRIVE}2)
 fi
 
-if [[ -b /dev/sdb ]]; then
-    SOURCES=$(blkid -o value -s UUID /dev/sdb1)
-fi
-if [[ -b /dev/sdc ]]; then
-    SWAP2=$(blkid -o value -s UUID /dev/sdc1)
-fi
 ## create fstab
 cat > /etc/fstab <<EOF
 # Begin /etc/fstab
@@ -59,10 +53,6 @@ UUID=$SWAP      swap           swap     pri=1               0     0
 UUID=$UEFI_MNT
 # End /etc/fstab
 EOF
-
-[ -n ${SOURCES} ] && echo "UUID=${SOURCES}  /mnt/sources  btrfs  noauto,defaults  0  0" >> /etc/fstab
-[ -n ${SWAP} ] && echo "UUID=${SWAP}  swap  swap  pri=1  0  0" >> /etc/fstab
-
 [ -f /etc/fstab ] && zzok " Created: /etc/fstab "
 
 install -v -m755 -d /etc/modprobe.d
@@ -75,4 +65,3 @@ install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 # End /etc/modprobe.d/usb.conf
 EOF
 [ -f /etc/modprobe.d/usb.conf ] && zzok " Created: /etc/modprobe.d/usb.conf "
-

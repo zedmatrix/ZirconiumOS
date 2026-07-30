@@ -23,12 +23,12 @@ build: |
   make html
 
 check: |
-  make check 2>&1 | tee gmp-check-log
+  make check 2>&1 | tee ${YBLD}/log/${PKGDIR}/gmp-check-log
 
 install: |
   make install &&
   make install-html;
-  awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log || true
+  awk '/# PASS:/{total+=$3} ; END{print total}' ${YBLD}/log/${PKGDIR}/gmp-check-log || true
 
 required:
   - libstdcpp

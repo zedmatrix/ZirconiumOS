@@ -10,7 +10,7 @@ YBUILD_RELEASE ?= systemd
 $(foreach v,drive uefi force, \
   $(if $($(v)), $(eval $(shell echo $(v) | tr a-z A-Z) := $($(v))) ) )
 
-install_ybuild := ca-bundle.crt magic.mgc pkg-install.sh yaml-get ystrip-static Ybuild ydatabase.yaml
+install_ybuild := ca-bundle.crt magic.mgc pkg-install.sh yaml-get ystrip-static Ybuild ydatabase.yaml ydest-strip-x64.sh
 install_scripts := Chapter_02/ybase_header.sh Chapter_02/ylfs-environment.sh Chapter_05/install-ch5.sh Chapter_06/install-ch6.sh \
  Chapter_08/install-ch8.sh Chapter_09/install-ch9.sh
 
@@ -28,7 +28,7 @@ filesystem: prep
 		$(if $(FORCE),force,) || exit 1
 	@[ -f Chapter_02/2-install-directories.sh ] && Chapter_02/2-install-directories.sh $(DRIVE) || exit 1
 
-directories: prep
+directories:
 	@[ -d "$(YBLD)" ] || mkdir -p $(YBLD) || exit 1
 	@[ -d "$(YBLD)/repos" ] || mkdir -p $(YBLD)/repos || exit 1
 	@[ -d "$(YBLD)/Chapter_09" ] || mkdir -p $(YBLD)/Chapter_09 || exit 1
@@ -49,18 +49,19 @@ directories: prep
 	@for file in $(install_scripts); do \
 		install -vm755 $$file $(YBLD)/prepare; \
 	done
-sources: prep directories
-	cp -nv "Chapter_03/sources" $(YBLD)/sources
 
-crosstools: prep directories
+sources:
+	cp -nv "Chapter_03/sources"/* $(YBLD)/sources
+
+crosstools:
 	cd $(YBLD)/prepare && $(YBLD)/prepare/install-ch5.sh
 	cd $(YBLD)/prepare && $(YBLD)/prepare/install-ch6.sh
-	cd $(YBLD) && $(YBLD)/exec-lfs-chroot.sh $(YBLD)/7-7-chapter-install.sh
+	cd $(YBLD) && $(YBLD)/prepare/exec-lfs-chroot.sh prepare/7-7-chapter-install.sh
 
-basesystem: prep sources
-	cd $(YBLD) && $(YBLD)/exec-lfs-chroot.sh $(YBLD)/prepare/install-ch8.sh
+basesystem:
+	cd $(YBLD) && $(YBLD)/prepare/exec-lfs-chroot.sh prepare/install-ch8.sh
 
-extrapackages: prep sources
-	cd $(YBLD) && $(YBLD)/exec-lfs-chroot.sh $(YBLD)/prepare/install-ch9.sh
+extrapackages:
+	cd $(YBLD) && $(YBLD)/prepare/exec-lfs-chroot.sh prepare/install-ch9.sh
 
-.PHONY: all prep filesystem sources crosstools basesystem extrapackages
+.PHONY: all prep filesystem directories sources crosstools basesystem extrapackages

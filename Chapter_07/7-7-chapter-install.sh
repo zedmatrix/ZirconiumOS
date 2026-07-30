@@ -3,8 +3,8 @@ set -e
 YBLD=${YBLD:-"/ybuild"}
 yinstall="${YBLD}/pkg-install.sh"
 
-${YBLD}/prepare//7-5-creating-dirs.sh || exit 1
-${YBLD}/prepare//7-6-create-files_sysv-and-systemd.sh  || exit 1
+${YBLD}/prepare/7-5-creating-dirs.sh || exit 1
+${YBLD}/prepare/7-6-create-files_sysv-and-systemd.sh  || exit 1
 
 pushd ${YBLD}
 

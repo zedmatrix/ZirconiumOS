@@ -1,0 +1,28 @@
+description: "These programs are typically used in conjunction with other programs to provide modular and powerful directory search and file locating capabilities to other commands."
+
+package:
+  name: findutils-tmp
+  version: 4.11.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/findutils/findutils-4.11.0.tar.xz
+    sha256: bfd19cb06cc71f3352d567e90284d8cdac02ac89774bbeadf0b533b0c11432fd
+    md5: 512c6875ed84034dca240c4bc9380b96
+
+prepare: |
+  ./configure --prefix=/usr --host=$YTARGET --build=$(build-aux/config.guess) \
+    --localstatedir=/var/lib/locate
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$YLFS install
+
+required:
+  - file-tmp
