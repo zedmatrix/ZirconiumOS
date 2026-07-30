@@ -96,7 +96,7 @@ mount --mkdir -v -t vfat /dev/sda1 -o codepage=437,iocharset=iso8859-1 /boot/efi
         <pre class="userinput"><kbd class=
         "command">bootctl install</kbd></pre>
         <pre class="userinput"><kbd class=
-        "command">cp -iv /boot/vmlinuz-7.0.8-lfs-r13-1-systemd /boot/efi/vmlinuz-7.0.8</kbd></pre>
+        "command">cp -iv /boot/vmlinuz-7.1.5-lfs-r13-1-systemd /boot/efi/vmlinuz-7.1.5</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -111,7 +111,7 @@ mount --mkdir -v -t vfat /dev/sda1 -o codepage=437,iocharset=iso8859-1 /boot/efi
         "command">mkdir -pv /boot/efi/loader/entries
 cat &gt; /boot/efi/loader/entries/lfs.conf &lt;&lt; EOF
 <code class="literal">title Zirconium Linux From Scratch
-linux   /vmlinuz-7.0.8
+linux   /vmlinuz-7.1.5
 options root=PARTUUID=$ROOTPART rw</code>
 EOF</kbd></pre>
         <p>

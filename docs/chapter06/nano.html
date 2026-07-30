@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      6.10.&nbsp;Grep-3.12
+      6.17.&nbsp;Nano-9.1
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -22,15 +22,16 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gawk.html" title="Gawk-5.4.1">Prev</a>
+          <a accesskey="p" href="xz.html" title="Xz-5.8.3">Prev</a>
           <p>
-            Gawk-5.4.1
+            Xz-5.8.3
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gzip.html" title="Gzip-1.14">Next</a>
+          <a accesskey="n" href="binutils-pass2.html" title=
+          "Binutils-2.47 - Pass 2">Next</a>
           <p>
-            Gzip-1.14
+            Binutils-2.47 - Pass 2
           </p>
         </li>
         <li class="up">
@@ -44,13 +45,13 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-tools-grep" name="ch-tools-grep"></a>6.10. Grep-3.12
+      <a id="ch-tools-nano" name="ch-tools-nano"></a>6.17. Nano-9.1
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Grep package contains programs for searching through the
-          contents of files.
+          The Nano package contains a small, simple text editor which aims to
+          replace Pico, the default editor in the Pine package.
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
@@ -60,53 +61,67 @@
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">25.5 MB</span>
+              <span class="segbody">22.4 MB</span>
             </div>
           </div>
         </div>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.10.1. Installation of Grep
+          6.17.1. Installation of Nano
         </h2>
         <p>
-          Prepare Grep for compilation:
+          Prepare Nano for compilation:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr   \
+        "command">./configure --prefix=/usr     \
+            --sysconfdir=/etc \
             --host=$LFS_TGT \
-            --build=$(./build-aux/config.guess)</kbd></pre>
+            --build=$(./config.guess)
+            --docdir=/usr/share/doc/nano-9.1</kbd></pre>
         <p>
           Compile the package:
         </p>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
         <p>
           Install the package:
         </p>
         <pre class="userinput"><kbd class=
         "command">make DESTDIR=$LFS install</kbd></pre>
       </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter08/nano.html#conf-nano" title=
+          "8.76.2.&nbsp;Configuring Nano">Section&nbsp;8.76.2, “Configuring
+          Nano.”</a>
+        </p>
+      </div>
       <div class="content" lang="en" xml:lang="en">
         <p>
           Details on this package are located in <a class="xref" href=
-          "../chapter08/grep.html#contents-grep" title=
-          "8.36.2.&nbsp;Contents of Grep">Section&nbsp;8.36.2, “Contents of
-          Grep.”</a>
+          "../chapter08/nano.html#contents-nano" title=
+          "8.76.3.&nbsp;Contents of Nano">Section&nbsp;8.76.3, “Contents of
+          Nano.”</a>
         </p>
       </div>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gawk.html" title="Gawk-5.4.1">Prev</a>
+          <a accesskey="p" href="xz.html" title="Xz-5.8.3">Prev</a>
           <p>
-            Gawk-5.4.1
+            Xz-5.8.3
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gzip.html" title="Gzip-1.14">Next</a>
+          <a accesskey="n" href="binutils-pass2.html" title=
+          "Binutils-2.47 - Pass 2">Next</a>
           <p>
-            Gzip-1.14
+            Binutils-2.47 - Pass 2
           </p>
         </li>
         <li class="up">

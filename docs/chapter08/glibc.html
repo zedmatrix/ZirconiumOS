@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.4.&nbsp;Glibc-2.43
+      8.4.&nbsp;Glibc-2.44
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -23,9 +23,9 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="iana-etc.html" title=
-          "Iana-Etc-20260504">Prev</a>
+          "Iana-Etc-20260617">Prev</a>
           <p>
-            Iana-Etc-20260504
+            Iana-Etc-20260617
           </p>
         </li>
         <li class="next">
@@ -45,7 +45,7 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-glibc" name="ch-system-glibc"></a>8.4. Glibc-2.43
+      <a id="ch-system-glibc" name="ch-system-glibc"></a>8.4. Glibc-2.44
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -91,7 +91,7 @@
           Now fix glibc to build against Linux 7.
         </p>
         <pre class="userinput"><kbd class=
-        "command">patch -Np1 -i ../glibc-2.43-linux7_fixes-1.patch</kbd></pre>
+        "command">patch -Np1 -i ../glibc-2.44-linux7_fixes-1.patch</kbd></pre>
         <p>
           The Glibc documentation recommends building Glibc in a dedicated
           build directory:
@@ -268,7 +268,7 @@ cd       build</kbd></pre>
           </h3>
           <p>
             If upgrading Glibc to a new minor version (for example, from
-            Glibc-2.36 to Glibc-2.43) on a running LFS system, you need to
+            Glibc-2.36 to Glibc-2.44) on a running LFS system, you need to
             take some extra precautions to avoid breaking the system:
           </p>
           <div class="itemizedlist">
@@ -319,8 +319,8 @@ cd       build</kbd></pre>
                   "command"><strong>uname -r</strong></span>) or if you want
                   to upgrade it anyway, following <a class="xref" href=
                   "../chapter10/kernel.html" title=
-                  "10.3.&nbsp;Linux-7.0.8">Section&nbsp;10.3,
-                  “Linux-7.0.8.”</a>
+                  "10.3.&nbsp;Linux-7.1.5">Section&nbsp;10.3,
+                  “Linux-7.1.5.”</a>
                 </p>
               </li>
               <li class="listitem">
@@ -331,8 +331,8 @@ cd       build</kbd></pre>
                   /usr/include/linux/version.h</strong></span>) or if you
                   want to upgrade it anyway, following <a class="xref" href=
                   "../chapter05/linux-headers.html" title=
-                  "5.4.&nbsp;Linux-7.0.8 API Headers">Section&nbsp;5.4,
-                  “Linux-7.0.8 API Headers”</a> (but removing <code class=
+                  "5.4.&nbsp;Linux-7.1.5 API Headers">Section&nbsp;5.4,
+                  “Linux-7.1.5 API Headers”</a> (but removing <code class=
                   "envar">$LFS</code> from the <span class=
                   "command"><strong>cp</strong></span> command).
                 </p>
@@ -449,7 +449,7 @@ localedef -i zh_TW -f UTF-8 zh_TW.UTF-8</kbd></pre>
         </p>
         <p>
           Alternatively, install all the locales listed in the <code class=
-          "filename">glibc-2.43/localedata/SUPPORTED</code> file (it includes
+          "filename">glibc-2.44/localedata/SUPPORTED</code> file (it includes
           every locale listed above and many more) at once with the following
           time-consuming command:
         </p>
@@ -1031,7 +1031,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd></pre>
                     Used internally by Glibc as a gross hack to get broken
                     programs (e.g., some Motif applications) running. See
                     comments in <code class=
-                    "filename">glibc-2.43/locale/broken_cur_max.c</code> for
+                    "filename">glibc-2.44/locale/broken_cur_max.c</code> for
                     more information
                   </p>
                 </td>
@@ -1292,9 +1292,9 @@ mkdir -pv /etc/ld.so.conf.d</kbd></pre>
       <ul>
         <li class="prev">
           <a accesskey="p" href="iana-etc.html" title=
-          "Iana-Etc-20260504">Prev</a>
+          "Iana-Etc-20260617">Prev</a>
           <p>
-            Iana-Etc-20260504
+            Iana-Etc-20260617
           </p>
         </li>
         <li class="next">
