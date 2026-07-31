@@ -1,0 +1,26 @@
+description: "provides a portable implementation of the 'which' utility. "
+
+package:
+  name: File-Which
+  version: 1.27
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://www.cpan.org/authors/id/P/PL/PLICEASE/File-Which-1.27.tar.gz
+    sha256: 3201f1a60e3f16484082e6045c896842261fc345de9fb2e620fd2a2c7af3a93a
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install

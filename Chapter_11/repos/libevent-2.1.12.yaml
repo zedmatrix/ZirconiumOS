@@ -1,0 +1,34 @@
+description: "provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached."
+
+package:
+  name: libevent
+  version: 2.1.12
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
+    sha256: 92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
+    md5: b5333f021f880fe76490d8a799cd79f4
+
+prepare: |
+  sed -i 's/python/&3/' event_rpcgen.py;
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+check: |
+  make verify || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+optional:
+  - doxygen

@@ -1,0 +1,28 @@
+description: "provides various portable helper functions for module building modules."
+
+homepage: "https://metacpan.org/pod/ExtUtils::Helpers"
+
+package:
+  name: ExtUtils-Helpers
+  version: 0.028
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-Helpers-0.028.tar.gz
+    sha256: c8574875cce073e7dc5345a7b06d502e52044d68894f9160203fcaab379514fe
+    md5: 0687f20ac896a7d01219646908ccdf89
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

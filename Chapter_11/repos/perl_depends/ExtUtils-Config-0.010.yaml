@@ -1,0 +1,28 @@
+description: "an abstraction around the Config hash, it ties together a family of modern toolchain modules."
+
+homepage: "https://metacpan.org/pod/ExtUtils::Config"
+
+package:
+  name: ExtUtils-Config
+  version: 0.010
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-Config-0.010.tar.gz
+    sha256: 82e7e4e90cbe380e152f5de6e3e403746982d502dd30197a123652e46610c66d
+    md5: f455b5743db7b73c80e88133effa3551
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

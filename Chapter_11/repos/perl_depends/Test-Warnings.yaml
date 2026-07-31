@@ -1,0 +1,23 @@
+package:
+  name: Test-Warnings
+  version: 0.038
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-Warnings-0.038.tar.gz
+    sha256: 3da27e003a3c3cafed3c09b42be05cf9bdbff0bee5c8590a731b02853880a273
+    md5: 53f8c543cf362f49f822bdfe31797712
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

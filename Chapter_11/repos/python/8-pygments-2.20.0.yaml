@@ -1,0 +1,26 @@
+description: "a syntax highlighting package written in Python."
+homepage: "https://pypi.org/project/Pygments/"
+
+package:
+  name: pygments
+  version: 2.20.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/P/Pygments/pygments-2.20.0.tar.gz
+    sha256: 6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f
+    md5: 358297d0a1db8e4beff8eebc0620960e
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user Pygments
+
+required:
+  - hatchling
+
+optional:
+  - pytest

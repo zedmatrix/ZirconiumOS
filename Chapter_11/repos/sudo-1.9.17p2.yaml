@@ -1,0 +1,38 @@
+description: "allows a system administrator to give certain users (or groups of users) the ability to run some (or all) commands as root or another user while logging the commands and arguments."
+
+package:
+  name: sudo
+  version: 1.9.17p2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.sudo.ws/dist/sudo-1.9.17p2.tar.gz
+    sha256: 4a38a1ab3adb1199257edc2a7c4a2bd714665eb605b04368843b06dada2cfcfb
+    md5: dcbf46f739ae06b076e1a11cbb271a10
+
+prepare: |
+  sed -e 's/\([->.a-zA-Z_]*\)->length/ASN1_STRING_length(\1)/' -i lib/iolog/hostcheck.c;
+  ./configure --prefix=/usr --libexecdir=/usr/lib --with-secure-path \
+    --with-env-editor --docdir=/usr/share/doc/sudo-${PKGVER} \
+    --with-passprompt="[sudo] password for %p: "
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh;
+  ${YPKG}/sudo-config.sh
+
+required:
+  - linux-pam
+
+optional:
+  - mitkrb
+  - openldap

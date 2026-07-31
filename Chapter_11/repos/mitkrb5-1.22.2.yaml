@@ -1,0 +1,60 @@
+description: "A free implementation of Kerberos 5, a network authentication protocol."
+
+package:
+  name: mitkrb5
+  version: 1.22.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://kerberos.org/dist/krb5/1.22/krb5-1.22.2.tar.gz
+    sha256: 3243ffbc8ea4d4ac22ddc7dd2a1dc54c57874c40648b60ff97009763554eaf13
+    md5: 42472b11771d074329e0cc776d2eb5fd
+
+patches:
+  - url: https://linuxfromscratch.org/patches/downloads/mitkrb/mitkrb-1.22.2-openssl_4_fixes-1.patch
+    sha256: 703f634a0731a0355079211593491f3e175acfce237ed92b97cd04bd1e21bcc1
+    md5: 44154a524f299ef609b5d8b57aff1132
+  - url: https://www.linuxfromscratch.org/patches/blfs/svn/mitkrb-1.22.2-upstream_fix-1.patch
+    sha256: 91bed46e7c59b4bc27df659c13abd4514e456293717720e8545d7f8acad00a97
+    md5: 53ebe03fd1c1f47b86378d9f70567f6f
+  - url: https://www.linuxfromscratch.org/patches/blfs/svn/mitkrb-1.22.2-security_fix-1.patch
+    sha256: fcab4e4117667f4ffde3733b00c47ea3da12a9a5355e6aa6e2b124a9543e6181
+    md5: 88a0da655410a42c240c1f645dcbd4c6
+
+prepare: |
+  autoheader;  autoconf -fiv;
+  cd src;
+  sed -i -e '/eq 0/{N;s/12 //}' plugins/kdb/db2/libdb2/test/run.test;
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var/lib --runstatedir=/run \
+    --with-system-et --with-system-ss --with-system-verto=no --enable-dns-for-realm \
+    --disable-rpath
+
+build: |
+  cd src;
+  make
+
+check: |
+  cd src;
+  make -j1 -k check
+
+install: |
+  cd src;
+  make install
+
+final: |
+  mkdir -pv ${DESTDIR}/usr/share/doc/mitkrb-${PKGVER}
+  cp -fr doc -T ${DESTDIR}/usr/share/doc/mitkrb-${PKGVER}
+  /ybuild/ydest-strip-x64.sh
+
+optional:
+  - bind-utilities
+  - cracklib
+  - keyutils
+  - openldap
+  - valgrind
+  - yasm
+  - libedit

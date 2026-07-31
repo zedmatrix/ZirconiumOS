@@ -1,0 +1,26 @@
+description: "Modern, extensible Python build backend"
+homepage: "https://pypi.org/project/hatchling/"
+
+package:
+  name: hatchling
+  version: 1.31.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/h/hatchling/hatchling-1.31.0.tar.gz
+    sha256: 6b48ad4068a482ed7239b3a8215bc55b47aad3345d58dfc94e553c5d2d46211b
+    md5: 78f623663c87f0c729e3e480d1d01894
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user hatchling
+
+required:
+  - editables
+  - pathspec
+  - pluggy
+  - trove-classifiers

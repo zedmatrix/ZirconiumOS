@@ -1,0 +1,23 @@
+description: "a utility library for pattern matching of file paths. So far this only includes Git’s gitignore pattern matching."
+homepage: "https://pypi.org/project/pathspec/"
+
+package:
+  name: pathspec
+  version: 1.1.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-1.1.1.tar.gz
+    sha256: 17db5ecd524104a120e173814c90367a96a98d07c45b2e10c2f3919fff91bf5a
+    md5: c762d0a00d6cfc9de003e02d5072b26a
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user pathspec
+
+optional:
+  - pytest

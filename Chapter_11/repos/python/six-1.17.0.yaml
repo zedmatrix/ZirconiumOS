@@ -1,0 +1,25 @@
+description: "Python 2 and 3 compatibility utilities"
+homepage: "https://pypi.org/project/six/"
+
+package:
+  name: six
+  version: 1.17.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/s/six/six-1.17.0.tar.gz
+    sha256: ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
+    md5: a0387fe15662c71057b4fb2b7aa9056a
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user six
+
+optional:
+  - pytest

@@ -1,0 +1,41 @@
+description: ""
+
+homepage: ""
+
+package:
+  name:
+  version:
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url:
+    sha256:
+    md5:
+
+patches:
+  - url:
+    sha256:
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+final: |
+
+required:
+
+recommended:
+
+optional:

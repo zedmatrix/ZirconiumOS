@@ -1,0 +1,31 @@
+description: "Contains a list of country, language and currency names and it is used as a central database for accessing this data."
+
+package:
+  name: iso-codes
+  version: 4.20.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v4.20.1/iso-codes-v4.20.1.tar.gz
+    sha256: 2d7d9f6084ab9ce6c534ce71a3dd5144b6e474f3c97616459a88f73f44a64bff
+    md5: a8f16a62662ec13e55ca255a7c036ee3
+
+prepare: |
+  meson setup build --prefix=/usr
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - meson
+  - ninja

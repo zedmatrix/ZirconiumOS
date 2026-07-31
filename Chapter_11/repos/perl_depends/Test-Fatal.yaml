@@ -1,0 +1,29 @@
+description: "Test::Fatal module provides simple helpers for testing code which throws exceptions."
+
+package:
+  name: Test-Fatal
+  version: 0.017
+  rel: 1
+  archive: false
+  delete: true
+  cflags: ""
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Test-Fatal-0.017.tar.gz
+    sha256:
+    md5: 2f160c31e1848536e3b82112d573bb76
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - Try-Tiny

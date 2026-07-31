@@ -1,0 +1,30 @@
+description: "A portable POSIX/ANSI-C library for Unix which provides multiple threads of execution inside event-driven applications."
+
+package:
+  name: npth
+  version: 1.8
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/npth/npth-1.8.tar.bz2
+    sha256: 8bd24b4f23a3065d6e5b26e98aba9ce783ea4fd781069c1b35d149694e90ca3e
+    md5: cb4fc0402be5ba67544e499cb2c1a74d
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh

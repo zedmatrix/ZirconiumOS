@@ -1,0 +1,35 @@
+description: "It is required for import or export of Network File System (NFS) shared directories, a replacement for portmap."
+
+package:
+  name: rpcbind
+  version: 1.2.8
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://downloads.sourceforge.net/rpcbind/rpcbind-1.2.8.tar.bz2
+    sha256: 964132c389918e8964d7334936b6dd10ef025b300c6b29e693ba0f29550e3de5
+    md5: dc7988c2307999525619983df72cb957
+
+prepare: |
+  groupadd -g 28 rpc &&
+  useradd -c "RPC Bind Daemon Owner" -d /dev/null -g rpc -s /bin/false -u 28 rpc &&
+  sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
+
+build: |
+  ./configure --prefix=/usr --bindir=/usr/sbin \
+    --enable-warmstarts --with-rpcuser=rpc &&
+  make
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh;
+  systemctl enable rpcbind
+
+required:
+  - libtirpc

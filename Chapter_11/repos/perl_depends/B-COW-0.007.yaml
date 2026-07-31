@@ -1,0 +1,28 @@
+description: "B::COW provides additional helpers for the B core module to check Copy On Write."
+
+homepage: "https://metacpan.org/pod/B::COW"
+
+package:
+  name: B-COW
+  version: 0.007
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/B-COW-0.007.tar.gz
+    sha256: 1290daf227e8b09889a31cf182e29106f1cf9f1a4e9bf7752f9de92ed1158b44
+    md5: 7afc46f19e6f906e2ba5769b21fca5ff
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

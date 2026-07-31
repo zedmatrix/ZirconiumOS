@@ -1,0 +1,26 @@
+description: "Parse gdb machine interface output with Python"
+
+homepage: "https://pypi.org/project/pygdbmi/"
+
+package:
+  name: pygdbmi
+  version: 0.11.0.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/p/pygdbmi/pygdbmi-0.11.0.0.tar.gz
+    sha256: 7a286be2fcf25650d9f66e11adc46e972cf078a466864a700cd44739ad261fb0
+    md5: 34b1812e77469c6206002b3929798cab
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user pygdbmi
+
+optional:
+  - pytest

@@ -1,0 +1,32 @@
+description: "HTML::Parser distribution is a collection of modules that parse and extract information from HTML documents. "
+
+homepage: "https://metacpan.org/pod/HTML::Parser"
+
+package:
+  name: HTML-Parser
+  version: 3.85
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTML-Parser-3.85.tar.gz
+    sha256: fd42ba6abe07241cf0ad57be246c3980065f683e4465e59b46af9efebc8e0c71
+    md5: 400384681da1452493d36f036d9f387b
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - HTML-Tagset
+  - HTTP-Message

@@ -1,0 +1,43 @@
+description: "Package contains libraries and utilities used for parsing XML files."
+
+package:
+  name: libxml2
+  version: 2.15.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.3.tar.xz
+    sha256: 78262a6e7ac170d6528ebfe2efccdf220191a5af6a6cd61ea4a9a9a5042c7a07
+    md5: b7b0123654f86ebf630a5cbedaafdece
+  - url: https://www.w3.org/XML/Test/xmlts20130923.tar.gz
+    sha256: 9b61db9f5dbffa545f4b8d78422167083a8568c59bd1129f94138f936cf6fc1f
+    md5: ef8fbe0c92efd9a60d7f320e211d10b2
+
+prepare: |
+  sed -i "/'git'/,+3d" meson.build;
+  meson setup build --prefix=/usr --buildtype=release -D history=enabled -D icu=enabled
+
+build: |
+  ninja -C build
+
+check: |
+  tar -xf ${YSRC}/xmlts20130923.tar.gz &&
+  ninja -C build test
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+  sed "s/--static/--shared/" -i /usr/bin/xml2-config
+
+recommended:
+  - icu
+
+optional:
+  - doxygen
+  - libxslt

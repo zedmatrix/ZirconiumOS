@@ -1,0 +1,34 @@
+description: "A library which facilitates the common operations with sizes in bytes."
+
+package:
+  name: libbytesize
+  version: 2.12
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/storaged-project/libbytesize/releases/download/2.12/libbytesize-2.12.tar.gz
+    sha256: 8356bac2cafd2f31f39bf1ad373cef8448cab08b817aeaee5c526d54e81c3c5a
+    md5: 5314b773b20d1f3acdf3b2bf0c92549f
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - pcre2
+  - pygments
+
+optional:
+  - gtk-doc

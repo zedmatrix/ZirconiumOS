@@ -1,0 +1,35 @@
+description: "supports the x86 and AMD64 instruction sets, accepts NASM and GAS assembler syntaxes and outputs binary, ELF32 and ELF64 object formats."
+
+package:
+  name: yasm
+  version: 1.3.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz
+    sha256: 3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f
+    md5: fc9e586751ff789b34b1f21d572d96af
+
+prepare: |
+  sed -e 's/def __cplusplus/ defined(__cplusplus) || __STDC_VERSION__ >= 202311L/' -i libyasm/bitvect.h &&
+  sed -i 's#) ytasm.*#)#' Makefile.in;
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make -j1 check || true
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+optional:
+  - cython

@@ -1,0 +1,31 @@
+description: "Sass compiler written in C++"
+
+homepage: "https://github.com/sass/libsass"
+note: "Archived Oct 24, 2025"
+
+package:
+  name: libsass
+  version: 3.6.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/sass/libsass/archive/3.6.6/libsass-3.6.6.tar.gz
+    sha256: 11f0bb3709a4f20285507419d7618f3877a425c0131ea8df40fe6196129df15d
+    md5: afda97284d75a030cabadf5b9f998a3b
+
+prepare: |
+  autoreconf -fi &&
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  /ybuild/ydest-strip-x64.sh

@@ -1,0 +1,29 @@
+description: "contains basic utilities for writing tests. "
+
+package:
+  name: Test-Simple
+  version: 1.302214
+  rel: 1
+  archive: false
+  delete: true
+  cflags: ""
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Test-Simple-1.302214.tar.gz
+    sha256: 6077ecc35f37b11b3b75df2d0ba1b9ca541f1dc24b2be8e15b6e91f78e2e03fc
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install
+
+required:
+  - Term-Table

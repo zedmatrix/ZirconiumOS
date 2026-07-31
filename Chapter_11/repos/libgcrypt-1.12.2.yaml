@@ -1,0 +1,42 @@
+description: "Contains a general purpose crypto library based on the code used in GnuPG."
+
+package:
+  name: libgcrypt
+  version: 1.12.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.12.2.tar.bz2
+    sha256: 7ce33c2492221a0436f96a8500215e9f3e3dcb5fd26a757cd415e7a843babd5e
+    md5: 4e98430cfc16d842a7231026c32418da
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make &&
+  make -C doc html &&
+  makeinfo --html --no-split -o doc/gcrypt_nochunks.html doc/gcrypt.texi &&
+  makeinfo --plaintext -o doc/gcrypt.txt doc/gcrypt.texi
+
+install: |
+  make DESTDIR=${DESTDIR} install &&
+  mkdir -pv ${DESTDIR}/usr/share/doc/libgcrypt-${PKGVER}/html;
+  install -m644 README doc/{README.apichanges,fips*,libgcrypt*} ${DESTDIR}/usr/share/doc/libgcrypt-${PKGVER};
+  install -m644 doc/gcrypt.html/* ${DESTDIR}/usr/share/doc/libgcrypt-${PKGVER}/html;
+  install -m644 doc/gcrypt_nochunks.html ${DESTDIR}/usr/share/doc/libgcrypt-${PKGVER};
+  install -m644 doc/gcrypt.{txt,texi} ${DESTDIR}/usr/share/doc/libgcrypt-${PKGVER}
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libgpg-error
+
+optional:
+  - texlive
+  - tl-installer

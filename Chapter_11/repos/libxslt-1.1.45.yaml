@@ -1,0 +1,41 @@
+description: "Package contains XSLT libraries used for extending libxml2 libraries to support XSLT files."
+
+package:
+  name: libxslt
+  version: 1.1.45
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.45.tar.xz
+    sha256: 9acfe68419c4d06a45c550321b3212762d92f41465062ca4ea19e632ee5d216e
+    md5: 84bb3f6ba7f5ee98af5dcd72e828c73e
+
+prepare: |
+  ./configure --prefix=/usr --disable-static \
+    --docdir=/usr/share/doc/libxslt-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libxml2
+
+optional:
+  - libcrypt
+
+runtime:
+  - docbook-xml
+  - docbook-xsl-nons

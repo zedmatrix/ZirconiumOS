@@ -1,0 +1,30 @@
+description: "Contains a library used to encode, decode, and manipulate JSON data."
+
+package:
+  name: jansson
+  version: 2.15.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/akheron/jansson/releases/download/v2.15.1/jansson-2.15.1.tar.bz2
+    sha256: f9aa4b3ec8496fee69db94f06f3d76fd4a26b012ee9bf1e917078c2cd2841881
+    md5: d78dc70210ed2052fe1f97cf3fd3ed72
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh

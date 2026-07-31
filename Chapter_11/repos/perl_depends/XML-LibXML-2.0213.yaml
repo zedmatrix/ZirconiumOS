@@ -1,0 +1,31 @@
+description: "is a perl binding for libxml2"
+homepage: "https://metacpan.org/pod/XML::LibXML"
+
+package:
+  name: XML-LibXML
+  version: 2.0213
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-LibXML-2.0213.tar.gz
+    sha256: 2af21c5d61ac34ea26a5fabf15ba5a5841e648f7189db3e33b6f28b5489802ab
+    md5: 7135bdef80f72a278ca65eb8e2dc13b6
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - Alien-Libxml2
+  - XML-SAX

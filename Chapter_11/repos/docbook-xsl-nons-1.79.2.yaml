@@ -1,0 +1,47 @@
+description: "DocBook XSL Stylesheets are useful for performing transformations on XML DocBook files."
+
+package:
+  name: docbook-xsl-nons
+  version: 1.79.2
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2
+    sha256: ee8b9eca0b7a8f89075832a2da7534bce8c5478fc8fc2676f512d5d87d832102
+    md5: 2666d1488d6ced1551d15f31d7ed8c38
+  - url: https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-doc-1.79.2.tar.bz2
+    sha256: 9bc38a3015717279a3a0620efb2d4bcace430077241ae2b0da609ba67d8340bc
+    md5: 62375ca864fc198cb2b17d98209d0b8c
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/docbook-xsl-nons/docbook-xsl-nons-1.79.2-stack_fix-1.patch
+    sha256: a92c39715c54949ba9369add1809527b8f155b7e2a2b2e30cb4b39ee715f2e30
+    md5: 8457bd6ee6b06fbc6dc540e1b096f766
+
+prepare: |
+  install -vdm755 /usr/share/xml/docbook/xsl-stylesheets-nons-${PKGVER} &&
+  cp -vR VERSION assembly common eclipse epub epub3 extensions fo \
+         highlighting html htmlhelp images javahelp lib manpages params \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5 \
+    /usr/share/xml/docbook/xsl-stylesheets-nons-${PKGVER}
+
+build: |
+  ln -s VERSION /usr/share/xml/docbook/xsl-stylesheets-nons-${PKGVER}/VERSION.xsl;
+  install -vDm644 README /usr/share/doc/docbook-xsl-nons-${PKGVER}/README.txt;
+  install -vm644  RELEASE-NOTES* NEWS* /usr/share/doc/docbook-xsl-nons-${PKGVER}
+
+install: |
+  tar -xf ${YSRC}/docbook-xsl-doc-${PKGVER}.tar.bz2 --strip-components=1 &&
+  cp -R doc/* /usr/share/doc/docbook-xsl-nons-${PKGVER}
+
+final: |
+  ${YPKG}/docbook-xsl-populate.sh
+
+required:
+  - libxml2
+
+optional:
+  - libxslt

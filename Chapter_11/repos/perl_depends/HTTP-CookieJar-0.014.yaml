@@ -1,0 +1,36 @@
+description: "provides a minimalist HTTP user agent cookie jar."
+
+homepage: "https://metacpan.org/pod/HTTP::CookieJar"
+
+package:
+  name: HTTP-CookieJar
+  version: 0.014
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/HTTP-CookieJar-0.014.tar.gz
+    sha256: 7094ea5c91f536d263b85e83ab4e9a963e11c4408ce08ecae553fa9c0cc47e73
+    md5: a1d891ce0046f1a2c19e2c617d624d0d
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - HTTP-Date
+
+optional:
+  - Test-Deep
+  - Test-Requires
+  - URI

@@ -1,0 +1,29 @@
+description: "A set of utilities for managing the key retention facility in the kernel, which can be used by filesystems, block devices."
+
+package:
+  name: keyutils
+  version: 1.6.3
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/keyutils-1.6.3.tar.gz
+    sha256: a61d5706136ae4c05bd48f86186bcfdbd88dd8bd5107e3e195c924cfc1b39bb4
+    md5: 6b70b2b381c1b6d9adfaf66d5d3e7c00
+
+build: |
+  make
+
+install: |
+  make NO_ARLIB=1 LIBDIR=/usr/lib BINDIR=/usr/bin SBINDIR=/usr/sbin install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+optional:
+  - lsb-tools
+
+note: "strip/destdir did not work"

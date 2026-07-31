@@ -1,0 +1,26 @@
+description: "Test::Needs skips tests if a requested module is not present."
+
+package:
+  name: Test-Needs
+  version: 0.002010
+  rel: 1
+  archive: false
+  delete: true
+  cflags: ""
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Test-Needs-0.002010.tar.gz
+    sha256:
+    md5: 2b3d10946001561297624e7668f09c26
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

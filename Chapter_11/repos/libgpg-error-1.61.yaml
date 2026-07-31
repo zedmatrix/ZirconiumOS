@@ -1,0 +1,30 @@
+description: "Contains a library that defines common error values for all GnuPG components."
+
+package:
+  name: libgpg-error
+  version: 1.61
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.61.tar.bz2
+    sha256: 7a85413f2bc354f4f8aa832b718af122e48965e9e0eb9012ee659c13c6385c93
+    md5: c89a8c6825cb64c527d5c1c0fb36f245
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh

@@ -1,0 +1,28 @@
+description: "A module for encoding/decoding data using a Base32 encoder and decoder"
+
+homepage: "https://metacpan.org/pod/MIME::Base32"
+
+package:
+  name: MIME-Base32
+  version: 1.303
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/R/RE/REHSACK/MIME-Base32-1.303.tar.gz
+    sha256: ab21fa99130e33a0aff6cdb596f647e5e565d207d634ba2ef06bdbef50424e99
+    md5: 0c7735fa09e74c7f2ec93d1890b8c6c0
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

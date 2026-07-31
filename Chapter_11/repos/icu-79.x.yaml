@@ -1,0 +1,38 @@
+description: "International Components for Unicode (ICU) widely used set of C/C++ libraries, Unicode and Globalization."
+note: "2026-07-01"
+
+package:
+  name: icu
+  version: 79.0.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: true
+  destdir: true
+
+sources:
+  - url: sources/icu-79.x.tar.gz
+    sha256: ba4f79d176fe3507561612d4632c99f9c676687993633b273d2fc91fb51425cb
+    md5: 90a2db9db12c2230ae4822bfa83724ca
+
+prepare: |
+  cd icu4c/source;
+  ./configure --prefix=/usr
+
+build: |
+  cd icu4c/source;
+  make
+
+check: |
+  cd icu4c/source;
+  make check 2>&1 | tee ${YBLD}/log/${PKGDIR}/check.log
+
+install: |
+  cd icu4c/source;
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - doxygen

@@ -1,0 +1,36 @@
+description: "To set up transparent encryption of block devices using the kernel crypto API."
+
+package:
+  name: cryptsetup
+  version: 2.8.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.6.tar.xz
+    sha256: 8004265fd993885d08f7b633dbe056851de1a210307613a4ebddc743fccefe5a
+    md5: 110d3dd2dec73401a087f526f598f884
+
+prepare: |
+  ./configure --prefix=/usr --disable-ssh-token --disable-asciidoc
+
+build: |
+  make
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - json-c
+  - lvm2
+  - popt
+
+optional:
+  - asciidoctor
+  - libpwquality

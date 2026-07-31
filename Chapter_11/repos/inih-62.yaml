@@ -1,0 +1,34 @@
+description: "A simple .INI file parser written in C."
+
+package:
+  name: inih
+  version: 62
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/benhoyt/inih/archive/r62/inih-r62.tar.gz
+    sha256: 9c15fa751bb8093d042dae1b9f125eb45198c32c6704cd5481ccde460d4f8151
+    md5: c0c6982525958a0376a3cb5bfbee14a0
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release
+
+build: |
+  ninja -C build
+
+check: |
+  ninja -C build test
+
+install: |
+  ninja -C build install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - meson
+  - ninja

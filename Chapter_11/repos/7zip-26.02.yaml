@@ -1,0 +1,37 @@
+description: "a file archiver that archives with high compression ratios."
+homepage: "https://www.7-zip.org"
+note: "for microsoft font extraction"
+
+package:
+  name: 7zip
+  version: 26.02
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/ip7z/7zip/archive/26.02/7zip-26.02.tar.gz
+    sha256: 7e5600ad0b21918bc41803bd84d0c2967e097fb7fbaa2e7aeb90beeb1121e54b
+    md5: 29f692dc18d150acbbd31a86e3ffe610
+
+prepare: |
+  sed -i 's/-Werror //g' CPP/7zip/7zip_gcc.mak
+
+build: |
+  (for i in Bundles/{Alone,Alone7z,Format7zF,SFXCon} UI/Console; do
+    make -C CPP/7zip/$i -f ../../cmpl_gcc.mak
+  done)
+
+install: |
+  install -vDm755 CPP/7zip/Bundles/Alone{/b/g/7za,7z/b/g/7zr} \
+    CPP/7zip/Bundles/Format7zF/b/g/7z.so CPP/7zip/UI/Console/b/g/7z -t /usr/local/lib/7zip/ &&
+  install -vm755 CPP/7zip/Bundles/SFXCon/b/g/7zCon /usr/local/lib/7zip/7zCon.sfx
+  cp -rv DOC -T /usr/local/share/doc/7zip-${PKGVER}
+
+final: |
+  for _prog in 7za 7zr 7z; do
+    printf '#!/bin/sh\nexec /usr/local/lib/7zip/%s "$@"\n' "$_prog" \
+    | install -vD /dev/stdin "/usr/local/bin/$_prog"
+  done

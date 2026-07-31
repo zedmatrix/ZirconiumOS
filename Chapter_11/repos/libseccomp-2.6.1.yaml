@@ -1,0 +1,32 @@
+description: "Provides an easy to use and platform independent interface to the Linux kernel's syscall filtering mechanism."
+
+package:
+  name: libseccomp
+  version: 2.6.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/seccomp/libseccomp/releases/download/v2.6.1/libseccomp-2.6.1.tar.gz
+    sha256: 501f66c667225d53791b97e1d7cf85ab764c297d04881f60f38f451c4b0ee1be
+    md5: 33a3a5d4c526a739515ff4dc53cdc192
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - which
+  - valgrind
+  - cython

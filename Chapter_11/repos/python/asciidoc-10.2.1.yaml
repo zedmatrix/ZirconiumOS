@@ -1,0 +1,26 @@
+description: "Text document format for writing notes, docs, articles, books, ebooks, slideshows, web pages, man pages and blogs."
+homepage: "https://pypi.org/project/asciidoc/"
+
+package:
+  name: asciidoc
+  version: 10.2.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/a/asciidoc/asciidoc-10.2.1.tar.gz
+    sha256: d9f13c285981b3c7eb660d02ca0a2779981e88d48105de81bb40445e60dddb83
+    md5: 460824075b51381a4b5f478c60a18165
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user asciidoc
+
+optional:
+  - libxslt
+  - docbook-xsl-nons
+  - fop
+  - lynx

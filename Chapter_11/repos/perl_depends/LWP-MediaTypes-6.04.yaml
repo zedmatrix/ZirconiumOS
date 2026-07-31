@@ -1,0 +1,31 @@
+description: "LWP::MediaTypes guesses the media type (i.e. the MIME Type) for a file or URL."
+
+homepage: "https://metacpan.org/pod/LWP::MediaTypes"
+
+package:
+  name: LWP-MediaTypes
+  version: 6.04
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-MediaTypes-6.04.tar.gz
+    sha256: 8f1bca12dab16a1c2a7c03a49c5e58cce41a6fec9519f0aadfba8dad997919d9
+    md5: 84b799a90c0d2ce52897a7cb4c0478d0
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+optional:
+  - Test-Fatal

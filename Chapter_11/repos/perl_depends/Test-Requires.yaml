@@ -1,0 +1,26 @@
+description: "module checks if another (optional) module can be loaded, and if not it skips all the current tests."
+
+package:
+  name: Test-Requires
+  version: 0.11
+  rel: 1
+  archive: false
+  delete: true
+  cflags: ""
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.11.tar.gz
+    sha256: 4b88de549597eecddf7c3c38a4d0204a16f59ad804577b671896ac04e24e040f
+    md5: 999d6c4e46ea7baae7a5113292e02ed8
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

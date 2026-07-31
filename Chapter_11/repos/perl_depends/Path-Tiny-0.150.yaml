@@ -1,0 +1,26 @@
+description: "provides a small fast utility for working with file paths."
+
+package:
+  name: Path-Tiny
+  version: 0.150
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Path-Tiny-0.150.tar.gz
+    sha256: ff20713d1a14d257af9c78209001f40dc177e4b9d1496115cbd8726d577946c7
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install

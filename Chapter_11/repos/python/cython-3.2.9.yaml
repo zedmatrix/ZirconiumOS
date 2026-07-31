@@ -1,0 +1,19 @@
+description: "Provides a compiler for writing C extensions for the Python language."
+
+package:
+  name: cython
+  version: 3.2.9
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/cython/cython/releases/download/3.2.9/cython-3.2.9.tar.gz
+    sha256: d249c9022ab13286b17bd66f30609e800c5f95efeecb06168990c7a66cecde6c
+    md5: 775ad752cdb021193f3ef323228388d5
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user Cython

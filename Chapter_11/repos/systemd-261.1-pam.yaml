@@ -1,0 +1,38 @@
+description: "The systemd package contains programs for controlling the startup, running, and shutdown of the system."
+note: "for systemd-boot create /etc/os-release file"
+
+package:
+  name: systemd-pam
+  version: 261.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/systemd/systemd/archive/v261.1/systemd-261.1.tar.gz
+    sha256: f9b9da1103d1714703503d1746971ccbeeae945663ef3ede3b7348169b5df064
+    md5: e8c18dba4d0b12dfbffa1ec2a75ae83b
+  - url: https://anduin.linuxfromscratch.org/LFS/systemd-man-pages-261.1.tar.xz
+    sha256: 30777e8534c68f1e70f0565eb5038b74053175e13f5288f0eb3df44e5b47702a
+    md5: 28f09e8ea44375bf6d598f9ca33b0d40
+
+prepare: |
+  sed -e 's/GROUP="render"/GROUP="video"/' -e 's/GROUP="sgx", //' -i rules.d/50-udev-default.rules.in;
+  meson setup build --prefix=/usr --buildtype=release -Ddefault-dnssec=no -Dfirstboot=false \
+    -Dinstall-tests=false -Dldconfig=false -Dsysusers=false -Drpmmacrosdir=no -Dhomed=disabled \
+    -Dman=disabled -Dmode=release -Dpam=enabled -Dpamconfdir=/etc/pam.d -Ddev-kvm-mode=0660 \
+    -Dnobody-group=nogroup -Dsysupdate=disabled -Dukify=disabled -Ddocdir=/usr/share/doc/systemd-${PKGVER} \
+    -Defi=true -Dbootloader=enabled -Dsbat-distro="zlfs" -Dsbat-distro-url="https://zedmatrix.github.io/ZirconiumOS/"
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh;
+  ${YPKG}/systemd-pam-config.sh;
+  systemctl daemon-reexec

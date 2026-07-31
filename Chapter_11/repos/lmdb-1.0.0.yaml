@@ -1,0 +1,27 @@
+description: "It uses memory-mapped files so it has the read performance of a pure in-memory database as fast, compact, key-value embedded data store."
+
+package:
+  name: lmdb
+  version: 1.0.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://git.openldap.org/openldap/openldap/-/archive/LMDB_1.0.0/openldap-LMDB_1.0.0.tar.bz2
+    sha256: 9ab73cda2ca2132d10256a63b655981af4860f6dc8315a933175ff9b598ffab2
+    md5: 82afab3729ecbd960cf19db691cd119a
+
+build: |
+  cd libraries/liblmdb &&
+  make &&
+  sed -i 's| liblmdb.a||' Makefile
+
+install: |
+  cd libraries/liblmdb &&
+  make prefix=/usr DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh

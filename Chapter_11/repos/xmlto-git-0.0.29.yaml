@@ -1,0 +1,48 @@
+description: "It chooses an appropriate stylesheet for the conversion you want and applies it using an external XSLT processor."
+homepage: "https://pagure.io/xmlto/  https://codeberg.org/xmlto/xmlto"
+
+package:
+  name: xmlto
+  version: 0.0.29
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: sources/xmlto-git-0.0.29.tar.gz
+    sha256: b23c748d20412e82137a96f9630441d9d1e9a734ebeacde57298e4c4b0401272
+    md5: aa452c940cbe91fcd4651bc96405c3a6
+
+prepare: |
+  autoreconf -fiv;
+  LINKS="/usr/bin/links" ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - docbook-xml
+  - docbook-xsl-nons
+  - libxslt
+
+optional:
+  - fop
+  - links
+  - lynx
+
+alternate: |
+  git ls-remote https://codeberg.org/xmlto/xmlto.git
+  git clone --filter=blob:none --no-checkout https://codeberg.org/xmlto/xmlto.git
+  git archive --format=tar.gz --prefix=xmlto-0.0.29/ \
+    --output=../xmlto-git-0.0.29.tar.gz 0.0.29-8-g57b9f20

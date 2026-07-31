@@ -1,0 +1,32 @@
+description: "allows Alien::Build to download from GitLab (in practice, this does not download if the required library is already installed on the system)."
+
+homepage: "https://metacpan.org/pod/Alien::Build::Plugin::Download::GitLab"
+
+package:
+  name: Alien-Build-Plugin-Download-GitLab
+  version: 0.01
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Build-Plugin-Download-GitLab-0.01.tar.gz
+    sha256: c1f089c8ea152a789909d48a83dbfcf2626f773daf30431c8622582b26aba902
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - Alien-Build
+  - URI

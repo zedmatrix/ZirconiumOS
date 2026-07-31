@@ -1,0 +1,39 @@
+description: "an 80x86 assembler and disassembler designed for portability and modularity."
+note: "2026-06-28 19:16"
+
+package:
+  name: nasm
+  version: 3.02
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.nasm.us/pub/nasm/releasebuilds/3.02rc13/nasm-3.02rc13.tar.xz
+    sha256: 71b08d014054949f34c305248c3849b0a18298186491690c769135f0aca83bc7
+    md5: aed95fe7a9efefa2b30d6039844d024f
+  - url: https://www.nasm.us/pub/nasm/releasebuilds/3.02rc13/nasm-3.02rc13-xdoc.tar.xz
+    sha256: 7d9238439397858aa5252bebf67b694dab881745863ff6f2a5d87b75b145f3eb
+    md5: f99abdb177103c5e76c16b4d21c2ddf0
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install;
+  tar -xf ${YSRC}/nasm-${PKGVER}rc13-xdoc.tar.xz --strip-components=1 &&
+  install -vdm755 ${DESTDIR}/usr/share/doc/nasm-${PKGVER}/html;
+  cp -v doc/html/*.html ${DESTDIR}/usr/share/doc/nasm-${PKGVER}/html;
+  cp -v doc/*.{txt,ps,pdf} ${DESTDIR}/usr/share/doc/nasm-${PKGVER}
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - asciidoc
+  - xmlto

@@ -1,0 +1,31 @@
+description: "parses a directory listing."
+
+homepage: "https://metacpan.org/pod/File::Listing"
+
+package:
+  name: File-Listing
+  version: 6.16
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-Listing-6.16.tar.gz
+    sha256: 189b3a13fc0a1ba412b9d9ec5901e9e5e444cc746b9f0156d4399370d33655c6
+    md5: d4fc8b0c86633d1fa5bf75323720eadc
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - HTTP-Date

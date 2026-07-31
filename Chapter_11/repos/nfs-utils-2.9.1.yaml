@@ -1,0 +1,50 @@
+description: "Contains the userspace server and client tools necessary to use the kernel's NFS abilities."
+
+package:
+  name: nfs-utils
+  version: 2.9.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/nfs-utils/2.9.1/nfs-utils-2.9.1.tar.xz
+    sha256: 302846343bf509f8f884c23bdbd0fe853b7f7cbb6572060a9082279d13b21a2c
+    md5: cbe69cd70cf81c99d6f3172613b2d250
+
+prepare: |
+  ./configure --prefix=/usr --sysconfdir=/etc --sbindir=/usr/sbin \
+    --disable-nfsv4 LIBS='-lsqlite3 -levent_core'
+
+build: |
+  make
+
+install: |
+  make install &&
+  chmod u+w,go+r /usr/sbin/mount.nfs;
+  chown nobody:nogroup /var/lib/nfs
+
+final: |
+  install -dm755 /etc/default/
+  install -m644 ${YPKG}/nfs-utils /etc/default/
+  install -m644 ${YPKG}/rpc-statd.service /usr/lib/systemd/system/
+  install -m644 ${YPKG}/rpc-statd-notify.service /usr/lib/systemd/system/
+  install -m644 ${YPKG}/nfs-client.service /usr/lib/systemd/system/
+  install -m644 ${YPKG}/nfs-client.target /usr/lib/systemd/system/
+  systemctl enable nfs-client.target
+
+required:
+  - libevent
+  - libnl
+  - libtirpc
+  - libxml2
+  - rpcsvc-proto
+  - rpcbind
+
+optional:
+  - cyrus-sasl
+  - libnsl
+  - lvm2
+  - openldap
+  - mitkrb
+  - libcap-pam

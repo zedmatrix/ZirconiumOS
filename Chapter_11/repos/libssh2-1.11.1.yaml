@@ -1,0 +1,36 @@
+description: "Is a client-side C library implementing the SSH2 protocol."
+note: "2024-10-16"
+
+package:
+  name: libssh2
+  version: 1.11.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.libssh2.org/download/libssh2-1.11.1.tar.gz
+    sha256: d9ec76cbe34db98eec3539fe2c899d26b0c837cb3eb466a56b0f109cabf658f7
+    md5: 38857d10b5c5deb198d6989dacace2e6
+
+prepare: |
+  ./configure --prefix=/usr --disable-docker-tests
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+optional:
+  - cmake
+  - libgcrypt
+  - openssh

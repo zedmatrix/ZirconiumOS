@@ -1,0 +1,32 @@
+description: "provides tools for building external (non-CPAN) dependencies for CPAN."
+
+package:
+  name: Alien-Build
+  version: 2.84
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Build-2.84.tar.gz
+    sha256: 8e891fd3acbac39dd8fdc01376b9abff931e625be41e0910ca30ad59363b4477
+    md5: 531c4d1ea1274e2fafd7e61df60f9099
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - Capture-Tiny
+  - File-Which
+  - FFI-CheckLib
+  - File-chdir

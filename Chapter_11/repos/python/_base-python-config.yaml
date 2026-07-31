@@ -1,0 +1,34 @@
+description: ""
+homepage: ""
+
+package:
+  name:
+  version:
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url:
+    sha256:
+    md5:
+
+patches:
+  - url:
+    sha256:
+    md5:
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user PKGNAME
+
+required:
+
+recommended:
+
+optional:
+  - pytest

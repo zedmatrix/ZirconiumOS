@@ -1,0 +1,34 @@
+description: "checks whether a particular dynamic library is available for FFI (Foreign Function Interface) to use."
+
+package:
+  name: FFI-CheckLib
+  version: 0.31
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/FFI-CheckLib-0.31.tar.gz
+    sha256: 04d885fc377d44896e5ea1c4ec310f979bb04f2f18658a7e7a4d509f7e80bb80
+    md5: ffc8e61bb686dd631bed3ddf102af41c
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - File-Which
+  - Capture-Tiny
+  - Path-Tiny
+
+optional:
+  - Test-Simple

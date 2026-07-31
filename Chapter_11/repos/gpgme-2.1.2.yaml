@@ -1,0 +1,39 @@
+description: "A C library that allows cryptography support to make access to public key crypto engines like GnuPG or GpgSM easier for applications."
+
+note: "	2026-06-30"
+
+package:
+  name: gpgme
+  version: 2.1.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.2.tar.bz2
+    sha256: 0687a95b299871c4141f507c0f740de6b429c9ac067d0fa4e062e3264df5fb77
+    md5: 58448073da13a22e878adfb22a988d4d
+
+build: |
+  mkdir -v build && cd build
+  ../configure --prefix=/usr --disable-static && make
+
+check: |
+  cd build && make -k check || true
+
+install: |
+  cd build && make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libassuan
+
+recommended:
+  - gnupg2
+
+optional:
+  - doxygen

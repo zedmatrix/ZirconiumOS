@@ -1,0 +1,32 @@
+description: "Netscape Portable Runtime (NSPR) provides a platform-neutral API for system level and libc like functions."
+
+package:
+  name: nspr
+  version: 4.39
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://archive.mozilla.org/pub/nspr/releases/v4.39/src/nspr-4.39.tar.gz
+    sha256: bbd02ee87a55676063a63e5bc819e0227de2666b47307b2a0134414cdf42368e
+    md5: a1062dbc7d0fa524f0db6f254b747e45
+
+prepare: |
+  cd nspr &&
+  sed -i '/^RELEASE/s|^|#|' pr/src/misc/Makefile.in;
+  sed -i 's|$(LIBRARY) ||'  config/rules.mk;
+  ./configure --prefix=/usr --with-mozilla --with-pthreads --enable-64bit
+
+build: |
+  cd nspr &&
+  make
+
+install: |
+  cd nspr &&
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh

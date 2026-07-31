@@ -1,0 +1,31 @@
+description: "is a rewrite of XML::Simple to use the XML::LibXML parser for XML structures, instead of the plain Perl or SAX parsers."
+
+homepage: "https://metacpan.org/pod/XML::LibXML::Simple"
+
+package:
+  name: XML-LibXML-Simple
+  version: 1.01
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://www.cpan.org/authors/id/M/MA/MARKOV/XML-LibXML-Simple-1.01.tar.gz
+    sha256: cd98c8104b70d7672bfa26b4513b78adf2b4b9220e586aa8beb1a508500365a6
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - XML-LibXML

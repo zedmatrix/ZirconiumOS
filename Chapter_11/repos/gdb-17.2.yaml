@@ -1,0 +1,42 @@
+description: "GNU Project debugger, allows you to see what is going on `inside' another program while it executes"
+homepage: "https://sourceware.org/gdb/"
+
+package:
+  name: gdb
+  version: 17.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gdb/gdb-17.2.tar.xz
+    sha256: 1c036c0d72e4b3d1fb5c94c88632add6f9d76f4d7c4d2ea793c12a9f19a3228c
+    md5: 6137ae4ffa0e7423fce956768835de1f
+
+prepare: |
+  mkdir build && cd build &&
+  ../configure --prefix=/usr --with-system-readline \
+    --with-system-zlib --with-python=/usr/bin/python3
+
+build: |
+  cd build && make
+
+install: |
+  cd build &&
+  make DESTDIR=${DESTDIR} -C gdb install &&
+  make DESTDIR=${DESTDIR} -C gdbserver install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - six
+
+optional:
+  - doxygen
+  - guile
+  - rustc
+  - gcc-p3
+  - valgrind

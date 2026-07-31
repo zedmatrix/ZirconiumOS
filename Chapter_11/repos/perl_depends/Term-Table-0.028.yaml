@@ -1,0 +1,23 @@
+description: "formats a header and rows into a table."
+
+package:
+  name: Term-Table
+  version: 0.028
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Term-Table-0.028.tar.gz
+    sha256: f2ba62a52f32d18aea8a8ca73299bef0e52409332cfe514a9c475316f6d5351c
+    md5: 28c3c03c85938a37e92d24413d0953ec
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+install: |
+  make install

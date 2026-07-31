@@ -1,0 +1,35 @@
+description: "provides userspace support for the hardware monitoring drivers in the Linux kernel."
+
+package:
+  name: lm-sensors
+  version: 3.6.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/hramrach/lm-sensors/archive/V3-6-2/lm-sensors-3-6-2.tar.gz
+    sha256: c6a0587e565778a40d88891928bf8943f27d353f382d5b745a997d635978a8f0
+    md5: 44c733f509cd4a31494fd3e355152b0a
+
+build: |
+  make PREFIX=/usr BUILD_STATIC_LIB=0 MANDIR=/usr/share/man
+
+install: |
+  make PREFIX=/usr BUILD_STATIC_LIB=0 MANDIR=/usr/share/man install
+  mkdir -pv ${DESTDIR}/usr/share/doc/lm-sensors-${PKGVER};
+  cp -rv README INSTALL doc/* ${DESTDIR}/usr/share/doc/lm-sensors-${PKGVER}
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - which
+
+optional:
+  - RRDtool
+  - dmidecode
+
+note: "destdir did not work"

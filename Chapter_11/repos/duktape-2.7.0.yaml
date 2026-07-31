@@ -1,0 +1,25 @@
+description: "An embeddable Javascript engine with a focus on portability and compact footprint."
+
+package:
+  name: duktape
+  version: 2.7.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://duktape.org/duktape-2.7.0.tar.xz
+    sha256: 90f8d2fa8b5567c6899830ddef2c03f3c27960b11aca222fa17aa7ac613c2890
+    md5: b3200b02ab80125b694bae887d7c1ca6
+
+build: |
+  sed -i 's/-Os/-O2/' Makefile.sharedlibrary &&
+  make -f Makefile.sharedlibrary INSTALL_PREFIX=/usr
+
+install: |
+  make -f Makefile.sharedlibrary INSTALL_PREFIX=/usr install
+
+final: |
+  /ybuild/ydest-strip-x64.sh

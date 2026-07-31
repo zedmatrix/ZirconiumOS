@@ -1,0 +1,32 @@
+description: "A collection of programs for controlling the network subsystem of the Linux kernel."
+
+package:
+  name: net-tools
+  version: 2.10
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://downloads.sourceforge.net/project/net-tools/net-tools-2.10.tar.xz
+    sha256: b262435a5241e89bfa51c3cabd5133753952f7a7b7b93f32e08cb9d96f580d69
+    md5: 78aae762c95e2d731faf88d482e4cde5
+
+prepare: |
+  cp -v ${YPKG}/net-tools-config config.make;
+  sed -n -e 's/^\(HAVE.*\)=\(.*\)/#define \1 \2/p' config.make > config.h
+
+build: |
+  make BINDIR='/usr/bin' SBINDIR='/usr/bin'
+
+install: |
+  make DESTDIR=${DESTDIR} BINDIR='/usr/bin' SBINDIR='/usr/bin' install
+
+final: |
+  rm -v ${DESTDIR}/usr/bin/{nis,yp}domainname;
+  rm -v ${DESTDIR}/usr/bin/{hostname,dnsdomainname,domainname,ifconfig};
+  rm -r ${DESTDIR}/usr/share/man/man1;
+  rm -v ${DESTDIR}/usr/share/man/man8/ifconfig.8;
+  ${YBLD}/ydest-strip-x64.sh

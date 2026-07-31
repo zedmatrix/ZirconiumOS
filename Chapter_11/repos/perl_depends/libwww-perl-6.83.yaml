@@ -1,0 +1,47 @@
+description: "collection is a set of Perl modules which provides a simple and consistent application programming interface (API) to the World-Wide Web."
+
+homepage: "https://metacpan.org/pod/LWP"
+
+package:
+  name: libwww-perl
+  version: 6.83
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://www.cpan.org/authors/id/O/OA/OALDERS/libwww-perl-6.83.tar.gz
+    sha256:
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install
+
+required:
+  - File-Listing
+  - HTTP-CookieJar
+  - HTTP-Cookies
+  - HTTP-Daemon
+  - HTTP-Negotiate
+  - HTML-Parser
+  - Net-HTTP
+  - Try-Tiny
+
+optional:
+  - Test-Fatal
+  - Test-Needs
+  - Test-RequiresInternet
+  - Test-LeakTrace
+
+runtime:
+  - WWW-RobotRules

@@ -1,0 +1,28 @@
+description: "TimeDate provides miscellaneous timezone manipulation routines."
+
+homepage: "https://metacpan.org/pod/TimeDate"
+
+package:
+  name: TimeDate
+  version: 2.35
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/TimeDate-2.35.tar.gz
+    sha256:
+    md5: 5e5afe22c8d417417283d1f7f4572a57
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

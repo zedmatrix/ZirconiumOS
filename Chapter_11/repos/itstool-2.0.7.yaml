@@ -1,0 +1,39 @@
+description: "Extracts messages from XML files, outputs PO templates, merges translations from MO files to create translated XML files."
+
+package:
+  name: itstool
+  version: 2.0.7
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/itstool/itstool/archive/2.0.7/itstool-2.0.7.tar.gz
+    sha256: fba78a37dc3535e4686c7f57407b97d03c676e3a57beac5fb2315162b0cc3176
+    md5: e759b258617a912acce630de3fa43957
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/itstool/itstool-2.0.7-lxml-1.patch
+    sha256: 035a0d22bd1cf37a00357ebc096454e1eb8594f3ea54f8122e8e76fdced0cbec
+    md5: 34e3b6b1c50f12b0c8cc2a2ddf2f35c0
+
+prepare: |
+  PYTHON=/usr/bin/python3 ./autogen.sh --prefix=/usr
+
+build: |
+  make
+
+check: |
+  python3 tests/run_tests.py
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - docbook-xml
+  - lxml

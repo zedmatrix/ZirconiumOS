@@ -1,0 +1,32 @@
+description: "is a Perl extension for using OpenSSL."
+
+homepage: "https://metacpan.org/pod/Net::SSLeay"
+package:
+  name: Net-SSLeay
+  version: 1.96
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/C/CH/CHRISN/Net-SSLeay-1.96.tar.gz
+    sha256: ab213691685fb2a576c669cbc8d9266f8165a31563ad15b7c4030b94adfc0753
+    md5: 63772ad94b874b5f0f025c2a4285f82f
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/blfs/svn/Net-SSLeay-1.96-openssl4_fixes-1.patch
+    sha256: cc50737ab598dc2ea5204dfa87d634b52c47c42bb4988a157720efdbc5a6f962
+    md5: 1f0beec0f74830397a2d2ed1a1aea602
+
+prepare: |
+  yes '' | perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

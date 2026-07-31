@@ -1,0 +1,60 @@
+description: "The Low Level Virtual Machine (LLVM) Core libraries provide a modern source and target-independent optimizer."
+
+package:
+  name: llvm
+  version: 22.1.8
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/llvm-project-22.1.8.src.tar.xz
+    sha256: 922f1817a0df7b1489272d18134ee0087a8b068828f87ac63b9861b1a9965888
+    md5: 69065494ebcb1150b2a329c1b3db7584
+
+prepare: |
+  grep -rl '#!.*python$' | xargs sed -i '1s/python$/python3/';
+  sed 's/utility/tool/' -i llvm/utils/FileCheck/CMakeLists.txt;
+  CC=gcc CXX=g++ cmake -B build -S llvm -G Ninja -Wno-dev -D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON -D LLVM_ENABLE_FFI=ON -D CMAKE_BUILD_TYPE=Release \
+      -D LLVM_BUILD_LLVM_DYLIB=ON -D LLVM_LINK_LLVM_DYLIB=ON -D LLVM_ENABLE_RTTI=ON \
+      -D LLVM_TARGETS_TO_BUILD="host;AMDGPU" -D LLVM_ENABLE_PROJECTS='clang;lld' -D LLVM_ENABLE_RUNTIMES=compiler-rt \
+      -D LLVM_BINUTILS_INCDIR=/usr/include -D LLVM_INCLUDE_BENCHMARKS=OFF -D CLANG_DEFAULT_PIE_ON_LINUX=ON \
+      -D CLANG_CONFIG_FILE_SYSTEM_DIR=/etc/clang -D CLANG_VENDOR="Zirconium ${PKGVER}" \
+      -D LLD_VENDOR="Zirconium ${PKGVER}"
+
+build: |
+  ninja -C build
+
+check: |
+  systemctl   --user start dbus &&
+  systemd-run --user --pty -d -G -p LimitCORE=0 ninja -C build check-all
+
+install: |
+  ninja -C build install
+
+final: |
+  /ybuild/ydest-strip-x64.sh;
+  mkdir -pv /etc/clang;
+  echo '-fstack-protector-strong' > /etc/clang/clang.cfg;
+  cp -v /etc/clang/clang.cfg /etc/clang/clang++.cfg
+
+required:
+  - cmake
+
+optional:
+  - doxygen
+  - git
+  - graphviz
+  - libunwind
+  - libxml2
+  - psutil
+  - pygments
+  - pyyaml
+  - rsync
+  - sphinx
+  - systemd-pam
+  - texlive
+  - valgrind

@@ -1,0 +1,26 @@
+description: "the blessed package to manage your versions by vcs metadata"
+homepage: "https://pypi.org/project/vcs-versioning/"
+
+package:
+  name: vcs_versioning
+  version: 2.2.2
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/v/vcs_versioning/vcs_versioning-2.2.2.tar.gz
+    sha256: 4ac4ded78720cdb4d0291ae58ace87e1e9201912e1023f3029c6cce5c9152cfb
+    md5: e0a06819d3cf9d5e63a9a3ec8563c13a
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user vcs-versioning
+
+required:
+  - packaging
+
+optional:
+  - pytest

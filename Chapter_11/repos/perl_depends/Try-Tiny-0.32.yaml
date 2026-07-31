@@ -1,0 +1,31 @@
+description: "Try::Tiny provides try and catch to expect and handle exceptional conditions, avoiding quirks in Perl"
+
+homepage: "https://metacpan.org/pod/Try::Tiny"
+
+package:
+  name: Try-Tiny
+  version: 0.32
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Try-Tiny-0.32.tar.gz
+    sha256: ef2d6cab0bad18e3ab1c4e6125cc5f695c7e459899f512451c8fa3ef83fa7fc0
+    md5: 964424fcada4654bede745a7a2fb870b
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+optional:
+  - Capture-Tiny

@@ -1,0 +1,39 @@
+description: "Provides a set of free peer-reviewed portable C++ source libraries."
+
+package:
+  name: boost
+  version: 1.92.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/boostorg/boost/releases/download/boost-1.92.0.beta1/boost-1.92.0.beta1-b2-nodocs.tar.xz
+    sha256: 97bcc12929a59c83d4c9505bc46790f0fef4ef5d1749ce9499d770ada0ef1b82
+    md5: 34a26125947b79548bbc0dd113d344d9
+
+prepare: |
+  ./bootstrap.sh --prefix=/usr --with-python=python3
+
+build: |
+  ./b2 stage -j$(nproc) threading=multi link=shared
+
+check: |
+  pushd tools/build/test;
+    python3 test_all.py;
+  popd
+
+install: |
+  ./b2 --prefix=${DESTDIR}/usr install threading=multi link=shared
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - which
+
+optional:
+  - icu
+  - numpy

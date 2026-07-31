@@ -1,0 +1,28 @@
+description: "HTML::Tagset provides several data tables useful in parsing HTML."
+
+homepage: "https://metacpan.org/pod/HTML::Tagset"
+
+package:
+  name: HTML-Tagset
+  version: 3.24
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/HTML-Tagset-3.24.tar.gz
+    sha256: eb89e145a608ed1f8f141a57472ee5f69e67592a432dcd2e8b1dbb445f2b230b
+    md5: f8db8974f5e7fe7df2a58263a7b00552
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

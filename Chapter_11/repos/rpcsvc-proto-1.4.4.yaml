@@ -1,0 +1,27 @@
+description: "contains the rcpsvc protocol files and headers, formerly included with glibc, that are not included in replacement libtirpc-1.3.7, along with the rpcgen program."
+
+package:
+  name: rpcsvc-proto
+  version: 1.4.4
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/thkukuk/rpcsvc-proto/releases/download/v1.4.4/rpcsvc-proto-1.4.4.tar.xz
+    sha256: 81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
+    md5: bf908de360308d909e9cc469402ff2ef
+
+prepare: |
+  ./configure --sysconfdir=/etc
+
+build: |
+  make
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh

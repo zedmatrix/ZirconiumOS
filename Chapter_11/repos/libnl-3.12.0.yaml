@@ -1,0 +1,37 @@
+description: "A collection of libraries providing APIs to netlink protocol based Linux kernel interfaces."
+
+package:
+  name: libnl
+  version: 3.12.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/thom311/libnl/releases/download/libnl3_12_0/libnl-3.12.0.tar.gz
+    sha256: fc51ca7196f1a3f5fdf6ffd3864b50f4f9c02333be28be4eeca057e103c0dd18
+    md5: f9112ca215807fe65eecd583d8f180cc
+  - url: https://github.com/thom311/libnl/releases/download/libnl3_12_0/libnl-doc-3.12.0.tar.gz
+    sha256: a4f9813fe769cd82a67e0be94296a9eafe14e0c3ca1dd198331e3ee6db25c1a1
+    md5: befe7b001c82640f8e937c603afc7edc
+
+prepare: |
+  ./configure --prefix=/usr --sysconfdir=/etc --disable-static
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install;
+  mkdir -vp ${DESTDIR}/usr/share/doc/libnl-${PKGVER};
+  tar -xf ${YSRC}/libnl-doc-${PKGVER}.tar.gz --strip-components=1 --no-same-owner \
+      -C ${DESTDIR}/usr/share/doc/libnl-${PKGVER}
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+

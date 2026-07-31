@@ -1,0 +1,26 @@
+description: "Use this package to validate classifiers in packages for PyPI upload or download."
+homepage: "https://pypi.org/project/trove-classifiers/"
+
+package:
+  name: trove-classifiers
+  version: 2026.6.1.19
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/t/trove_classifiers/trove_classifiers-2026.6.1.19.tar.gz
+    sha256: c5132b4b61a829d11cfbd2d72e97f20a45ed6edb95e45c5efdeb5e00836b2745
+    md5: fb231b2e9492a5d34fb9bec0250f0f55
+
+prepare: |
+  sed -i '/calver/s/^/#/;$iversion="2026.6.1.19"' setup.py
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user trove-classifiers
+
+optional:
+  - pytest

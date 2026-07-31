@@ -1,0 +1,33 @@
+description: "A library which provides type definitions for NVMe specification structures, enumerations, and bit fields."
+
+package:
+  name: libnvme
+  version: 1.16.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/linux-nvme/libnvme/archive/v1.16.2/libnvme-1.16.2.tar.gz
+    sha256: 1d850d5a871559abf641d6e6b63bb86047e4cb26f3ad144597c2c64b3cff7231
+    md5: a6554fb50022d762021fc1e949e01520
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release -D libdbus= {auto,disabled}
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - dbus
+  - json-c
+  - keyutils
+  - swig

@@ -1,0 +1,54 @@
+description: "Rust programming language is designed to be a safe, concurrent, practical language."
+
+package:
+  name: rustc
+  version: 1.93.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://static.rust-lang.org/dist/rustc-1.93.0-src.tar.xz
+    sha256: e30d898272c587a22f77679f03c5e8192b5645c7c9ccc3407ad1106761507cea
+    md5: 3a8a6c6c9c277077d8345cd31032869b
+
+prepare: |
+  mkdir -pv /opt/rustc-${PKGVER};
+  ln -svfn rustc-${PKGVER} /opt/rustc;
+  cp -v ${YPKG}/rust-config.toml bootstrap.toml
+
+build: |
+  export LIBSSH2_SYS_USE_PKG_CONFIG=1;
+  export LIBSQLITE3_SYS_USE_PKG_CONFIG=1;
+  ./x.py build
+
+check: |
+  export LIBSSH2_SYS_USE_PKG_CONFIG=1;
+  export LIBSQLITE3_SYS_USE_PKG_CONFIG=1;
+  ./x.py test --verbose --no-fail-fast | tee ../rustc-testlog
+  grep '^test result:' ../rustc-testlog |
+    awk '{sum1 += $4; sum2 += $6} END { print sum1 " passed; " sum2 " failed" }'
+
+install: |
+  export LIBSSH2_SYS_USE_PKG_CONFIG=1;
+  export LIBSQLITE3_SYS_USE_PKG_CONFIG=1;
+  ./x.py install
+
+final: |
+  rm -fv /opt/rustc-${PKGVER}/share/doc/rustc-${PKGVER}/*.old;
+  install -vm644 README.md /opt/rustc-${PKGVER}/share/doc/rustc-${PKGVER};
+  install -vdm755 /usr/share/zsh/site-functions;
+  ln -sfv /opt/rustc/share/zsh/site-functions/_cargo /usr/share/zsh/site-functions;
+  mv -v /etc/bash_completion.d/cargo /usr/share/bash-completion/completions
+
+required:
+  - cmake
+  - curl
+
+recommended:
+  - libssh2
+  - llvm
+
+optional:
+  - gdb
+  - git

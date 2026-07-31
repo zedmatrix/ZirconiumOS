@@ -1,0 +1,38 @@
+description: "Package contains a low-level cryptographic library that is designed to fit easily in many contexts."
+homepage: "https://www.lysator.liu.se/~nisse/nettle/"
+
+package:
+  name: nettle
+  version: 4.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/nettle/nettle-4.0.tar.gz
+    sha256: 3addbc00da01846b232fb3bc453538ea5468da43033f21bb345cb1e9073f5094
+    md5: 144401453f9f35e53938bcacfc59800e
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install;
+  chmod -v 755 ${DESTDIR}/usr/lib/lib{hogweed,nettle}.so;
+  mkdir -pv ${DESTDIR}/usr/share/doc/nettle-${PKGVER};
+  install -dm755 ${DESTDIR}/usr/share/doc/nettle-${PKGVER};
+  install -m644 nettle.{html,pdf} ${DESTDIR}/usr/share/doc/nettle-${PKGVER}
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - valgrind

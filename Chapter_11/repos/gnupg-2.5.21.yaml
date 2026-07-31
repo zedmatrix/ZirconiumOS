@@ -1,0 +1,55 @@
+description: "GNU's tool for secure communication and data storage, used to encrypt data and to create digital signatures."
+
+package:
+  name: gnupg2
+  version: 2.5.21
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-2.5.21.tar.bz2
+    sha256: e3af2c8caa46a66a9329fa7c6880af260451914d819595beabc2c26597b31352
+    md5: 39311d55044c9548b5eb8f53466a86b5
+
+prepare: |
+  mkdir -v build && cd build &&
+  ../configure --prefix=/usr --localstatedir=/var --sysconfdir=/etc \
+    --docdir=/usr/share/doc/gnupg-${PKGVER}
+
+
+build: |
+  cd build && make &&
+  makeinfo --html --no-split -I doc -o doc/gnupg_nochunks.html ../doc/gnupg.texi &&
+  makeinfo --plaintext -I doc -o doc/gnupg.txt ../doc/gnupg.texi &&
+  make -C doc html
+
+check: |
+  cd build && make check || true
+
+install: |
+  cd build && make DESTDIR=${DESTDIR} install &&
+  mkdir -pv ${DESTDIR}/usr/share/doc/gnupg-${PKGVER}/html;
+  install -m644 doc/gnupg_nochunks.html ${DESTDIR}/usr/share/doc/gnupg-${PKGVER}/html/gnupg.html;
+  install -m644 ../doc/*.texi doc/gnupg.txt ${DESTDIR}/usr/share/doc/gnupg-${PKGVER};
+  install -m644 doc/gnupg.html/* ${DESTDIR}/usr/share/doc/gnupg-${PKGVER}/html
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libassuan
+  - libgcrypt
+  - libksba
+  - npth
+  - openldap
+
+recommended:
+  - gnutls
+
+optional:
+  - curl
+  - fuse3
+  - libusb

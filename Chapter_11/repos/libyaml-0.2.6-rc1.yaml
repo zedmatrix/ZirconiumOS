@@ -1,0 +1,33 @@
+description: "Contains a C library for parsing and emitting YAML (YAML Ain't Markup Language) code."
+
+package:
+  name: libyaml
+  version: 0.2.6
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/yaml/libyaml/releases/download/0.2.6-rc.1/yaml-0.2.6-rc.1.tar.gz
+    sha256: f73184b62c10e5bb81f3aeb8e3f40cce1be5b2c40bee8c37fc1c26320e128a3d
+    md5: 0931851d4b5b0e8cbbbcc915b5391352
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - doxygen

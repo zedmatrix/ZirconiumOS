@@ -1,0 +1,26 @@
+description: ""
+
+package:
+  name: Test-RequiresInternet
+  version: 0.05
+  rel: 1
+  archive: false
+  delete: true
+  cflags: ""
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/M/MA/MALLEN/Test-RequiresInternet-0.05.tar.gz
+    sha256: bba7b32a1cc0d58ce2ec20b200a7347c69631641e8cae8ff4567ad24ef1e833e
+    md5: 0ba9f1cff4cf90ed2618c2eddfd525d8
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

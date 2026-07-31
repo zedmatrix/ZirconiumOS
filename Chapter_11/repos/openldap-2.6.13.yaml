@@ -1,0 +1,47 @@
+description: "Provides an open source implementation of the Lightweight Directory Access Protocol."
+
+package:
+  name: openldap
+  version: 2.6.13
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.6.13.tgz
+    sha256: d693b49517a42efb85a1a364a310aed16a53d428d1b46c0d31ef3fba78fcb656
+    md5: 761be850c8ff85dbf5031af7c6c6da44
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/blfs/svn/openldap-2.6.13-consolidated-1.patch
+    sha256: a1aee8daf29cbe6de0a41ce8d250d6f9157d581843c92034714cc82ea1cf934f
+    md5: b5bf3d71aeae55cbbc65846016cacf67
+  - url: https://trak4.com/musl-from-scratch/musl-packages/openldap-2.6.13-openssl4-fix.patch
+    sha256: 213c77ec5f3238eadc3393753c736826525ca11dfe4a90b4ce723819107bf6da
+    md5: c6d71f3529344499325760e588193a13
+
+prepare: |
+  autoconf &&
+  ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-dynamic \
+    --disable-debug --disable-slapd
+
+build: |
+  make depend &&
+  make
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+recommended:
+  - cyrus-sasl
+
+optional:
+  - gnutls
+  - unixodbc
+  - mariadb
+  - postgresql

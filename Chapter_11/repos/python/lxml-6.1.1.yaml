@@ -1,0 +1,24 @@
+description: "lxml provides Python bindings for libxslt-1.1.45 and libxml2-2.15.1."
+
+homepage: "https://pypi.org/project/lxml/"
+
+package:
+  name: lxml
+  version: 6.1.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/l/lxml/lxml-6.1.1.tar.gz
+    sha256: ba96ae44888e0185281e937633a743ea90d5a196c6000f82565ebb0580012d40
+    md5: 6bbd3674ecba1340b08c9180afef1829
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user lxml
+
+required:
+  - libxslt

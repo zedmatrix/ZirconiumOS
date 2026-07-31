@@ -1,0 +1,31 @@
+description: "a database of all the HTTP cookies that a given LWP::UserAgent (from libwww-perl-6.81) object knows about."
+
+homepage: "https://metacpan.org/pod/HTTP::Cookies"
+
+package:
+  name: HTTP-Cookies
+  version: 6.11
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Cookies-6.11.tar.gz
+    sha256: 8c9a541a4a39f6c0c7e3d0b700b05dfdb830bd490a1b1942a7dedd1b50d9a8c8
+    md5: 80017e7e56bdc8ba16dea75789748829
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - HTTP-Message

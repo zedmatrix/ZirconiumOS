@@ -1,0 +1,37 @@
+description: ""
+
+homepage: ""
+
+package:
+  name:
+  version:
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url:
+    sha256:
+    md5:
+
+patches:
+  - url:
+    sha256:
+    md5:
+
+prepare: |
+
+build: |
+
+install: |
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+
+recommended:
+
+optional:

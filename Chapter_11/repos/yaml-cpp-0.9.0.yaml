@@ -1,0 +1,31 @@
+description: "yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec."
+
+package:
+  name: yaml-cpp
+  version: 0.9.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.9.0.tar.gz
+    sha256: 25cb043240f828a8c51beb830569634bc7ac603978e0f69d6b63558dadefd49a
+    md5: 7d17de1b2a4b1d2776181f67c940bcdf
+
+prepare: |
+  cmake -B Ybuild -G Ninja -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+    -DYAML_BUILD_SHARED_LIBS=ON;
+  cmake -B Ybuild-static -G Ninja -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release \
+    -DYAML_BUILD_SHARED_LIBS=OFF
+
+build: |
+  ninja -C Ybuild;
+  ninja -C Ybuild-static
+
+install: |
+  ninja -C Ybuild install;
+  cp -v Ybuild-static/libyaml-cpp.a /usr/lib
+
+required:
+  - cmake
+  - ninja

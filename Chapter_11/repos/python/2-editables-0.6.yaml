@@ -1,0 +1,23 @@
+description: "A Python library for creating editable wheels"
+homepage: "https://pypi.org/project/editables/"
+
+package:
+  name: editables
+  version: 0.6
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/e/editables/editables-0.6.tar.gz
+    sha256: 1163834902381c4613787951c5914800fdf155ae08848a373b8ea5006780977c
+    md5: 658e28eab5b342442d8edc42ff4fa3bd
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user editables
+
+optional:
+  - pytest

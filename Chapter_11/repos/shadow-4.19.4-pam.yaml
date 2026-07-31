@@ -1,0 +1,41 @@
+description: "Re-Installing Shadow will allow programs such as login and su to utilize PAM."
+
+package:
+  name: shadow-pam
+  version: 4.19.4
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/shadow-maint/shadow/releases/download/4.19.4/shadow-4.19.4.tar.xz
+    sha256: ce57a313e315a0a7cb04a8f50cc20753e994e487bbe9b78a2a824ca75cb486c0
+    md5: ed0f3ff4940822ba75a3b0687a9ce93b
+
+prepare: |
+  sed -i 's/groups$(EXEEXT) //' src/Makefile.in;
+  find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
+  find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
+  find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
+  sed -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD YESCRYPT@' \
+    -e 's@/var/spool/mail@/var/mail@' -e '/PATH=/{s@/sbin:@@;s@/bin:@@}' -i etc/login.defs
+
+build: |
+  ./configure --sysconfdir=/etc --disable-static --without-libbsd --with-{b,yes}crypt &&
+  make
+
+install: |
+  make exec_prefix=/usr pamddir= install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh;
+  ${YPKG}/shadow_pam-config.sh
+
+required:
+  - linux-pam
+
+optional:
+  - libbsd
+  - tcb

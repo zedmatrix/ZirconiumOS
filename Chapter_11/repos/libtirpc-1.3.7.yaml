@@ -1,0 +1,30 @@
+description: "Contains libraries that support programs that use the Remote Procedure Call (RPC) API."
+
+package:
+  name: libtirpc
+  version: 1.3.7
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.7.tar.bz2
+    sha256: b47d3ac19d3549e54a05d0019a6c400674da716123858cfdb6d3bdd70a66c702
+    md5: 74f97df306b8d6149d3d9898a1d44c6e
+
+prepare: |
+  ./configure --prefix=/usr --sysconfdir=/etc --disable-static
+
+build: |
+  make
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+recommended:
+  - mitkrb

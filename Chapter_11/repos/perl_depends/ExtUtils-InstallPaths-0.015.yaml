@@ -1,0 +1,28 @@
+description: "Build.PL install path logic made easy"
+
+homepage: "https://metacpan.org/pod/ExtUtils::InstallPaths"
+
+package:
+  name: ExtUtils-InstallPaths
+  version: 0.015
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.015.tar.gz
+    sha256: 7d64eb2dfa87ead010cdf55c8a1bdfde50b7b5852d7cb8cf2304f55bea2eb007
+    md5: 70f17a346e92560b5f5692119edbb161
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

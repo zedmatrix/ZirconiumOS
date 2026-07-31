@@ -1,0 +1,33 @@
+description: "a wrapper around libsass"
+note: "Archived Oct 24, 2025"
+homepage: "https://github.com/sass/sassc"
+
+package:
+  name: sassc
+  version: 3.6.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/sass/sassc/archive/3.6.2/sassc-3.6.2.tar.gz
+    sha256: 608dc9002b45a91d11ed59e352469ecc05e4f58fc1259fc9a9f5b8f0f8348a03
+    md5: 4c3b06ce2979f2a9f0a35093e501d8bb
+
+prepare: |
+  autoreconf -fi &&
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - libsass

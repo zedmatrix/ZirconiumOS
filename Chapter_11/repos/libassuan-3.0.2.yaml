@@ -1,0 +1,40 @@
+description: "Contains an inter process communication library used by some of the other GnuPG related packages."
+
+package:
+  name: libassuan
+  version: 3.0.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-3.0.2.tar.bz2
+    sha256: d2931cdad266e633510f9970e1a2f346055e351bb19f9b78912475b8074c36f6
+    md5: c6f1bf4bd2aaa79cd1635dcc070ba51a
+
+prepare: |
+  ./configure --prefix=/usr && make
+
+build: |
+  make -C doc html &&
+  makeinfo --html --no-split -o doc/assuan_nochunks.html doc/assuan.texi &&
+  makeinfo --plaintext -o doc/assuan.txt doc/assuan.texi
+
+install: |
+  make install;
+  mkdir -pv ${DESTDIR}/usr/share/doc/libassuan-${PKGVER}/html
+
+final: |
+  install -m644 doc/assuan.html/* ${DESTDIR}/usr/share/doc/libassuan-${PKGVER}/html;
+  install -m644 doc/assuan_nochunks.html ${DESTDIR}/usr/share/doc/libassuan-${PKGVER};
+  install -m644 doc/assuan.{txt,texi} ${DESTDIR}/usr/share/doc/libassuan-${PKGVER}
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - libgpg-error
+
+optional:
+  - texlive
+  - tl-installer

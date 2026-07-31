@@ -1,0 +1,26 @@
+description: "Linux-PAM support for the libcap package."
+
+package:
+  name: libcap-pam
+  version: 2.78
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.78.tar.xz
+    sha256: 0d621e562fd932ccf67b9660fb018e468a683d7b827541df27813228c996bb11
+    md5: 0ff11419aa4813c0a0f84fe67bf3b39e
+
+build: |
+  make -C pam_cap
+
+install: |
+  install -v -m755 pam_cap/pam_cap.so /usr/lib/security &&
+  install -v -m644 pam_cap/capability.conf /etc/security
+
+final: |
+  ${YPKG}/libcap-config.sh
+
+required:
+  - linux-pam

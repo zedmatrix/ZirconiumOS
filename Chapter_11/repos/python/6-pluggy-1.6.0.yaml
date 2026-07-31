@@ -1,0 +1,26 @@
+description: "plugin and hook calling mechanisms for python"
+homepage: "https://pypi.org/project/pluggy/"
+
+package:
+  name: pluggy
+  version: 1.6.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/p/pluggy/pluggy-1.6.0.tar.gz
+    sha256: 7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3
+    md5: 54391218af778acb006c2d915085d469
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user pluggy
+
+required:
+  - setuptools_scm
+
+optional:
+  - pytest

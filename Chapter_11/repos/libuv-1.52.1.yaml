@@ -1,0 +1,31 @@
+description: "is a multi-platform support library with a focus on asynchronous I/O."
+
+package:
+  name: libuv
+  version: 1.52.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://dist.libuv.org/dist/v1.52.1/libuv-v1.52.1.tar.gz
+    sha256: 66d511b9e6e334c0e62279eb234fbfb2b3110b1479c09b95b44c7afca8cff9e7
+    md5: db711bbe3822dd4fe51fad0cd78baa57
+
+prepare: |
+  sh autogen.sh;
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - sphinx

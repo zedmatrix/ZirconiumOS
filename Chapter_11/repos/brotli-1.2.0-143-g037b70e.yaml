@@ -1,0 +1,44 @@
+description: "A general-purpose lossless compression algorithm that uses a combination of modern LZ77 algorithm"
+note: "v1.2.0-143-g037b70e"
+
+package:
+  name: brotli
+  version: 1.2.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: sources/brotli-1.2.0-143-g037b70e.tar.gz
+    sha256: be475b0f21a81a066f979b479065c8b9c44fb99e17d4756a7484943aa6130934
+    md5: 881fb80f487a9ee72054624065246b1e
+
+prepare: |
+  cmake -B build -G Ninja -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release
+
+build: |
+  ninja -C build
+
+check: |
+  ninja -C build test || true
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh;
+  ${YPKG}/brotli-python.sh
+
+required:
+  - cmake
+
+optional:
+  - pytest
+
+experimental: |
+  git clone --filter=blob:none --no-checkout https://github.com/google/brotli.git
+  cd brotli
+  git archive --format=tar.gz --prefix=brotli-1.2.0/ \
+		--output=../brotli-1.2.0-143-g037b70e.tar.gz v1.2.0-143-g037b70e

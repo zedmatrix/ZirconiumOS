@@ -1,0 +1,22 @@
+description: "provides Mozilla’s carefully curated collection of Root Certificates for validating SSL certificates"
+homepage: "https://pypi.org/project/certifi/"
+
+package:
+  name: certifi
+  version: 2026.7.22
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/c/certifi/certifi-2026.7.22.tar.gz
+    sha256: 741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55
+    md5: 926857e560a3ae443ee35c2de270d75b
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user certifi

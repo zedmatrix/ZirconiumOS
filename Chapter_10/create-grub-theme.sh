@@ -1,14 +1,13 @@
 #!/bin/bash
 
-source "${PWD}/ybase_header.sh" || { echo "Can Not Base Header"; exit 127; }
+source "${YHEAD}" || { echo "Can Not Base Header"; exit 127; }
 
-# codename="Zirconium"
-codename="Antares"
-kernelversion="7.0.8"
+DRIVE=${1:-"/dev/sda"}
+codename=${2:-"Zirconium"}
+kernelversion=${3:-"7.1.5"}
+
+PTTYPE=$(lsblk -dn -o PTTYPE "$DRIVE" | head -1)
 postfix="zlfs"
-
-DRIVE="/dev/sda"
-PTTYPE="gpt"
 
 [[ $DRIVE =~ 'nvme' ]] && P=p || P=
 
@@ -23,12 +22,12 @@ mountpoint /sys/firmware/efi/efivars || mount -v -t efivarfs efivarfs /sys/firmw
 # Install Directories and Theme Assets
 mkdir -pv /boot/grub
 mkdir -pv /boot/grub/{themes,fonts}
-mkdir -pv /boot/grub/themes/Zirconium/icons
+mkdir -pv /boot/grub/themes/zirconium/icons
 cp -v /usr/share/grub/themes/starfield/*.pf2 /boot/grub/fonts
-cp -v /usr/share/grub/themes/starfield/*.png /boot/grub/themes/Zirconium
+cp -v /usr/share/grub/themes/starfield/*.png /boot/grub/themes/zirconium
 
 # Install grub.cfg theme
-cp -v ${PWD}/grub-config /boot/grub/grub.cfg || { zmsg "Failed to create grub.cfg"; exit 1; }
+cp -v ${YBLD}/prepare/grub-config.cfg /boot/grub/grub.cfg || { zmsg "Failed to create grub.cfg"; exit 1; }
 sed -i "s/ROOT_DRIVE/$ROOT/" /boot/grub/grub.cfg || { zmsg "Failed in insert ROOT UUID"; exit 1; }
 sed -i "s/ROOTPART/$ROOTPART/" /boot/grub/grub.cfg || { zmsg "Failed in insert ROOT PART UUID"; exit 1; }
 sed -i "s/VERSION/$kernelversion/g" /boot/grub/grub.cfg || { zmsg "Failed in insert VERSION"; exit 1; }

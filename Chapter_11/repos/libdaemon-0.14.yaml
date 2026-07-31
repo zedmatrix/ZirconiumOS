@@ -1,0 +1,32 @@
+description: "A lightweight C library that eases the writing of UNIX daemons."
+homepage: "... Alternate: https://github.com/Distrotech/libdaemon"
+
+package:
+  name: libdaemon
+  version: 0.14
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://0pointer.de/lennart/projects/libdaemon/libdaemon-0.14.tar.gz
+    sha256: fd23eb5f6f986dcc7e708307355ba3289abe03cc381fc47a80bca4a50aa6b834
+    md5: 509dc27107c21bcd9fbf2f95f5669563
+
+prepare: |
+ ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make docdir=/usr/share/doc/libdaemon-${PKGVER} DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - doxygen
+  - lynx

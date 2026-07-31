@@ -1,0 +1,28 @@
+description: "Parses robots.txt files, creating a RobotRules object with methods to check if access to given URL is prohibited."
+
+homepage: "https://metacpan.org/pod/WWW::RobotRules"
+
+package:
+  name: WWW-RobotRules
+  version: 6.03
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/WWW-RobotRules-6.03.tar.gz
+    sha256: 8522b532935a11bfa688c2e113bac66729df4851be50c2c26d4b06f45fade472
+    md5: 9c821b8f6eb0f5ddb86f1d338b493879
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install

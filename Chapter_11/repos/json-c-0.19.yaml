@@ -1,0 +1,40 @@
+description: "Implements a reference counting object model that allows you to easily construct JSON objects in C"
+homepage: "https://github.com/json-c/json-c"
+
+package:
+  name: json-c
+  version: 0.19
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.19.tar.gz
+    sha256: 37ad0249902e301bd9052bf712e511fcc6acff4ecaad4b5900aad9ce564e26de
+    md5: 5678f1373ba51e0041b574c0411c696b
+
+prepare: |
+  cmake -B build -G Ninja -D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_BUILD_TYPE=Release -D BUILD_STATIC_LIBS=OFF
+
+build: |
+  ninja -C build
+
+check: |
+  ninja -C build test
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - cmake
+  - ninja
+
+optional:
+  - doxygen
+  - graphviz

@@ -1,0 +1,36 @@
+description: "Library for password quality checking and generating random passwords."
+
+homepage: "https://github.com/libpwquality/libpwquality"
+
+package:
+  name: libpwquality
+  version: 1.4.5
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/libpwquality/libpwquality/releases/download/libpwquality-1.4.5/libpwquality-1.4.5.tar.bz2
+    sha256: 6fcf18b75d305d99d04d2e42982ed5b787a081af2842220ed63287a2d6a10988
+    md5: 6b70e355269aef0b9ddb2b9d17936f21
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --with-securedir=/usr/lib/security \
+    --disable-python-bindings
+
+build: |
+  make &&
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD/python
+
+install: |
+  make DESTDIR=${DESTDIR} install &&
+  pip3 install --no-index --find-links dist --no-user pwquality
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - cracklib
+  - linux-pam

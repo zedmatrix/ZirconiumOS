@@ -1,0 +1,40 @@
+description: "HTTP::Message provides a base class for HTTP style message objects."
+
+homepage: "https://metacpan.org/pod/HTTP::Message"
+
+package:
+  name: HTTP-Message
+  version: 7.01
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Message-7.01.tar.gz
+    sha256: 82b79ce680251045c244ee059626fecbf98270bed1467f0175ff5ea91071437e
+    md5: fc958d64205edb2c76e1673424523932
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - Clone
+  - Encode-Locale
+  - HTTP-Date
+  - IO-HTML
+  - LWP-MediaTypes
+  - URI
+
+optional:
+  - Test-Needs
+  - Try-Tiny

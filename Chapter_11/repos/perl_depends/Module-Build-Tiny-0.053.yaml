@@ -1,0 +1,33 @@
+description: "A tiny replacement for Module::Build"
+
+homepage: "https://metacpan.org/pod/Module::Build::Tiny"
+
+package:
+  name: Module-Build-Tiny
+  version: 0.053
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-Tiny-0.053.tar.gz
+    sha256: 3726d622da6f655e88fdf89e4fd597709c44970b47de65082003e8d86b5e193a
+    md5: 606d1f830f0475b6de53b82aa3e5d36a
+
+prepare: |
+  perl Build.PL
+
+build: |
+  ./Build
+
+check: |
+  ./Build test
+
+install: |
+  ./Build install
+
+required:
+  - ExtUtils-Config
+  - ExtUtils-Helpers
+  - ExtUtils-InstallPaths

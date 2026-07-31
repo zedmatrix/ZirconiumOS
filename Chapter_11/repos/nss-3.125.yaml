@@ -1,0 +1,51 @@
+description: "A set of libraries designed to support cross-platform development of security-enabled client and server applications. Network Security Services"
+
+package:
+  name: nss
+  version: 3.125
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://ftp.mozilla.org/pub/security/nss/releases/NSS_3_125_RTM/src/nss-3.125.tar.gz
+    sha256: 1ad541f10da7c58dec01f540ecc44d28cbbc033f741a57473de5a0893d91606d
+    md5: b60ca976dbb369fadec72e9a451b2334
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/nss/nss-standalone-1.patch
+    sha256: 87bb1af0b11fd41311b9899187f6e4b3fca9940651123c7bc836ec7497d2da84
+    md5: f8a7ce473bd61792ef182cf0fb2d359a
+
+build: |
+  cd nss &&
+  make BUILD_OPT=1 NSPR_INCLUDE_DIR=/usr/include/nspr USE_SYSTEM_ZLIB=1 \
+    ZLIB_LIBS=-lz NSS_ENABLE_WERROR=0 USE_64=1 NSS_USE_SYSTEM_SQLITE=1
+
+check: |
+  cd nss/tests &&
+  HOST=localhost DOMSUF=localdomain ./all.sh
+
+install: |
+  cd dist &&
+  mkdir -pv ${DESTDIR}/usr/lib/pkgconfig;
+  install -vm755 Linux*/lib/*.so ${DESTDIR}/usr/lib;
+  install -vm644 Linux*/lib/*.chk ${DESTDIR}/usr/lib;
+  mkdir -pv ${DESTDIR}/usr/include/nss;
+  install -vdm755 ${DESTDIR}/usr/include/nss;
+  cp -vRL {public,private}/nss/* ${DESTDIR}/usr/include/nss;
+  mkdir -pv ${DESTDIR}/usr/bin;
+  install -vm755 Linux*/bin/{certutil,nss-config,pk12util} ${DESTDIR}/usr/bin;
+  install -vm644 Linux*/lib/pkgconfig/nss.pc ${DESTDIR}/usr/lib/pkgconfig
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+  ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
+
+required:
+  - nspr
+
+recommended:
+  - p11-kit

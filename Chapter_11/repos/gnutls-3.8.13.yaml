@@ -1,0 +1,53 @@
+description: "Contains libraries and userspace tools which provide a secure layer over a reliable transport layer."
+
+package:
+  name: gnutls
+  version: 3.8.13
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.13.tar.xz
+    sha256: ffed8ec1bf09c2426d4f14aae377de4753b53e537d685e604e99a8b16ca9c97e
+    md5: a97671c1839340c6b43c23ccb3237180
+
+prepare: |
+  ./configure --prefix=/usr --docdir=/usr/share/doc/gnutls-${PKGVER} \
+    --with-default-trust-store-pkcs11="pkcs11:"
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  make install
+
+final: |
+  /ybuild/ydest-strip-x64.sh
+
+required:
+  - nettle
+
+recommended:
+  - make-ca
+  - libunistring
+  - libtasn1
+  - p11-kit
+
+optional:
+  - brotli
+  - doxygen
+  - gtk-doc
+  - libidn
+  - libidn2
+  - libseccomp
+  - net-tools
+  - texlive
+  - tl-installer
+  - unbound
+  - valgrind

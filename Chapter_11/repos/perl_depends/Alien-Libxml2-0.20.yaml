@@ -1,0 +1,36 @@
+description: "designed to allow modules to install the C libxml2 library on your system."
+
+homepage: "https://metacpan.org/pod/Alien::Libxml2"
+
+package:
+  name: Alien-Libxml2
+  version: 0.20
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Libxml2-0.20.tar.gz
+    sha256: 56aae7b339bbeb02f77c5801f57a821be5791b51f43bf7f9062bb3bfa444c328
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test
+
+install: |
+  make install
+
+required:
+  - Alien-Build-Plugin-Download-GitLab
+  - libxml2
+  - Path-Tiny
+
+optional:
+  - Test-Simple

@@ -1,0 +1,28 @@
+description: "A disk reporting library, only supports a subset of the ATA S.M.A.R.T. functionality."
+homepage: "https://0pointer.de/blog/projects/being-smart.html"
+
+package:
+  name: libatasmart
+  version: 0.19
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://0pointer.de/public/libatasmart-0.19.tar.xz
+    sha256: 61f0ea345f63d28ab2ff0dc352c22271661b66bf09642db3a4049ac9dbdb0f8d
+    md5: 53afe2b155c36f658e121fe6def33e77
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make docdir=/usr/share/doc/libatasmart-0.19 install
+
+final: |
+  /ybuild/ydest-strip-x64.sh

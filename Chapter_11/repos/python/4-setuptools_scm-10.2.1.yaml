@@ -1,0 +1,30 @@
+description: "extracts Python package versions from git or hg metadata instead of declaring them as the version argument or in a Source Code Managed (SCM) managed file."
+
+homepage: "https://pypi.org/project/setuptools-scm/"
+
+package:
+  name: setuptools_scm
+  version: 10.2.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://files.pythonhosted.org/packages/source/s/setuptools_scm/setuptools_scm-10.2.1.tar.gz
+    sha256: 4fa7dd82cf8c800df59c9a288c90299b1657ff1ecfc3f5cc00287c5dbf5e27a9
+    md5: 187e24547a12cac72d7eed1a2da49584
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user setuptools_scm
+
+required:
+  - vcs_versioning
+
+optional:
+  - git
+  - mercurial
+  - pytest
+  - sudo

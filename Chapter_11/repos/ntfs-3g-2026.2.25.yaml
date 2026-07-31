@@ -1,0 +1,34 @@
+description: "a stable, read-write open source driver for NTFS partitions."
+homepage: "https://github.com/tuxera/ntfs-3g"
+
+package:
+  name: ntfs-3g
+  version: 2026.2.25
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+  cflags: ""
+
+sources:
+  - url: https://github.com/tuxera/ntfs-3g/archive/2026.2.25/ntfs-3g-2026.2.25.tar.gz
+    sha256: 47de1260fa3fb1aa27d239a637f1178d29a04dd6add6ddff4ea5e47b806731f8
+    md5: e92f169f58eda3307f2ca128bd42792f
+
+prepare: |
+  ./autogen.sh &&
+  ./configure --prefix=/usr --disable-static --with-fuse=internal \
+    --docdir=/usr/share/doc/ntfs-3g-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libgcrypt

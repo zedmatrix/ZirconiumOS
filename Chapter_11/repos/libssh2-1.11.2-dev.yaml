@@ -1,0 +1,44 @@
+description: "Is a client-side C library implementing the SSH2 protocol."
+note: "libssh2-1.11.1-862-g0c94b90  -  2026-July-25"
+
+package:
+  name: libssh2
+  version: 1.11.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: sources/libssh2-1.11.2-dev.tar.gz
+    sha256: ecf46934b2ebf34c29481cc4f4fa097a988b441356b846bd48887a5ba3ef48fe
+    md5: 2a766dc0b91b800bde79268ff08dfa39
+
+prepare: |
+  cmake -B build -G Ninja -D CMAKE_INSTALL_PREFIX=/usr \
+    -D BUILD_STATIC_LIBS=OFF -D BUILD_TESTING=OFF
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+optional:
+  - cmake
+  - libgcrypt
+  - openssh
+
+git-download: |
+  git clone --filter=blob:none --no-checkout https://github.com/libssh2/libssh2.git
+  cd libssh2
+    git describe --tags
+
+    git checkout -b new_branch 0c94b90a769e972efe97bf6d13de944603178fdd
+
+    git archive --format=tar.gz --prefix=libssh2-1.11.2/ \
+		--output=../libssh2-1.11.2-dev.tar.gz 0c94b90a769e972efe97bf6d13de944603178fdd

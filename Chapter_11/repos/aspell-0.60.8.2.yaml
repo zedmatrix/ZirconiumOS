@@ -1,0 +1,36 @@
+description: "An interactive spell checking program and the Aspell libraries."
+
+package:
+  name: aspell
+  version: 0.60.8.2
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/aspell/aspell-0.60.8.2.tar.gz
+    sha256: 57fe4863eae6048f72245a8575b44b718fb85ca14b9f8c0afc41b254dfd76919
+    md5: bc3f30321db5d44f112ab66084421225
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/aspell/dict/en/aspell6-en-2026.02.25-0.tar.bz2
+    sha256: 77a5cb437c45d1115f3b593802c20651d8c93803ed1073278dc1a1240016f10d
+    md5: e8f2aade4d0bf1b6c8be743998c4583f
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make DESTDIR=${DESTDIR} install;
+  ${YPKG}/aspell-doc-config.sh
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh;
+  ${YPKG}/aspell-config.sh;
+  ln -svfn aspell-0.60 /usr/lib/aspell
+
+required:
+  - which

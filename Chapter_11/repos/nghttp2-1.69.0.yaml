@@ -1,0 +1,42 @@
+description: "Is an implementation of HTTP/2 and its header compression algorithm, HPACK."
+
+package:
+  name: nghttp2
+  version: 1.69.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://github.com/nghttp2/nghttp2/releases/download/v1.69.0/nghttp2-1.69.0.tar.xz
+    sha256: 1fb324b6ec2c56f6bde0658f4139ffd8209fa9e77ce98fd7a5f63af8d0e508ad
+    md5:
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --enable-lib-only \
+    --docdir=/usr/share/doc/nghttp2-${PKGVER}
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libxml2
+
+optional:
+  - boost
+  - c-ares
+  - cython
+  - jansson
+  - libevent
+  - sphinx

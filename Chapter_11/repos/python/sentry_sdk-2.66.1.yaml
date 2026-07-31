@@ -1,0 +1,26 @@
+description: "Python client for Sentry (https://sentry.io)"
+homepage: "https://pypi.org/project/sentry-sdk/"
+
+package:
+  name: sentry_sdk
+  version: 2.66.1
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: false
+
+sources:
+  - url: https://github.com/getsentry/sentry-python/releases/download/2.66.1/sentry_sdk-2.66.1.tar.gz
+    sha256: f882fb08710c5f8bfc603aafa3e901b384009a19cc3f76a572b863392ee81cdc
+    md5: 1409cd504551871b1c23ff2a9353fecc
+
+build: |
+  pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+
+install: |
+  pip3 install --no-index --find-links dist --no-user sentry_sdk
+
+required:
+  - certifi
+  - urllib3

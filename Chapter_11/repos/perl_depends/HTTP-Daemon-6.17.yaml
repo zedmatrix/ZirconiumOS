@@ -1,0 +1,32 @@
+description: "Instances of the HTTP::Daemon class are HTTP/1.1 servers that listen on a socket for incoming requests."
+
+homepage: "https://metacpan.org/pod/HTTP::Daemon"
+
+package:
+  name: HTTP-Daemon
+  version: 6.17
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Daemon-6.17.tar.gz
+    sha256: 16281580c40e23108d028434698b5d7d53637bf904c9df822481e253cbec920c
+    md5: 14f98fd61159ec4740a21781b787944e
+
+prepare: |
+  perl Build.PL
+
+build: |
+  ./Build
+
+check: |
+  ./Build test
+
+install: |
+  ./Build install
+
+required:
+  - HTTP-Message
+  - Module-Build-Tiny

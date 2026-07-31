@@ -1,0 +1,28 @@
+description: "package contains document type definitions for verification of XML data files against the DocBook rule set."
+
+package:
+  name: docbook-xml
+  version: 4.5
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://archive.docbook.org/xml/4.5/docbook-xml-4.5.zip
+    sha256: 4e4e037a2b83c98c6c94818390d4bdd3f6e10f6ec62dd79188594e26190dc7b4
+    md5: 03083e288e87a7e829e437358da7ef9e
+
+prepare: |
+  install -v -d -m755 /usr/share/xml/docbook/xml-dtd-4.5;
+  install -v -d -m755 /etc/xml
+
+build: |
+  cp -v -af --no-preserve=ownership docbook.cat *.dtd ent/ *.mod \
+    /usr/share/xml/docbook/xml-dtd-4.5
+
+install: |
+  ${YPKG}/docbook-xml-populate.sh
+
+required:
+  - libarchive
+  - libxml2

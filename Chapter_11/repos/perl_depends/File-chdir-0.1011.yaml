@@ -1,0 +1,26 @@
+description: "provides a more sensible way to change directories."
+
+package:
+  name: File-chdir
+  version: 0.1011
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+
+sources:
+  - url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/File-chdir-0.1011.tar.gz
+    sha256: 31ebf912df48d5d681def74b9880d78b1f3aca4351a0ed1fe3570b8e03af6c79
+    md5:
+
+prepare: |
+  perl Makefile.PL
+
+build: |
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install

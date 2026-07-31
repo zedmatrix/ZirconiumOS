@@ -1,0 +1,36 @@
+description: "Library used to make X.509 certificates and CMS (Cryptographic Message Syntax) accessible by other applications."
+
+package:
+  name: libksba
+  version: 1.8.0
+  rel: 1
+  archive: false
+  delete: true
+  ycheck: false
+  destdir: true
+
+sources:
+  - url: https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2
+    sha256: 296b9db9095749f2aa104202d7ab7fd09ad10710e00780a709c9754b1a1d9292
+    md5: 182951961170c12f6569454717a1383a
+
+prepare: |
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make DESTDIR=${DESTDIR} install
+
+final: |
+  ${YBLD}/ydest-strip-x64.sh
+
+required:
+  - libgpg-error
+
+optional:
+  - valgrind
