@@ -129,7 +129,7 @@
                 <span class="strong"><strong>GCC-5.4</strong></span>
                 including the C++ compiler, <span class=
                 "command"><strong>g++</strong></span> (Versions greater than
-                16.1.0 are not recommended as they have not been tested). C
+                16.2.0 are not recommended as they have not been tested). C
                 and C++ standard libraries (with headers) must also be
                 present so the C++ compiler can build hosted programs
               </p>
@@ -146,7 +146,8 @@
             </li>
             <li class="listitem">
               <p>
-                <span class="strong"><strong>Linux Kernel-5.4</strong></span>
+                <span class="strong"><strong>Linux
+                Kernel-5.10</strong></span>
               </p>
               <p>
                 The reason for the kernel version requirement is that we
@@ -158,20 +159,20 @@
                 "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Chapter&nbsp;8</a>,
                 so the workarounds for older kernels are not enabled and the
                 compiled <span class="application">glibc</span> is slightly
-                faster and smaller. As at Dec 2024, 5.4 is the oldest kernel
+                faster and smaller. As at Dec 2024, 5.10 is the oldest kernel
                 release still supported by the kernel developers. Some kernel
-                releases older than 5.4 may be still supported by third-party
-                teams, but they are not considered official upstream kernel
-                releases; read <a class="ulink" href=
+                releases older than 5.10 may be still supported by
+                third-party teams, but they are not considered official
+                upstream kernel releases; read <a class="ulink" href=
                 "https://kernel.org/category/releases.html">https://kernel.org/category/releases.html</a>
                 for the details.
               </p>
               <p>
-                If the host kernel is earlier than 5.4 you will need to
+                If the host kernel is earlier than 5.10 you will need to
                 replace the kernel with a more up-to-date version. There are
                 two ways you can go about this. First, see if your Linux
-                vendor provides a 5.4 or later kernel package. If so, you may
-                wish to install it. If your vendor doesn't offer an
+                vendor provides a 5.10 or later kernel package. If so, you
+                may wish to install it. If your vendor doesn't offer an
                 acceptable kernel package, or you would prefer not to install
                 it, you can compile a kernel yourself. Instructions for
                 compiling the kernel and configuring the boot loader
@@ -182,7 +183,7 @@
               <p>
                 We require the host kernel to support UNIX 98 pseudo terminal
                 (PTY). It should be enabled on all desktop or server distros
-                shipping Linux 5.4 or a newer kernel. If you are building a
+                shipping Linux 5.10 or a newer kernel. If you are building a
                 custom host kernel, ensure <code class=
                 "option">CONFIG_UNIX98_PTYS</code> is set to <code class=
                 "literal">y</code> in the kernel configuration.
@@ -321,7 +322,7 @@ ver_check Sed            sed      4.1.5
 ver_check Tar            tar      1.22
 ver_check Texinfo        texi2any 5.0
 ver_check Xz             xz       5.0.0
-ver_kernel 5.4
+ver_kernel 5.10
 
 if mount | grep -q 'devpts on /dev/pts' &amp;&amp; [ -e /dev/ptmx ]
 then echo "OK:    Linux Kernel supports UNIX 98 PTY";

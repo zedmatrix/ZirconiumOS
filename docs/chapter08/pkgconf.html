@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.19.&nbsp;Pkgconf-2.5.1
+      8.25.&nbsp;Pkgconf-3.0.5
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -22,9 +22,9 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="dejagnu.html" title="DejaGNU-1.6.3">Prev</a>
+          <a accesskey="p" href="meson.html" title="Meson-1.11.2">Prev</a>
           <p>
-            DejaGNU-1.6.3
+            Meson-1.11.2
           </p>
         </li>
         <li class="next">
@@ -45,8 +45,8 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-pkgconf" name="ch-system-pkgconf"></a>8.19.
-      Pkgconf-2.5.1
+      <a id="ch-system-pkgconf" name="ch-system-pkgconf"></a>8.25.
+      Pkgconf-3.0.5
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -71,23 +71,23 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          8.19.1. Installation of Pkgconf
+          8.25.1. Installation of Pkgconf
         </h2>
         <p>
           Prepare Pkgconf for compilation:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr    \
-            --disable-static \
-            --docdir=/usr/share/doc/pkgconf-2.5.1</kbd></pre>
+        "command">meson setup build --prefix=/usr --buildtype=release</kbd></pre>
         <p>
           Compile the package:
         </p>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C build</kbd></pre>
         <p>
           Install the package:
         </p>
-        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+        <pre class="userinput"><kbd class="command">ninja -C build install
+mv /usr/share/doc/pkgconf{,-3.0.5}</kbd></pre>
         <p>
           To maintain compatibility with the original Pkg-config create two
           symlinks:
@@ -98,7 +98,7 @@ ln -sv pkgconf.1 /usr/share/man/man1/pkg-config.1</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-pkgconf" name="contents-pkgconf"></a>8.19.2.
+          <a id="contents-pkgconf" name="contents-pkgconf"></a>8.25.2.
           Contents of Pkgconf
         </h2>
         <div class="segmentedlist">
@@ -114,7 +114,7 @@ ln -sv pkgconf.1 /usr/share/man/man1/pkg-config.1</kbd></pre>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed directory:</strong>
-              <span class="segbody">/usr/share/doc/pkgconf-2.5.1</span>
+              <span class="segbody">/usr/share/doc/pkgconf-3.0.5</span>
             </div>
           </div>
         </div>
@@ -180,9 +180,9 @@ ln -sv pkgconf.1 /usr/share/man/man1/pkg-config.1</kbd></pre>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="dejagnu.html" title="DejaGNU-1.6.3">Prev</a>
+          <a accesskey="p" href="meson.html" title="Meson-1.11.2">Prev</a>
           <p>
-            DejaGNU-1.6.3
+            Meson-1.11.2
           </p>
         </li>
         <li class="next">

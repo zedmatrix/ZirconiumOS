@@ -73,6 +73,11 @@
           8.74.1. Installation of Tar
         </h2>
         <p>
+          First fix the package to build with acl-2.4.0:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../tar-1.35-acl_fix-1.patch</kbd></pre>
+        <p>
           Prepare Tar for compilation:
         </p>
         <pre class="userinput"><kbd class=

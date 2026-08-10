@@ -23,16 +23,16 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="linux-headers.html" title=
-          "Linux-7.1.5 API Headers">Prev</a>
+          "Linux-7.1.7 API Headers">Prev</a>
           <p>
-            Linux-7.1.5 API Headers
+            Linux-7.1.7 API Headers
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="gcc-libstdc++.html" title=
-          "Libstdc++ from GCC-16.1.0">Next</a>
+          "Libstdc++ from GCC-16.2.0">Next</a>
           <p>
-            Libstdc++ from GCC-16.1.0
+            Libstdc++ from GCC-16.2.0
           </p>
         </li>
         <li class="up">
@@ -108,11 +108,6 @@ esac</kbd></pre>
         <pre class="userinput"><kbd class=
         "command">patch -Np1 -i ../glibc-fhs-1.patch</kbd></pre>
         <p>
-          Now fix glibc to build against Linux 7.
-        </p>
-        <pre class="userinput"><kbd class=
-        "command">patch -Np1 -i ../glibc-2.44-linux7_fixes-1.patch</kbd></pre>
-        <p>
           The Glibc documentation recommends building Glibc in a dedicated
           build directory:
         </p>
@@ -136,7 +131,7 @@ cd       build</kbd></pre>
       --build=$(../scripts/config.guess) \
       --disable-nscd                     \
       libc_cv_slibdir=/usr/lib           \
-      --enable-kernel=5.4</kbd></pre>
+      --enable-kernel=5.10</kbd></pre>
         <div class="variablelist">
           <p class="title">
             <strong>The meaning of the configure options:</strong>
@@ -156,11 +151,11 @@ cd       build</kbd></pre>
             </dd>
             <dt>
               <span class="term"><em class=
-              "parameter"><code>--enable-kernel=5.4</code></em></span>
+              "parameter"><code>--enable-kernel=5.10</code></em></span>
             </dt>
             <dd>
               <p>
-                This tells Glibc to compile the library with support for 5.4
+                This tells Glibc to compile the library with support for 5.10
                 and later Linux kernels. Workarounds for older kernels are
                 not enabled.
               </p>
@@ -320,8 +315,8 @@ readelf -l a.out | grep ': /lib'</kbd></pre>
         </p>
         <pre class="screen"><code class=
         "computeroutput">#include &lt;...&gt; search starts here:
- /mnt/lfs/tools/lib/gcc/x86_64-lfs-linux-gnu/16.1.0/include
- /mnt/lfs/tools/lib/gcc/x86_64-lfs-linux-gnu/16.1.0/include-fixed
+ /mnt/lfs/tools/lib/gcc/x86_64-lfs-linux-gnu/16.2.0/include
+ /mnt/lfs/tools/lib/gcc/x86_64-lfs-linux-gnu/16.2.0/include-fixed
  /mnt/lfs/usr/include</code></pre>
         <p>
           Again, the directory named after your target triplet may be
@@ -411,16 +406,16 @@ SEARCH_DIR("=/usr/lib");</code></pre>
       <ul>
         <li class="prev">
           <a accesskey="p" href="linux-headers.html" title=
-          "Linux-7.1.5 API Headers">Prev</a>
+          "Linux-7.1.7 API Headers">Prev</a>
           <p>
-            Linux-7.1.5 API Headers
+            Linux-7.1.7 API Headers
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="gcc-libstdc++.html" title=
-          "Libstdc++ from GCC-16.1.0">Next</a>
+          "Libstdc++ from GCC-16.2.0">Next</a>
           <p>
-            Libstdc++ from GCC-16.1.0
+            Libstdc++ from GCC-16.2.0
           </p>
         </li>
         <li class="up">

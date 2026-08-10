@@ -23,9 +23,9 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="iana-etc.html" title=
-          "Iana-Etc-20260617">Prev</a>
+          "Iana-Etc-20260723">Prev</a>
           <p>
-            Iana-Etc-20260617
+            Iana-Etc-20260723
           </p>
         </li>
         <li class="next">
@@ -88,10 +88,12 @@
         <pre class="userinput"><kbd class=
         "command">patch -Np1 -i ../glibc-fhs-1.patch</kbd></pre>
         <p>
-          Now fix glibc to build against Linux 7.
+          Now fix an issue causing the tanh(3) function to crash on some old
+          x86_64 processors. Newer x86_64 processors and 32-bit x86
+          processors are not affected but the patch makes no harm either:
         </p>
         <pre class="userinput"><kbd class=
-        "command">patch -Np1 -i ../glibc-2.44-linux7_fixes-1.patch</kbd></pre>
+        "command">patch -Np1 -i ../glibc-2.44-upstream_fix-1.patch</kbd></pre>
         <p>
           The Glibc documentation recommends building Glibc in a dedicated
           build directory:
@@ -115,7 +117,7 @@ cd       build</kbd></pre>
              --disable-nscd                  \
              libc_cv_slibdir=/usr/lib        \
              --enable-stack-protector=strong \
-             --enable-kernel=5.4</kbd></pre>
+             --enable-kernel=5.10</kbd></pre>
         <div class="variablelist">
           <p class="title">
             <strong>The meaning of the configure options:</strong>
@@ -133,12 +135,12 @@ cd       build</kbd></pre>
             </dd>
             <dt>
               <span class="term"><em class=
-              "parameter"><code>--enable-kernel=5.4</code></em></span>
+              "parameter"><code>--enable-kernel=5.10</code></em></span>
             </dt>
             <dd>
               <p>
                 This option tells the build system that this Glibc may be
-                used with kernels as old as 5.4. This means generating
+                used with kernels as old as 5.10. This means generating
                 workarounds in case a system call introduced in a later
                 version cannot be used.
               </p>
@@ -285,7 +287,7 @@ cd       build</kbd></pre>
                   If upgrading on a LFS system prior to 12.0 (exclusive),
                   install <span class="application">Libxcrypt</span>
                   following <a class="xref" href="libxcrypt.html" title=
-                  "8.27.&nbsp;Libxcrypt-4.5.2">Section&nbsp;8.27,
+                  "8.33.&nbsp;Libxcrypt-4.5.2">Section&nbsp;8.33,
                   “Libxcrypt-4.5.2.”</a> In addition to a normal <span class=
                   "application">Libxcrypt</span> installation, <span class=
                   "bold"><strong>you MUST follow the note in Libxcrypt
@@ -314,25 +316,25 @@ cd       build</kbd></pre>
               </li>
               <li class="listitem">
                 <p>
-                  Upgrade the kernel and reboot if it's older than 5.4 (check
-                  the current version with <span class=
+                  Upgrade the kernel and reboot if it's older than 5.10
+                  (check the current version with <span class=
                   "command"><strong>uname -r</strong></span>) or if you want
                   to upgrade it anyway, following <a class="xref" href=
                   "../chapter10/kernel.html" title=
-                  "10.3.&nbsp;Linux-7.1.5">Section&nbsp;10.3,
-                  “Linux-7.1.5.”</a>
+                  "10.3.&nbsp;Linux-7.1.7">Section&nbsp;10.3,
+                  “Linux-7.1.7.”</a>
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  Upgrade the kernel API headers if it's older than 5.4
+                  Upgrade the kernel API headers if it's older than 5.10
                   (check the current version with <span class=
                   "command"><strong>cat
                   /usr/include/linux/version.h</strong></span>) or if you
                   want to upgrade it anyway, following <a class="xref" href=
                   "../chapter05/linux-headers.html" title=
-                  "5.4.&nbsp;Linux-7.1.5 API Headers">Section&nbsp;5.4,
-                  “Linux-7.1.5 API Headers”</a> (but removing <code class=
+                  "5.4.&nbsp;Linux-7.1.7 API Headers">Section&nbsp;5.4,
+                  “Linux-7.1.7 API Headers”</a> (but removing <code class=
                   "envar">$LFS</code> from the <span class=
                   "command"><strong>cp</strong></span> command).
                 </p>
@@ -1292,9 +1294,9 @@ mkdir -pv /etc/ld.so.conf.d</kbd></pre>
       <ul>
         <li class="prev">
           <a accesskey="p" href="iana-etc.html" title=
-          "Iana-Etc-20260617">Prev</a>
+          "Iana-Etc-20260723">Prev</a>
           <p>
-            Iana-Etc-20260617
+            Iana-Etc-20260723
           </p>
         </li>
         <li class="next">

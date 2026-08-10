@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.30.&nbsp;GCC-16.1.0
+      8.36.&nbsp;GCC-16.2.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -44,7 +44,7 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-gcc" name="ch-system-gcc"></a>8.30. GCC-16.1.0
+      <a id="ch-system-gcc" name="ch-system-gcc"></a>8.36. GCC-16.2.0
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -67,7 +67,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          8.30.1. Installation of GCC
+          8.36.1. Installation of GCC
         </h2>
         <p>
           If building on x86_64, change the default directory name for 64-bit
@@ -283,7 +283,7 @@ su tester -c "PATH=$PATH make -k check"</kbd></pre>
           group:
         </p>
         <pre class="userinput"><kbd class="command">chown -v -R root:root \
-    /usr/lib/gcc/$(gcc -dumpmachine)/16.1.0/include{,-fixed}</kbd></pre>
+    /usr/lib/gcc/$(gcc -dumpmachine)/16.2.0/include{,-fixed}</kbd></pre>
         <p>
           Create a symlink required by the <a class="ulink" href=
           "https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s09.html">FHS</a>
@@ -296,7 +296,7 @@ su tester -c "PATH=$PATH make -k check"</kbd></pre>
           "command"><strong>cc</strong></span> to call the C compiler. We've
           already created <span class="command"><strong>cc</strong></span> as
           a symlink in <a class="xref" href="../chapter06/gcc-pass2.html"
-          title="6.19.&nbsp;GCC-16.1.0 - Pass 2">gcc-pass2</a>, create its
+          title="6.19.&nbsp;GCC-16.2.0 - Pass 2">gcc-pass2</a>, create its
           man page as a symlink as well:
         </p>
         <pre class="userinput"><kbd class=
@@ -306,7 +306,7 @@ su tester -c "PATH=$PATH make -k check"</kbd></pre>
           Time Optimization (LTO):
         </p>
         <pre class="userinput"><kbd class=
-        "command">ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/16.1.0/liblto_plugin.so \
+        "command">ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/16.2.0/liblto_plugin.so \
         /usr/lib/bfd-plugins/</kbd></pre>
         <p>
           Now that our final toolchain is in place, it is important to again
@@ -332,9 +332,9 @@ readelf -l a.out | grep ': /lib'</kbd></pre>
           The output of the last command should be:
         </p>
         <pre class="screen"><code class=
-        "computeroutput">/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.0/../../../../lib/Scrt1.o succeeded
-/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.0/../../../../lib/crti.o succeeded
-/usr/lib/gcc/x86_64-pc-linux-gnu/16.1.0/../../../../lib/crtn.o succeeded</code></pre>
+        "computeroutput">/usr/lib/gcc/x86_64-pc-linux-gnu/16.2.0/../../../../lib/Scrt1.o succeeded
+/usr/lib/gcc/x86_64-pc-linux-gnu/16.2.0/../../../../lib/crti.o succeeded
+/usr/lib/gcc/x86_64-pc-linux-gnu/16.2.0/../../../../lib/crtn.o succeeded</code></pre>
         <p>
           Depending on your machine architecture, the above may differ
           slightly. The difference will be the name of the directory after
@@ -354,9 +354,9 @@ readelf -l a.out | grep ': /lib'</kbd></pre>
         </p>
         <pre class="screen"><code class=
         "computeroutput">#include &lt;...&gt; search starts here:
- /usr/lib/gcc/x86_64-pc-linux-gnu/16.1.0/include
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16.2.0/include
  /usr/local/include
- /usr/lib/gcc/x86_64-pc-linux-gnu/16.1.0/include-fixed
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16.2.0/include-fixed
  /usr/include</code></pre>
         <p>
           Again, the directory named after your target triplet may be
@@ -435,7 +435,7 @@ mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gcc" name="contents-gcc"></a>8.30.2. Contents of
+          <a id="contents-gcc" name="contents-gcc"></a>8.36.2. Contents of
           GCC
         </h2>
         <div class="segmentedlist">
@@ -459,7 +459,7 @@ mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib</kbd></pre>
             <div class="seg">
               <strong class="segtitle">Installed directories:</strong>
               <span class="segbody">/usr/include/c++, /usr/lib/gcc,
-              /usr/libexec/gcc, and /usr/share/gcc-16.1.0</span>
+              /usr/libexec/gcc, and /usr/share/gcc-16.2.0</span>
             </div>
           </div>
         </div>

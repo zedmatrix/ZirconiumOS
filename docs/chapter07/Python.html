@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      7.11.&nbsp;Python-3.14.6
+      7.12.&nbsp;Python-3.14.7
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -23,9 +23,9 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="perl.html" title="Perl-5.42.2">Prev</a>
+          <a accesskey="p" href="zlib.html" title="Zlib-1.3.2">Prev</a>
           <p>
-            Perl-5.42.2
+            Zlib-1.3.2
           </p>
         </li>
         <li class="next">
@@ -46,7 +46,7 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-tools-Python" name="ch-tools-Python"></a>7.11. Python-3.14.6
+      <a id="ch-tools-Python" name="ch-tools-Python"></a>7.12. Python-3.14.7
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -71,7 +71,7 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.11.1. Installation of Python
+          7.12.1. Installation of Python
         </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
@@ -82,7 +82,7 @@
             There are two package files whose name starts with the
             <span class="quote">“<span class="quote">python</span>”</span>
             prefix. The one to extract from is <code class=
-            "filename">Python-3.14.6.tar.xz</code> (notice the uppercase
+            "filename">Python-3.14.7.tar.xz</code> (notice the uppercase
             first letter).
           </p>
         </div>
@@ -90,10 +90,11 @@
           Prepare Python for compilation:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr       \
-            --enable-shared     \
-            --without-ensurepip \
-            --without-static-libpython</kbd></pre>
+        "command">./configure --prefix=/usr \
+        --without-static-libpython \
+        --enable-shared \
+        --enable-optimizations \
+        --disable-test-modules</kbd></pre>
         <div class="variablelist">
           <p class="title">
             <strong>The meaning of the configure option:</strong>
@@ -110,12 +111,14 @@
             </dd>
             <dt>
               <span class="term"><em class=
-              "parameter"><code>--without-ensurepip</code></em></span>
+              "parameter"><code>--enable-optimizations</code></em></span>
             </dt>
             <dd>
               <p>
-                This switch disables the Python package installer, which is
-                not needed at this stage.
+                This switch enables extensive, but time-consuming,
+                optimization steps. The interpreter is built twice; tests
+                performed on the first build are used to improve the
+                optimized version.
               </p>
             </dd>
             <dt>
@@ -160,7 +163,7 @@
         <p>
           Details on this package are located in <a class="xref" href=
           "../chapter08/Python.html#contents-python" title=
-          "8.56.2.&nbsp;Contents of Python 3">Section&nbsp;8.56.2, “Contents
+          "8.62.2.&nbsp;Contents of Python 3">Section&nbsp;8.62.2, “Contents
           of Python 3.”</a>
         </p>
       </div>
@@ -168,9 +171,9 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="perl.html" title="Perl-5.42.2">Prev</a>
+          <a accesskey="p" href="zlib.html" title="Zlib-1.3.2">Prev</a>
           <p>
-            Perl-5.42.2
+            Zlib-1.3.2
           </p>
         </li>
         <li class="next">

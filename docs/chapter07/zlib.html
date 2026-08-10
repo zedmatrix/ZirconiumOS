@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      7.8.&nbsp;Gettext-1.0
+      7.11.&nbsp;Zlib-1.3.2
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -23,16 +23,15 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="createfiles.html" title=
-          "Creating Essential Files and Symlinks">Prev</a>
+          <a accesskey="p" href="perl.html" title="Perl-5.44.0">Prev</a>
           <p>
-            Creating Essential Files and Symlinks
+            Perl-5.44.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="bison.html" title="Bison-3.8.2">Next</a>
+          <a accesskey="n" href="Python.html" title="Python-3.14.7">Next</a>
           <p>
-            Bison-3.8.2
+            Python-3.14.7
           </p>
         </li>
         <li class="up">
@@ -47,93 +46,71 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-tools-gettext" name="ch-tools-gettext"></a>7.8. Gettext-1.0
+      <a id="ch-tools-zlib" name="ch-tools-zlib"></a>7.11. Zlib-1.3.2
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Gettext package contains utilities for internationalization and
-          localization. These allow programs to be compiled with NLS (Native
-          Language Support), enabling them to output messages in the user's
-          native language.
+          The Zlib package contains compression and decompression routines
+          used by some programs.
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">1.5 SBU</span>
+              <span class="segbody">less than 0.1 SBU</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">235.9 MB</span>
+              <span class="segbody">4.6 MB</span>
             </div>
           </div>
         </div>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.8.1. Installation of Gettext
+          7.11.1. Installation of Zlib
         </h2>
         <p>
-          For our temporary set of tools, we only need to install three
-          programs from Gettext.
-        </p>
-        <p>
-          Prepare Gettext for compilation:
+          Prepare Zlib for compilation:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --disable-shared</kbd></pre>
-        <div class="variablelist">
-          <p class="title">
-            <strong>The meaning of the configure option:</strong>
-          </p>
-          <dl class="variablelist">
-            <dt>
-              <span class="term"><em class=
-              "parameter"><code>--disable-shared</code></em></span>
-            </dt>
-            <dd>
-              <p>
-                We do not need to install any of the shared Gettext libraries
-                at this time, therefore there is no need to build them.
-              </p>
-            </dd>
-          </dl>
-        </div>
+        "command">./configure --prefix=/usr</kbd></pre>
         <p>
           Compile the package:
         </p>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
         <p>
-          Install the <span class="command"><strong>msgfmt</strong></span>,
-          <span class="command"><strong>msgmerge</strong></span>, and
-          <span class="command"><strong>xgettext</strong></span> programs:
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+        <p>
+          Remove a useless static library:
         </p>
         <pre class="userinput"><kbd class=
-        "command">cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /usr/bin</kbd></pre>
+        "command">rm -fv /usr/lib/libz.a</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <p>
           Details on this package are located in <a class="xref" href=
-          "../chapter08/gettext.html#contents-gettext" title=
-          "8.40.2.&nbsp;Contents of Gettext">Section&nbsp;8.40.2, “Contents
-          of Gettext.”</a>
+          "../chapter08/zlib.html#contents-zlib" title=
+          "8.5.2.&nbsp;Contents of Zlib">Section&nbsp;8.5.2, “Contents of
+          Zlib.”</a>
         </p>
       </div>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="createfiles.html" title=
-          "Creating Essential Files and Symlinks">Prev</a>
+          <a accesskey="p" href="perl.html" title="Perl-5.44.0">Prev</a>
           <p>
-            Creating Essential Files and Symlinks
+            Perl-5.44.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="bison.html" title="Bison-3.8.2">Next</a>
+          <a accesskey="n" href="Python.html" title="Python-3.14.7">Next</a>
           <p>
-            Bison-3.8.2
+            Python-3.14.7
           </p>
         </li>
         <li class="up">

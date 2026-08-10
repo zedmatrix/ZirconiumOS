@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      5.6.&nbsp;Libstdc++ from GCC-16.1.0
+      5.6.&nbsp;Libstdc++ from GCC-16.2.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -46,7 +46,7 @@
     </div>
     <h1 class="sect1">
       <a id="ch-tools-libstdcpp" name="ch-tools-libstdcpp"></a>5.6. Libstdc++
-      from GCC-16.1.0
+      from GCC-16.2.0
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -54,7 +54,7 @@
           Libstdc++ is the standard C++ library. It is needed to compile C++
           code (part of GCC is written in C++), but we had to defer its
           installation when we built <a class="xref" href="gcc-pass1.html"
-          title="5.3.&nbsp;GCC-16.1.0 - Pass 1">gcc-pass1</a> because
+          title="5.3.&nbsp;GCC-16.2.0 - Pass 1">gcc-pass1</a> because
           Libstdc++ depends on Glibc, which was not yet available in the
           target directory.
         </p>
@@ -83,7 +83,7 @@
           <p>
             <span class="application">Libstdc++</span> is part of the GCC
             sources. You should first unpack the GCC tarball and change to
-            the <code class="filename">gcc-16.1.0</code> directory.
+            the <code class="filename">gcc-16.2.0</code> directory.
           </p>
         </div>
         <p>
@@ -102,7 +102,7 @@ cd       build</kbd></pre>
     --disable-multilib         \
     --disable-nls              \
     --disable-libstdcxx-pch    \
-    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/16.1.0</kbd></pre>
+    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/16.2.0</kbd></pre>
         <div class="variablelist">
           <p class="title">
             <strong>The meaning of the configure options:</strong>
@@ -131,7 +131,7 @@ cd       build</kbd></pre>
             </dd>
             <dt>
               <span class="term"><em class=
-              "parameter"><code>--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/16.1.0</code></em></span>
+              "parameter"><code>--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/16.2.0</code></em></span>
             </dt>
             <dd>
               <p>
@@ -148,7 +148,7 @@ cd       build</kbd></pre>
                 path <code class="filename">$LFS</code> (specified when
                 building GCC-pass1) to the include file search path, so it
                 will actually search in <code class=
-                "filename">$LFS/tools/$LFS_TGT/include/c++/16.1.0</code>. The
+                "filename">$LFS/tools/$LFS_TGT/include/c++/16.2.0</code>. The
                 combination of the <em class=
                 "parameter"><code>DESTDIR</code></em> variable (in the
                 <span class="command"><strong>make install</strong></span>
@@ -178,7 +178,7 @@ cd       build</kbd></pre>
         <p>
           Details on this package are located in <a class="xref" href=
           "../chapter08/gcc.html#contents-gcc" title=
-          "8.30.2.&nbsp;Contents of GCC">Section&nbsp;8.30.2, “Contents of
+          "8.36.2.&nbsp;Contents of GCC">Section&nbsp;8.36.2, “Contents of
           GCC.”</a>
         </p>
       </div>
