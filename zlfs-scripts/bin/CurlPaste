@@ -1,0 +1,152 @@
+#!/bin/bash
+
+ENGINE=pinnwand
+URL="https://bpa.st/api/v1/paste"
+DEFAULT_EXPIRATION="1week"
+DEFAULT_LANGUAGE="text"
+DEFAULT_DESCRIPTION="paste"
+
+DESCRIPTION="$DEFAULT_DESCRIPTION"
+LANGUAGE="$DEFAULT_LANGUAGE"
+EXPIRATION="$DEFAULT_EXPIRATION"
+CVT_TABS=0
+USE_WGET=0
+FILES=()
+SOURCE="stdin"
+
+# ── helpers ────────────────────────────────────────────────────────────────────
+
+die() { echo "$*" >&2; exit 1; }
+
+usage() {
+cat <<USAGE
+ bpa.st pastebin uploader
+ Usage: ./CurlPaste-bpa.sh [options] [file ...]
+   -d DESCRIPTION   paste title/filename (default: "paste")
+   -l LANGUAGE      syntax lexer (default: text)
+   -e EXPIRATION    1day or 1week (default: 1week)
+   -t               convert tabs to spaces
+   -w               use wget instead of curl (default: curl)
+USAGE
+}
+
+# Escape a string for embedding in a JSON value
+escape_json() {
+    sed \
+        -e 's|\\|\\\\|g' \
+        -e 's|"|\\"|g'   \
+        -e 's|\x1b|\\u001b|g' \
+        -e 's|\r||g'     \
+        -e 's|\t|\\t|g'  \
+        -e 's|$|\\n|'    \
+        <<< "$*" | tr -d '\n'
+}
+
+# ── collect input ──────────────────────────────────────────────────────────────
+
+getfilenames() {
+    for f in "$@"; do
+        [[ -f "$f" ]] || die "$0: '$f': no such file."
+        SOURCE="files"
+        FILES+=("$f")
+    done
+}
+
+read_input() {
+    if [[ "$SOURCE" == "stdin" ]]; then
+        INPUT="$(cat)"
+    else
+        # Concatenate all files
+        INPUT="$(cat "${FILES[@]}")"
+        # Use first filename as description if not set by user
+        [[ "$DESCRIPTION" == "$DEFAULT_DESCRIPTION" ]] && DESCRIPTION="$(basename "${FILES[0]}")"
+    fi
+    [[ -n "$INPUT" ]] || die "No input to paste."
+    [[ "$CVT_TABS" -eq 1 ]] && INPUT="${INPUT//$'\t'/    }"
+}
+
+# ── build JSON body ────────────────────────────────────────────────────────────
+
+build_body() {
+    local escaped_desc escaped_content
+    escaped_desc="$(escape_json "$DESCRIPTION")"
+    escaped_content="$(escape_json "$INPUT")"
+    printf '{"expiry":"%s","files":[{"name":"%s","lexer":"%s","content":"%s"}]}' \
+        "$EXPIRATION" "$escaped_desc" "$LANGUAGE" "$escaped_content"
+}
+
+# ── HTTP POST ──────────────────────────────────────────────────────────────────
+
+do_post() {
+    local body response url
+    body="$(build_body)"
+
+    if [[ "$USE_WGET" -eq 1 ]]; then
+        response="$(wget -q -O- \
+            --header='Content-Type: application/json' \
+            --post-data="$body" \
+            "$URL")" \
+            || die "wget failed — is bpa.st reachable?"
+    else
+        response="$(curl -sS \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -d "$body" \
+            "$URL")" \
+            || die "curl failed — is bpa.st reachable?"
+    fi
+
+    # Extract the paste link from the JSON response
+    # Response looks like: {"link": "https://bpa.st/XXXX", "removal": "https://bpa.st/remove/YYYY"}
+    if command -v jq &>/dev/null; then
+        url="$(printf '%s' "$response" | jq -r '.link')"
+        removal="$(printf '%s' "$response" | jq -r '.removal')"
+    else
+        # Fallback: tolerate optional space around the colon
+        url="$(printf '%s' "$response" | grep -o '"link": *"[^"]*"' | cut -d'"' -f4)"
+        removal="$(printf '%s' "$response" | grep -o '"removal": *"[^"]*"' | cut -d'"' -f4)"
+    fi
+
+    if [[ -z "$url" || "$url" == "null" ]]; then
+        echo "Unexpected response from bpa.st:" >&2
+        echo "$response" >&2
+        exit 1
+    fi
+
+    echo "Paste:   $url"
+    [[ -n "$removal" && "$removal" != "null" ]] && echo "Removal: $removal"
+}
+
+# ── argument parsing ───────────────────────────────────────────────────────────
+
+while getopts ":d:l:e:tw" opt; do
+    case "$opt" in
+        d) DESCRIPTION="$OPTARG" ;;
+        l) LANGUAGE="$OPTARG" ;;
+        e) EXPIRATION="$OPTARG" ;;
+        t) CVT_TABS=1 ;;
+        w) USE_WGET=1 ;;
+        :) die "Option -$OPTARG requires an argument." ;;
+        \?) die "Unknown option: -$OPTARG" ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+# Validate expiration
+case "$EXPIRATION" in
+    1day|1week) ;;
+    *) die "Invalid expiration '$EXPIRATION'. Use: 1day or 1week" ;;
+esac
+
+# ── main ───────────────────────────────────────────────────────────────────────
+
+getfilenames "$@"
+
+# If no files and stdin is a terminal (nothing piped), show usage
+if [[ "$SOURCE" == "stdin" ]] && [[ -t 0 ]] && [[ $# -eq 0 ]]; then
+    usage
+    exit 0
+fi
+
+read_input
+do_post

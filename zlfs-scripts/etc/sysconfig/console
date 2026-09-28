@@ -1,0 +1,7 @@
+# Begin /etc/sysconfig/console
+
+UNICODE="1"
+FONT="lat9u-16"
+#FONT="Lat2-Terminus16"
+
+# End /etc/sysconfig/console

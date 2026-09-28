@@ -1,0 +1,13 @@
+[Match]
+Name=enp*
+
+[Network]
+DHCP=ipv4
+
+[DHCPv4]
+UseDomains=true
+ClientIdentifier=mac
+
+# Anonymize=true
+# SendHostname=true
+# Hostname=LiveLFS_USB

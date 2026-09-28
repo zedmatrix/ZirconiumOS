@@ -1,0 +1,21 @@
+#!/bin/sh
+# Begin ~/.profile
+# Personal environment variables and startup programs.
+
+source /etc/profile.d/0path-functions.sh
+
+if [ -d "$HOME/bin" ] ; then
+  pathprepend $HOME/bin
+fi
+
+if [ -d "$HOME/sbin" ] ; then
+  pathprepend $HOME/sbin
+fi
+
+# Set up user specific i18n variables
+export LANG=C.UTF-8
+
+# export LANG=en_US.UTF-8
+# export LC_CTYPE=en_US
+
+# End ~/.profile

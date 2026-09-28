@@ -1,0 +1,7 @@
+[Unit]
+Description=OpenSSH Per-Connection server daemon
+
+[Service]
+ExecStart=-/usr/sbin/sshd -i -e
+StandardInput=socket
+StandardError=journal

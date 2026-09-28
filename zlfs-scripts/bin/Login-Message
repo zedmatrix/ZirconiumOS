@@ -1,0 +1,64 @@
+#!/bin/bash
+clear
+rows="$(stty size | cut -d ' ' -f 1)"
+cols=$(expr "$(stty size | cut -d ' ' -f 2)" - 2)
+middle=$((cols / 2))
+
+zstars() { echo -e "\033[1;34m$(eval printf "%${cols}s" | tr ' ' '*')\033[0m"; }
+zmsg() { echo -e "\033[1;36m $* \033[0m"; }
+
+# Basic system info
+HOSTNAME=$(hostname)
+KERNEL=$(uname -r)
+DATE=$(date +"%Y-%m-%d %H:%M:%S")
+
+glibc_ver=$(ldd --version 2>/dev/null | head -1 | awk '{print $2,$3}')
+#musl_ver=$(ldd --version 2>&1 | awk '/^Version/ {print $2}')
+bin_ver=$(ld --version 2>/dev/null | head -1 | awk '{print $3,$4}')
+gcc_ver=$(gcc --version 2>/dev/null | head -1 | awk '{print $2,$3}')
+
+zstars
+if [[ -n "$SSH_TTY" ]]; then
+    terminal="$SSH_TTY"
+else
+    terminal="$(tty)"
+fi
+msg="Zirconium Linux Console $terminal"
+zpos=$((middle - ${#msg} / 2))
+printf '%*s%s\n' $zpos "" "$msg"
+zstars
+zmsg "Hostname: $HOSTNAME"
+zmsg "Kernel:   $KERNEL"
+zmsg "Build:    Binutils ${bin_ver} | GCC ${gcc_ver} | Glibc ${glibc_ver}"
+zmsg "Date:     $DATE"
+
+for dir in /opt/ybuild /ybuild; do
+    [[ -d $dir ]] && break;
+done
+[[ -n $dir ]] || dir='not found'
+printf 'Install Directory: %s\n' "$dir"
+
+zstars
+if [[ -n "$SSH_CONNECTION" ]]; then
+    read -r client_ip client_port server_ip server_port <<< "$SSH_CONNECTION"
+
+    zmsg "Remote: $client_ip:$client_port"
+    zmsg "Local:  $server_ip:$server_port"
+fi
+if [[ -n "$SSH_CLIENT" ]]; then
+    read -r client_ip client_port server_port <<< "$SSH_CLIENT"
+    zmsg "Remote: $client_ip:$client_port"
+else
+    zmsg "Local Connection"
+fi
+
+zstars
+ztools=(wget curl git lspci lsusb which version-check CurlPaste)
+printf "Tools Available:"
+for t in ${ztools[@]}; do
+    if command -v "$t" >/dev/null 2>&1; then
+        printf ' %s' "$t"
+    fi
+done
+printf '\n'
+zstars
